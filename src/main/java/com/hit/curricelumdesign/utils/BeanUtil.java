@@ -3,6 +3,8 @@ package com.hit.curricelumdesign.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
+import com.hit.curricelumdesign.context.enums.Error;
+import com.hit.curricelumdesign.context.exception.BaseException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -150,13 +152,11 @@ public class BeanUtil {
     public static void copyProperties(Object source, Object target, String... ignoreProperties) {
         if (source == null) {
             logger.error(LogUtils.getCommLog(String.format("source不能为空")));
-            // todo 放开
-            //			throw new BaseException(Error._064200101);
+            throw new BaseException(Error._064200101);
         }
         if (target == null) {
             logger.error(LogUtils.getCommLog(String.format("target不能为空")));
-            // todo 放开
-            //			throw new BaseException(Error._064200101);
+            throw new BaseException(Error._064200101);
         }
         boolean flag = false;
         String currentMethod = null;
@@ -249,8 +249,7 @@ public class BeanUtil {
         } catch (Exception e) {
             flag = true;
             logger.error(LogUtils.getCommLog(String.format("参数转换异常，%s", e)));
-            // todo 放开
-			//            throw new BaseException(Error._06410004);
+            throw new BaseException(Error._06410004);
         } finally {
             if (flag && currentMethod != null) {
                 logger.error(LogUtils.getCommLog(String.format("%s()方法执行异常", currentMethod)));
