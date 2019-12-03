@@ -1,13 +1,13 @@
-package com.bingo.teamwork;
+package com.hit.curricelumdesign;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CurriculumDesignApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(CurriculumDesignApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

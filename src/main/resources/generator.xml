@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!-- 去除自动生成的注释 -->
+        <commentGenerator
+                type="com.saas.oss.utils.MyCommentGenerator">
+            <!-- <property name="suppressAllComments" value="true" /> -->
+        </commentGenerator>
+
+        <!--数据库基本信息 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://123.56.135.63:3306/db_saas_oss_platform?characterEncoding=UTF-8"
+                        userId="test" password="Dev@hfq">
+        </jdbcConnection>
+
+        <!--生成实体类的位置以及包的名字 -->
+        <javaModelGenerator
+                targetPackage="com.saas.oss.context.entity.oss.user"
+                targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mybatis-mapper/oss" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--生成Dao类存放位置,mapper接口生成的位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.saas.oss.dao.oss.user" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--生成对应表及类名 -->
+        <table schema="" tableName="t_menu_privilege" domainObjectName="MenuPrivilege"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+
+    </context>
+
+</generatorConfiguration>
