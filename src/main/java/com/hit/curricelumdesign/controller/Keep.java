@@ -3,6 +3,9 @@ package com.hit.curricelumdesign.controller;
 import com.hit.curricelumdesign.dao.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author xbr
@@ -10,14 +13,19 @@ import org.springframework.stereotype.Controller;
  * @ClassName keep
  * @Description
  */
+
+
 @Controller
 public class Keep {
 
-    @Autowired
+   @Autowired
     private AdminMapper adminMapper;
 
-    public static void main(String[] args) {
-
+    @RequestMapping(name = "/", method = RequestMethod.POST)
+    @ResponseBody
+    public String a() {
+        adminMapper.selectByPrimaryKey(1);
+        return "a";
     }
 
 }
