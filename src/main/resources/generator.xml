@@ -9,36 +9,37 @@
 
         <!-- 去除自动生成的注释 -->
         <commentGenerator
-                type="com.saas.oss.utils.MyCommentGenerator">
+                type="com.hit.curricelumdesign.utils.mybatisgenerator.MyCommentGenerator">
             <!-- <property name="suppressAllComments" value="true" /> -->
         </commentGenerator>
 
         <!--数据库基本信息 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://123.56.135.63:3306/db_saas_oss_platform?characterEncoding=UTF-8"
-                        userId="test" password="Dev@hfq">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://39.105.8.210:3306/curriculum_design?characterEncoding=UTF-8"
+                        userId="root" password="1234">
         </jdbcConnection>
 
         <!--生成实体类的位置以及包的名字 -->
         <javaModelGenerator
-                targetPackage="com.saas.oss.context.entity.oss.user"
+
+                targetPackage="com.hit.curricelumdesign.context.entity"
                 targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!--生成映射文件存放位置-->
-        <sqlMapGenerator targetPackage="mybatis-mapper/oss" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!--生成Dao类存放位置,mapper接口生成的位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.saas.oss.dao.oss.user" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hit.curricelumdesign.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <!--生成对应表及类名 -->
-        <table schema="" tableName="t_menu_privilege" domainObjectName="MenuPrivilege"
+        <table schema="curriculum_design" tableName="t_teacher" domainObjectName="Teacher"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
