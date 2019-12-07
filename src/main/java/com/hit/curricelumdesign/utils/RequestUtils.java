@@ -41,7 +41,7 @@ public class RequestUtils {
 		String value = request.getParameter(key);
 
 		if (StringUtils.isBlank(value)) {
-			throw new BaseException(Error._064200101.getErrorCode(), "缺少参数:" + key);
+			throw new BaseException(Error._200101.getErrorCode(), "缺少参数:" + key);
 		}
 		return value.trim();
 	}
