@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hit.curricelumdesign.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.Teacher" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_academy_id" property="academyId" jdbcType="INTEGER" />
+    <result column="f_username" property="username" jdbcType="VARCHAR" />
+    <result column="f_password" property="password" jdbcType="VARCHAR" />
+    <result column="f_name" property="name" jdbcType="VARCHAR" />
+    <result column="f_teacher_number" property="teacherNumber" jdbcType="VARCHAR" />
+    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
+    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="f_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="f_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, f_academy_id, f_username, f_password, f_name, f_teacher_number, f_is_delete, 
+    f_creator_id, f_create_time, f_updater_id, f_update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_teacher
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_teacher
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.Teacher" >
+    insert into t_teacher (f_id, f_academy_id, f_username, 
+      f_password, f_name, f_teacher_number, 
+      f_is_delete, f_creator_id, f_create_time, 
+      f_updater_id, f_update_time)
+    values (#{id,jdbcType=INTEGER}, #{academyId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{teacherNumber,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updaterId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.Teacher" >
+    insert into t_teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        f_id,
+      </if>
+      <if test="academyId != null" >
+        f_academy_id,
+      </if>
+      <if test="username != null" >
+        f_username,
+      </if>
+      <if test="password != null" >
+        f_password,
+      </if>
+      <if test="name != null" >
+        f_name,
+      </if>
+      <if test="teacherNumber != null" >
+        f_teacher_number,
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete,
+      </if>
+      <if test="creatorId != null" >
+        f_creator_id,
+      </if>
+      <if test="createTime != null" >
+        f_create_time,
+      </if>
+      <if test="updaterId != null" >
+        f_updater_id,
+      </if>
+      <if test="updateTime != null" >
+        f_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="academyId != null" >
+        #{academyId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherNumber != null" >
+        #{teacherNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null" >
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.Teacher" >
+    update t_teacher
+    <set >
+      <if test="academyId != null" >
+        f_academy_id = #{academyId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        f_username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        f_password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        f_name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherNumber != null" >
+        f_teacher_number = #{teacherNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="creatorId != null" >
+        f_creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null" >
+        f_updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        f_update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.Teacher" >
+    update t_teacher
+    set f_academy_id = #{academyId,jdbcType=INTEGER},
+      f_username = #{username,jdbcType=VARCHAR},
+      f_password = #{password,jdbcType=VARCHAR},
+      f_name = #{name,jdbcType=VARCHAR},
+      f_teacher_number = #{teacherNumber,jdbcType=VARCHAR},
+      f_is_delete = #{isDelete,jdbcType=BIT},
+      f_creator_id = #{creatorId,jdbcType=INTEGER},
+      f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      f_updater_id = #{updaterId,jdbcType=INTEGER},
+      f_update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

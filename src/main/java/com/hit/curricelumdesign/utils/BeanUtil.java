@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  * ClassName: BeanUtil
  * date: 2018年11月11日
  *
- * @author YGC
+ * @author xbr
  * @since JDK 1.8
  */
 public class BeanUtil {
@@ -152,11 +152,11 @@ public class BeanUtil {
     public static void copyProperties(Object source, Object target, String... ignoreProperties) {
         if (source == null) {
             logger.error(LogUtils.getCommLog(String.format("source不能为空")));
-            throw new BaseException(Error._064200101);
+            throw new BaseException(Error._200101);
         }
         if (target == null) {
             logger.error(LogUtils.getCommLog(String.format("target不能为空")));
-            throw new BaseException(Error._064200101);
+            throw new BaseException(Error._200101);
         }
         boolean flag = false;
         String currentMethod = null;
@@ -249,7 +249,7 @@ public class BeanUtil {
         } catch (Exception e) {
             flag = true;
             logger.error(LogUtils.getCommLog(String.format("参数转换异常，%s", e)));
-            throw new BaseException(Error._06410004);
+            throw new BaseException(Error._100004);
         } finally {
             if (flag && currentMethod != null) {
                 logger.error(LogUtils.getCommLog(String.format("%s()方法执行异常", currentMethod)));

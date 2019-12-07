@@ -9,43 +9,122 @@
 
         <!-- 去除自动生成的注释 -->
         <commentGenerator
-                type="com.saas.oss.utils.MyCommentGenerator">
+                type="com.hit.curricelumdesign.utils.mybatisgenerator.MyCommentGenerator">
             <!-- <property name="suppressAllComments" value="true" /> -->
         </commentGenerator>
 
         <!--数据库基本信息 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://123.56.135.63:3306/db_saas_oss_platform?characterEncoding=UTF-8"
-                        userId="test" password="Dev@hfq">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://39.105.8.210:3306/curriculum_design?characterEncoding=UTF-8"
+                        userId="root" password="1234">
+            <!--解决生成实体属性缺失-->
+            <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
         <!--生成实体类的位置以及包的名字 -->
         <javaModelGenerator
-                targetPackage="com.saas.oss.context.entity.oss.user"
+
+                targetPackage="com.hit.curricelumdesign.context.entity"
                 targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!--生成映射文件存放位置-->
-        <sqlMapGenerator targetPackage="mybatis-mapper/oss" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!--生成Dao类存放位置,mapper接口生成的位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.saas.oss.dao.oss.user" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hit.curricelumdesign.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <!--生成对应表及类名 -->
-        <table schema="" tableName="t_menu_privilege" domainObjectName="MenuPrivilege"
+        <table schema="curriculum_design" tableName="t_academy" domainObjectName="Academy"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                enableUpdateByExample="false">
             <columnRenamingRule searchString="^f_" replaceString=""/>
         </table>
-
+        <table schema="curriculum_design" tableName="t_class" domainObjectName="Class"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_craft_card" domainObjectName="CraftCard"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_craft_card_to_work" domainObjectName="CraftCardToWork"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_enrollment_year" domainObjectName="EnrollmentYear"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_file" domainObjectName="File"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_folder" domainObjectName="Folder"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_teaching" domainObjectName="Teaching"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_work" domainObjectName="Work"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_work_message" domainObjectName="WorkMessage"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_work_project" domainObjectName="WorkProject"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_work_project_file" domainObjectName="WorkProjectFile"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
     </context>
 
 </generatorConfiguration>

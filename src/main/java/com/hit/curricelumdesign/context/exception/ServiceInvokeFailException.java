@@ -7,7 +7,7 @@ import com.hit.curricelumdesign.context.enums.Error;
  * ClassName: BaseException
  * date: 2018年11月11日
  *
- * @author YGC
+ * @author xbr
  * @version
  * @since JDK 1.8
  */
@@ -16,10 +16,10 @@ public class ServiceInvokeFailException extends BaseException {
 	private static final long serialVersionUID = -7305673475606021068L;
 
 	public ServiceInvokeFailException() {
-		super(Error._064200115.getErrorCode(), Error._064200115.getErrorMsg());
+		super(Error._200115.getErrorCode(), Error._200115.getErrorMsg());
 	}
 
 	public ServiceInvokeFailException(String description) {
-		super(Error._064200115.getErrorCode(), description);
+		super(Error._200115.getErrorCode(), description);
 	}
 }

@@ -7,7 +7,7 @@ import com.hit.curricelumdesign.context.enums.Error;
  * ClassName: BaseException
  * date: 2018年11月11日
  *
- * @author YGC
+ * @author xbr
  * @version
  * @since JDK 1.8
  */
@@ -16,6 +16,6 @@ public class LackParameterExcpetion extends BaseException {
 	private static final long serialVersionUID = -7305673475606021068L;
 
 	public LackParameterExcpetion(String description) {
-		super(Error._064200101.getErrorCode(), description);
+		super(Error._200101.getErrorCode(), description);
 	}
 }

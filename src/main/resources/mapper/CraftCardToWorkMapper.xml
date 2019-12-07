@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.curricelumdesign.dao.CraftCardToWorkMapper">
+  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.CraftCardToWork">
+    <id column="f_id" jdbcType="INTEGER" property="id" />
+    <result column="f_craft_card_id" jdbcType="INTEGER" property="craftCardId" />
+    <result column="f_work_id" jdbcType="INTEGER" property="workId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    f_id, f_craft_card_id, f_work_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_craft_card_to_work
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_craft_card_to_work
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.CraftCardToWork">
+    insert into t_craft_card_to_work (f_id, f_craft_card_id, f_work_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{craftCardId,jdbcType=INTEGER}, #{workId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.CraftCardToWork">
+    insert into t_craft_card_to_work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        f_id,
+      </if>
+      <if test="craftCardId != null">
+        f_craft_card_id,
+      </if>
+      <if test="workId != null">
+        f_work_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="craftCardId != null">
+        #{craftCardId,jdbcType=INTEGER},
+      </if>
+      <if test="workId != null">
+        #{workId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.CraftCardToWork">
+    update t_craft_card_to_work
+    <set>
+      <if test="craftCardId != null">
+        f_craft_card_id = #{craftCardId,jdbcType=INTEGER},
+      </if>
+      <if test="workId != null">
+        f_work_id = #{workId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.CraftCardToWork">
+    update t_craft_card_to_work
+    set f_craft_card_id = #{craftCardId,jdbcType=INTEGER},
+      f_work_id = #{workId,jdbcType=INTEGER}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

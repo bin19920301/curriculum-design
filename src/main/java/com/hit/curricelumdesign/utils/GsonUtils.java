@@ -13,7 +13,7 @@ import java.util.Map;
  * ClassName: GsonUtils.java
  * date: 2018年12月3日
  *
- * @author YGC
+ * @author xbr
  * @version
  * @since JDK 1.8
  */
