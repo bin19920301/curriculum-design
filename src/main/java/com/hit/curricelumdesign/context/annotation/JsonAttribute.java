@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * ClassName: JsonAttribute
  * date: 2018年11月9日
  *
- * @author YGC
+ * @author xbr
  * @version
  * @since JDK 1.8
  */

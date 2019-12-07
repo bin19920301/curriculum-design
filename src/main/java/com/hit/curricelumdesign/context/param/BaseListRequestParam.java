@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
  * ClassName: BaseListRequestParam
  * date: 2018年11月11日
  *
- * @author YGC
+ * @author xbr
  * @version
  * @since JDK 1.8
  */

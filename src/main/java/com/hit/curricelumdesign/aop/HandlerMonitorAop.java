@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * ClassName: HandlerMonitorAop
  * date: 2018年11月11日
  *
- * @author YGC
+ * @author xbr
  * @since JDK 1.8
  */
 @Aspect

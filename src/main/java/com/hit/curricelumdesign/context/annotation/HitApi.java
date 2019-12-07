@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  * ClassName: OssApi
  * date: 2018年11月20日
  *
- * @author YGC
+ * @author xbr
  * @version
  * @since JDK 1.8
  */
