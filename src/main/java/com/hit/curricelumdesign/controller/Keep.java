@@ -1,6 +1,7 @@
 package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.entity.Admin;
+import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +24,12 @@ public class Keep {
     private AdminMapper adminMapper;
 
     @RequestMapping(name = "/", method = RequestMethod.POST)
-    @ResponseBody
-    public String a() {
+    public Result a() {
         Admin admin = adminMapper.selectByPrimaryKey(1);
         if (admin == null) {
             System.out.println("null");
         }
-        return "a";
+        return Result.success();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.context.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hit.curricelumdesign.context.enums.Error;
 
 /**
@@ -11,6 +12,7 @@ import com.hit.curricelumdesign.context.enums.Error;
  * @version
  * @since JDK 1.8
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Result {
 
 	/**
