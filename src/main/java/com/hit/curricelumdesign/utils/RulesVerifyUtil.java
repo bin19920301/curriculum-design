@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * ClassName: RulesVerifyUtil
  * date: 2018年11月22日
  *
- * @author YGC
+ * @author xbr
  * @version
  * @since JDK 1.8
  */

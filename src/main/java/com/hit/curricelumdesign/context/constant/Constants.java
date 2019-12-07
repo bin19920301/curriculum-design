@@ -5,7 +5,7 @@ package com.hit.curricelumdesign.context.constant;
  * ClassName: Constants
  * date: 2018年11月11日
  *
- * @author YGC
+ * @author xbr
  * @since JDK 1.8
  */
 public class Constants {

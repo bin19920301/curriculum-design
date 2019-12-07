@@ -15,7 +15,7 @@ import java.util.List;
  * ClassName: ValidationUtil
  * date: 2018年11月22日
  *
- * @author YGC
+ * @author xbr
  * @version
  * @since JDK 1.8
  */

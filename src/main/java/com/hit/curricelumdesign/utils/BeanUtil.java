@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  * ClassName: BeanUtil
  * date: 2018年11月11日
  *
- * @author YGC
+ * @author xbr
  * @since JDK 1.8
  */
 public class BeanUtil {
