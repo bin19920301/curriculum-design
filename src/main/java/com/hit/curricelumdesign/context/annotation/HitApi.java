@@ -17,14 +17,20 @@ import java.lang.annotation.*;
 public @interface HitApi {
 
 	/**
-	 * 是否需要登录校验
+	 * 是否需要登录管理员端校验
 	 */
-	boolean checkLogin() default false;
+	boolean checkAdminLogin() default false;
 
 	/**
-	 * 是否需要校验权限
+	 * 是否需要登录教师端校验
 	 */
-	boolean checkPrivilege() default false;
+	boolean checkTeacherLogin() default false;
+
+	/**
+	 * 是否需要登录学生端校验
+	 */
+	boolean checkStudentLogin() default false;
+
 
 	/**
 	 * 指定校验权限接口名(默认为接口自身，可以指定为其他接口)

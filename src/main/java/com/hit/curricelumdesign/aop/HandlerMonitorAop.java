@@ -66,12 +66,12 @@ public class HandlerMonitorAop {
                 logger.error(LogUtils.getCommLog(String.format("[%s:%s]业务异常:%s", request.getRequestURL().toString(),
                         RequestUtils.getRequest4String(request), baseException.toString())), e);
             } else {
-                result = Result.failure(Error._06410002);
+                result = Result.failure(Error._100002);
                 logger.error(LogUtils.getCommLog(String.format("[%s:%s]未知错误类型:%s", request.getRequestURL().toString(),
                         RequestUtils.getRequest4String(request), e.toString())), e);
             }
         } catch (Throwable e) {
-            result = Result.failure(Error._06410002);
+            result = Result.failure(Error._100002);
             logger.error(LogUtils.getCommLog(String.format("[%s:%s]未知错误类型:%s", request.getRequestURL().toString(),
                     RequestUtils.getRequest4String(request), e.toString())), e);
         }
