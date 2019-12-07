@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "t_teacher")
-public class Teacher {
+@Table(name = "t_class")
+public class Class {
     /**
-     * id主键自增唯一
+     * id主键自增
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,43 +15,25 @@ public class Teacher {
     private Integer id;
 
     /**
-     * 关联的学院id
+     * 所属院系的id
      */
     @Column(name = "f_academy_id")
     private Integer academyId;
 
     /**
-     * 教师的登录账号，预设的管理员账号也是一个特殊的教师
+     * 班级名称
      */
-    @Column(name = "f_username")
-    private String username;
+    @Column(name = "f_class_name")
+    private String className;
 
     /**
-     * 教师的登录的密码
-     */
-    @Column(name = "f_password")
-    private String password;
-
-    /**
-     * 教师姓名
-     */
-    @Column(name = "f_name")
-    private String name;
-
-    /**
-     * 教师编号
-     */
-    @Column(name = "f_teacher_number")
-    private String teacherNumber;
-
-    /**
-     * 删除标志位
+     * 删除标识
      */
     @Column(name = "f_is_delete")
     private Boolean isDelete;
 
     /**
-     * 创建者id
+     * 创建者的id
      */
     @Column(name = "f_creator_id")
     private Integer creatorId;
@@ -64,7 +46,7 @@ public class Teacher {
     private Date createTime;
 
     /**
-     * 更新时操作者的id
+     * 更新操作者的id
      */
     @Column(name = "f_updater_id")
     private Integer updaterId;
@@ -92,36 +74,12 @@ public class Teacher {
         this.academyId = academyId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getClassName() {
+        return className;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTeacherNumber() {
-        return teacherNumber;
-    }
-
-    public void setTeacherNumber(String teacherNumber) {
-        this.teacherNumber = teacherNumber;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public Boolean getIsDelete() {

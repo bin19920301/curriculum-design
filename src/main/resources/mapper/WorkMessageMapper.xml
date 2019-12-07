@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hit.curricelumdesign.dao.WorkMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.WorkMessage" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_teaching_id" property="teachingId" jdbcType="INTEGER" />
+    <result column="f_project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="f_message_content" property="messageContent" jdbcType="VARCHAR" />
+    <result column="f_is_read" property="isRead" jdbcType="BIT" />
+    <result column="f_sender_id" property="senderId" jdbcType="INTEGER" />
+    <result column="f_sender_type" property="senderType" jdbcType="INTEGER" />
+    <result column="f_receiver_id" property="receiverId" jdbcType="INTEGER" />
+    <result column="f_receiver_type" property="receiverType" jdbcType="INTEGER" />
+    <result column="f_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="f_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, f_teaching_id, f_project_id, f_message_content, f_is_read, f_sender_id, f_sender_type, 
+    f_receiver_id, f_receiver_type, f_create_time, f_creator_id, f_update_time, f_updater_id, 
+    f_is_delete
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_work_message
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_work_message
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.WorkMessage" >
+    insert into t_work_message (f_id, f_teaching_id, f_project_id, 
+      f_message_content, f_is_read, f_sender_id, 
+      f_sender_type, f_receiver_id, f_receiver_type, 
+      f_create_time, f_creator_id, f_update_time, 
+      f_updater_id, f_is_delete)
+    values (#{id,jdbcType=INTEGER}, #{teachingId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, 
+      #{messageContent,jdbcType=VARCHAR}, #{isRead,jdbcType=BIT}, #{senderId,jdbcType=INTEGER}, 
+      #{senderType,jdbcType=INTEGER}, #{receiverId,jdbcType=INTEGER}, #{receiverType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updaterId,jdbcType=INTEGER}, #{isDelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.WorkMessage" >
+    insert into t_work_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        f_id,
+      </if>
+      <if test="teachingId != null" >
+        f_teaching_id,
+      </if>
+      <if test="projectId != null" >
+        f_project_id,
+      </if>
+      <if test="messageContent != null" >
+        f_message_content,
+      </if>
+      <if test="isRead != null" >
+        f_is_read,
+      </if>
+      <if test="senderId != null" >
+        f_sender_id,
+      </if>
+      <if test="senderType != null" >
+        f_sender_type,
+      </if>
+      <if test="receiverId != null" >
+        f_receiver_id,
+      </if>
+      <if test="receiverType != null" >
+        f_receiver_type,
+      </if>
+      <if test="createTime != null" >
+        f_create_time,
+      </if>
+      <if test="creatorId != null" >
+        f_creator_id,
+      </if>
+      <if test="updateTime != null" >
+        f_update_time,
+      </if>
+      <if test="updaterId != null" >
+        f_updater_id,
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teachingId != null" >
+        #{teachingId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="messageContent != null" >
+        #{messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=BIT},
+      </if>
+      <if test="senderId != null" >
+        #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="senderType != null" >
+        #{senderType,jdbcType=INTEGER},
+      </if>
+      <if test="receiverId != null" >
+        #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverType != null" >
+        #{receiverType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null" >
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.WorkMessage" >
+    update t_work_message
+    <set >
+      <if test="teachingId != null" >
+        f_teaching_id = #{teachingId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        f_project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="messageContent != null" >
+        f_message_content = #{messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null" >
+        f_is_read = #{isRead,jdbcType=BIT},
+      </if>
+      <if test="senderId != null" >
+        f_sender_id = #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="senderType != null" >
+        f_sender_type = #{senderType,jdbcType=INTEGER},
+      </if>
+      <if test="receiverId != null" >
+        f_receiver_id = #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverType != null" >
+        f_receiver_type = #{receiverType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        f_creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        f_update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null" >
+        f_updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.WorkMessage" >
+    update t_work_message
+    set f_teaching_id = #{teachingId,jdbcType=INTEGER},
+      f_project_id = #{projectId,jdbcType=INTEGER},
+      f_message_content = #{messageContent,jdbcType=VARCHAR},
+      f_is_read = #{isRead,jdbcType=BIT},
+      f_sender_id = #{senderId,jdbcType=INTEGER},
+      f_sender_type = #{senderType,jdbcType=INTEGER},
+      f_receiver_id = #{receiverId,jdbcType=INTEGER},
+      f_receiver_type = #{receiverType,jdbcType=INTEGER},
+      f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      f_creator_id = #{creatorId,jdbcType=INTEGER},
+      f_update_time = #{updateTime,jdbcType=TIMESTAMP},
+      f_updater_id = #{updaterId,jdbcType=INTEGER},
+      f_is_delete = #{isDelete,jdbcType=BIT}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

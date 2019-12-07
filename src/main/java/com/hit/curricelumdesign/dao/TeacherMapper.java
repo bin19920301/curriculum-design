@@ -1,9 +1,7 @@
 package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.entity.Teacher;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface TeacherMapper {
     int deleteByPrimaryKey(Integer id);
 

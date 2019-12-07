@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hit.curricelumdesign.dao.CraftCardMapper" >
+  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.CraftCard" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="t_craft_name" property="tCraftName" jdbcType="VARCHAR" />
+    <result column="t_finished_surface" property="tFinishedSurface" jdbcType="INTEGER" />
+    <result column="t_processing_method" property="tProcessingMethod" jdbcType="INTEGER" />
+    <result column="t_process _content" property="tProcessContent" jdbcType="VARCHAR" />
+    <result column="t_is_delete" property="tIsDelete" jdbcType="BIT" />
+    <result column="t_creator_id" property="tCreatorId" jdbcType="INTEGER" />
+    <result column="t_create_time" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="t_updater_id" property="tUpdaterId" jdbcType="INTEGER" />
+    <result column="t_update_time" property="tUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, t_craft_name, t_finished_surface, t_processing_method, "t_process _content", 
+    t_is_delete, t_creator_id, t_create_time, t_updater_id, t_update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_craft_card
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_craft_card
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.CraftCard" >
+    insert into t_craft_card (f_id, t_craft_name, t_finished_surface, 
+      t_processing_method, "t_process _content", t_is_delete, 
+      t_creator_id, t_create_time, t_updater_id, 
+      t_update_time)
+    values (#{id,jdbcType=INTEGER}, #{tCraftName,jdbcType=VARCHAR}, #{tFinishedSurface,jdbcType=INTEGER}, 
+      #{tProcessingMethod,jdbcType=INTEGER}, #{tProcessContent,jdbcType=VARCHAR}, #{tIsDelete,jdbcType=BIT}, 
+      #{tCreatorId,jdbcType=INTEGER}, #{tCreateTime,jdbcType=TIMESTAMP}, #{tUpdaterId,jdbcType=INTEGER}, 
+      #{tUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.CraftCard" >
+    insert into t_craft_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        f_id,
+      </if>
+      <if test="tCraftName != null" >
+        t_craft_name,
+      </if>
+      <if test="tFinishedSurface != null" >
+        t_finished_surface,
+      </if>
+      <if test="tProcessingMethod != null" >
+        t_processing_method,
+      </if>
+      <if test="tProcessContent != null" >
+        "t_process _content",
+      </if>
+      <if test="tIsDelete != null" >
+        t_is_delete,
+      </if>
+      <if test="tCreatorId != null" >
+        t_creator_id,
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time,
+      </if>
+      <if test="tUpdaterId != null" >
+        t_updater_id,
+      </if>
+      <if test="tUpdateTime != null" >
+        t_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tCraftName != null" >
+        #{tCraftName,jdbcType=VARCHAR},
+      </if>
+      <if test="tFinishedSurface != null" >
+        #{tFinishedSurface,jdbcType=INTEGER},
+      </if>
+      <if test="tProcessingMethod != null" >
+        #{tProcessingMethod,jdbcType=INTEGER},
+      </if>
+      <if test="tProcessContent != null" >
+        #{tProcessContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tIsDelete != null" >
+        #{tIsDelete,jdbcType=BIT},
+      </if>
+      <if test="tCreatorId != null" >
+        #{tCreatorId,jdbcType=INTEGER},
+      </if>
+      <if test="tCreateTime != null" >
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUpdaterId != null" >
+        #{tUpdaterId,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null" >
+        #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.CraftCard" >
+    update t_craft_card
+    <set >
+      <if test="tCraftName != null" >
+        t_craft_name = #{tCraftName,jdbcType=VARCHAR},
+      </if>
+      <if test="tFinishedSurface != null" >
+        t_finished_surface = #{tFinishedSurface,jdbcType=INTEGER},
+      </if>
+      <if test="tProcessingMethod != null" >
+        t_processing_method = #{tProcessingMethod,jdbcType=INTEGER},
+      </if>
+      <if test="tProcessContent != null" >
+        "t_process _content" = #{tProcessContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tIsDelete != null" >
+        t_is_delete = #{tIsDelete,jdbcType=BIT},
+      </if>
+      <if test="tCreatorId != null" >
+        t_creator_id = #{tCreatorId,jdbcType=INTEGER},
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUpdaterId != null" >
+        t_updater_id = #{tUpdaterId,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null" >
+        t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.CraftCard" >
+    update t_craft_card
+    set t_craft_name = #{tCraftName,jdbcType=VARCHAR},
+      t_finished_surface = #{tFinishedSurface,jdbcType=INTEGER},
+      t_processing_method = #{tProcessingMethod,jdbcType=INTEGER},
+      "t_process _content" = #{tProcessContent,jdbcType=VARCHAR},
+      t_is_delete = #{tIsDelete,jdbcType=BIT},
+      t_creator_id = #{tCreatorId,jdbcType=INTEGER},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      t_updater_id = #{tUpdaterId,jdbcType=INTEGER},
+      t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

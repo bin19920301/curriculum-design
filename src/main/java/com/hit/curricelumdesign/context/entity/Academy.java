@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "t_admin")
-public class Admin {
+@Table(name = "t_academy")
+public class Academy {
     /**
-     * id主键自增非空唯一
+     * id主键唯一自增
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,44 +15,32 @@ public class Admin {
     private Integer id;
 
     /**
-     * 管理员登录的账号
+     * 学院名称
      */
-    @Column(name = "f_username")
-    private String username;
+    @Column(name = "f_academy_name")
+    private String academyName;
 
     /**
-     * 管理员登录的密码
-     */
-    @Column(name = "f_password")
-    private String password;
-
-    /**
-     * 管理员的名称
-     */
-    @Column(name = "f_name")
-    private String name;
-
-    /**
-     * 删除标志位
+     * 删除的标志位
      */
     @Column(name = "f_is_delete")
-    private Integer isDelete;
+    private Boolean isDelete;
 
     /**
-     * 创建者id，因为最初的管理员为预设，所以没有非空限定
+     * 创建者的id
      */
-    @Column(name = "f_creator_id")
-    private Integer creatorId;
+    @Column(name = "f_create_id")
+    private Integer createId;
 
     /**
-     * 创建时间
+     * 创建日期
      */
     @Column(name = "f_create_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
 
     /**
-     * 更新时，修改者的id
+     * 更新时操作者的id
      */
     @Column(name = "f_updater_id")
     private Integer updaterId;
@@ -72,44 +60,28 @@ public class Admin {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAcademyName() {
+        return academyName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAcademyName(String academyName) {
+        this.academyName = academyName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getIsDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(Integer isDelete) {
+    public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
 
-    public Integer getCreatorId() {
-        return creatorId;
+    public Integer getCreateId() {
+        return createId;
     }
 
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
+    public void setCreateId(Integer createId) {
+        this.createId = createId;
     }
 
     public Date getCreateTime() {

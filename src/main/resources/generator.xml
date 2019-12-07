@@ -41,14 +41,90 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名 -->
-        <table schema="curriculum_design" tableName="t_admin" domainObjectName="Admin"
+        <table schema="curriculum_design" tableName="t_academy" domainObjectName="Academy"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                enableUpdateByExample="false">
             <columnRenamingRule searchString="^f_" replaceString=""/>
         </table>
-
+        <table schema="curriculum_design" tableName="t_class" domainObjectName="Class"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_craft_card" domainObjectName="CraftCard"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_craft_card_to_work" domainObjectName="CraftCardToWork"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_enrollment_year" domainObjectName="EnrollmentYear"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_file" domainObjectName="File"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_folder" domainObjectName="Folder"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_teaching" domainObjectName="Teaching"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_work" domainObjectName="Work"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_work_message" domainObjectName="WorkMessage"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_work_project" domainObjectName="WorkProject"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_work_project_file" domainObjectName="WorkProjectFile"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
     </context>
 
 </generatorConfiguration>
