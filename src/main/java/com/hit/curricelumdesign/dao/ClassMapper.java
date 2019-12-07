@@ -2,8 +2,10 @@ package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.entity.Class;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface ClassMapper {
     int deleteByPrimaryKey(Integer id);
 
