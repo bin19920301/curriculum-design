@@ -1,7 +1,9 @@
 package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.entity.Work;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface WorkMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -1,7 +1,9 @@
 package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.entity.Class;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ClassMapper {
     int deleteByPrimaryKey(Integer id);
 

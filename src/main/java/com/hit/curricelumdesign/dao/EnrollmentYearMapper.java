@@ -1,7 +1,9 @@
 package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.entity.EnrollmentYear;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface EnrollmentYearMapper {
     int deleteByPrimaryKey(Integer id);
 
