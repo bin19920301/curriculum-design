@@ -46,8 +46,8 @@ public class Admin {
     /**
      * 创建时间
      */
-    @Column(name = "f_creator_time")
-    private Date creatorTime;
+    @Column(name = "f_create_time")
+    private Date createTime;
 
     /**
      * 更新时，修改者的id
@@ -110,12 +110,12 @@ public class Admin {
         this.creatorId = creatorId;
     }
 
-    public Date getCreatorTime() {
-        return creatorTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatorTime(Date creatorTime) {
-        this.creatorTime = creatorTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getUpdaterId() {
