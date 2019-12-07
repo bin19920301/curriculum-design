@@ -16,6 +16,6 @@ public class InvalidParameterException extends BaseException {
 	private static final long serialVersionUID = -3883814863434936445L;
 
 	public InvalidParameterException(String msg) {
-		super(Error._10004.getErrorCode(), msg);
+		super(Error._100004.getErrorCode(), msg);
 	}
 }

@@ -1,5 +1,6 @@
-package com.hit.curricelumdesign.controller.admin;
+package com.hit.curricelumdesign.controller;
 
+import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.entity.Admin;
 import com.hit.curricelumdesign.context.param.admin.GetAdminParam;
 import com.hit.curricelumdesign.context.response.Result;
@@ -23,8 +24,8 @@ public class AdminController {
     private AdminService adminService;
 
 
-
     @RequestMapping(value = "/admin/getadminbyid/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
     public Result getAdmin(GetAdminParam param) {
         return adminService.getAdminById(param);
     }

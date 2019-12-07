@@ -249,7 +249,7 @@ public class BeanUtil {
         } catch (Exception e) {
             flag = true;
             logger.error(LogUtils.getCommLog(String.format("参数转换异常，%s", e)));
-            throw new BaseException(Error._10004);
+            throw new BaseException(Error._100004);
         } finally {
             if (flag && currentMethod != null) {
                 logger.error(LogUtils.getCommLog(String.format("%s()方法执行异常", currentMethod)));
