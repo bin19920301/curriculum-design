@@ -1,8 +1,8 @@
 package com.hit.curricelumdesign.context.entity;
 import javax.persistence.*;
 import java.util.Date;
-@Entity
 
+@Entity
 @Table(name = "t_admin")
 public class Admin {
     /**
