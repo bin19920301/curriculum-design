@@ -147,4 +147,18 @@
     </set>
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.Teaching">
+    update t_teaching
+    set f_name = #{name,jdbcType=VARCHAR},
+      "f_teacher_ reminder" = #{teacherReminder,jdbcType=VARCHAR},
+      f_teacher_id = #{teacherId,jdbcType=INTEGER},
+      f_deadline_time = #{deadlineTime,jdbcType=TIMESTAMP},
+      f_status = #{status,jdbcType=INTEGER},
+      f_is_delete = #{isDelete,jdbcType=BIT},
+      f_createtime = #{createtime,jdbcType=TIMESTAMP},
+      f_creator_id = #{creatorId,jdbcType=INTEGER},
+      f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      f_updater_id = #{updaterId,jdbcType=INTEGER}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
