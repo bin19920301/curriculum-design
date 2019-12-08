@@ -1,8 +1,11 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
 import com.hit.curricelumdesign.context.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -13,9 +16,13 @@ public interface TeacherMapper {
 
     int insertSelective(Teacher record);
 
-    Teacher selectByPrimaryKey(Integer id);
+    TeacherDTO selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
+
+    List<TeacherDTO> getTeacherList();
+
+    Teacher getTeacherByNumber(String number);
 }
