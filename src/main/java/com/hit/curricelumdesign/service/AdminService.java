@@ -79,7 +79,7 @@ public class AdminService {
      * @return
      */
     public Result getAdminList(BaseListRequestParam param) {
-        PageHelper.startPage(param.getPageNum() - 1, param.getPageSize());
+        PageHelper.startPage(param.getPageNum() -1, param.getPageSize());
         List<Admin> adminList = adminManager.getAdminList();
         PageInfo<Admin> pageInfo = new PageInfo<>(adminList);
         List<AdminListDTO> dtoList = new ArrayList<>();

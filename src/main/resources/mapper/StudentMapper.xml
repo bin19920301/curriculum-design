@@ -161,4 +161,10 @@
       f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getStudentList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_student
+    where f_is_delete = 0
+  </select>
 </mapper>

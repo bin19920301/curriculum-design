@@ -1,6 +1,5 @@
 package com.hit.curricelumdesign.service;
 
-import com.github.pagehelper.Constant;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
@@ -9,10 +8,7 @@ import com.hit.curricelumdesign.context.entity.Teacher;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
-import com.hit.curricelumdesign.context.param.teacher.AddTeacherParam;
-import com.hit.curricelumdesign.context.param.teacher.DeleteTeacherParam;
-import com.hit.curricelumdesign.context.param.teacher.GetTeacherParam;
-import com.hit.curricelumdesign.context.param.teacher.UpdateTeacherParam;
+import com.hit.curricelumdesign.context.param.teacher.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.TeacherMapper;
 import com.hit.curricelumdesign.manager.teacher.TeacherManager;
@@ -21,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -77,6 +72,7 @@ public class TeacherService {
     public Result updateTeacher(UpdateTeacherParam teacherParam){
         Teacher teacher = new Teacher();
         BeanUtil.copyProperties(teacherParam,teacher);
+        BeanUtil.copyProperties(teacherParam,teacher,"password");
         System.out.println("新的密码；"+teacher.getPassword());;
         teacher.setUpdatetime(new Date());
         teacherMapper.updateByPrimaryKeySelective(teacher);
@@ -102,7 +98,7 @@ public class TeacherService {
      * @param teacherParam
      * @return
      */
-    public Result resetTeacherPassword(GetTeacherParam teacherParam){
+    public Result resetTeacherPassword(ResetPasswordParam teacherParam){
         TeacherDTO dto = teacherMapper.selectByPrimaryKey(teacherParam.getId());
         Teacher teacher = new Teacher();
         BeanUtil.copyProperties(dto,teacher);

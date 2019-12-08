@@ -4,6 +4,8 @@ import com.hit.curricelumdesign.context.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface StudentMapper {
@@ -18,4 +20,6 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
+    List<Student> getStudentList();
 }

@@ -16,8 +16,9 @@ public interface TeacherMapper {
 
     int insertSelective(Teacher record);
 
-    TeacherDTO selectByPrimaryKey(Integer id);
+    TeacherDTO selectById(Integer id);
 
+    Teacher selectByPrimaryKey(Integer id);
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);

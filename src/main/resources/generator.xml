@@ -48,6 +48,13 @@
                enableUpdateByExample="false">
             <columnRenamingRule searchString="^f_" replaceString=""/>
         </table>
+        <table schema="curriculum_design" tableName="t_admin" domainObjectName="Admin"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
         <table schema="curriculum_design" tableName="t_class" domainObjectName="Class"
                enableCountByExample="false"
                enableDeleteByExample="false"
@@ -56,13 +63,6 @@
             <columnRenamingRule searchString="^f_" replaceString=""/>
         </table>
         <table schema="curriculum_design" tableName="t_craft_card" domainObjectName="CraftCard"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <columnRenamingRule searchString="^f_" replaceString=""/>
-        </table>
-        <table schema="curriculum_design" tableName="t_craft_card_to_work" domainObjectName="CraftCardToWork"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
@@ -84,6 +84,34 @@
             <columnRenamingRule searchString="^f_" replaceString=""/>
         </table>
         <table schema="curriculum_design" tableName="t_folder" domainObjectName="Folder"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_processing_method" domainObjectName="ProcessingMethod"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_student" domainObjectName="Student"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_surface" domainObjectName="Surface"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnRenamingRule searchString="^f_" replaceString=""/>
+        </table>
+        <table schema="curriculum_design" tableName="t_teacher" domainObjectName="Teacher"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
