@@ -1,8 +1,5 @@
 package com.hit.curricelumdesign.context.dto.student;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public class StudentDTO {
     /**
      * 主键id自增
@@ -12,7 +9,7 @@ public class StudentDTO {
     /**
      * 学号，字符串格式
      */
-    private String studentNumber;
+    private String number;
 
     /**
      * 学生姓名
@@ -58,12 +55,12 @@ public class StudentDTO {
         this.id = id;
     }
 
-    public String getStudentNumber() {
-        return studentNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setStudentNumber(String studentNumber) {
-        this.studentNumber = studentNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getName() {

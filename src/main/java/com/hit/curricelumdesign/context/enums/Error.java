@@ -76,10 +76,11 @@ public enum Error {
 	TEACHER_NUMBER_IS_EXIST("3003006", "教师编号已存在"),
 
 	//----------------------------------------学生
-	STUDENT_NOT_FOUND("3004001", "学生信息不存在"),
+	STUDENT_IS_NOT_EXIST("3004001", "学生信息不存在"),
 	STUDENT_ADD_FAILURE("3004002", "添加学生信息失败"),
 	STUDENT_UPDATE_FAILURE("3004003", "更新学生信息失败"),
 	STUDENT_DELETE_FAILURE("3004004", "删除学生信息失败"),
+	STUDENT_NUMBER_IS_EXIST("3003005", "学生编号已存在"),
 	;
 
 

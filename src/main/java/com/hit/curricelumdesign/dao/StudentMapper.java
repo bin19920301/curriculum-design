@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.student.StudentDTO;
 import com.hit.curricelumdesign.context.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -17,9 +18,13 @@ public interface StudentMapper {
 
     Student selectByPrimaryKey(Integer id);
 
+    Student selectByNumber(String number);
+
+    StudentDTO selectById(Integer id);
+
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
 
-    List<Student> getStudentList();
+    List<StudentDTO> getStudentList();
 }
