@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.entity.Admin;
+import com.hit.curricelumdesign.context.param.admin.GetAdminListParam;
 import com.hit.curricelumdesign.context.param.admin.GetAdminParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.AdminMapper;
@@ -28,5 +29,12 @@ public class AdminController {
     @HitApi(checkAdminLogin = true)
     public Result getAdmin(GetAdminParam param) {
         return adminService.getAdminById(param);
+    }
+
+
+    @RequestMapping(value = "/admin/getadminlist/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
+    public Result getAdminList(GetAdminListParam param) {
+        return adminService.getAdminList(param);
     }
 }
