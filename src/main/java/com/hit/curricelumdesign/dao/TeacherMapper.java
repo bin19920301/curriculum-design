@@ -26,4 +26,6 @@ public interface TeacherMapper {
     List<TeacherDTO> getTeacherList();
 
     Teacher getTeacherByNumber(String number);
+
+    Long countTeacherByAcademyId(Integer academyId);
 }

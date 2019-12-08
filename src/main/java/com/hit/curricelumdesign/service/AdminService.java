@@ -44,7 +44,7 @@ public class AdminService {
     public Result addAdmin(AddAdminParam param) {
         Admin adminByNumber = adminMapper.getAdminByNumber(param.getNumber());
         if (null != adminByNumber) {
-            throw new BaseException(Error._300002);
+            throw new BaseException(Error.ADMIN_NUMBER_IS_EXIST);
         }
         Date now = new Date();
         Admin admin = new Admin();
@@ -79,7 +79,7 @@ public class AdminService {
      * @return
      */
     public Result getAdminList(BaseListRequestParam param) {
-        PageHelper.startPage(param.getPageNum() -1, param.getPageSize());
+        PageHelper.startPage(param.getPageNum(), param.getPageSize());
         List<Admin> adminList = adminManager.getAdminList();
         PageInfo<Admin> pageInfo = new PageInfo<>(adminList);
         List<AdminListDTO> dtoList = new ArrayList<>();
@@ -100,6 +100,10 @@ public class AdminService {
      */
     public Result updateAdmin(UpdateAdminParam param) {
         Admin admin = adminManager.getAminById(param.getId());
+        Admin adminByNumber = adminMapper.getAdminByNumber(param.getNumber());
+        if (null != adminByNumber && admin.getId().compareTo(adminByNumber.getId()) == 0) {
+            throw new BaseException(Error.ADMIN_NUMBER_IS_EXIST);
+        }
         BeanUtil.copyProperties(param, admin);
         admin.setUpdatetime(new Date());
         // todo id
