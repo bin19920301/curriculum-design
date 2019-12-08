@@ -187,7 +187,7 @@
       f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getStudentList" resultMap="DTOResultMap">
+  <select id="getStudentDTOList" resultMap="DTOResultMap">
     select
     st.f_id, st.f_academy_id, st.f_enrollment_id, st.f_class_id, st.f_name, st.f_number,a.f_name as academyName,e.f_name as enrollmentYear,c.f_name as className
     from t_student st

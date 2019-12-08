@@ -26,5 +26,5 @@ public interface StudentMapper {
 
     int updateByPrimaryKey(Student record);
 
-    List<StudentDTO> getStudentList();
+    List<StudentDTO> getStudentDTOList();
 }
