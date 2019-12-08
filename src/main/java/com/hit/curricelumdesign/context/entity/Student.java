@@ -2,7 +2,6 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name = "t_student")
 public class Student {
@@ -33,18 +32,6 @@ public class Student {
     private Integer classId;
 
     /**
-     * 学生的登录账号
-     */
-    @Column(name = "f_username")
-    private String username;
-
-    /**
-     * 学生账号的登录密码
-     */
-    @Column(name = "f_password")
-    private String password;
-
-    /**
      * 学生姓名
      */
     @Column(name = "f_name")
@@ -53,8 +40,8 @@ public class Student {
     /**
      * 学号，字符串格式
      */
-    @Column(name = "f_student_number")
-    private String studentNumber;
+    @Column(name = "f_number")
+    private String number;
 
     /**
      * 删除标志位
@@ -71,9 +58,8 @@ public class Student {
     /**
      * 创建时间
      */
-    @Column(name = "f_create_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
+    @Column(name = "f_createtime")
+    private Date createtime;
 
     /**
      * 更新时操作者的id
@@ -84,9 +70,8 @@ public class Student {
     /**
      * 更新时间
      */
-    @Column(name = "f_update_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
+    @Column(name = "f_updatetime")
+    private Date updatetime;
 
     public Integer getId() {
         return id;
@@ -120,22 +105,6 @@ public class Student {
         this.classId = classId;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getName() {
         return name;
     }
@@ -144,12 +113,12 @@ public class Student {
         this.name = name;
     }
 
-    public String getStudentNumber() {
-        return studentNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setStudentNumber(String studentNumber) {
-        this.studentNumber = studentNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public Byte getIsDelete() {
@@ -168,12 +137,12 @@ public class Student {
         this.creatorId = creatorId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     public Integer getUpdaterId() {
@@ -184,11 +153,11 @@ public class Student {
         this.updaterId = updaterId;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 }

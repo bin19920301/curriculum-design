@@ -2,7 +2,6 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name = "t_teaching")
 public class Teaching {
@@ -15,6 +14,12 @@ public class Teaching {
     private Integer id;
 
     /**
+     * 指导教师id
+     */
+    @Column(name = "f_teacher_id")
+    private Integer teacherId;
+
+    /**
      * 教学名称
      */
     @Column(name = "f_name")
@@ -25,12 +30,6 @@ public class Teaching {
      */
     @Column(name = "f_teacher_ reminder")
     private String teacherReminder;
-
-    /**
-     * 指导教师id
-     */
-    @Column(name = "f_teacher_id")
-    private Integer teacherId;
 
     /**
      * 截止日期
@@ -82,6 +81,14 @@ public class Teaching {
         this.id = id;
     }
 
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+
     public String getName() {
         return name;
     }
@@ -96,14 +103,6 @@ public class Teaching {
 
     public void setTeacherReminder(String teacherReminder) {
         this.teacherReminder = teacherReminder;
-    }
-
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
     }
 
     public Date getDeadlineTime() {

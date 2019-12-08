@@ -2,7 +2,6 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name = "t_admin")
 public class Admin {
@@ -15,10 +14,10 @@ public class Admin {
     private Integer id;
 
     /**
-     * 管理员登录的账号
+     * 管理员的编号
      */
-    @Column(name = "f_username")
-    private String username;
+    @Column(name = "f_number")
+    private String number;
 
     /**
      * 管理员登录的密码
@@ -39,7 +38,7 @@ public class Admin {
     private Integer isDelete;
 
     /**
-     * 创建者id，因为最初的管理员为预设，所以没有非空限定
+     * 创建者id
      */
     @Column(name = "f_creator_id")
     private Integer creatorId;
@@ -47,9 +46,8 @@ public class Admin {
     /**
      * 创建时间
      */
-    @Column(name = "f_create_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
+    @Column(name = "f_createtime")
+    private Date createtime;
 
     /**
      * 更新时，修改者的id
@@ -60,9 +58,8 @@ public class Admin {
     /**
      * 更新时间
      */
-    @Column(name = "f_update_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
+    @Column(name = "f_updatetime")
+    private Date updatetime;
 
     public Integer getId() {
         return id;
@@ -72,12 +69,12 @@ public class Admin {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNumber() {
+        return number;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getPassword() {
@@ -112,12 +109,12 @@ public class Admin {
         this.creatorId = creatorId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     public Integer getUpdaterId() {
@@ -128,11 +125,11 @@ public class Admin {
         this.updaterId = updaterId;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 }

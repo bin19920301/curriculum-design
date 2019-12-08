@@ -2,7 +2,6 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name = "t_class")
 public class Class {
@@ -23,8 +22,8 @@ public class Class {
     /**
      * 班级名称
      */
-    @Column(name = "f_class_name")
-    private String className;
+    @Column(name = "f_name")
+    private String name;
 
     /**
      * 删除标识
@@ -41,9 +40,8 @@ public class Class {
     /**
      * 创建时间
      */
-    @Column(name = "f_create_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
+    @Column(name = "f_createtime")
+    private Date createtime;
 
     /**
      * 更新操作者的id
@@ -54,9 +52,8 @@ public class Class {
     /**
      * 更新时间
      */
-    @Column(name = "f_update_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
+    @Column(name = "f_updatetime")
+    private Date updatetime;
 
     public Integer getId() {
         return id;
@@ -74,12 +71,12 @@ public class Class {
         this.academyId = academyId;
     }
 
-    public String getClassName() {
-        return className;
+    public String getName() {
+        return name;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean getIsDelete() {
@@ -98,12 +95,12 @@ public class Class {
         this.creatorId = creatorId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     public Integer getUpdaterId() {
@@ -114,11 +111,11 @@ public class Class {
         this.updaterId = updaterId;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 }

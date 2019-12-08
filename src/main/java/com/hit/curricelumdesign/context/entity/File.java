@@ -2,7 +2,6 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name = "t_file")
 public class File {

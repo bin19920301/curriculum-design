@@ -2,7 +2,6 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name = "t_enrollment_year")
 public class EnrollmentYear {
@@ -17,8 +16,8 @@ public class EnrollmentYear {
     /**
      * 年级年份
      */
-    @Column(name = "f_enrollment_year_id")
-    private Integer enrollmentYearId;
+    @Column(name = "f_enrollment_year")
+    private Integer enrollmentYear;
 
     /**
      * 删除的标志位
@@ -35,9 +34,8 @@ public class EnrollmentYear {
     /**
      * 创建时间
      */
-    @Column(name = "f_create_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
+    @Column(name = "f_createtime")
+    private Date createtime;
 
     /**
      * 修改时操作者的id
@@ -48,9 +46,8 @@ public class EnrollmentYear {
     /**
      * 修改时间
      */
-    @Column(name = "f_update_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
+    @Column(name = "f_updatetime")
+    private Date updatetime;
 
     public Integer getId() {
         return id;
@@ -60,12 +57,12 @@ public class EnrollmentYear {
         this.id = id;
     }
 
-    public Integer getEnrollmentYearId() {
-        return enrollmentYearId;
+    public Integer getEnrollmentYear() {
+        return enrollmentYear;
     }
 
-    public void setEnrollmentYearId(Integer enrollmentYearId) {
-        this.enrollmentYearId = enrollmentYearId;
+    public void setEnrollmentYear(Integer enrollmentYear) {
+        this.enrollmentYear = enrollmentYear;
     }
 
     public Boolean getIsDelete() {
@@ -84,12 +81,12 @@ public class EnrollmentYear {
         this.creatorId = creatorId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     public Integer getUpdaterId() {
@@ -100,11 +97,11 @@ public class EnrollmentYear {
         this.updaterId = updaterId;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 }

@@ -2,7 +2,6 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name = "t_teacher")
 public class Teacher {
@@ -21,16 +20,10 @@ public class Teacher {
     private Integer academyId;
 
     /**
-     * 教师的登录账号，预设的管理员账号也是一个特殊的教师
+     * 教师编号
      */
-    @Column(name = "f_username")
-    private String username;
-
-    /**
-     * 教师的登录的密码
-     */
-    @Column(name = "f_password")
-    private String password;
+    @Column(name = "f_number")
+    private String number;
 
     /**
      * 教师姓名
@@ -39,10 +32,10 @@ public class Teacher {
     private String name;
 
     /**
-     * 教师编号
+     * 教师的登录的密码
      */
-    @Column(name = "f_teacher_number")
-    private String teacherNumber;
+    @Column(name = "f_password")
+    private String password;
 
     /**
      * 删除标志位
@@ -59,9 +52,8 @@ public class Teacher {
     /**
      * 创建时间
      */
-    @Column(name = "f_create_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
+    @Column(name = "f_createtime")
+    private Date createtime;
 
     /**
      * 更新时操作者的id
@@ -72,9 +64,8 @@ public class Teacher {
     /**
      * 更新时间
      */
-    @Column(name = "f_update_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
+    @Column(name = "f_updatetime")
+    private Date updatetime;
 
     public Integer getId() {
         return id;
@@ -92,20 +83,12 @@ public class Teacher {
         this.academyId = academyId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNumber() {
+        return number;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getName() {
@@ -116,12 +99,12 @@ public class Teacher {
         this.name = name;
     }
 
-    public String getTeacherNumber() {
-        return teacherNumber;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTeacherNumber(String teacherNumber) {
-        this.teacherNumber = teacherNumber;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Boolean getIsDelete() {
@@ -140,12 +123,12 @@ public class Teacher {
         this.creatorId = creatorId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     public Integer getUpdaterId() {
@@ -156,11 +139,11 @@ public class Teacher {
         this.updaterId = updaterId;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 }
