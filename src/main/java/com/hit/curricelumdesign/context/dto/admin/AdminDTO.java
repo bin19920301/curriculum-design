@@ -1,4 +1,4 @@
-package com.hit.curricelumdesign.context.dto;
+package com.hit.curricelumdesign.context.dto.admin;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -18,11 +18,6 @@ public class AdminDTO {
     private Integer id;
 
     /**
-     * 管理员登录的账号
-     */
-    private String username;
-
-    /**
      * 管理员登录的密码
      */
     private String password;
@@ -32,20 +27,17 @@ public class AdminDTO {
      */
     private String name;
 
+    /**
+     * 管理员的编号
+     */
+    private String number;
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -64,13 +56,21 @@ public class AdminDTO {
         this.name = name;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     @Override
     public String toString() {
         return "AdminDTO{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
                 '}';
     }
 }

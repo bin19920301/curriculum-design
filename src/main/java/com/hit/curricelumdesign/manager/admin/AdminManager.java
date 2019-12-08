@@ -7,6 +7,8 @@ import com.hit.curricelumdesign.dao.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * @author xbr
  * @Date 2019-12-07
@@ -27,4 +29,7 @@ public class AdminManager {
     }
 
 
+    public List<Admin> getAdminList() {
+        return adminMapper.getAdminList();
+    }
 }

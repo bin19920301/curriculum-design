@@ -1,11 +1,9 @@
 package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
-import com.hit.curricelumdesign.context.entity.Admin;
-import com.hit.curricelumdesign.context.param.admin.GetAdminListParam;
+import com.hit.curricelumdesign.context.param.BaseListRequestParam;
 import com.hit.curricelumdesign.context.param.admin.GetAdminParam;
 import com.hit.curricelumdesign.context.response.Result;
-import com.hit.curricelumdesign.dao.AdminMapper;
 import com.hit.curricelumdesign.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +32,7 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/getadminlist/", method = RequestMethod.POST)
     @HitApi(checkAdminLogin = true)
-    public Result getAdminList(GetAdminListParam param) {
+    public Result getAdminList(BaseListRequestParam param) {
         return adminService.getAdminList(param);
     }
 }
