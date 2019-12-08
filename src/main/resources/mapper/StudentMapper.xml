@@ -6,19 +6,17 @@
     <result column="f_academy_id" property="academyId" jdbcType="INTEGER" />
     <result column="f_enrollment_id" property="enrollmentId" jdbcType="INTEGER" />
     <result column="f_class_id" property="classId" jdbcType="INTEGER" />
-    <result column="f_username" property="username" jdbcType="VARCHAR" />
-    <result column="f_password" property="password" jdbcType="VARCHAR" />
     <result column="f_name" property="name" jdbcType="VARCHAR" />
-    <result column="f_student_number" property="studentNumber" jdbcType="VARCHAR" />
+    <result column="f_number" property="number" jdbcType="VARCHAR" />
     <result column="f_is_delete" property="isDelete" jdbcType="TINYINT" />
     <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
-    <result column="f_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
-    <result column="f_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    f_id, f_academy_id, f_enrollment_id, f_class_id, f_username, f_password, f_name, 
-    f_student_number, f_is_delete, f_creator_id, f_create_time, f_updater_id, f_update_time
+    f_id, f_academy_id, f_enrollment_id, f_class_id, f_name, f_number, f_is_delete, f_creator_id, 
+    f_createtime, f_updater_id, f_updatetime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,15 +30,13 @@
   </delete>
   <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.Student" >
     insert into t_student (f_id, f_academy_id, f_enrollment_id, 
-      f_class_id, f_username, f_password, 
-      f_name, f_student_number, f_is_delete, 
-      f_creator_id, f_create_time, f_updater_id, 
-      f_update_time)
+      f_class_id, f_name, f_number, 
+      f_is_delete, f_creator_id, f_createtime, 
+      f_updater_id, f_updatetime)
     values (#{id,jdbcType=INTEGER}, #{academyId,jdbcType=INTEGER}, #{enrollmentId,jdbcType=INTEGER}, 
-      #{classId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{studentNumber,jdbcType=VARCHAR}, #{isDelete,jdbcType=TINYINT}, 
-      #{creatorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{classId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=TINYINT}, #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updaterId,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.Student" >
     insert into t_student
@@ -57,17 +53,11 @@
       <if test="classId != null" >
         f_class_id,
       </if>
-      <if test="username != null" >
-        f_username,
-      </if>
-      <if test="password != null" >
-        f_password,
-      </if>
       <if test="name != null" >
         f_name,
       </if>
-      <if test="studentNumber != null" >
-        f_student_number,
+      <if test="number != null" >
+        f_number,
       </if>
       <if test="isDelete != null" >
         f_is_delete,
@@ -75,14 +65,14 @@
       <if test="creatorId != null" >
         f_creator_id,
       </if>
-      <if test="createTime != null" >
-        f_create_time,
+      <if test="createtime != null" >
+        f_createtime,
       </if>
       <if test="updaterId != null" >
         f_updater_id,
       </if>
-      <if test="updateTime != null" >
-        f_update_time,
+      <if test="updatetime != null" >
+        f_updatetime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -98,17 +88,11 @@
       <if test="classId != null" >
         #{classId,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="studentNumber != null" >
-        #{studentNumber,jdbcType=VARCHAR},
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null" >
         #{isDelete,jdbcType=TINYINT},
@@ -116,14 +100,14 @@
       <if test="creatorId != null" >
         #{creatorId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="updaterId != null" >
         #{updaterId,jdbcType=INTEGER},
       </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -139,17 +123,11 @@
       <if test="classId != null" >
         f_class_id = #{classId,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        f_username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        f_password = #{password,jdbcType=VARCHAR},
-      </if>
       <if test="name != null" >
         f_name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="studentNumber != null" >
-        f_student_number = #{studentNumber,jdbcType=VARCHAR},
+      <if test="number != null" >
+        f_number = #{number,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null" >
         f_is_delete = #{isDelete,jdbcType=TINYINT},
@@ -157,14 +135,14 @@
       <if test="creatorId != null" >
         f_creator_id = #{creatorId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="createtime != null" >
+        f_createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="updaterId != null" >
         f_updater_id = #{updaterId,jdbcType=INTEGER},
       </if>
-      <if test="updateTime != null" >
-        f_update_time = #{updateTime,jdbcType=TIMESTAMP},
+      <if test="updatetime != null" >
+        f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where f_id = #{id,jdbcType=INTEGER}
@@ -174,15 +152,13 @@
     set f_academy_id = #{academyId,jdbcType=INTEGER},
       f_enrollment_id = #{enrollmentId,jdbcType=INTEGER},
       f_class_id = #{classId,jdbcType=INTEGER},
-      f_username = #{username,jdbcType=VARCHAR},
-      f_password = #{password,jdbcType=VARCHAR},
       f_name = #{name,jdbcType=VARCHAR},
-      f_student_number = #{studentNumber,jdbcType=VARCHAR},
+      f_number = #{number,jdbcType=VARCHAR},
       f_is_delete = #{isDelete,jdbcType=TINYINT},
       f_creator_id = #{creatorId,jdbcType=INTEGER},
-      f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      f_createtime = #{createtime,jdbcType=TIMESTAMP},
       f_updater_id = #{updaterId,jdbcType=INTEGER},
-      f_update_time = #{updateTime,jdbcType=TIMESTAMP}
+      f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
