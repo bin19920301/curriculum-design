@@ -18,7 +18,7 @@ public class TeacherManager {
     private TeacherMapper teacherMapper;
 
     public TeacherDTO getTeacherById(Integer id){
-        TeacherDTO teacher = teacherMapper.selectByPrimaryKey(id);
+        TeacherDTO teacher = teacherMapper.selectById(id);
         if (null == teacher){
             throw new BaseException(Error.TEACHER_IS_NOT_EXIST);
 

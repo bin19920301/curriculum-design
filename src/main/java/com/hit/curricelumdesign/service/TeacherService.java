@@ -99,7 +99,7 @@ public class TeacherService {
      * @return
      */
     public Result resetTeacherPassword(ResetPasswordParam teacherParam){
-        TeacherDTO dto = teacherMapper.selectByPrimaryKey(teacherParam.getId());
+        TeacherDTO dto = teacherMapper.selectById(teacherParam.getId());
         Teacher teacher = new Teacher();
         BeanUtil.copyProperties(dto,teacher);
         teacher.setPassword(teacherPasswordDefault);
