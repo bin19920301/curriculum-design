@@ -1,6 +1,7 @@
 package com.hit.curricelumdesign.context.dto.academy;
 
 import com.hit.curricelumdesign.context.dto.clazz.ClassInfoDTO;
+
 import java.util.List;
 
 /**
@@ -12,6 +13,11 @@ import java.util.List;
 public class AcademyDTO {
 
     /**
+     * 学院id
+     */
+    private Integer id;
+
+    /**
      * 学院名称
      */
     private String name;
@@ -20,6 +26,14 @@ public class AcademyDTO {
      * 班级列表
      */
     private List<ClassInfoDTO> classList;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -40,7 +54,8 @@ public class AcademyDTO {
     @Override
     public String toString() {
         return "AcademyDTO{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", classList=" + classList +
                 '}';
     }

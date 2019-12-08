@@ -147,9 +147,19 @@ public class AcademyService {
         for (Academy academy : academyList) {
             AcademyDTO dto = new AcademyDTO();
             BeanUtil.copyProperties(academy, dto);
+            List<Class> classList = classManager.getClassListByAcademyId(academy.getId());
+            List<ClassInfoDTO> classInfoDTOList = new ArrayList<>();
+            for (Class aClass : classList) {
+                ClassInfoDTO classInfoDTO = new ClassInfoDTO();
+                classInfoDTO.setName(aClass.getName());
+                classInfoDTO.setId(aClass.getId());
+                classInfoDTOList.add(classInfoDTO);
+            }
+            dto.setClassList(classInfoDTOList);
             academyDTOList.add(dto);
         }
-        return Result.success(academyDTOList);
+        BaseListDTO<AcademyDTO> baseListDTO = new BaseListDTO<AcademyDTO>(academyDTOList.size(), academyDTOList);
+        return Result.success(baseListDTO);
     }
 
     /**
