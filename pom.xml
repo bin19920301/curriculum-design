@@ -8,8 +8,8 @@
         <version>2.2.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.bingo</groupId>
-    <artifactId>teamwork</artifactId>
+    <groupId>com.hit</groupId>
+    <artifactId>curricelumdesign</artifactId>
     <version>1.0</version>
     <name>curriculum_design</name>
     <description>Demo project for Spring Boot</description>
@@ -56,7 +56,7 @@
             <artifactId>druid</artifactId>
             <version>1.1.10</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -66,7 +66,7 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>

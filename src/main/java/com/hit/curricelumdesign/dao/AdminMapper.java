@@ -22,4 +22,6 @@ public interface AdminMapper {
     int updateByPrimaryKey(Admin record);
 
     List<Admin> getAdminList();
+
+    Admin getAdminByNumber(String number);
 }

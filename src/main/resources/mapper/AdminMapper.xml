@@ -22,11 +22,18 @@
         from t_admin
         where f_id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="getAdminList" resultType="com.hit.curricelumdesign.context.entity.Admin">
+    <select id="getAdminList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from t_admin
         where f_is_delete = 0
+    </select>
+    <select id="getAdminByNumber" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_admin
+        where f_is_delete = 0
+        and f_number = #{number,jdbcType=VARCHAR};
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_admin
