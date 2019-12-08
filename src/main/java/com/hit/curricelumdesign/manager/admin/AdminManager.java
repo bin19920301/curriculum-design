@@ -23,7 +23,7 @@ public class AdminManager {
     public Admin getAminById(Integer id) {
         Admin admin = adminMapper.selectByPrimaryKey(id);
         if (null == admin) {
-            throw new BaseException(Error._300001);
+            throw new BaseException(Error.ADMIN_IS_NOT_EXIST);
         }
         return admin;
     }

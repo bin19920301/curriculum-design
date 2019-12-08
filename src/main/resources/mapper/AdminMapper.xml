@@ -21,6 +21,7 @@
         <include refid="Base_Column_List"/>
         from t_admin
         where f_id = #{id,jdbcType=INTEGER}
+        and f_is_delete = 0
     </select>
     <select id="getAdminList" resultMap="BaseResultMap">
         select

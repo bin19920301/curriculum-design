@@ -1,110 +1,130 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hit.curricelumdesign.dao.AcademyMapper" >
-  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.Academy" >
-    <id column="f_id" property="id" jdbcType="INTEGER" />
-    <result column="f_name" property="name" jdbcType="VARCHAR" />
-    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
-    <result column="f_create_id" property="createId" jdbcType="INTEGER" />
-    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
-    <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.hit.curricelumdesign.dao.AcademyMapper">
+    <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.Academy">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_is_delete" property="isDelete" jdbcType="BIT"/>
+        <result column="f_create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="f_updater_id" property="updaterId" jdbcType="INTEGER"/>
+        <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     f_id, f_name, f_is_delete, f_create_id, f_createtime, f_updater_id, f_updatetime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_academy
-    where f_id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_academy
+        where f_id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getAcademyByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_academy
+        where f_is_delete = 0
+        and f_name = #{name,jdbcType=VARCHAR}
+    </select>
+    <select id="getAcademyById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_academy
+        where f_is_delete = 0
+        and f_id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getAcademyList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_academy
+        where f_is_delete = 0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_academy
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.Academy" >
-    insert into t_academy (f_id, f_name, f_is_delete, 
-      f_create_id, f_createtime, f_updater_id, 
+    <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.Academy">
+    insert into t_academy (f_id, f_name, f_is_delete,
+      f_create_id, f_createtime, f_updater_id,
       f_updatetime)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, 
-      #{createId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT},
+      #{createId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER},
       #{updatetime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.Academy" >
-    insert into t_academy
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        f_id,
-      </if>
-      <if test="name != null" >
-        f_name,
-      </if>
-      <if test="isDelete != null" >
-        f_is_delete,
-      </if>
-      <if test="createId != null" >
-        f_create_id,
-      </if>
-      <if test="createtime != null" >
-        f_createtime,
-      </if>
-      <if test="updaterId != null" >
-        f_updater_id,
-      </if>
-      <if test="updatetime != null" >
-        f_updatetime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="isDelete != null" >
-        #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="createId != null" >
-        #{createId,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null" >
-        #{updaterId,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null" >
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.Academy" >
-    update t_academy
-    <set >
-      <if test="name != null" >
-        f_name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="isDelete != null" >
-        f_is_delete = #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="createId != null" >
-        f_create_id = #{createId,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        f_createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null" >
-        f_updater_id = #{updaterId,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null" >
-        f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where f_id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.Academy" >
+    <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.Academy">
+        insert into t_academy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                f_id,
+            </if>
+            <if test="name != null">
+                f_name,
+            </if>
+            <if test="isDelete != null">
+                f_is_delete,
+            </if>
+            <if test="createId != null">
+                f_create_id,
+            </if>
+            <if test="createtime != null">
+                f_createtime,
+            </if>
+            <if test="updaterId != null">
+                f_updater_id,
+            </if>
+            <if test="updatetime != null">
+                f_updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaterId != null">
+                #{updaterId,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.Academy">
+        update t_academy
+        <set>
+            <if test="name != null">
+                f_name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                f_is_delete = #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="createId != null">
+                f_create_id = #{createId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                f_createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaterId != null">
+                f_updater_id = #{updaterId,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where f_id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.Academy">
     update t_academy
     set f_name = #{name,jdbcType=VARCHAR},
       f_is_delete = #{isDelete,jdbcType=BIT},
