@@ -18,4 +18,6 @@ public interface EnrollmentYearMapper {
     int updateByPrimaryKeySelective(EnrollmentYear record);
 
     int updateByPrimaryKey(EnrollmentYear record);
+
+    EnrollmentYear getEnrollmentYearByEnrollmentYear(Integer enrollmentYear);
 }

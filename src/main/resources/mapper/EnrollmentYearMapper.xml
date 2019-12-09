@@ -1,110 +1,118 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hit.curricelumdesign.dao.EnrollmentYearMapper" >
-  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.EnrollmentYear" >
-    <id column="f_id" property="id" jdbcType="INTEGER" />
-    <result column="f_enrollment_year" property="enrollmentYear" jdbcType="INTEGER" />
-    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
-    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
-    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
-    <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.hit.curricelumdesign.dao.EnrollmentYearMapper">
+    <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.EnrollmentYear">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_enrollment_year" property="enrollmentYear" jdbcType="INTEGER"/>
+        <result column="f_is_delete" property="isDelete" jdbcType="BIT"/>
+        <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
+        <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="f_updater_id" property="updaterId" jdbcType="INTEGER"/>
+        <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     f_id, f_enrollment_year, f_is_delete, f_creator_id, f_createtime, f_updater_id, f_updatetime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_enrollment_year
-    where f_id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_enrollment_year
+        where f_is_delete = 0
+        and f_id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getEnrollmentYearByEnrollmentYear" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from t_enrollment_year
+      where f_is_delete = 0
+      and f_enrollment_year = #{enrollmentYear,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_enrollment_year
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.EnrollmentYear" >
-    insert into t_enrollment_year (f_id, f_enrollment_year, f_is_delete, 
-      f_creator_id, f_createtime, f_updater_id, 
+    <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.EnrollmentYear">
+    insert into t_enrollment_year (f_id, f_enrollment_year, f_is_delete,
+      f_creator_id, f_createtime, f_updater_id,
       f_updatetime)
-    values (#{id,jdbcType=INTEGER}, #{enrollmentYear,jdbcType=INTEGER}, #{isDelete,jdbcType=BIT}, 
-      #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{enrollmentYear,jdbcType=INTEGER}, #{isDelete,jdbcType=BIT},
+      #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER},
       #{updatetime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.EnrollmentYear" >
-    insert into t_enrollment_year
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        f_id,
-      </if>
-      <if test="enrollmentYear != null" >
-        f_enrollment_year,
-      </if>
-      <if test="isDelete != null" >
-        f_is_delete,
-      </if>
-      <if test="creatorId != null" >
-        f_creator_id,
-      </if>
-      <if test="createtime != null" >
-        f_createtime,
-      </if>
-      <if test="updaterId != null" >
-        f_updater_id,
-      </if>
-      <if test="updatetime != null" >
-        f_updatetime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="enrollmentYear != null" >
-        #{enrollmentYear,jdbcType=INTEGER},
-      </if>
-      <if test="isDelete != null" >
-        #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="creatorId != null" >
-        #{creatorId,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null" >
-        #{updaterId,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null" >
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.EnrollmentYear" >
-    update t_enrollment_year
-    <set >
-      <if test="enrollmentYear != null" >
-        f_enrollment_year = #{enrollmentYear,jdbcType=INTEGER},
-      </if>
-      <if test="isDelete != null" >
-        f_is_delete = #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="creatorId != null" >
-        f_creator_id = #{creatorId,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        f_createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null" >
-        f_updater_id = #{updaterId,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null" >
-        f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where f_id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.EnrollmentYear" >
+    <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.EnrollmentYear">
+        insert into t_enrollment_year
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                f_id,
+            </if>
+            <if test="enrollmentYear != null">
+                f_enrollment_year,
+            </if>
+            <if test="isDelete != null">
+                f_is_delete,
+            </if>
+            <if test="creatorId != null">
+                f_creator_id,
+            </if>
+            <if test="createtime != null">
+                f_createtime,
+            </if>
+            <if test="updaterId != null">
+                f_updater_id,
+            </if>
+            <if test="updatetime != null">
+                f_updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="enrollmentYear != null">
+                #{enrollmentYear,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="creatorId != null">
+                #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaterId != null">
+                #{updaterId,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.EnrollmentYear">
+        update t_enrollment_year
+        <set>
+            <if test="enrollmentYear != null">
+                f_enrollment_year = #{enrollmentYear,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                f_is_delete = #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="creatorId != null">
+                f_creator_id = #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                f_createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaterId != null">
+                f_updater_id = #{updaterId,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where f_id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.EnrollmentYear">
     update t_enrollment_year
     set f_enrollment_year = #{enrollmentYear,jdbcType=INTEGER},
       f_is_delete = #{isDelete,jdbcType=BIT},

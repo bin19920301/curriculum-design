@@ -229,4 +229,11 @@
         where f_is_delete = 0
         and f_class_id = #{classId,jdbcType=INTEGER}
   </select>
+  <select id="countStudentByEnrollmentId" resultType="java.lang.Long">
+      select
+        count(*)
+        from t_student
+        where f_is_delete = 0
+        and f_enrollment_id = #{enrollmentId,jdbcType=INTEGER}
+  </select>
 </mapper>

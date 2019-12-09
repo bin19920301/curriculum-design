@@ -73,6 +73,8 @@ public enum Error {
 	CLASS_NAME_IS_EXIST("300206","班级名称已经存在"),
 	CLASS_IS_NOT_EXIST("300207","班级不存在"),
 	CLASS_HAS_STUDENT("300208","班级下有学生"),
+	ENROLLMENTYEAR_IS_EXIST("300209","入学年份已存在"),
+	ENROLLMENTYEAR_IS_NOT_EXIST("300210","入学年份不存在"),
 
 
 	//----------------------------------------教师

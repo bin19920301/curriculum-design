@@ -32,5 +32,8 @@ public interface StudentMapper {
 
     List<StudentDTO> getStudentDTOListByParams(Integer enrollmentId,Integer academyId,Integer classId);
 
-    Long countStudentByClassId(Integer id);
+    Long countStudentByClassId(Integer classId);
+
+    Long countStudentByEnrollmentId(Integer enrollmentId);
+
 }
