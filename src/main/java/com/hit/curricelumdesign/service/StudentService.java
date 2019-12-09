@@ -8,10 +8,7 @@ import com.hit.curricelumdesign.context.entity.Student;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
-import com.hit.curricelumdesign.context.param.student.AddStudentParam;
-import com.hit.curricelumdesign.context.param.student.DeleteStudentParam;
-import com.hit.curricelumdesign.context.param.student.GetStudentParam;
-import com.hit.curricelumdesign.context.param.student.UpdateStudentParam;
+import com.hit.curricelumdesign.context.param.student.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.StudentMapper;
 import com.hit.curricelumdesign.manager.student.StudentManager;
@@ -99,6 +96,20 @@ public class StudentService {
         PageInfo<StudentDTO> pageInfo = new PageInfo<>(studentList);
 
         BaseListDTO<StudentDTO> studentBaseListDTO = new BaseListDTO<>(pageInfo.getTotal(), studentList);
+        return Result.success(studentBaseListDTO);
+    }
+
+    /**
+     * 条件查询学生信息
+     * @param param
+     * @return
+     */
+    public Result getStudentByParams(ConditionSearchStudentParam param){
+        Integer enrollmentId = param.getEnrollmentId();
+        Integer academyId = param.getAcademyId();
+        Integer classId = param.getClassId();
+        List<StudentDTO> studentDTOListByParams = studentMapper.getStudentDTOListByParams(enrollmentId, academyId, classId);
+        BaseListDTO<StudentDTO> studentBaseListDTO = new BaseListDTO<>(studentDTOListByParams.size(),studentDTOListByParams);
         return Result.success(studentBaseListDTO);
     }
 }

@@ -2,10 +2,7 @@ package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
-import com.hit.curricelumdesign.context.param.student.AddStudentParam;
-import com.hit.curricelumdesign.context.param.student.DeleteStudentParam;
-import com.hit.curricelumdesign.context.param.student.GetStudentParam;
-import com.hit.curricelumdesign.context.param.student.UpdateStudentParam;
+import com.hit.curricelumdesign.context.param.student.*;
 import com.hit.curricelumdesign.context.param.teacher.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.service.StudentService;
@@ -47,5 +44,11 @@ public class StudentController {
     @HitApi(checkAdminLogin = true)
     public Result listStudent(BaseListRequestParam studentParam) {
         return studentService.getStudentList(studentParam);
+    }
+
+    @RequestMapping(value = "/student/liststudentbyparam/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
+    public Result listStudentByParams(ConditionSearchStudentParam studentParam) {
+        return studentService.getStudentByParams(studentParam);
     }
 }

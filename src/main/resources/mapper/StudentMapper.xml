@@ -203,4 +203,22 @@
         where f_is_delete = 0
         and f_academy_id = #{academyId,jdbcType=INTEGER}
     </select>
+  <select id="getStudentDTOListByParams" resultMap="DTOResultMap">
+    select
+        st.f_id, st.f_academy_id, st.f_enrollment_id, st.f_class_id, st.f_name, st.f_number,a.f_name as academyName,e.f_enrollment_year as enrollmentYear,c.f_name as className
+    from t_student st
+    left join t_academy a on st.f_academy_id = a.f_id
+    left join t_enrollment_year e on st.f_enrollment_id = e.f_id
+    left join t_class c on st.f_class_id = c.f_id
+    where st.f_is_delete = false
+    <if test=" enrollmentId != null" >
+      and st.f_enrollment_id = #{enrollmentId}
+    </if>
+    <if test="academyId != null" >
+      and st.f_academy_id = #{academyId}
+    </if>
+    <if test="classId != null" >
+      and st.f_class_id = #{classId}
+    </if>
+  </select>
 </mapper>
