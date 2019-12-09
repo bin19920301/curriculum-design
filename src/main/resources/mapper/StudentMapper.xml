@@ -26,11 +26,11 @@
     <result column="className" property="className" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    f_id, f_academy_id, f_enrollment_id, f_class_id, f_name, f_number, f_is_delete, f_creator_id, 
+    f_id, f_academy_id, f_enrollment_id, f_class_id, f_name, f_number, f_is_delete, f_creator_id,
     f_createtime, f_updater_id, f_updatetime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_student
     where f_id = #{id,jdbcType=INTEGER}
@@ -55,13 +55,13 @@
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.Student" >
-    insert into t_student (f_id, f_academy_id, f_enrollment_id, 
-      f_class_id, f_name, f_number, 
-      f_is_delete, f_creator_id, f_createtime, 
+    insert into t_student (f_id, f_academy_id, f_enrollment_id,
+      f_class_id, f_name, f_number,
+      f_is_delete, f_creator_id, f_createtime,
       f_updater_id, f_updatetime)
-    values (#{id,jdbcType=INTEGER}, #{academyId,jdbcType=INTEGER}, #{enrollmentId,jdbcType=INTEGER}, 
-      #{classId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
-      #{isDelete,jdbcType=TINYINT}, #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{academyId,jdbcType=INTEGER}, #{enrollmentId,jdbcType=INTEGER},
+      #{classId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR},
+      #{isDelete,jdbcType=TINYINT}, #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP},
       #{updaterId,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.Student" >
@@ -196,4 +196,11 @@
     left join t_class c on st.f_class_id = c.id
     where st.f_is_delete = false;
   </select>
+  <select id="countStudentByAcademyId" resultType="java.lang.Long">
+        select
+        count(*)
+        from t_student
+        where f_is_delete = 0
+        and f_academy_id = #{academyId,jdbcType=INTEGER}
+    </select>
 </mapper>

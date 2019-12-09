@@ -27,4 +27,6 @@ public interface StudentMapper {
     int updateByPrimaryKey(Student record);
 
     List<StudentDTO> getStudentDTOList();
+
+    Long countStudentByAcademyId(Integer academyId);
 }
