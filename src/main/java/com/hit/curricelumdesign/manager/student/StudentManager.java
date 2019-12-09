@@ -24,7 +24,7 @@ public class StudentManager {
     }
 
     public List<StudentDTO> getTeacherList(){
-        return studentMapper.getStudentList();
+        return studentMapper.getStudentDTOList();
     }
 
 
