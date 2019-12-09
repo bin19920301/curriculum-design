@@ -88,7 +88,10 @@ public enum Error {
 	STUDENT_ADD_FAILURE("3004002", "添加学生信息失败"),
 	STUDENT_UPDATE_FAILURE("3004003", "更新学生信息失败"),
 	STUDENT_DELETE_FAILURE("3004004", "删除学生信息失败"),
-	STUDENT_NUMBER_IS_EXIST("3003005", "学生编号已存在"),
+	STUDENT_NUMBER_IS_EXIST("3004005", "学生编号已存在"),
+
+	//----------------------------------------文件夹
+	FOLDER_NAME_IS_EXIST("3005001", "文件夹名称已存在"),
 	;
 
 
