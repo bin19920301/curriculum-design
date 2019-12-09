@@ -94,7 +94,7 @@ public class StudentService {
      * @return
      */
     public Result getStudentList(BaseListRequestParam param){
-        PageHelper.startPage(param.getPageNum() , param.getPageSize());
+        PageHelper.startPage(param.getPageNum(), param.getPageSize());
         List<StudentDTO> studentList = studentMapper.getStudentDTOList();
         PageInfo<StudentDTO> pageInfo = new PageInfo<>(studentList);
 
