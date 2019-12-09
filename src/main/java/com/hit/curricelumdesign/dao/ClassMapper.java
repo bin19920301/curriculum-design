@@ -24,4 +24,6 @@ public interface ClassMapper {
     List<Class> getClassListByAcademyId(Integer academyId);
 
     Long countClassByAcademyId(Integer academyId);
+
+    Class getClassByName(String name);
 }

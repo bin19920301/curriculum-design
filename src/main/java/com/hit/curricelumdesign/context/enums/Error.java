@@ -70,6 +70,9 @@ public enum Error {
 	ACADEMY_HAS_STUDENT("300203","学院下有学生"),
 	ACADEMY_HAS_TEACHER("300204","学院下有老师"),
 	ACADEMY_HAS_CLASS("300205","学院下有班级"),
+	CLASS_NAME_IS_EXIST("300206","班级名称已经存在"),
+	CLASS_IS_NOT_EXIST("300207","班级不存在"),
+	CLASS_HAS_STUDENT("300208","班级下有学生"),
 
 
 	//----------------------------------------教师

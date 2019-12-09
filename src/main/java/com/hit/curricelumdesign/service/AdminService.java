@@ -101,7 +101,7 @@ public class AdminService {
     public Result updateAdmin(UpdateAdminParam param) {
         Admin admin = adminManager.getAminById(param.getId());
         Admin adminByNumber = adminMapper.getAdminByNumber(param.getNumber());
-        if (null != adminByNumber && admin.getId().compareTo(adminByNumber.getId()) == 0) {
+        if (null != adminByNumber && admin.getId().compareTo(adminByNumber.getId()) != 0) {
             throw new BaseException(Error.ADMIN_NUMBER_IS_EXIST);
         }
         BeanUtil.copyProperties(param, admin);

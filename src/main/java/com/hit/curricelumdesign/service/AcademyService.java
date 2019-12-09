@@ -96,7 +96,7 @@ public class AcademyService {
     public Result renameAcademy(RenameAcademyParam param) {
         Academy academyByName = academyMapper.getAcademyByName(param.getName());
         Academy academy = academyManager.getAcademyById(param.getId());
-        if (null != academyByName && academy.getId().compareTo(academyByName.getId()) == 0) {
+        if (null != academyByName && academy.getId().compareTo(academyByName.getId()) != 0) {
             throw new BaseException(Error.ACADEMY_NAME_IS_EXIST);
         }
         academy.setName(param.getName());

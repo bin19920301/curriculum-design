@@ -20,6 +20,7 @@
         <include refid="Base_Column_List"/>
         from t_class
         where f_id = #{id,jdbcType=INTEGER}
+        and f_is_delete = 0
     </select>
     <select id="getClassListByAcademyId" resultMap="BaseResultMap">
         select
@@ -34,6 +35,13 @@
         from t_class
         where f_is_delete = 0
         and f_academy_id = #{academyId,jdbcType=INTEGER}
+    </select>
+    <select id="getClassByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_class
+        where f_name = #{name,jdbcType=VARCHAR}
+        and f_is_delete = 0
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_class
