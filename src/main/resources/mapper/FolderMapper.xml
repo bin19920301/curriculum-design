@@ -10,6 +10,10 @@
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.folder.FolderDTO" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     f_id, f_name, f_is_delete, f_createtime, f_creator_id, f_updatetime, f_updater_id
   </sql>
@@ -114,4 +118,22 @@
       f_updater_id = #{updaterId,jdbcType=INTEGER}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectById" resultMap="DTOResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_folder
+    where f_id = #{id,jdbcType=INTEGER} and f_is_delete = false
+  </select>
+  <select id="selectByName" resultMap="DTOResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_folder
+    where f_name = #{name} and f_is_delete = false
+  </select>
+  <select id="getFolderDTOList" resultMap="DTOResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from t_folder
+    where f_is_delete = false
+  </select>
 </mapper>

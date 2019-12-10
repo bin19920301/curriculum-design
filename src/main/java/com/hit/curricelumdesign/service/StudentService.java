@@ -28,7 +28,7 @@ public class StudentService {
     private StudentMapper studentMapper;
 
     /**
-     * 教师信息详情展示
+     * 学生信息详情展示
      * @param studentParam
      * @return
      */

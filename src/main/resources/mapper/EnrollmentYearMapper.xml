@@ -10,6 +10,10 @@
         <result column="f_updater_id" property="updaterId" jdbcType="INTEGER"/>
         <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.enrollmentYear.EnrollmentYearDTO">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_enrollment_year" property="enrollmentYear" jdbcType="INTEGER"/>
+    </resultMap>
     <sql id="Base_Column_List">
     f_id, f_enrollment_year, f_is_delete, f_creator_id, f_createtime, f_updater_id, f_updatetime
   </sql>
@@ -122,4 +126,17 @@
       f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectById" resultMap="DTOResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_enrollment_year
+        where f_is_delete = 0
+        and f_id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getEnrollmentYearList" resultMap="DTOResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from t_enrollment_year
+        where f_is_delete = 0
+    </select>
 </mapper>
