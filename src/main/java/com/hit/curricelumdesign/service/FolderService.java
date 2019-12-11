@@ -13,6 +13,7 @@ import com.hit.curricelumdesign.context.param.folder.DeleteFolderParam;
 import com.hit.curricelumdesign.context.param.folder.GetFolderParam;
 import com.hit.curricelumdesign.context.param.folder.UpdateFolderParam;
 import com.hit.curricelumdesign.context.response.Result;
+import com.hit.curricelumdesign.dao.FileMapper;
 import com.hit.curricelumdesign.dao.FolderMapper;
 import com.hit.curricelumdesign.manager.folder.FolderManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
@@ -30,6 +31,9 @@ public class FolderService {
     
     @Autowired
     private FolderMapper folderMapper;
+
+    @Autowired
+    private FileMapper fileMapper;
 
     /**
      * 文件夹信息详情展示
@@ -58,6 +62,7 @@ public class FolderService {
         folder.setCreatorId(0);
         folder.setCreatetime(new Date());
         folder.setUpdaterId(0);
+        folder.setUpdatetime(new Date());
         folderMapper.insert(folder);
         return Result.success();
     }
@@ -81,6 +86,10 @@ public class FolderService {
      * @return
      */
     public Result deleteFolder(DeleteFolderParam folderParam){
+        Long fileCount = fileMapper.countFileByFolderId(folderParam.getId());
+        if (fileCount > 0){
+            throw new BaseException(Error.FOLDER_HAS_FILES);
+        }
         Folder folder = new Folder();
         BeanUtil.copyProperties(folderParam,folder);
         folder.setIsDelete(true);

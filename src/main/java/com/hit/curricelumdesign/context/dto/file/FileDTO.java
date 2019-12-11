@@ -1,5 +1,8 @@
 package com.hit.curricelumdesign.context.dto.file;
 
+import javax.persistence.Column;
+import java.util.Date;
+
 public class FileDTO {
     /**
      * 主键id
@@ -27,9 +30,19 @@ public class FileDTO {
     private String size;
 
     /**
-     * 文件路径
+     * 创建者id
      */
-    private String path;
+    private Integer creatorId;
+
+    /**
+     * 创建者id
+     */
+    private String creatorName;
+
+    /**
+     * 创建时间
+     */
+    private Date createtime;
 
     /**
      * 使用总数
@@ -76,19 +89,35 @@ public class FileDTO {
         this.size = size;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
     public Integer getUseCount() {
         return useCount;
     }
 
     public void setUseCount(Integer useCount) {
         this.useCount = useCount;
+    }
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
     }
 }

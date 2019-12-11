@@ -48,7 +48,7 @@ public class FolderController {
         return folderService.getFolderList(folderParam);
     }
 
-    @RequestMapping(value = "/folder/listfolderbyparam/", method = RequestMethod.POST)
+    @RequestMapping(value = "/folder/getallfolder/", method = RequestMethod.POST)
     @HitApi(checkAdminLogin = true)
     public Result getAllFloder() {
         return folderService.getAllFolder();

@@ -14,6 +14,17 @@
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.file.FileDTO" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_folder_id" property="folderId" jdbcType="INTEGER" />
+    <result column="f_name" property="name" jdbcType="VARCHAR" />
+    <result column="f_size" property="size" jdbcType="VARCHAR" />
+    <result column="f_use_count" property="useCount" jdbcType="INTEGER" />
+    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="teacherName" property="creatorName" jdbcType="VARCHAR" />
+    <result column="folderName" property="folderName" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     f_id, f_folder_id, f_name, f_size, f_path, f_use_count, f_is_delete, f_createtime, 
     f_creator_id, f_updatetime, f_updater_id
@@ -161,4 +172,20 @@
       f_updater_id = #{updaterId,jdbcType=INTEGER}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getListByFolderId" resultMap="DTOResultMap" >
+    select
+    fi.f_id, fi.f_folder_id, fi.f_name, fi.f_size, fi.f_path, fi.f_use_count, fi.f_is_delete, fi.f_createtime,
+    fi.f_creator_id, fo.f_name as folderName,te.f_name as teacherName
+    from t_file fi
+    left join t_folder fo on fi.f_folder_id = fo.f_id
+    left join t_teacher te on fi.f_creator_id = te.f_id
+    where fi.f_is_delete = false and fi.f_folder_id = #{folderId}
+  </select>
+  <select id="countFileByFolderId" resultType="java.lang.Long">
+      select
+        count(*)
+        from t_file
+        where f_is_delete = 0
+        and f_folder_id = #{folderId,jdbcType=INTEGER}
+  </select>
 </mapper>
