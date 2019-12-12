@@ -19,6 +19,7 @@ import com.hit.curricelumdesign.manager.enrollmentyear.EnrollmentYearManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,7 @@ import java.util.List;
  * @Description
  */
 @Service
+@Transactional
 public class EnrollmentYearService {
 
     @Autowired
