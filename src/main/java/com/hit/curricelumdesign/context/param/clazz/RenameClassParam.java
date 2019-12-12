@@ -1,6 +1,7 @@
 package com.hit.curricelumdesign.context.param.clazz;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author xbr
@@ -20,6 +21,7 @@ public class RenameClassParam {
      * 班级名称
      */
     @NotNull
+    @Size(min = 0,max = 30 ,message = "班级名称")
     private String name;
 
     public Integer getClassId() {
