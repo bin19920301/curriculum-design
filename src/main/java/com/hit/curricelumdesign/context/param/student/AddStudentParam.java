@@ -1,14 +1,18 @@
 package com.hit.curricelumdesign.context.param.student;
 
+import javax.validation.constraints.Size;
+
 public class AddStudentParam {
 
     /**
      * 学号，字符串格式
      */
+    @Size(min = 0,max = 30 ,message = "学号")
     private String number;
     /**
      * 学生姓名
      */
+    @Size(min = 0,max = 30 ,message = "学生姓名")
     private String name;
 
     /**

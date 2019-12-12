@@ -1,6 +1,7 @@
 package com.hit.curricelumdesign.context.param.student;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class UpdateStudentParam extends StudentBaseParam {
     /**
@@ -31,12 +32,14 @@ public class UpdateStudentParam extends StudentBaseParam {
      * 学生姓名
      */
     @NotNull
+    @Size(min = 0,max = 30 ,message = "学生姓名")
     private String name;
 
     /**
      * 学号，字符串格式
      */
     @NotNull
+    @Size(min = 0,max = 30 ,message = "学号")
     private String number;
 
     @Override
