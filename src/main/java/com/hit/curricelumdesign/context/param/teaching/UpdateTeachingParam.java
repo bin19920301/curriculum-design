@@ -3,7 +3,6 @@ package com.hit.curricelumdesign.context.param.teaching;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-import java.util.List;
 
 public class UpdateTeachingParam extends TeachingBaseParam {
 

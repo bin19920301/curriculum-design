@@ -23,7 +23,7 @@ public class TeachingService {
     private TeachingManager teachingManager;
 
     /**
-     * 文件夹信息详情展示
+     * 教学信息详情展示
      * @param teachingParam
      * @return
      */
@@ -32,7 +32,7 @@ public class TeachingService {
     }
 
     /**
-     * 增加文件夹信息
+     * 增加教学信息
      * @param teachingParam
      * @return
      */
@@ -41,7 +41,7 @@ public class TeachingService {
     }
 
     /**
-     * 更新文件夹信息
+     * 更新教学信息
      * @param teachingParam
      * @return
      */
@@ -50,7 +50,7 @@ public class TeachingService {
     }
 
     /**
-     * 删除文件夹信息
+     * 删除教学信息
      * @param teachingParam
      * @return
      */
@@ -59,7 +59,7 @@ public class TeachingService {
     }
 
     /**
-     * 分页查询文件夹信息
+     * 分页查询教学信息
      * @param param
      * @return
      */
@@ -68,11 +68,11 @@ public class TeachingService {
     }
 
     /**
-     * 查询所有文件夹信息
+     * 查询所有教学信息
      * @param
      * @return
      */
-    public Result getTeachingByCratorId(){
+    public Result getTeachingByCreatorId(){
         return Result.success();
     }
 }

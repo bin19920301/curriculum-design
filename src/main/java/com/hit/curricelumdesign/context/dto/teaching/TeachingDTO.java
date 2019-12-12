@@ -1,9 +1,6 @@
 package com.hit.curricelumdesign.context.dto.teaching;
 
-import com.hit.curricelumdesign.context.entity.Student;
-
 import java.util.Date;
-import java.util.List;
 
 public class TeachingDTO {
     /**
