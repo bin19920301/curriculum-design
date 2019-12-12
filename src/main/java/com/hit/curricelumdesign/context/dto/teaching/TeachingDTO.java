@@ -28,6 +28,23 @@ public class TeachingDTO {
      */
     private Integer status;
 
+    /**
+     * 指导教师id
+     */
+    private Integer teacherId;
+
+    /**
+     * 教师姓名
+     */
+    private String teacherName;
+
+    /**
+     * 创建者id（理论上和指导教师应该是一个人）
+     */
+    private Integer creatorId;
+
+
+
 
     public Integer getId() {
         return id;
@@ -67,5 +84,29 @@ public class TeachingDTO {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
     }
 }

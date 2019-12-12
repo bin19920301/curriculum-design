@@ -21,6 +21,7 @@ public class AddTeachingParam {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm" )
     private Date deadlineTime;
 
+    //这里缺少作业的集合
 
     public String getName() {
         return name;

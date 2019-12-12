@@ -23,6 +23,7 @@ public class UpdateTeachingParam extends TeachingBaseParam {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm" )
     private Date deadlineTime;
 
+    //这里应该有更新的作业集合
 
     public String getName() {
         return name;

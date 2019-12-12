@@ -14,6 +14,15 @@
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.teaching.TeachingDTO" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="f_name" property="name" jdbcType="VARCHAR" />
+    <result column="f_teacher_ reminder" property="teacherReminder" jdbcType="VARCHAR" />
+    <result column="f_deadline_time" property="deadlineTime" jdbcType="TIMESTAMP" />
+    <result column="f_status" property="status" jdbcType="INTEGER" />
+    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Base_Column_List" >
     f_id, f_teacher_id, f_name, "f_teacher_ reminder", f_deadline_time, f_status, f_is_delete, 
     f_createtime, f_creator_id, f_updatetime, f_updater_id
