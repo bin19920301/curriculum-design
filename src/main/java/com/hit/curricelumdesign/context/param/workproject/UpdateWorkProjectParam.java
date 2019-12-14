@@ -2,7 +2,6 @@ package com.hit.curricelumdesign.context.param.workproject;
 
 import com.hit.curricelumdesign.context.param.BaseRequestParam;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -13,26 +12,39 @@ import java.util.List;
  * @ClassName AddWorkProjectParam
  * @Description
  */
-public class AddWorkProjectParam extends BaseRequestParam {
+public class UpdateWorkProjectParam extends BaseRequestParam {
+
+    /**
+     * 作业项目id
+     */
+    private Integer id;
 
     /**
      * 作业项目名称
      */
     @NotNull
-    @Size(min = 1, max = 30,message = "名称")
+    @Size(min = 1, max = 30, message = "名称")
     private String name;
 
     /**
      * 简介
      */
     @NotNull
-    @Size(min = 1, max = 500,message = "简介")
+    @Size(min = 1, max = 500, message = "简介")
     private String desc;
 
     /**
      * 文件id列表
      */
     private List<Integer> fileIdList;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -60,8 +72,9 @@ public class AddWorkProjectParam extends BaseRequestParam {
 
     @Override
     public String toString() {
-        return "AddWorkProjectParam{" +
-                "name='" + name + '\'' +
+        return "UpdateWorkProjectParam{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
                 ", fileIdList=" + fileIdList +
                 '}';

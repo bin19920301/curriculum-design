@@ -78,32 +78,38 @@ public enum Error {
 
 
 	//----------------------------------------教师
-	TEACHER_IS_NOT_EXIST("3003001", "教师信息不存在"),
-	TEACHER_ADD_FAILURE("3003002", "添加教师信息失败"),
-	TEACHER_UPDATE_FAILURE("3003003", "更新教师信息失败"),
-	TEACHER_DELETE_FAILURE("3003004", "删除教师信息失败"),
-	TEACHER_RESET_PASSWORD_FAILURE("3003005", "重置教师密码失败"),
-	TEACHER_NUMBER_IS_EXIST("3003006", "教师编号已存在"),
+	TEACHER_IS_NOT_EXIST("300301", "教师信息不存在"),
+	TEACHER_ADD_FAILURE("300302", "添加教师信息失败"),
+	TEACHER_UPDATE_FAILURE("300303", "更新教师信息失败"),
+	TEACHER_DELETE_FAILURE("300304", "删除教师信息失败"),
+	TEACHER_RESET_PASSWORD_FAILURE("300305", "重置教师密码失败"),
+	TEACHER_NUMBER_IS_EXIST("300306", "教师编号已存在"),
 
 	//----------------------------------------学生
-	STUDENT_IS_NOT_EXIST("3004001", "学生信息不存在"),
-	STUDENT_ADD_FAILURE("3004002", "添加学生信息失败"),
-	STUDENT_UPDATE_FAILURE("3004003", "更新学生信息失败"),
-	STUDENT_DELETE_FAILURE("3004004", "删除学生信息失败"),
-	STUDENT_NUMBER_IS_EXIST("3004005", "学生编号已存在"),
+	STUDENT_IS_NOT_EXIST("300401", "学生信息不存在"),
+	STUDENT_ADD_FAILURE("300402", "添加学生信息失败"),
+	STUDENT_UPDATE_FAILURE("300403", "更新学生信息失败"),
+	STUDENT_DELETE_FAILURE("300404", "删除学生信息失败"),
+	STUDENT_NUMBER_IS_EXIST("300405", "学生编号已存在"),
 
 	//----------------------------------------文件夹
-	FOLDER_NAME_IS_EXIST("3005001", "文件夹名称已存在"),
-	FOLDER_IS_NOT_EXIST("3005002", "文件夹不存在"),
-	FOLDER_HAS_FILES("3005003", "文件夹下存在文件，不可删除"),
+	FOLDER_NAME_IS_EXIST("300501", "文件夹名称已存在"),
+	FOLDER_IS_NOT_EXIST("300502", "文件夹不存在"),
+	FOLDER_HAS_FILES("300503", "文件夹下存在文件，不可删除"),
 
 	//----------------------------------------文件
-	FILE_UPLOAD_FAILURE("3006001", "文件上传失败"),
-	FILE_DOWNLOAD_FAILURE("3006002", "文件下载失败"),
-	FILE_IS_NOT_EXIST("3006003", "文件不存在"),
+	FILE_UPLOAD_FAILURE("300601", "文件上传失败"),
+	FILE_DOWNLOAD_FAILURE("300602", "文件下载失败"),
+	FILE_IS_NOT_EXIST("300603", "文件不存在"),
+
+	//----------------------------------------作业项目
+	WORK_PROJECT_NAME_IS_EXIST("300701", "作业项目名称已经存在"),
+	WORK_PROJECT_NEED_ASSOCIATE_FILE("300702", "作业项目的资料不能为空"),
+	WORK_PROJECT_ASSOCIATE_FILE_HAS_NOT_EXIST("300703", "作业项目关联了不存在的资料"),
+	WORK_PROJECT_IS_NOT_EXIST("300704", "作业项目不存在"),
 
 	//----------------------------------------教学
-	TEACHER__REMINDER_OVER_LENGTH("3007001", "教师提示超长，应不超过500字"),
+	TEACHER__REMINDER_OVER_LENGTH("300801", "教师提示超长，应不超过500字"),
 
 
 	;
