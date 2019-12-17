@@ -41,7 +41,7 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名 -->
-        <table schema="curriculum_design" tableName="t_teaching_student" domainObjectName="TeachingStudent"
+        <table schema="curriculum_design" tableName="t_token" domainObjectName="Token"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
