@@ -138,7 +138,7 @@ public class StudentService {
      */
     public Result login(StudentLoginParam param) {
         Student student = studentMapper.getStudentByNameAndNumber(param.getName(), param.getNumber());
-        if (null != student) {
+        if (null == student) {
             throw new BaseException(Error.LOGIN_STUDENT_NAME_OR_NUMBER_ERROR);
         }
         String tokenStr = TokenUtils.getToken(student.getId(), student.getName(), student.getNumber(), MsgUtils.generateUUIDStr());

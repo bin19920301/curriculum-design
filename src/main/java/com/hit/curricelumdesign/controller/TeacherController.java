@@ -51,4 +51,9 @@ public class TeacherController {
     public Result resetTeacherPassword(ResetPasswordParam teacherParam) {
         return teacherService.resetTeacherPassword(teacherParam);
     }
+    @RequestMapping(value = "/teacher/login/", method = RequestMethod.POST)
+    public Result teacherLogin(TeacherLoginParam param) {
+        return teacherService.teacherLogin(param);
+    }
+
 }

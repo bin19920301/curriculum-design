@@ -60,4 +60,9 @@ public class AdminController {
         return adminService.deleteAdmin(param);
     }
 
+    @RequestMapping(value = "/admin/login/", method = RequestMethod.POST)
+    public Result adminLogin(AdminLoginParam param) {
+        return adminService.adminLogin(param);
+    }
+
 }
