@@ -36,4 +36,5 @@ public interface StudentMapper {
 
     Long countStudentByEnrollmentId(Integer enrollmentId);
 
+    Student getStudentByNameAndNumber(String name, String number);
 }

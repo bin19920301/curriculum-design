@@ -25,7 +25,7 @@ public class StudentController {
     @RequestMapping(value = "/student/addstudent/", method = RequestMethod.POST)
     @HitApi(checkAdminLogin = true)
     public Result addStudent(AddStudentParam studentParam) {
-        return  studentService.addStudent(studentParam);
+        return studentService.addStudent(studentParam);
     }
 
     @RequestMapping(value = "/student/updatestudent/", method = RequestMethod.POST)
@@ -51,4 +51,10 @@ public class StudentController {
     public Result listStudentByParams(ConditionSearchStudentParam studentParam) {
         return studentService.getStudentByParams(studentParam);
     }
+
+    @RequestMapping(value = "/student/login/", method = RequestMethod.POST)
+    public Result login(StudentLoginParam param) {
+        return studentService.login(param);
+    }
+
 }
