@@ -8,6 +8,8 @@ import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.work.ScoreForWorkParam;
 import com.hit.curricelumdesign.context.param.work.AddWorkParam;
+import com.hit.curricelumdesign.context.param.work.UpdateWorkParam;
+import com.hit.curricelumdesign.context.param.work.WorkBaseParam;
 import com.hit.curricelumdesign.context.param.work.WorkBaseParam;
 import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByStudentParam;
 import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByTeacherParam;
@@ -57,11 +59,24 @@ public class WorkService {
         return Result.success();
     }
 
-    public Result updateWork() {
+    public Result updateWork(UpdateWorkParam workParam) {
+        //目前只存在一种情况，即更新作业中的作业项目
+        Work work = new Work();
+        BeanUtil.copyProperties(workParam,work);
+        //设置更新时间
+        work.setUpdatetime(new Date());
+        workMapper.updateByPrimaryKeySelective(work);
         return Result.success();
     }
 
-    public Result deleteWork() {
+    public Result deleteWork(WorkBaseParam workParam) {
+        Work work = new Work();
+        BeanUtil.copyProperties(workParam,work);
+        //设置删除标志位
+        work.setIsDelete(Constants.Common.IS_YES);
+        //设置更新时间
+        work.setUpdatetime(new Date());
+        workMapper.updateByPrimaryKeySelective(work);
         return Result.success();
     }
 

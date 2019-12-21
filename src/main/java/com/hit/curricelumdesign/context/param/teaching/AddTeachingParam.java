@@ -23,7 +23,7 @@ public class AddTeachingParam {
     private Date deadlineTime;
 
     //这里缺少作业的集合
-    List<StudentWorkProjectParam> works;
+    private List<StudentWorkProjectParam> works;
 
     public String getName() {
         return name;
@@ -56,4 +56,5 @@ public class AddTeachingParam {
     public void setWorks(List<StudentWorkProjectParam> works) {
         this.works = works;
     }
+
 }

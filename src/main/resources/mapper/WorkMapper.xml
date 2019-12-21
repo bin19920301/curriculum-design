@@ -161,4 +161,20 @@
       f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByParams" resultMap="BaseResultMap" >
+    select
+    f_id, f_teaching_id, f_work_project_id, f_student_id, f_score, f_submittime, f_returntime,
+    f_status, f_is_delete, f_createtime, f_updatetime
+    from t_work
+    where f_is_delete = false;
+    <if test="teachingId != null" >
+     and f_teaching_id = #{teachingId,jdbcType=INTEGER}
+    </if>
+    <if test="studentId != null" >
+      and f_student_id = #{studentId,jdbcType=INTEGER}
+    </if>
+    <if test="workProjectId != null" >
+      and f_work_project_id = #{workProjectId,jdbcType=INTEGER}
+    </if>
+  </select>
 </mapper>
