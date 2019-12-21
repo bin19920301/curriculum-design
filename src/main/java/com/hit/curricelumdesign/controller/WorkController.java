@@ -2,7 +2,7 @@ package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.param.work.ScoreForWorkParam;
-import com.hit.curricelumdesign.context.param.workproject.AddWorkProjectParam;
+import com.hit.curricelumdesign.context.param.work.WorkBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +26,11 @@ public class WorkController {
     @HitApi(checkTeacherLogin = true)
     public Result score(ScoreForWorkParam param) {
         return workService.score(param);
+    }
+
+    @RequestMapping(value = "/work/return/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
+    public Result returnWork(WorkBaseParam param) {
+        return workService.returnWork(param);
     }
 }

@@ -6,6 +6,7 @@ import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.work.ScoreForWorkParam;
 import com.hit.curricelumdesign.context.param.work.AddWorkParam;
+import com.hit.curricelumdesign.context.param.work.WorkBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.WorkMapper;
 import com.hit.curricelumdesign.manager.work.WorkManager;
@@ -52,10 +53,6 @@ public class WorkService {
         return Result.success();
     }
 
-    public Result updateStatusForWork() {
-        return Result.success();
-    }
-
     /**
      * 评分
      *
@@ -82,4 +79,19 @@ public class WorkService {
         return Result.success();
     }
 
+    /**
+     * 退回作业
+     * @param param
+     * @return
+     */
+    public Result returnWork(WorkBaseParam param) {
+        Work work = workManager.getWorkerById(param.getId());
+        if (work.getStatus().compareTo(Constants.Work.WorkStatus.SUBMIT.getStatus()) != 0) {
+            throw new BaseException(Error.WORK_IS_NOT_SUBMIT);
+        }
+        work.setStatus(Constants.Work.WorkStatus.RETURN.getStatus());
+        work.setUpdatetime(new Date());
+        workMapper.updateByPrimaryKey(work);
+        return Result.success();
+    }
 }
