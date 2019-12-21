@@ -72,16 +72,18 @@ public class Constants {
                 return status;
             }
 
-            public void setStatus(Integer status) {
-                this.status = status;
-            }
 
             public String getDesc() {
                 return desc;
             }
 
-            public void setDesc(String desc) {
-                this.desc = desc;
+            public static String getDescByStat(Integer status){
+                for (WorkStatus value : WorkStatus.values()) {
+                    if (value.equals(status)){
+                        return  WorkStatus.getDescByStat(status);
+                    }
+                }
+                return null;
             }
         }
     }
@@ -99,6 +101,52 @@ public class Constants {
         public static final Integer RECEIVER_TYPE_STUDENT = 1;
         //老师
         public static final Integer RECEIVER_TYPE_TEACHER = 2;
+    }
+
+    public static class Teaching{
+        public enum TeachingStatus {
+            TEACHING(0, "教学中"),
+            CHECKING(1, "批阅中"),
+            CHECKED(2, "批阅完成"),
+            DONE(3, "已完成"),
+            ;
+
+            /**
+             * 状态
+             */
+            private Integer status;
+
+            /**
+             * 描述
+             */
+            private String desc;
+
+            private TeachingStatus(Integer status, String desc) {
+                this.status = status;
+                this.desc = desc;
+            }
+
+            private TeachingStatus() {
+            }
+
+            public Integer getStatus() {
+                return status;
+            }
+
+
+            public String getDesc() {
+                return desc;
+            }
+
+            public static String getDescByStat(Integer status){
+                for (TeachingStatus value : TeachingStatus.values()) {
+                    if (value.equals(status)){
+                        return  TeachingStatus.getDescByStat(status);
+                    }
+                }
+                return null;
+            }
+        }
     }
 
 }

@@ -22,6 +22,9 @@
         <result column="f_deadline_time" property="deadlineTime" jdbcType="TIMESTAMP"/>
         <result column="f_status" property="status" jdbcType="INTEGER"/>
         <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
+        <result column="teacherName" property="teacherName" />
+        <collection property="workForTeacherDTOList"
+            column="f_id" select="com.hit.curricelumdesign.dao.WorkMapper.selectByTeachingId"></collection>
     </resultMap>
     <sql id="Base_Column_List">
     f_id, f_teacher_id, f_name, "f_teacher_ reminder", f_deadline_time, f_status, f_is_delete,
@@ -171,25 +174,31 @@
       f_updater_id = #{updaterId,jdbcType=INTEGER}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
-    <select id="selectById" resultMap="DTOResultMap" parameterType="java.lang.Integer">
+  <select id="selectById" resultMap="DTOResultMap" parameterType="java.lang.Integer">
     select
-    f_id, f_teacher_id, f_name, "f_teacher_ reminder", f_deadline_time, f_status, f_is_delete,
-    f_createtime, f_creator_id, f_updatetime, f_updater_id
-    from t_teaching
-    where f_id = #{id,jdbcType=INTEGER} and f_is_delete = false
+     tt.f_id, tt.f_teacher_id, tt.f_name, "tt.f_teacher_ reminder", tt.f_deadline_time, tt.f_status,
+     tt.f_creator_id,
+     tt.f_name as teacherName
+    from t_teaching  tt
+    left join t_teacher te on tt.f_teacher_id = te.f_id
+    where tt.f_id = #{id,jdbcType=INTEGER} and tt.f_is_delete = false
   </select>
-    <select id="selectByName" resultMap="DTOResultMap">
+  <select id="selectByName" resultMap="DTOResultMap">
     select
-    f_id, f_teacher_id, f_name, "f_teacher_ reminder", f_deadline_time, f_status, f_is_delete,
-    f_createtime, f_creator_id, f_updatetime, f_updater_id
-    from t_teaching
-    where f_name = #{name} and f_is_delete = false
+     tt.f_id, tt.f_teacher_id, tt.f_name, "tt.f_teacher_ reminder", tt.f_deadline_time, tt.f_status,
+     tt.f_creator_id,
+     tt.f_name as teacherName
+    from t_teaching  tt
+    left join t_teacher te on tt.f_teacher_id = te.f_id
+    where tt.f_name = #{name} and tt.f_is_delete = false
   </select>
-    <select id="getTeachingDTOByCreatorId" resultMap="DTOResultMap">
+  <select id="getTeachingDTOByCreatorId" resultMap="DTOResultMap">
     select
-    f_id, f_teacher_id, f_name, "f_teacher_ reminder", f_deadline_time, f_status, f_is_delete,
-    f_createtime, f_creator_id, f_updatetime, f_updater_id
-    from t_teaching
-    where f_creator_id = #{creatorId} and f_is_delete = false
+     tt.f_id, tt.f_teacher_id, tt.f_name, "tt.f_teacher_ reminder", tt.f_deadline_time, tt.f_status,
+     tt.f_creator_id,
+     tt.f_name as teacherName
+    from t_teaching  tt
+    left join t_teacher te on tt.f_teacher_id = te.f_id
+    where tt.f_creator_id = #{creatorId} and tt.f_is_delete = false
   </select>
 </mapper>

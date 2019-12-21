@@ -25,7 +25,8 @@ public class UpdateTeachingParam extends TeachingBaseParam {
     private Date deadlineTime;
 
     //这里应该有更新的作业集合
-    List<StudentWorkProjectParam> works;
+    private List<StudentWorkProjectParam> works;
+
 
     public String getName() {
         return name;
