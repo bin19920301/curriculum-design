@@ -27,9 +27,14 @@ public class TeachingDTO {
     private Date deadlineTime;
 
     /**
-     * 状态 1：教学中 2：批阅中 3：批阅完成 4：已完成
+     * 状态码 1：教学中 2：批阅中 3：批阅完成 4：已完成
      */
     private Integer status;
+
+    /**
+     * 状态描述
+     */
+    private String statusDescribe;
 
     /**
      * 指导教师id
@@ -46,7 +51,9 @@ public class TeachingDTO {
      */
     private Integer creatorId;
 
-
+    /**
+     * 作业详情列表（教师端）
+     */
     private List<WorkForTeacherDTO> workForTeacherDTOList;
 
     public Integer getId() {
@@ -119,5 +126,13 @@ public class TeachingDTO {
 
     public void setWorkForTeacherDTOList(List<WorkForTeacherDTO> workForTeacherDTOList) {
         this.workForTeacherDTOList = workForTeacherDTOList;
+    }
+
+    public String getStatusDescribe() {
+        return statusDescribe;
+    }
+
+    public void setStatusDescribe(String statusDescribe) {
+        this.statusDescribe = statusDescribe;
     }
 }
