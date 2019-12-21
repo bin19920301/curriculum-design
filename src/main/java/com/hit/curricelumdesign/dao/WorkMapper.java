@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.work.WorkForTeacherDTO;
 import com.hit.curricelumdesign.context.entity.Work;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -22,4 +23,6 @@ public interface WorkMapper {
     int updateByPrimaryKey(Work record);
 
     List<Work> selectByParams(Integer teachingId,Integer studentId,Integer workProjectId);
+
+    List<WorkForTeacherDTO> selectByTeachingId(Integer teachingId);
 }

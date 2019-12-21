@@ -72,16 +72,18 @@ public class Constants {
                 return status;
             }
 
-            public void setStatus(Integer status) {
-                this.status = status;
-            }
 
             public String getDesc() {
                 return desc;
             }
 
-            public void setDesc(String desc) {
-                this.desc = desc;
+            public static String getDescByStat(Integer status){
+                for (WorkStatus value : WorkStatus.values()) {
+                    if (value.equals(status)){
+                        return  WorkStatus.getDescByStat(status);
+                    }
+                }
+                return null;
             }
         }
     }

@@ -13,7 +13,6 @@ import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
 import com.hit.curricelumdesign.context.param.teaching.*;
-import com.hit.curricelumdesign.context.param.work.AddWorkParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.TeachingMapper;
 import com.hit.curricelumdesign.dao.WorkMapper;

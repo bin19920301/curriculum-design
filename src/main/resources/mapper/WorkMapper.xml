@@ -14,6 +14,19 @@
     <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
+   <resultMap id="WorkForTeachDTOResultMap" type="com.hit.curricelumdesign.context.dto.work.WorkForTeacherDTO" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_work_project_id" property="workProjectId" jdbcType="INTEGER" />
+    <result column="f_student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="f_status" property="status" jdbcType="INTEGER" />
+    <result column="studentId" property="studentId" />
+    <result column="studentNumber" property="studentNumber" />
+    <result column="studentName" property="studentName" />
+    <result column="enrollmentYear" property="enrollmentYear" />
+    <result column="academyName" property="academyName" />
+    <result column="className" property="className" />
+    <result column="workProjectName" property="workProjectName" />
+</resultMap>
   <sql id="Base_Column_List" >
     f_id, f_teaching_id, f_work_project_id, f_student_id, f_score, f_submittime, f_returntime, 
     f_status, f_is_delete, f_createtime, f_updatetime
@@ -166,15 +179,31 @@
     f_id, f_teaching_id, f_work_project_id, f_student_id, f_score, f_submittime, f_returntime,
     f_status, f_is_delete, f_createtime, f_updatetime
     from t_work
-    where f_is_delete = false;
+    where f_is_delete = false
     <if test="teachingId != null" >
-     and f_teaching_id = #{teachingId,jdbcType=INTEGER}
+        and f_teaching_id = #{teachingId,jdbcType=INTEGER}
     </if>
     <if test="studentId != null" >
-      and f_student_id = #{studentId,jdbcType=INTEGER}
+        and f_student_id = #{studentId,jdbcType=INTEGER}
     </if>
     <if test="workProjectId != null" >
-      and f_work_project_id = #{workProjectId,jdbcType=INTEGER}
+        and f_work_project_id = #{workProjectId,jdbcType=INTEGER}
     </if>
-  </select>
+</select>
+ <select id="selectByTeachingId" resultMap="WorkForTeachDTOResultMap">
+    select
+    tw.f_id, tw.f_teaching_id, tw.f_work_project_id, tw.f_student_id,  tw.f_status,
+    ts.f_id as studentId ,ts.f_number as studentNumber,ts.f_name as studentName,
+    twp.f_id as workProjectId,twp.f_name as workProjectName,
+    ta.f_name as academyName,
+    te.f_name as enrollmentYear,
+    tc.f_name as className
+    from t_work tw
+    left join t_student ts on tw.f_student_id = ts.f_id
+    left join t_work_project twp on tw.f_work_project_id = twp.f_id
+    left join t_academy ta on ts.f_academy_id = ta.f_id
+    left join t_enrollment_year te on ts.f_enrollment_id = te.f_id
+    left join t_class tc on ts.f_class_id = tc.f_id
+    where f_is_delete = false and f_teaching_id = #{teachingId,jdbcType=INTEGER}
+</select>
 </mapper>

@@ -1,6 +1,9 @@
 package com.hit.curricelumdesign.context.dto.teaching;
 
+import com.hit.curricelumdesign.context.dto.work.WorkForTeacherDTO;
+
 import java.util.Date;
+import java.util.List;
 
 public class TeachingDTO {
     /**
@@ -44,7 +47,7 @@ public class TeachingDTO {
     private Integer creatorId;
 
 
-
+    private List<WorkForTeacherDTO> workForTeacherDTOList;
 
     public Integer getId() {
         return id;
@@ -108,5 +111,13 @@ public class TeachingDTO {
 
     public void setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
+    }
+
+    public List<WorkForTeacherDTO> getWorkForTeacherDTOList() {
+        return workForTeacherDTOList;
+    }
+
+    public void setWorkForTeacherDTOList(List<WorkForTeacherDTO> workForTeacherDTOList) {
+        this.workForTeacherDTOList = workForTeacherDTOList;
     }
 }
