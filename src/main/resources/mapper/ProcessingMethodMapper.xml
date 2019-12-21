@@ -3,6 +3,7 @@
 <mapper namespace="com.hit.curricelumdesign.dao.ProcessingMethodMapper" >
   <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.ProcessingMethod" >
     <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_name" property="name" jdbcType="VARCHAR" />
     <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
     <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
@@ -10,31 +11,40 @@
     <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    f_id, f_is_delete, f_createtime, f_creator_id, f_updatetime, f_updater_id
+    f_id, f_name, f_is_delete, f_createtime, f_creator_id, f_updatetime, f_updater_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_processing_method
     where f_id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="getAllProcessingMethod" resultMap="BaseResultMap" >
+      select
+      <include refid="Base_Column_List" />
+      from t_processing_method
+      where f_is_delete = 0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_processing_method
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.ProcessingMethod" >
-    insert into t_processing_method (f_id, f_is_delete, f_createtime, 
-      f_creator_id, f_updatetime, f_updater_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{isDelete,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{creatorId,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER}
-      )
+    insert into t_processing_method (f_id, f_name, f_is_delete,
+      f_createtime, f_creator_id, f_updatetime,
+      f_updater_id)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT},
+      #{createtime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP},
+      #{updaterId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.ProcessingMethod" >
     insert into t_processing_method
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         f_id,
+      </if>
+      <if test="name != null" >
+        f_name,
       </if>
       <if test="isDelete != null" >
         f_is_delete,
@@ -56,6 +66,9 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
       <if test="isDelete != null" >
         #{isDelete,jdbcType=BIT},
       </if>
@@ -76,6 +89,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.ProcessingMethod" >
     update t_processing_method
     <set >
+      <if test="name != null" >
+        f_name = #{name,jdbcType=VARCHAR},
+      </if>
       <if test="isDelete != null" >
         f_is_delete = #{isDelete,jdbcType=BIT},
       </if>
@@ -96,7 +112,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.ProcessingMethod" >
     update t_processing_method
-    set f_is_delete = #{isDelete,jdbcType=BIT},
+    set f_name = #{name,jdbcType=VARCHAR},
+      f_is_delete = #{isDelete,jdbcType=BIT},
       f_createtime = #{createtime,jdbcType=TIMESTAMP},
       f_creator_id = #{creatorId,jdbcType=INTEGER},
       f_updatetime = #{updatetime,jdbcType=TIMESTAMP},

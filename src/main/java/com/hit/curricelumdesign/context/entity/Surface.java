@@ -1,9 +1,11 @@
 package com.hit.curricelumdesign.context.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
-@Entity
-@Table(name = "t_surface")
+
 public class Surface {
     /**
      * 主键id
@@ -12,6 +14,12 @@ public class Surface {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "f_id")
     private Integer id;
+
+    /**
+     * 加工表面名称
+     */
+    @Column(name = "f_name")
+    private String name;
 
     /**
      * 是否删除 0：否 1：是
@@ -49,6 +57,14 @@ public class Surface {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean getIsDelete() {

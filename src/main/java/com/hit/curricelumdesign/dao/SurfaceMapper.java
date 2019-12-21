@@ -4,8 +4,10 @@ import com.hit.curricelumdesign.context.entity.Surface;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-@Mapper
+import java.util.List;
+
 @Repository
+@Mapper
 public interface SurfaceMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -18,4 +20,6 @@ public interface SurfaceMapper {
     int updateByPrimaryKeySelective(Surface record);
 
     int updateByPrimaryKey(Surface record);
+
+    List<Surface> getAllSurface();
 }

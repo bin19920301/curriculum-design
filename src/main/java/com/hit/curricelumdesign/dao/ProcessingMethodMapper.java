@@ -4,9 +4,12 @@ import com.hit.curricelumdesign.context.entity.ProcessingMethod;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-@Mapper
+import java.util.List;
+
 @Repository
+@Mapper
 public interface ProcessingMethodMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(ProcessingMethod record);
@@ -18,4 +21,6 @@ public interface ProcessingMethodMapper {
     int updateByPrimaryKeySelective(ProcessingMethod record);
 
     int updateByPrimaryKey(ProcessingMethod record);
+
+    List<ProcessingMethod> getAllProcessingMethod();
 }
