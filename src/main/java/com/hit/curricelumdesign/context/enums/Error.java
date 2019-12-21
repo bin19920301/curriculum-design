@@ -112,6 +112,7 @@ public enum Error {
 	//----------------------------------------教学
 	TEACHER_REMINDER_OVER_LENGTH("300801", "教师提示超长，应不超过500字"),
 	TEACHING_NAME_IS_EXIST("300802", "教学计划名称已存在"),
+	TEACHING_IS_NOT_EXIST("300806", "教学不存在"),
 
 	//----------------------------------------作业
 	WORK_IS_NOT_EXIST("300901", "作业不存在"),

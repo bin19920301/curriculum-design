@@ -86,4 +86,19 @@ public class Constants {
         }
     }
 
+    public static class WorkMessage {
+
+        //发送者类型
+        //学生
+        public static final Integer SENDER_TYPE_STUDENT = 1;
+        //教师
+        public static final Integer SENDER_TYPE_TEACHER = 2;
+
+        //接受者类型
+        //学生
+        public static final Integer RECEIVER_TYPE_STUDENT = 1;
+        //老师
+        public static final Integer RECEIVER_TYPE_TEACHER = 2;
+    }
+
 }

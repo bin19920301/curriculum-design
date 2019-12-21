@@ -1,14 +1,20 @@
 package com.hit.curricelumdesign.service;
 
 import com.hit.curricelumdesign.context.constant.Constants;
+import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.entity.Work;
+import com.hit.curricelumdesign.context.entity.WorkMessage;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.work.ScoreForWorkParam;
 import com.hit.curricelumdesign.context.param.work.AddWorkParam;
 import com.hit.curricelumdesign.context.param.work.WorkBaseParam;
+import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByStudentParam;
+import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByTeacherParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.WorkMapper;
+import com.hit.curricelumdesign.dao.WorkMessageMapper;
+import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +33,16 @@ public class WorkService {
     @Autowired
     private WorkManager workManager;
 
+    @Autowired
+    private TeachingManager teachingManager;
+
+    @Autowired
+    private WorkMessageMapper workMessageMapper;
+
 
     public Result addWork(AddWorkParam workParam) {
         Work work = new Work();
-        BeanUtil.copyProperties(workParam,work);
+        BeanUtil.copyProperties(workParam, work);
         //设置分数
         work.setScore(0);
         //设置状态
@@ -81,6 +93,7 @@ public class WorkService {
 
     /**
      * 退回作业
+     *
      * @param param
      * @return
      */
@@ -92,6 +105,57 @@ public class WorkService {
         work.setStatus(Constants.Work.WorkStatus.RETURN.getStatus());
         work.setUpdatetime(new Date());
         workMapper.updateByPrimaryKey(work);
+        return Result.success();
+    }
+
+    /**
+     * 教师添加作业消息
+     *
+     * @param param
+     * @return
+     */
+    public Result addMessageByTeacher(AddWorkMessageByTeacherParam param) {
+        Work work = workManager.getWorkerById(param.getWorkId());
+        Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
+        WorkMessage msg = new WorkMessage();
+        msg.setTeachingId(teaching.getId());
+        msg.setWorkId(work.getId());
+        msg.setContent(param.getContent());
+        msg.setIsRead(Constants.Common.IS_NOT);
+        msg.setSenderId(teaching.getTeacherId());
+        msg.setSenderType(Constants.WorkMessage.SENDER_TYPE_TEACHER);
+        msg.setReceiverId(work.getStudentId());
+        msg.setReceiverType(Constants.WorkMessage.RECEIVER_TYPE_STUDENT);
+        Date now = new Date();
+        msg.setCreatetime(now);
+        msg.setUpdatetime(now);
+        msg.setIsDelete(Constants.Common.IS_NOT);
+        workMessageMapper.insert(msg);
+        return Result.success();
+    }
+
+    /**
+     * 学生添加作业消息
+     * @param param
+     * @return
+     */
+    public Result addMessageByStudent(AddWorkMessageByStudentParam param) {
+        Work work = workManager.getWorkerById(param.getWorkId());
+        Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
+        WorkMessage msg = new WorkMessage();
+        msg.setTeachingId(teaching.getId());
+        msg.setWorkId(work.getId());
+        msg.setContent(param.getContent());
+        msg.setIsRead(Constants.Common.IS_NOT);
+        msg.setSenderId(work.getStudentId());
+        msg.setSenderType(Constants.WorkMessage.SENDER_TYPE_STUDENT);
+        msg.setReceiverId(teaching.getTeacherId());
+        msg.setReceiverType(Constants.WorkMessage.RECEIVER_TYPE_TEACHER);
+        Date now = new Date();
+        msg.setCreatetime(now);
+        msg.setUpdatetime(now);
+        msg.setIsDelete(Constants.Common.IS_NOT);
+        workMessageMapper.insert(msg);
         return Result.success();
     }
 }
