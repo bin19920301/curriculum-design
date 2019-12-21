@@ -25,4 +25,22 @@ public class TeachingController {
     public Result updateTeaching(){
         return Result.success();
     }
+
+    @RequestMapping(value = "/teaching/deleteteaching/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
+    public Result deleteTeaching(){
+        return Result.success();
+    }
+
+    @RequestMapping(value = "/teaching/getteachinglist/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
+    public Result getTeachingList(){
+        return Result.success();
+    }
+
+    @RequestMapping(value = "/teaching/getteachingbycreatorid/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
+    public Result getTeachingByCreatorId(){
+        return Result.success();
+    }
 }

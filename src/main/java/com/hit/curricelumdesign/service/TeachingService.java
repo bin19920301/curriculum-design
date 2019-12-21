@@ -8,10 +8,7 @@ import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
-import com.hit.curricelumdesign.context.param.teaching.AddTeachingParam;
-import com.hit.curricelumdesign.context.param.teaching.GetTeachingParam;
-import com.hit.curricelumdesign.context.param.teaching.TeachingBaseParam;
-import com.hit.curricelumdesign.context.param.teaching.UpdateTeachingParam;
+import com.hit.curricelumdesign.context.param.teaching.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.TeachingMapper;
 import com.hit.curricelumdesign.manager.teaching.TeachingManager;
@@ -125,7 +122,7 @@ public class TeachingService {
      * @param
      * @return
      */
-    public Result getTeachingByCreatorId(){
+    public Result getTeachingByCreatorId(ConditionTeachingParam teachingParam){
         //这里应该是获取到当前登录用户的id
         Integer currentUserId = 1;
         List<TeachingDTO> teachingList =  teachingMapper.getTeachingDTOByCreatorId(currentUserId);
