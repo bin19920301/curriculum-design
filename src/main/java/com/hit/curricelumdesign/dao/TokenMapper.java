@@ -18,4 +18,8 @@ public interface TokenMapper {
     int updateByPrimaryKeySelective(Token record);
 
     int updateByPrimaryKey(Token record);
+
+    Token getByToken(String token);
+
+    Token getByTokenAndType(String token, int type);
 }

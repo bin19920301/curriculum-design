@@ -10,6 +10,7 @@ import com.hit.curricelumdesign.context.entity.Token;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import com.hit.curricelumdesign.context.param.student.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.StudentMapper;
@@ -18,6 +19,7 @@ import com.hit.curricelumdesign.manager.student.StudentManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import com.hit.curricelumdesign.utils.MsgUtils;
 import com.hit.curricelumdesign.utils.TokenUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -156,5 +158,25 @@ public class StudentService {
         result.put("studentId", student.getId().toString());
         result.put("studentName", student.getName());
         return Result.success(result);
+    }
+
+    /**
+     * 学生登出
+     *
+     * @param param
+     * @return
+     */
+    public Result logout(BaseRequestParam param) {
+        String studentToken = param.getStudentToken();
+        if (StringUtils.isBlank(studentToken)) {
+            throw new BaseException(Error._200201);
+        }
+        Token token = tokenMapper.getByTokenAndType(studentToken, Constants.Token.TYPE_STUDENT);
+        if (null != token) {
+            token.setIsDelete(Constants.Common.IS_YES);
+            token.setUpdatetime(new Date());
+            tokenMapper.updateByPrimaryKey(token);
+        }
+        return Result.success();
     }
 }

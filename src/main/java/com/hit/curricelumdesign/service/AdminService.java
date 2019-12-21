@@ -12,6 +12,7 @@ import com.hit.curricelumdesign.context.entity.Token;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import com.hit.curricelumdesign.context.param.admin.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.AdminMapper;
@@ -189,5 +190,25 @@ public class AdminService {
         result.put("adminId", admin.getId().toString());
         result.put("adminName", admin.getName());
         return Result.success(result);
+    }
+
+    /**
+     * 管理员登出
+     *
+     * @param param
+     * @return
+     */
+    public Result adminLogout(BaseRequestParam param) {
+        String adminToken = param.getAdminToken();
+        if (StringUtils.isBlank(adminToken)) {
+            throw new BaseException(Error._200201);
+        }
+        Token token = tokenMapper.getByTokenAndType(adminToken, Constants.Token.TYPE_ADMIN);
+        if (null != token) {
+            token.setIsDelete(Constants.Common.IS_YES);
+            token.setUpdatetime(new Date());
+            tokenMapper.updateByPrimaryKey(token);
+        }
+        return Result.success();
     }
 }
