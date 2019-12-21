@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import com.hit.curricelumdesign.context.param.student.*;
 import com.hit.curricelumdesign.context.param.teacher.*;
 import com.hit.curricelumdesign.context.response.Result;
@@ -55,6 +56,12 @@ public class StudentController {
     @RequestMapping(value = "/student/login/", method = RequestMethod.POST)
     public Result login(StudentLoginParam param) {
         return studentService.login(param);
+    }
+
+
+    @RequestMapping(value = "/student/logout/", method = RequestMethod.POST)
+    public Result logout(BaseRequestParam param) {
+        return studentService.logout(param);
     }
 
 }

@@ -12,6 +12,7 @@ import com.hit.curricelumdesign.context.entity.Token;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import com.hit.curricelumdesign.context.param.teacher.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.TeacherMapper;
@@ -180,5 +181,25 @@ public class TeacherService {
         result.put("teacherId", teacher.getId().toString());
         result.put("teacherName", teacher.getName());
         return Result.success(result);
+    }
+
+    /**
+     * 教师登出
+     * @param param
+     * @return
+     */
+    public Result teacherLogout(BaseRequestParam param) {
+        String teacherToken = param.getTeacherToken();
+        if (StringUtils.isBlank(teacherToken)) {
+            throw new BaseException(Error._200201);
+        }
+        Token token = tokenMapper.getByTokenAndType(teacherToken,Constants.Token.TYPE_TEACHER);
+        if (null != token) {
+            token.setIsDelete(Constants.Common.IS_YES);
+            token.setUpdatetime(new Date());
+            tokenMapper.updateByPrimaryKey(token);
+        }
+
+        return Result.success();
     }
 }

@@ -1,6 +1,7 @@
 package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import com.hit.curricelumdesign.context.param.teacher.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.service.TeacherService;
@@ -55,5 +56,11 @@ public class TeacherController {
     public Result teacherLogin(TeacherLoginParam param) {
         return teacherService.teacherLogin(param);
     }
+
+    @RequestMapping(value = "/teacher/logout/", method = RequestMethod.POST)
+    public Result teacherLogout(BaseRequestParam param) {
+        return teacherService.teacherLogout(param);
+    }
+
 
 }

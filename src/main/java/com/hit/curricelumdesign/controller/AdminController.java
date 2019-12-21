@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import com.hit.curricelumdesign.context.param.admin.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.service.AdminService;
@@ -63,6 +64,10 @@ public class AdminController {
     @RequestMapping(value = "/admin/login/", method = RequestMethod.POST)
     public Result adminLogin(AdminLoginParam param) {
         return adminService.adminLogin(param);
+    }
+    @RequestMapping(value = "/admin/logout/", method = RequestMethod.POST)
+    public Result adminLogout(BaseRequestParam param) {
+        return adminService.adminLogout(param);
     }
 
 }
