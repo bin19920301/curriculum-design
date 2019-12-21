@@ -115,6 +115,10 @@ public enum Error {
 
 	//----------------------------------------作业
 	WORK_IS_NOT_EXIST("300901", "作业不存在"),
+	WORK_IS_NOT_SUBMIT("300902", "作业不是提交状态"),
+	WORK_IS_SUBMIT("300903", "作业已提交"),
+	WORK_IS_RETURN("300904", "作业已退回"),
+	WORK_IS_DONE("300905", "作业已完成"),
 
 
 	;
