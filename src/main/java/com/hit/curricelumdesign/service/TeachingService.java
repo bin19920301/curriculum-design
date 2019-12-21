@@ -1,5 +1,9 @@
 package com.hit.curricelumdesign.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.hit.curricelumdesign.context.dto.BaseListDTO;
+import com.hit.curricelumdesign.context.dto.teaching.TeachingDTO;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
@@ -17,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -35,7 +40,7 @@ public class TeachingService {
      */
     public Result getTeachingById(GetTeachingParam teachingParam) {
         //这里是详情展示的详细操作
-        return  Result.success();
+        return  Result.success(teachingMapper.selectById(teachingParam.getId()));
     }
 
     /**
@@ -44,8 +49,11 @@ public class TeachingService {
      * @return
      */
     public Result addTeaching(AddTeachingParam teachingParam){
+        if (null != teachingMapper.selectByName(teachingParam.getName())){
+            throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
+        }
         if (teachingParam.getTeacherReminder().length() > 500){
-            throw new BaseException(Error.TEACHER__REMINDER_OVER_LENGTH);
+            throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
         }
         Teaching teaching = new Teaching();
         BeanUtil.copyProperties(teachingParam,teaching);
@@ -55,7 +63,7 @@ public class TeachingService {
         teaching.setUpdaterId(0);
         teaching.setUpdatetime(new Date());
         teaching.setIsDelete(false);
-        //这里应该增加保存作业相关操作
+        //这里应该增加保存作业相关操作,未完成
         teachingMapper.insert(teaching);
         return Result.success();
     }
@@ -66,14 +74,17 @@ public class TeachingService {
      * @return
      */
     public Result updateTeaching(UpdateTeachingParam teachingParam){
+        if (null != teachingMapper.selectByName(teachingParam.getName())){
+            throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
+        }
         if (teachingParam.getTeacherReminder().length() > 500){
-            throw new BaseException(Error.TEACHER__REMINDER_OVER_LENGTH);
+            throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
         }
         Teaching teaching = new Teaching();
         BeanUtil.copyProperties(teachingParam,teaching);
         teaching.setUpdaterId(2);
         teaching.setUpdatetime(new Date());
-        //这里应该有更新作业相关操作
+        //这里应该有更新作业相关操做，未完成
         teachingMapper.updateByPrimaryKeySelective(teaching);
         return Result.success();
     }
@@ -100,7 +111,13 @@ public class TeachingService {
      * @return
      */
     public Result getTeachingList(BaseListRequestParam param){
-        return Result.success();
+        PageHelper.startPage(param.getPageNum(), param.getPageSize());
+        //这里应该是获取到当前登录用户的id
+        Integer currentUserId = 1;
+        List<TeachingDTO> teachingList =  teachingMapper.getTeachingDTOByCreatorId(currentUserId);
+        PageInfo<TeachingDTO> pageInfo = new PageInfo<>(teachingList);
+        BaseListDTO<TeachingDTO> teacherBaseListDTO = new BaseListDTO<>(pageInfo.getTotal(), teachingList);
+        return Result.success(teacherBaseListDTO);
     }
 
     /**
@@ -109,6 +126,9 @@ public class TeachingService {
      * @return
      */
     public Result getTeachingByCreatorId(){
-        return Result.success();
+        //这里应该是获取到当前登录用户的id
+        Integer currentUserId = 1;
+        List<TeachingDTO> teachingList =  teachingMapper.getTeachingDTOByCreatorId(currentUserId);
+        return Result.success(teachingList);
     }
 }

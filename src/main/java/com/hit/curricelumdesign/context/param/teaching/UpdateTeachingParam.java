@@ -3,6 +3,7 @@ package com.hit.curricelumdesign.context.param.teaching;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 public class UpdateTeachingParam extends TeachingBaseParam {
 
@@ -24,6 +25,7 @@ public class UpdateTeachingParam extends TeachingBaseParam {
     private Date deadlineTime;
 
     //这里应该有更新的作业集合
+    List<StudentWorkProjectParam> works;
 
     public String getName() {
         return name;
@@ -47,5 +49,13 @@ public class UpdateTeachingParam extends TeachingBaseParam {
 
     public void setDeadlineTime(Date deadlineTime) {
         this.deadlineTime = deadlineTime;
+    }
+
+    public List<StudentWorkProjectParam> getWorks() {
+        return works;
+    }
+
+    public void setWorks(List<StudentWorkProjectParam> works) {
+        this.works = works;
     }
 }

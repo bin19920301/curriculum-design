@@ -22,7 +22,10 @@ public interface TeachingMapper {
 
     int updateByPrimaryKey(Teaching record);
 
-    // TeachingDTO selectById(Integer id);
+    TeachingDTO selectById(Integer id);
 
-    // List<TeachingDTO> getTeachingDTOByCreatorId(Integer id);
+    List<TeachingDTO> getTeachingDTOByCreatorId(Integer creatorId);
+
+    TeachingDTO selectByName(String name);
+
 }

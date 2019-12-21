@@ -170,4 +170,25 @@
       f_updater_id = #{updaterId,jdbcType=INTEGER}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectById" resultMap="DTOResultMap" parameterType="java.lang.Integer" >
+    select
+    f_id, f_teacher_id, f_name, "f_teacher_ reminder", f_deadline_time, f_status, f_is_delete,
+    f_createtime, f_creator_id, f_updatetime, f_updater_id
+    from t_teaching
+    where f_id = #{id,jdbcType=INTEGER} and f_is_delete = false
+  </select>
+  <select id="selectByName" resultMap="DTOResultMap" >
+    select
+    f_id, f_teacher_id, f_name, "f_teacher_ reminder", f_deadline_time, f_status, f_is_delete,
+    f_createtime, f_creator_id, f_updatetime, f_updater_id
+    from t_teaching
+    where f_name = #{name} and f_is_delete = false
+  </select>
+  <select id="getTeachingDTOByCreatorId" resultMap="DTOResultMap">
+    select
+    f_id, f_teacher_id, f_name, "f_teacher_ reminder", f_deadline_time, f_status, f_is_delete,
+    f_createtime, f_creator_id, f_updatetime, f_updater_id
+    from t_teaching
+    where f_creator_id = #{creatorId} and f_is_delete = false
+  </select>
 </mapper>
