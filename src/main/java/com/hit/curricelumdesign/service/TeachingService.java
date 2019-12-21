@@ -7,6 +7,7 @@ import com.hit.curricelumdesign.context.bo.work.UpdateWorkBO;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
 import com.hit.curricelumdesign.context.dto.teaching.TeachingDTO;
+import com.hit.curricelumdesign.context.dto.work.WorkForTeacherDTO;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.entity.Work;
 import com.hit.curricelumdesign.context.enums.Error;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -168,6 +170,7 @@ public class TeachingService {
 
     /**
      * 根据当前登录用户分页查询教学信息，目前教师的id是传送过来的
+     * 分页根据需求没有使用，暂时没有完成
      * @param param
      * @return
      */
@@ -188,8 +191,31 @@ public class TeachingService {
      */
     public Result getTeachingByCreatorId(ConditionTeachingParam teachingParam){
         //这里应该是获取到当前登录用户的id
-        Integer currentUserId = 1;
+        Integer currentUserId = teachingParam.getTeacherId();
         List<TeachingDTO> teachingList =  teachingMapper.getTeachingDTOByCreatorId(currentUserId);
-        return Result.success(teachingList);
+        //这里设置教学当前的状态和教学涉及到的教学人数,以及更新作业的状态
+        List<TeachingDTO> newTeachingList = new ArrayList<>();
+        for (int i = 0; i < teachingList.size(); i++) {
+            newTeachingList.add(this.setStatusDescribeAndStudentCount(teachingList.get(i)));
+        }
+        return Result.success(newTeachingList);
+    }
+
+    private TeachingDTO setStatusDescribeAndStudentCount(TeachingDTO teachingDTO){
+        //设置教学中参与学生人数
+        Long studentCount = workMapper.countStudentsByTeachingId(teachingDTO.getId());
+        teachingDTO.setStudentCount(studentCount);
+        //设置教学状体
+        teachingDTO.setStatusDescribe(Constants.Teaching.TeachingStatus.getDescByStat(teachingDTO.getStatus()));
+        //设置作业状态
+        List<WorkForTeacherDTO> workForTeacherDTOList = teachingDTO.getWorkForTeacherDTOList();
+        List<WorkForTeacherDTO> newWorkList = new ArrayList<>();
+        for (int i = 0; i < workForTeacherDTOList.size(); i++) {
+            WorkForTeacherDTO currentWorkDTO = workForTeacherDTOList.get(i);
+            currentWorkDTO.setStatusDescribe(Constants.Work.WorkStatus.getDescByStat(workForTeacherDTOList.get(i).getStatus()));
+            newWorkList.add(currentWorkDTO);
+        }
+        teachingDTO.setWorkForTeacherDTOList(newWorkList);
+        return teachingDTO;
     }
 }

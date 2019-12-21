@@ -13,6 +13,11 @@ public class WorkForTeacherDTO {
      */
     private Integer status;
 
+    /**
+     * 作业状态描述
+     */
+    private String statusDescribe;
+
     //学生部分信息
 
     /**
@@ -135,5 +140,13 @@ public class WorkForTeacherDTO {
 
     public void setWorkProjectName(String workProjectName) {
         this.workProjectName = workProjectName;
+    }
+
+    public String getStatusDescribe() {
+        return statusDescribe;
+    }
+
+    public void setStatusDescribe(String statusDescribe) {
+        this.statusDescribe = statusDescribe;
     }
 }
