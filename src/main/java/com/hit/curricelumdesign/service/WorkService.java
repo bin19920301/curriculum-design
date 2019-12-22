@@ -193,6 +193,7 @@ public class WorkService {
     @Transactional
     public Result addCraftCardList(AddCraftCardListParam param) {
         Integer workId = param.getWorkId();
+        Work work = workManager.getWorkerById(workId);
         List<AddCraftCardParam> paramList = param.getList();
         List<CraftCard> newCraftCardList = new ArrayList<>();
         List<CraftCard> updateCraftCardList = new ArrayList<>();
