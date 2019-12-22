@@ -1,7 +1,10 @@
 package com.hit.curricelumdesign.context.param.teaching;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.hit.curricelumdesign.context.annotation.JsonArr;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -9,20 +12,24 @@ public class AddTeachingParam {
     /**
      * 教学名称
      */
+    @NotNull
     private String name;
 
     /**
      * 教师提示
      */
+    @NotNull
     private String teacherReminder;
 
     /**
      * 截止日期
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm" )
+    @NotNull
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss")
     private Date deadlineTime;
 
     //这里缺少作业的集合
+    @JsonArr(type = StudentWorkProjectParam.class,paramName = "works")
     private List<StudentWorkProjectParam> works;
 
     public String getName() {

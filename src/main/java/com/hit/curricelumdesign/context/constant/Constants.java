@@ -82,10 +82,10 @@ public class Constants {
                 return desc;
             }
 
-            public static String getDescByStat(Integer status) {
+            public static String getDescByStat(Integer status){
                 for (WorkStatus value : WorkStatus.values()) {
-                    if (value.equals(status)) {
-                        return WorkStatus.getDescByStat(status);
+                    if (value.getStatus().equals(status)){
+                        return  value.getDesc();
                     }
                 }
                 return null;
@@ -108,7 +108,7 @@ public class Constants {
         public static final Integer RECEIVER_TYPE_TEACHER = 2;
     }
 
-    public static class Teaching {
+    public static class Teaching{
         public enum TeachingStatus {
             TEACHING(0, "教学中"),
             CHECKING(1, "批阅中"),
@@ -143,10 +143,10 @@ public class Constants {
                 return desc;
             }
 
-            public static String getDescByStat(Integer status) {
+            public static String getDescByStat(Integer status){
                 for (TeachingStatus value : TeachingStatus.values()) {
-                    if (value.equals(status)) {
-                        return TeachingStatus.getDescByStat(status);
+                    if (value.getStatus().equals(status)){
+                        return value.getDesc() ;
                     }
                 }
                 return null;

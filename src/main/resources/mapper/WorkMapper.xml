@@ -196,7 +196,7 @@
     ts.f_id as studentId ,ts.f_number as studentNumber,ts.f_name as studentName,
     twp.f_id as workProjectId,twp.f_name as workProjectName,
     ta.f_name as academyName,
-    te.f_name as enrollmentYear,
+    te.f_enrollment_year as enrollmentYear,
     tc.f_name as className
     from t_work tw
     left join t_student ts on tw.f_student_id = ts.f_id

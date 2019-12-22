@@ -1,8 +1,10 @@
 package com.hit.curricelumdesign.context.param.teaching;
 
+import com.hit.curricelumdesign.context.param.BaseListRequestParam;
+
 import javax.validation.constraints.NotNull;
 
-public class ConditionTeachingParam {
+public class ConditionTeachingParam extends BaseListRequestParam {
 
     /**
      * 当前教师id
@@ -13,6 +15,7 @@ public class ConditionTeachingParam {
     /**
      * 教学状态
      */
+    @NotNull
     private Integer status;
 
     public Integer getStatus() {

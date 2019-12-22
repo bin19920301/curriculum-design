@@ -28,7 +28,7 @@ public class Teaching {
     /**
      * 教师提示
      */
-    @Column(name = "f_teacher_ reminder")
+    @Column(name = "f_teacher_reminder")
     private String teacherReminder;
 
     /**

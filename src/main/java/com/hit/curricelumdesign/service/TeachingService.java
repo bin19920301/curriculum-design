@@ -6,7 +6,8 @@ import com.hit.curricelumdesign.context.bo.work.AddWorkBO;
 import com.hit.curricelumdesign.context.bo.work.UpdateWorkBO;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
-import com.hit.curricelumdesign.context.dto.teaching.TeachingDTO;
+import com.hit.curricelumdesign.context.dto.teaching.TeachingInfoDTO;
+import com.hit.curricelumdesign.context.dto.teaching.TeachingListDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkForTeacherDTO;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.entity.Work;
@@ -52,7 +53,8 @@ public class TeachingService {
      */
     public Result getTeachingById(GetTeachingParam teachingParam) {
         //这里是详情展示的详细操作
-        return  Result.success(teachingManager.getTeachingDTOById(teachingParam.getId()));
+        TeachingInfoDTO infoDTO = teachingManager.getTeachingDTOById(teachingParam.getId());
+        return  Result.success(this.setStatusDescribeAndStudentCountAndWorkStatus(infoDTO));
     }
 
     /**
@@ -62,7 +64,7 @@ public class TeachingService {
      */
     public Result addTeaching(AddTeachingParam teachingParam){
         if (null != teachingMapper.selectByName(teachingParam.getName())){
-            throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
+            throw new BaseException(Error.TEACHING_NAME_IS_EXIST);
         }
         if (teachingParam.getTeacherReminder().length() > 500){
             throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
@@ -75,9 +77,12 @@ public class TeachingService {
         teaching.setUpdaterId(0);
         teaching.setUpdatetime(new Date());
         teaching.setIsDelete(false);
+        //设置教学状态
+        teaching.setStatus(0);
         //获取保存之后的教学Id
-        int currentTeachingId = teachingMapper.insert(teaching);
-        //这里应该增加保存作业相关操作,未完成
+        teachingMapper.insert(teaching);
+        int currentTeachingId = teaching.getId();
+                //这里应该增加保存作业相关操作,未完成
         List<StudentWorkProjectParam> works = teachingParam.getWorks();
         for (int i = 0; i < works.size(); i++) {
             StudentWorkProjectParam studentWorkProjectParam =  works.get(i);
@@ -100,9 +105,6 @@ public class TeachingService {
      * @return
      */
     public Result updateTeaching(UpdateTeachingParam teachingParam){
-        if (null != teachingMapper.selectByName(teachingParam.getName())){
-            throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
-        }
         if (teachingParam.getTeacherReminder().length() > 500){
             throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
         }
@@ -121,50 +123,54 @@ public class TeachingService {
         //设置新增，修改
         for (int i = 0; i < currentWorkList.size(); i++) {
             StudentWorkProjectParam studentWorkProjectParam =  currentWorkList.get(i);
+            //获取老的作业项目
+            Work oldWork = null;
+            if (oldListIterator.hasNext()){
+                oldWork = oldListIterator.next();
+            }
             //判断未修改，不做操作，从oldWorkList中删除
             List<Work> tempWorksForSame = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getStudentId(), studentWorkProjectParam.getWorkProjectId());
+            List<Work> tempWorksForUpdate = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getStudentId(), null);
             if(tempWorksForSame.size() > 0){
                 //说明存在相同的作业
-                while (oldListIterator.hasNext()){
-                    if (tempWorksForSame.get(0).getId() == oldListIterator.next().getId()){
+                if (null != oldWork){
+                    if (tempWorksForSame.get(0).getId() == oldWork.getId() && oldWork.getWorkProjectId() == studentWorkProjectParam.getWorkProjectId()){
                         oldListIterator.remove();
-                        break;
                     }
                 }
-                continue;
             }
             //教学id和学生id相同，说明存在作业，执行更新作业项目的操作
-            List<Work> tempWorksForUpdate = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getStudentId(), null);
-            if (tempWorksForSame.size() > 0){
+            else if (tempWorksForUpdate.size() > 0){
                 //说明存在需要更新的作业
-                while (oldListIterator.hasNext()){
-                    if (tempWorksForSame.get(0).getId() == oldListIterator.next().getId()){
+                if (null != oldWork){
+                    if (tempWorksForUpdate.get(0).getId() == oldWork.getId()){
                         UpdateWorkBO updateWorkBO = new UpdateWorkBO();
-                        updateWorkBO.setId(oldListIterator.next().getId());
+                        updateWorkBO.setId(oldWork.getId());
                         updateWorkBO.setStudentId(studentWorkProjectParam.getStudentId());
                         updateWorkBO.setWorkProjectId(studentWorkProjectParam.getWorkProjectId());
                         workManager.updateWork(updateWorkBO);
                         oldListIterator.remove();
-                        break;
                     }
                 }
                 continue;
+            }else{
+                //这里是新增操作
+                AddWorkBO addWorkBO = new AddWorkBO();
+                addWorkBO.setTeachingId(currentTeachingId);
+                addWorkBO.setStudentId(studentWorkProjectParam.getStudentId());
+                addWorkBO.setWorkProjectId(studentWorkProjectParam.getWorkProjectId());
+                workManager.addWork(addWorkBO);
             }
-            //这里是新增操作
-            AddWorkBO addWorkBO = new AddWorkBO();
-            addWorkBO.setStudentId(studentWorkProjectParam.getStudentId());
-            addWorkBO.setStudentId(studentWorkProjectParam.getWorkProjectId());
-            workManager.addWork(addWorkBO);
+
 
         }
         //这里是删除弃用的作业
-        while (oldListIterator.hasNext()){
-            Work next = oldListIterator.next();
+        for (int i = 0; i <oldWorkList.size() ; i++) {
+            Work next = oldWorkList.get(i);
             next.setIsDelete(Constants.Common.IS_YES);
             next.setUpdatetime(new Date());
             workMapper.updateByPrimaryKeySelective(next);
         }
-
         return Result.success();
     }
 
@@ -177,11 +183,12 @@ public class TeachingService {
     public Result getTeachingList(BaseListRequestParam param){
         PageHelper.startPage(param.getPageNum(), param.getPageSize());
         //这里应该是获取到当前登录用户的id
-        Integer currentUserId = 1;
+  /*      Integer currentUserId = 1;
         List<TeachingDTO> teachingList =  teachingMapper.getTeachingDTOByCreatorId(currentUserId);
         PageInfo<TeachingDTO> pageInfo = new PageInfo<>(teachingList);
         BaseListDTO<TeachingDTO> teacherBaseListDTO = new BaseListDTO<>(pageInfo.getTotal(), teachingList);
-        return Result.success(teacherBaseListDTO);
+        return Result.success(teacherBaseListDTO);*/
+        return null;
     }
 
     /**
@@ -190,32 +197,55 @@ public class TeachingService {
      * @return
      */
     public Result getTeachingByCreatorId(ConditionTeachingParam teachingParam){
+        PageHelper.startPage(teachingParam.getPageNum(), teachingParam.getPageSize());
         //这里应该是获取到当前登录用户的id
         Integer currentUserId = teachingParam.getTeacherId();
-        List<TeachingDTO> teachingList =  teachingMapper.getTeachingDTOByCreatorId(currentUserId);
+        Integer status = teachingParam.getStatus();
+        List<TeachingListDTO> teachingList =  teachingMapper.getTeachingDTOByCreatorIdAndStatus(currentUserId,status);
         //这里设置教学当前的状态和教学涉及到的教学人数,以及更新作业的状态
-        List<TeachingDTO> newTeachingList = new ArrayList<>();
+        List<TeachingListDTO> newTeachingList = new ArrayList<>();
         for (int i = 0; i < teachingList.size(); i++) {
             newTeachingList.add(this.setStatusDescribeAndStudentCount(teachingList.get(i)));
         }
-        return Result.success(newTeachingList);
+        PageInfo<TeachingListDTO> pageInfo = new PageInfo<>(newTeachingList);
+        BaseListDTO<TeachingListDTO> newTeachingDTOList = new BaseListDTO<>(pageInfo.getTotal(), newTeachingList);
+        return Result.success(newTeachingDTOList);
     }
 
-    private TeachingDTO setStatusDescribeAndStudentCount(TeachingDTO teachingDTO){
+    private TeachingListDTO setStatusDescribeAndStudentCount(TeachingListDTO teachingListDTO){
         //设置教学中参与学生人数
-        Long studentCount = workMapper.countStudentsByTeachingId(teachingDTO.getId());
-        teachingDTO.setStudentCount(studentCount);
+        Long studentCount = workMapper.countStudentsByTeachingId(teachingListDTO.getId());
+        teachingListDTO.setStudentCount(studentCount);
         //设置教学状体
-        teachingDTO.setStatusDescribe(Constants.Teaching.TeachingStatus.getDescByStat(teachingDTO.getStatus()));
+        teachingListDTO.setStatusDescribe(Constants.Teaching.TeachingStatus.getDescByStat(teachingListDTO.getStatus()));
         //设置作业状态
-        List<WorkForTeacherDTO> workForTeacherDTOList = teachingDTO.getWorkForTeacherDTOList();
+   /*     List<WorkForTeacherDTO> workForTeacherDTOList = teachingListDTO.getWorkForTeacherDTOList();
         List<WorkForTeacherDTO> newWorkList = new ArrayList<>();
         for (int i = 0; i < workForTeacherDTOList.size(); i++) {
             WorkForTeacherDTO currentWorkDTO = workForTeacherDTOList.get(i);
             currentWorkDTO.setStatusDescribe(Constants.Work.WorkStatus.getDescByStat(workForTeacherDTOList.get(i).getStatus()));
             newWorkList.add(currentWorkDTO);
         }
-        teachingDTO.setWorkForTeacherDTOList(newWorkList);
-        return teachingDTO;
+        teachingListDTO.setWorkForTeacherDTOList(newWorkList);*/
+        return teachingListDTO;
     }
+
+    private TeachingInfoDTO setStatusDescribeAndStudentCountAndWorkStatus(TeachingInfoDTO teachingInfoDTO){
+        //设置教学中参与学生人数
+        Long studentCount = workMapper.countStudentsByTeachingId(teachingInfoDTO.getId());
+        teachingInfoDTO.setStudentCount(studentCount);
+        //设置教学状体
+        teachingInfoDTO.setStatusDescribe(Constants.Teaching.TeachingStatus.getDescByStat(teachingInfoDTO.getStatus()));
+        //设置作业状态
+        List<WorkForTeacherDTO> workForTeacherDTOList = teachingInfoDTO.getWorkForTeacherDTOList();
+        List<WorkForTeacherDTO> newWorkList = new ArrayList<>();
+        for (int i = 0; i < workForTeacherDTOList.size(); i++) {
+            WorkForTeacherDTO currentWorkDTO = workForTeacherDTOList.get(i);
+            currentWorkDTO.setStatusDescribe(Constants.Work.WorkStatus.getDescByStat(workForTeacherDTOList.get(i).getStatus()));
+            newWorkList.add(currentWorkDTO);
+        }
+        teachingInfoDTO.setWorkForTeacherDTOList(newWorkList);
+        return teachingInfoDTO;
+    }
+
 }

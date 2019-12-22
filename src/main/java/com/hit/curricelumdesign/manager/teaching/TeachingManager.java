@@ -1,6 +1,7 @@
 package com.hit.curricelumdesign.manager.teaching;
 
-import com.hit.curricelumdesign.context.dto.teaching.TeachingDTO;
+import com.hit.curricelumdesign.context.dto.teaching.TeachingInfoDTO;
+import com.hit.curricelumdesign.context.dto.teaching.TeachingListDTO;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
@@ -22,11 +23,11 @@ public class TeachingManager {
         return teaching;
     }
 
-    public TeachingDTO getTeachingDTOById(Integer teachingId){
-        TeachingDTO teachingDTO = teachingMapper.selectById(teachingId);
-        if (null == teachingDTO){
+    public TeachingInfoDTO getTeachingDTOById(Integer teachingId){
+        TeachingInfoDTO teachingListDTO = teachingMapper.selectById(teachingId);
+        if (null == teachingListDTO){
             throw new BaseException(Error.TEACHING_IS_NOT_EXIST);
         }
-        return teachingDTO;
+        return teachingListDTO;
     }
 }
