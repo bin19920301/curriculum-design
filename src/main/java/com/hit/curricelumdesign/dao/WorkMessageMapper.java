@@ -25,4 +25,8 @@ public interface WorkMessageMapper {
     List<WorkMessageDTO> getTeacherMessageDTOByTeacherId(Integer teacherId, Integer read);
 
     List<WorkMessageDTO> getStudentMessageDTOByStudentId(Integer studentId, Integer read);
+
+    long countTeacherUnreadMessage(Integer teacherId);
+
+    long countStudentUnreadMessage(Integer studentId);
 }

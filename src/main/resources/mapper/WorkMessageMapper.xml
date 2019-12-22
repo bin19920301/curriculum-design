@@ -65,6 +65,26 @@
             AND a.f_receiver_id = #{studentId}
             AND a.f_is_read = #{read}
   </select>
+    <select id="countTeacherUnreadMessage" resultType="java.lang.Long">
+        SELECT
+            count( * )
+        FROM
+            t_work_message
+        WHERE
+            f_is_delete = 0
+            AND f_receiver_type = 2
+            AND f_receiver_id = #{teacherId}
+  </select>
+    <select id="countStudentUnreadMessage" resultType="java.lang.Long">
+        SELECT
+            count( * )
+        FROM
+            t_work_message
+        WHERE
+            f_is_delete = 0
+            AND f_receiver_type = 1
+            AND f_receiver_id = #{studentId}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_work_message
     where f_id = #{id,jdbcType=INTEGER}

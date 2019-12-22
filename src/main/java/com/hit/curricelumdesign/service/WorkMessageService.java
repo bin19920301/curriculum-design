@@ -8,10 +8,7 @@ import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageDTO;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.entity.Work;
 import com.hit.curricelumdesign.context.entity.WorkMessage;
-import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByStudentParam;
-import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByTeacherParam;
-import com.hit.curricelumdesign.context.param.workmessage.GetStudentMessageParam;
-import com.hit.curricelumdesign.context.param.workmessage.GetTeacherMessageParam;
+import com.hit.curricelumdesign.context.param.workmessage.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.WorkMessageMapper;
 import com.hit.curricelumdesign.manager.teaching.TeachingManager;
@@ -20,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author xbr
@@ -108,7 +107,7 @@ public class WorkMessageService {
     }
 
     /**
-     * 获取教师
+     * 获取学生消息
      *
      * @param param
      * @return
@@ -119,5 +118,31 @@ public class WorkMessageService {
         PageInfo<WorkMessageDTO> pageInfo = new PageInfo<>(workMessageDTOList);
         BaseListDTO<WorkMessageDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
         return Result.success(baseListDTO);
+    }
+
+    /**
+     * 获取教师未读消息总数
+     *
+     * @param param
+     * @return
+     */
+    public Result countTeacherUnreadMessage(CountTeacherUnreadMessageParam param) {
+        long total = workMessageMapper.countTeacherUnreadMessage(param.getTeacherId());
+        Map<String, Long> result = new HashMap<>();
+        result.put("total", total);
+        return Result.success(result);
+    }
+
+    /**
+     * 获取学生未读消息总数
+     *
+     * @param param
+     * @return
+     */
+    public Result countStudentUnreadMessage(CountStudentUnreadMessageParam param) {
+        long total = workMessageMapper.countStudentUnreadMessage(param.getStudentId());
+        Map<String, Long> result = new HashMap<>();
+        result.put("total", total);
+        return Result.success(result);
     }
 }

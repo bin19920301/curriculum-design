@@ -1,10 +1,7 @@
 package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
-import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByStudentParam;
-import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByTeacherParam;
-import com.hit.curricelumdesign.context.param.workmessage.GetStudentMessageParam;
-import com.hit.curricelumdesign.context.param.workmessage.GetTeacherMessageParam;
+import com.hit.curricelumdesign.context.param.workmessage.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.WorkMessageMapper;
 import com.hit.curricelumdesign.service.WorkMessageService;
@@ -50,4 +47,16 @@ public class WorkMessageController {
     public Result getStudentMessage(GetStudentMessageParam param) {
         return workMessageService.getStudentMessage(param);
     }
+
+    @RequestMapping(value = "/workmessage/countteacherunreadmessage/", method = RequestMethod.POST)
+    public Result countTeacherUnreadMessage(CountTeacherUnreadMessageParam param) {
+        return workMessageService.countTeacherUnreadMessage(param);
+    }
+
+    @RequestMapping(value = "/workmessage/countstudentunreadmessage/", method = RequestMethod.POST)
+    public Result countStudentUnreadMessage(CountStudentUnreadMessageParam param) {
+        return workMessageService.countStudentUnreadMessage(param);
+    }
+
+
 }
