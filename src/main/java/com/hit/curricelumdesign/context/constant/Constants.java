@@ -40,6 +40,11 @@ public class Constants {
      */
     public static class Work {
 
+        public static class WorkMessage {
+            public static final Integer UNREAD = 0;//未读
+            public static final Integer READ = 1;//已读
+        }
+
         /**
          * 作业状态
          */
@@ -77,10 +82,10 @@ public class Constants {
                 return desc;
             }
 
-            public static String getDescByStat(Integer status){
+            public static String getDescByStat(Integer status) {
                 for (WorkStatus value : WorkStatus.values()) {
-                    if (value.equals(status)){
-                        return  WorkStatus.getDescByStat(status);
+                    if (value.equals(status)) {
+                        return WorkStatus.getDescByStat(status);
                     }
                 }
                 return null;
@@ -103,7 +108,7 @@ public class Constants {
         public static final Integer RECEIVER_TYPE_TEACHER = 2;
     }
 
-    public static class Teaching{
+    public static class Teaching {
         public enum TeachingStatus {
             TEACHING(0, "教学中"),
             CHECKING(1, "批阅中"),
@@ -138,10 +143,10 @@ public class Constants {
                 return desc;
             }
 
-            public static String getDescByStat(Integer status){
+            public static String getDescByStat(Integer status) {
                 for (TeachingStatus value : TeachingStatus.values()) {
-                    if (value.equals(status)){
-                        return  TeachingStatus.getDescByStat(status);
+                    if (value.equals(status)) {
+                        return TeachingStatus.getDescByStat(status);
                     }
                 }
                 return null;

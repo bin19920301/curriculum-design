@@ -132,57 +132,6 @@ public class WorkService {
         return Result.success();
     }
 
-    /**
-     * 教师添加作业消息
-     *
-     * @param param
-     * @return
-     */
-    public Result addMessageByTeacher(AddWorkMessageByTeacherParam param) {
-        Work work = workManager.getWorkerById(param.getWorkId());
-        Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
-        WorkMessage msg = new WorkMessage();
-        msg.setTeachingId(teaching.getId());
-        msg.setWorkId(work.getId());
-        msg.setContent(param.getContent());
-        msg.setIsRead(Constants.Common.IS_NOT);
-        msg.setSenderId(teaching.getTeacherId());
-        msg.setSenderType(Constants.WorkMessage.SENDER_TYPE_TEACHER);
-        msg.setReceiverId(work.getStudentId());
-        msg.setReceiverType(Constants.WorkMessage.RECEIVER_TYPE_STUDENT);
-        Date now = new Date();
-        msg.setCreatetime(now);
-        msg.setUpdatetime(now);
-        msg.setIsDelete(Constants.Common.IS_NOT);
-        workMessageMapper.insert(msg);
-        return Result.success();
-    }
-
-    /**
-     * 学生添加作业消息
-     *
-     * @param param
-     * @return
-     */
-    public Result addMessageByStudent(AddWorkMessageByStudentParam param) {
-        Work work = workManager.getWorkerById(param.getWorkId());
-        Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
-        WorkMessage msg = new WorkMessage();
-        msg.setTeachingId(teaching.getId());
-        msg.setWorkId(work.getId());
-        msg.setContent(param.getContent());
-        msg.setIsRead(Constants.Common.IS_NOT);
-        msg.setSenderId(work.getStudentId());
-        msg.setSenderType(Constants.WorkMessage.SENDER_TYPE_STUDENT);
-        msg.setReceiverId(teaching.getTeacherId());
-        msg.setReceiverType(Constants.WorkMessage.RECEIVER_TYPE_TEACHER);
-        Date now = new Date();
-        msg.setCreatetime(now);
-        msg.setUpdatetime(now);
-        msg.setIsDelete(Constants.Common.IS_NOT);
-        workMessageMapper.insert(msg);
-        return Result.success();
-    }
 
     /**
      * 添加工艺卡片列表

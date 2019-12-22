@@ -39,19 +39,6 @@ public class WorkController {
         return workService.returnWork(param);
     }
 
-
-    @RequestMapping(value = "/work/addmessagebyteacher/", method = RequestMethod.POST)
-    @HitApi(checkTeacherLogin = true)
-    public Result addMessageByTeacher(AddWorkMessageByTeacherParam param) {
-        return workService.addMessageByTeacher(param);
-    }
-
-    @RequestMapping(value = "/work/addmessagebystudent/", method = RequestMethod.POST)
-    @HitApi(checkStudentLogin = true)
-    public Result addMessageByStudent(AddWorkMessageByStudentParam param) {
-        return workService.addMessageByStudent(param);
-    }
-
     @RequestMapping(value = "/work/addcraftcardlist/", method = RequestMethod.POST)
     @HitApi(checkStudentLogin = true)
     public Result addCraftCardList(@RequestBody AddCraftCardListParam param) {

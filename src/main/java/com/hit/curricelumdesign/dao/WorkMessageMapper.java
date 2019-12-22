@@ -1,8 +1,11 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageDTO;
 import com.hit.curricelumdesign.context.entity.WorkMessage;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -18,4 +21,8 @@ public interface WorkMessageMapper {
     int updateByPrimaryKeySelective(WorkMessage record);
 
     int updateByPrimaryKey(WorkMessage record);
+
+    List<WorkMessageDTO> getTeacherMessageDTOByTeacherId(Integer teacherId, Integer read);
+
+    List<WorkMessageDTO> getStudentMessageDTOByStudentId(Integer studentId, Integer read);
 }
