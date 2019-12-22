@@ -1,158 +1,165 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hit.curricelumdesign.dao.CraftCardMapper" >
-  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.CraftCard" >
-    <id column="f_id" property="id" jdbcType="INTEGER" />
-    <result column="f_work_id" property="workId" jdbcType="INTEGER" />
-    <result column="f_surface_id" property="surfaceId" jdbcType="INTEGER" />
-    <result column="f_processing_method_id" property="processingMethodId" jdbcType="INTEGER" />
-    <result column="f_process _content" property="processContent" jdbcType="VARCHAR" />
-    <result column="f_sort" property="sort" jdbcType="INTEGER" />
-    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
-    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
-    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
-    <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    f_id, f_work_id, f_surface_id, f_processing_method_id, "f_process _content", f_sort, 
+<mapper namespace="com.hit.curricelumdesign.dao.CraftCardMapper">
+    <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.CraftCard">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_work_id" property="workId" jdbcType="INTEGER"/>
+        <result column="f_surface_id" property="surfaceId" jdbcType="INTEGER"/>
+        <result column="f_processing_method_id" property="processingMethodId" jdbcType="INTEGER"/>
+        <result column="f_process_content" property="processContent" jdbcType="VARCHAR"/>
+        <result column="f_sort" property="sort" jdbcType="INTEGER"/>
+        <result column="f_is_delete" property="isDelete" jdbcType="BIT"/>
+        <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
+        <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="f_updater_id" property="updaterId" jdbcType="INTEGER"/>
+        <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    f_id, f_work_id, f_surface_id, f_processing_method_id, f_process_content, f_sort,
     f_is_delete, f_creator_id, f_createtime, f_updater_id, f_updatetime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_craft_card
-    where f_id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_craft_card
+        where f_id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getCraftCardListByWorkId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_craft_card
+        where f_is_delete = 0
+        and f_work_id = #{workId}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_craft_card
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.CraftCard" >
-    insert into t_craft_card (f_id, f_work_id, f_surface_id, 
-      f_processing_method_id, "f_process _content", f_sort, 
-      f_is_delete, f_creator_id, f_createtime, 
+    <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.CraftCard">
+    insert into t_craft_card (f_id, f_work_id, f_surface_id,
+      f_processing_method_id, f_process_content, f_sort,
+      f_is_delete, f_creator_id, f_createtime,
       f_updater_id, f_updatetime)
-    values (#{id,jdbcType=INTEGER}, #{workId,jdbcType=INTEGER}, #{surfaceId,jdbcType=INTEGER}, 
-      #{processingMethodId,jdbcType=INTEGER}, #{processContent,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
-      #{isDelete,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{workId,jdbcType=INTEGER}, #{surfaceId,jdbcType=INTEGER},
+      #{processingMethodId,jdbcType=INTEGER}, #{processContent,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER},
+      #{isDelete,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP},
       #{updaterId,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.CraftCard" >
-    insert into t_craft_card
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        f_id,
-      </if>
-      <if test="workId != null" >
-        f_work_id,
-      </if>
-      <if test="surfaceId != null" >
-        f_surface_id,
-      </if>
-      <if test="processingMethodId != null" >
-        f_processing_method_id,
-      </if>
-      <if test="processContent != null" >
-        "f_process _content",
-      </if>
-      <if test="sort != null" >
-        f_sort,
-      </if>
-      <if test="isDelete != null" >
-        f_is_delete,
-      </if>
-      <if test="creatorId != null" >
-        f_creator_id,
-      </if>
-      <if test="createtime != null" >
-        f_createtime,
-      </if>
-      <if test="updaterId != null" >
-        f_updater_id,
-      </if>
-      <if test="updatetime != null" >
-        f_updatetime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="workId != null" >
-        #{workId,jdbcType=INTEGER},
-      </if>
-      <if test="surfaceId != null" >
-        #{surfaceId,jdbcType=INTEGER},
-      </if>
-      <if test="processingMethodId != null" >
-        #{processingMethodId,jdbcType=INTEGER},
-      </if>
-      <if test="processContent != null" >
-        #{processContent,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null" >
-        #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="isDelete != null" >
-        #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="creatorId != null" >
-        #{creatorId,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null" >
-        #{updaterId,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null" >
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.CraftCard" >
-    update t_craft_card
-    <set >
-      <if test="workId != null" >
-        f_work_id = #{workId,jdbcType=INTEGER},
-      </if>
-      <if test="surfaceId != null" >
-        f_surface_id = #{surfaceId,jdbcType=INTEGER},
-      </if>
-      <if test="processingMethodId != null" >
-        f_processing_method_id = #{processingMethodId,jdbcType=INTEGER},
-      </if>
-      <if test="processContent != null" >
-        "f_process _content" = #{processContent,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null" >
-        f_sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="isDelete != null" >
-        f_is_delete = #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="creatorId != null" >
-        f_creator_id = #{creatorId,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        f_createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null" >
-        f_updater_id = #{updaterId,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null" >
-        f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where f_id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.CraftCard" >
+    <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.CraftCard">
+        insert into t_craft_card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                f_id,
+            </if>
+            <if test="workId != null">
+                f_work_id,
+            </if>
+            <if test="surfaceId != null">
+                f_surface_id,
+            </if>
+            <if test="processingMethodId != null">
+                f_processing_method_id,
+            </if>
+            <if test="processContent != null">
+                f_process_content,
+            </if>
+            <if test="sort != null">
+                f_sort,
+            </if>
+            <if test="isDelete != null">
+                f_is_delete,
+            </if>
+            <if test="creatorId != null">
+                f_creator_id,
+            </if>
+            <if test="createtime != null">
+                f_createtime,
+            </if>
+            <if test="updaterId != null">
+                f_updater_id,
+            </if>
+            <if test="updatetime != null">
+                f_updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="workId != null">
+                #{workId,jdbcType=INTEGER},
+            </if>
+            <if test="surfaceId != null">
+                #{surfaceId,jdbcType=INTEGER},
+            </if>
+            <if test="processingMethodId != null">
+                #{processingMethodId,jdbcType=INTEGER},
+            </if>
+            <if test="processContent != null">
+                #{processContent,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="creatorId != null">
+                #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaterId != null">
+                #{updaterId,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.CraftCard">
+        update t_craft_card
+        <set>
+            <if test="workId != null">
+                f_work_id = #{workId,jdbcType=INTEGER},
+            </if>
+            <if test="surfaceId != null">
+                f_surface_id = #{surfaceId,jdbcType=INTEGER},
+            </if>
+            <if test="processingMethodId != null">
+                f_processing_method_id = #{processingMethodId,jdbcType=INTEGER},
+            </if>
+            <if test="processContent != null">
+                f_process_content = #{processContent,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                f_sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                f_is_delete = #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="creatorId != null">
+                f_creator_id = #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                f_createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaterId != null">
+                f_updater_id = #{updaterId,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where f_id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.CraftCard">
     update t_craft_card
     set f_work_id = #{workId,jdbcType=INTEGER},
       f_surface_id = #{surfaceId,jdbcType=INTEGER},
       f_processing_method_id = #{processingMethodId,jdbcType=INTEGER},
-      "f_process _content" = #{processContent,jdbcType=VARCHAR},
+      f_process_content = #{processContent,jdbcType=VARCHAR},
       f_sort = #{sort,jdbcType=INTEGER},
       f_is_delete = #{isDelete,jdbcType=BIT},
       f_creator_id = #{creatorId,jdbcType=INTEGER},
