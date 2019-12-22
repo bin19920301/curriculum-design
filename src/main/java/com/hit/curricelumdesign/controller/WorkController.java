@@ -39,11 +39,18 @@ public class WorkController {
         return workService.returnWork(param);
     }
 
+    @RequestMapping(value = "/work/submit/", method = RequestMethod.POST)
+    @HitApi(checkStudentLogin = true)
+    public Result submitWork(WorkBaseParam param) {
+        return workService.submitWork(param);
+    }
+
     @RequestMapping(value = "/work/addcraftcardlist/", method = RequestMethod.POST)
     @HitApi(checkStudentLogin = true)
     public Result addCraftCardList(@RequestBody AddCraftCardListParam param) {
         return workService.addCraftCardList(param);
     }
+
 
 
 }

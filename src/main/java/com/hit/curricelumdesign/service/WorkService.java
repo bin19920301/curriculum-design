@@ -206,4 +206,24 @@ public class WorkService {
         craftCard.setUpdatetime(now);
         return craftCard;
     }
+
+    /**
+     * 提交作业
+     *
+     * @param param
+     * @return
+     */
+    public Result submitWork(WorkBaseParam param) {
+        Work work = workManager.getWorkerById(param.getId());
+        if (work.getStatus().compareTo(Constants.Work.WorkStatus.SUBMIT.getStatus()) == 0) {
+            throw new BaseException(Error.WORK_IS_SUBMIT);
+        }
+        if (work.getStatus().compareTo(Constants.Work.WorkStatus.DONE.getStatus()) == 0) {
+            throw new BaseException(Error.WORK_IS_DONE);
+        }
+        work.setStatus(Constants.Work.WorkStatus.SUBMIT.getStatus());
+        work.setUpdatetime(new Date());
+        workMapper.updateByPrimaryKey(work);
+        return Result.success();
+    }
 }
