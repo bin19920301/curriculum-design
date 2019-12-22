@@ -13,6 +13,7 @@ import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.WorkMessageMapper;
 import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
+import com.hit.curricelumdesign.manager.workmessage.WorkMessageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,9 @@ public class WorkMessageService {
 
     @Autowired
     private WorkMessageMapper workMessageMapper;
+
+    @Autowired
+    private WorkMessageManager workMessageManager;
 
     @Autowired
     private WorkManager workManager;
@@ -144,5 +148,33 @@ public class WorkMessageService {
         Map<String, Long> result = new HashMap<>();
         result.put("total", total);
         return Result.success(result);
+    }
+
+    /**
+     * 删除教师消息
+     *
+     * @param param
+     * @return
+     */
+    public Result deleteTeahcerMessage(WorkMessageBaseParam param) {
+        WorkMessage workMessage = workMessageManager.getWorkMessageById(param.getId());
+        workMessage.setIsDelete(Constants.Common.IS_YES);
+        workMessage.setUpdatetime(new Date());
+        workMessageMapper.updateByPrimaryKey(workMessage);
+        return Result.success();
+    }
+
+    /**
+     * 删除学生信息
+     *
+     * @param param
+     * @return
+     */
+    public Result deleteStudentMessage(WorkMessageBaseParam param) {
+        WorkMessage workMessage = workMessageManager.getWorkMessageById(param.getId());
+        workMessage.setIsDelete(Constants.Common.IS_YES);
+        workMessage.setUpdatetime(new Date());
+        workMessageMapper.updateByPrimaryKey(workMessage);
+        return Result.success();
     }
 }

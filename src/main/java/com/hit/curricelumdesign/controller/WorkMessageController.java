@@ -58,5 +58,14 @@ public class WorkMessageController {
         return workMessageService.countStudentUnreadMessage(param);
     }
 
+    @RequestMapping(value = "/workmessage/deleteteahcermessage/", method = RequestMethod.POST)
+    public Result deleteTeahcerMessage(WorkMessageBaseParam param) {
+        return workMessageService.deleteTeahcerMessage(param);
+    }
+    @RequestMapping(value = "/workmessage/deletestudentmessage/", method = RequestMethod.POST)
+    public Result deleteStudentMessage(WorkMessageBaseParam param) {
+        return workMessageService.deleteStudentMessage(param);
+    }
+
 
 }
