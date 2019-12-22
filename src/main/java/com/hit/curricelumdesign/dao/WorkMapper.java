@@ -25,4 +25,6 @@ public interface WorkMapper {
     List<Work> selectByParams(Integer teachingId,Integer studentId,Integer workProjectId);
 
     List<WorkForTeacherDTO> selectByTeachingId(Integer teachingId);
+
+    Long countStudentsByTeachingId(Integer teachingId);
 }

@@ -204,6 +204,12 @@
     left join t_academy ta on ts.f_academy_id = ta.f_id
     left join t_enrollment_year te on ts.f_enrollment_id = te.f_id
     left join t_class tc on ts.f_class_id = tc.f_id
+    where tw.f_is_delete = false and tw.f_teaching_id = #{teachingId,jdbcType=INTEGER}
+</select>
+<select id="countStudentsByTeachingId" resultType="java.lang.Long">
+    select
+        count(*)
+    from t_work
     where f_is_delete = false and f_teaching_id = #{teachingId,jdbcType=INTEGER}
 </select>
 </mapper>

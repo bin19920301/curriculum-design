@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TeachingDTO {
+
     /**
      * 主键id
      */
@@ -15,6 +16,11 @@ public class TeachingDTO {
      * 教学名称
      */
     private String name;
+
+    /**
+     * 参与学生人数
+     */
+    private Long studentCount;
 
     /**
      * 教师提示
@@ -134,5 +140,13 @@ public class TeachingDTO {
 
     public void setStatusDescribe(String statusDescribe) {
         this.statusDescribe = statusDescribe;
+    }
+
+    public Long getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(Long studentCount) {
+        this.studentCount = studentCount;
     }
 }

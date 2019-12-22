@@ -1,10 +1,13 @@
 package com.hit.curricelumdesign.context.param.teaching;
 
+import javax.validation.constraints.NotNull;
+
 public class ConditionTeachingParam {
 
     /**
      * 当前教师id
      */
+    @NotNull
     private Integer teacherId;
 
     /**
