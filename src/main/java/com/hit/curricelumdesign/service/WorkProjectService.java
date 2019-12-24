@@ -210,4 +210,18 @@ public class WorkProjectService {
 
         return Result.success();
     }
+
+    /**
+     * 获取全部作业项目
+     * @return
+     */
+    public Result getAllWorkProjectList() {
+        List<WorkProjectListDTO> workProjectListDTOList = workProjectMapper.getWorkProjectList();
+        for (WorkProjectListDTO workProjectListDTO : workProjectListDTOList) {
+            List<String> fileNameList = fileMapper.getFileNameByWorkProjectId(workProjectListDTO.getId());
+            workProjectListDTO.setFileName(fileNameList);
+        }
+        BaseListDTO<WorkProjectListDTO> baseListDTO = new BaseListDTO<>(workProjectListDTOList.size(), workProjectListDTOList);
+        return Result.success(baseListDTO);
+    }
 }

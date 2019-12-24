@@ -52,5 +52,10 @@ public class WorkController {
     }
 
 
+    @RequestMapping(value = "/work/getworkinfobyid/", method = RequestMethod.POST)
+    public Result getWorkInfoById(WorkBaseParam param) {
+        return workService.getWorkInfoById(param);
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.dto.teaching.TeachingInfoDTO;
 import com.hit.curricelumdesign.context.dto.teaching.TeachingListDTO;
+import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -28,5 +29,7 @@ public interface TeachingMapper {
     List<TeachingListDTO> getTeachingDTOByCreatorIdAndStatus(Integer creatorId, Integer status);
 
     TeachingListDTO selectByName(String name);
+
+    WorkTeachingDTO getWorkTeachingDTOById(Integer teachingId);
 
 }

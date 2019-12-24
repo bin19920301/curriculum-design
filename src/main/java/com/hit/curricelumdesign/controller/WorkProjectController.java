@@ -34,6 +34,11 @@ public class WorkProjectController {
         return workProjectService.getWorkProjectList(param);
     }
 
+    @RequestMapping(value = "/workproject/getallworkprojectlist/", method = RequestMethod.POST)
+    public Result getAllWorkProjectList() {
+        return workProjectService.getAllWorkProjectList();
+    }
+
 
     @RequestMapping(value = "/workproject/getworkprojectinfo/", method = RequestMethod.POST)
     public Result getWorkProjectInfo(GetWorkProjectInfoParam param) {

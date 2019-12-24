@@ -1,6 +1,10 @@
 package com.hit.curricelumdesign.service;
 
 import com.hit.curricelumdesign.context.constant.Constants;
+import com.hit.curricelumdesign.context.dto.file.FileListDTO;
+import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
+import com.hit.curricelumdesign.context.dto.work.WorkInfoDTO;
+import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoDTO;
 import com.hit.curricelumdesign.context.entity.CraftCard;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.entity.Work;
@@ -12,9 +16,7 @@ import com.hit.curricelumdesign.context.param.work.WorkBaseParam;
 import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByStudentParam;
 import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByTeacherParam;
 import com.hit.curricelumdesign.context.response.Result;
-import com.hit.curricelumdesign.dao.CraftCardMapper;
-import com.hit.curricelumdesign.dao.WorkMapper;
-import com.hit.curricelumdesign.dao.WorkMessageMapper;
+import com.hit.curricelumdesign.dao.*;
 import com.hit.curricelumdesign.manager.craftcard.CraftCardManager;
 import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
@@ -50,6 +52,14 @@ public class WorkService {
     @Autowired
     private CraftCardMapper craftCardMapper;
 
+    @Autowired
+    private TeachingMapper teachingMapper;
+
+    @Autowired
+    private WorkProjectMapper workProjectMapper;
+
+    @Autowired
+    private FileMapper fileMapper;
 
     public Result addWork(AddWorkParam workParam) {
         Work work = new Work();
@@ -224,6 +234,30 @@ public class WorkService {
         work.setStatus(Constants.Work.WorkStatus.SUBMIT.getStatus());
         work.setUpdatetime(new Date());
         workMapper.updateByPrimaryKey(work);
+        return Result.success();
+    }
+
+    /**
+     * 获取作业详情
+     *
+     * @param param
+     * @return
+     */
+    public Result getWorkInfoById(WorkBaseParam param) {
+        WorkInfoDTO workInfoDTO = new WorkInfoDTO();
+        Work work = workManager.getWorkerById(param.getId());
+        WorkTeachingDTO workTeachingDTO = teachingMapper.getWorkTeachingDTOById(work.getTeachingId());
+        if (null == workTeachingDTO) {
+            throw new BaseException(Error.TEACHING_IS_NOT_EXIST);
+        }
+        WorkProjectInfoDTO workProjectInfoDTO = workProjectMapper.getWorkProjectInfoById(work.getWorkProjectId());
+        if (null == workProjectInfoDTO) {
+            throw new BaseException(Error.WORK_PROJECT_IS_NOT_EXIST);
+        }
+        List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectId(workProjectInfoDTO.getId());
+        workProjectInfoDTO.setFilelist(fileListDTOList);
+
+
         return Result.success();
     }
 }

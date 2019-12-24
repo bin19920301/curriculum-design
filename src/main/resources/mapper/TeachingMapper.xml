@@ -15,17 +15,17 @@
         <result column="f_updater_id" property="updaterId" jdbcType="INTEGER"/>
     </resultMap>
     <resultMap id="InfoDTOResultMap" type="com.hit.curricelumdesign.context.dto.teaching.TeachingInfoDTO">
-    <id column="f_id" property="id" jdbcType="INTEGER"/>
-    <result column="f_teacher_id" property="teacherId" jdbcType="INTEGER"/>
-    <result column="f_name" property="name" jdbcType="VARCHAR"/>
-    <result column="f_teacher_reminder" property="teacherReminder" jdbcType="VARCHAR"/>
-    <result column="f_deadline_time" property="deadlineTime" jdbcType="TIMESTAMP"/>
-    <result column="f_status" property="status" jdbcType="INTEGER"/>
-    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
-    <result column="teacherName" property="teacherName" />
-    <collection property="workForTeacherDTOList"
-                column="f_id" select="com.hit.curricelumdesign.dao.WorkMapper.selectByTeachingId"></collection>
-</resultMap>
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_teacher_id" property="teacherId" jdbcType="INTEGER"/>
+        <result column="f_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_teacher_reminder" property="teacherReminder" jdbcType="VARCHAR"/>
+        <result column="f_deadline_time" property="deadlineTime" jdbcType="TIMESTAMP"/>
+        <result column="f_status" property="status" jdbcType="INTEGER"/>
+        <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
+        <result column="teacherName" property="teacherName"/>
+        <collection property="workForTeacherDTOList"
+                    column="f_id" select="com.hit.curricelumdesign.dao.WorkMapper.selectByTeachingId"></collection>
+    </resultMap>
     <resultMap id="ListDTOResultMap" type="com.hit.curricelumdesign.context.dto.teaching.TeachingListDTO">
         <id column="f_id" property="id" jdbcType="INTEGER"/>
         <result column="f_teacher_id" property="teacherId" jdbcType="INTEGER"/>
@@ -34,7 +34,16 @@
         <result column="f_deadline_time" property="deadlineTime" jdbcType="TIMESTAMP"/>
         <result column="f_status" property="status" jdbcType="INTEGER"/>
         <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
-        <result column="teacherName" property="teacherName" />
+        <result column="teacherName" property="teacherName"/>
+    </resultMap>
+    <resultMap id="WorkTeachingDTOMap" type="com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_teacher_id" property="teacherId" jdbcType="INTEGER"/>
+        <result column="f_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_teacher_reminder" property="teacherReminder" jdbcType="VARCHAR"/>
+        <result column="f_deadline_time" property="deadlineTime" jdbcType="TIMESTAMP"/>
+        <result column="f_status" property="status" jdbcType="INTEGER"/>
+        <result column="teacherName" property="teacherName"/>
     </resultMap>
     <sql id="Base_Column_List">
     f_id, f_teacher_id, f_name, "f_teacher_reminder", f_deadline_time, f_status, f_is_delete,
@@ -51,7 +60,8 @@
     delete from t_teaching
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert"  useGeneratedKeys="true" keyProperty="id" parameterType="com.hit.curricelumdesign.context.entity.Teaching">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.hit.curricelumdesign.context.entity.Teaching">
     insert into t_teaching (f_id, f_teacher_id, f_name,
       f_teacher_reminder, f_deadline_time, f_status,
       f_is_delete, f_createtime, f_creator_id,
@@ -184,7 +194,7 @@
       f_updater_id = #{updaterId,jdbcType=INTEGER}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectById" resultMap="InfoDTOResultMap" parameterType="java.lang.Integer">
+    <select id="selectById" resultMap="InfoDTOResultMap" parameterType="java.lang.Integer">
     select
      tt.f_id, tt.f_teacher_id, tt.f_name, tt.f_teacher_reminder, tt.f_deadline_time, tt.f_status,
      tt.f_creator_id,
@@ -193,7 +203,7 @@
     left join t_teacher te on tt.f_teacher_id = te.f_id
     where tt.f_id = #{id,jdbcType=INTEGER} and tt.f_is_delete = false
   </select>
-  <select id="selectByName" resultMap="ListDTOResultMap">
+    <select id="selectByName" resultMap="ListDTOResultMap">
     select
      tt.f_id, tt.f_teacher_id, tt.f_name, tt.f_teacher_reminder, tt.f_deadline_time, tt.f_status,
      tt.f_creator_id,
@@ -202,19 +212,29 @@
     left join t_teacher te on tt.f_teacher_id = te.f_id
     where tt.f_name = #{name} and tt.f_is_delete = false
   </select>
-  <select id="getTeachingDTOByCreatorIdAndStatus" resultMap="ListDTOResultMap">
-    select
-     tt.f_id, tt.f_teacher_id, tt.f_name, tt.f_teacher_reminder, tt.f_deadline_time, tt.f_status,
-     tt.f_creator_id,
-     te.f_name as teacherName
-    from t_teaching  tt
-    left join t_teacher te on tt.f_teacher_id = te.f_id
-    where tt.f_creator_id = #{creatorId} and tt.f_is_delete = false
-      <if test="status == 0">
-          and tt.f_status != 3
-      </if>
-      <if test="status == 1">
-          and tt.f_status = 3
-      </if>
-  </select>
+    <select id="getTeachingDTOByCreatorIdAndStatus" resultMap="ListDTOResultMap">
+        select
+        tt.f_id, tt.f_teacher_id, tt.f_name, tt.f_teacher_reminder, tt.f_deadline_time, tt.f_status,
+        tt.f_creator_id,
+        te.f_name as teacherName
+        from t_teaching tt
+        left join t_teacher te on tt.f_teacher_id = te.f_id
+        where tt.f_creator_id = #{creatorId} and tt.f_is_delete = false
+        <if test="status == 0">
+            and tt.f_status != 3
+        </if>
+        <if test="status == 1">
+            and tt.f_status = 3
+        </if>
+    </select>
+    <select id="getWorkTeachingDTOById" resultMap="WorkTeachingDTOMap">
+        select
+         tt.f_id, tt.f_teacher_id, tt.f_name, tt.f_teacher_reminder, tt.f_deadline_time, tt.f_status,
+         tt.f_creator_id,
+         te.f_name as teacherName
+        from t_teaching  tt
+        left join t_teacher te on tt.f_teacher_id = te.f_id
+        where tt.f_name = #{name} and tt.f_is_delete = false
+    </select>
+
 </mapper>
