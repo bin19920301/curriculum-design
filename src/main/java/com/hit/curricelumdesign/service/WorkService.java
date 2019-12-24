@@ -1,14 +1,15 @@
 package com.hit.curricelumdesign.service;
 
 import com.hit.curricelumdesign.context.constant.Constants;
+import com.hit.curricelumdesign.context.dto.craftcard.CraftCardInfoDTO;
 import com.hit.curricelumdesign.context.dto.file.FileListDTO;
+import com.hit.curricelumdesign.context.dto.student.StudentDTO;
+import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
 import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoDTO;
+import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoDTO;
-import com.hit.curricelumdesign.context.entity.CraftCard;
-import com.hit.curricelumdesign.context.entity.Teaching;
-import com.hit.curricelumdesign.context.entity.Work;
-import com.hit.curricelumdesign.context.entity.WorkMessage;
+import com.hit.curricelumdesign.context.entity.*;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.work.*;
@@ -18,6 +19,8 @@ import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByTeache
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.*;
 import com.hit.curricelumdesign.manager.craftcard.CraftCardManager;
+import com.hit.curricelumdesign.manager.student.StudentManager;
+import com.hit.curricelumdesign.manager.teacher.TeacherManager;
 import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
@@ -60,6 +63,12 @@ public class WorkService {
 
     @Autowired
     private FileMapper fileMapper;
+
+    @Autowired
+    private TeacherManager teacherManager;
+
+    @Autowired
+    private StudentManager studentManager;
 
     public Result addWork(AddWorkParam workParam) {
         Work work = new Work();
@@ -245,19 +254,42 @@ public class WorkService {
      */
     public Result getWorkInfoById(WorkBaseParam param) {
         WorkInfoDTO workInfoDTO = new WorkInfoDTO();
+
         Work work = workManager.getWorkerById(param.getId());
+        workInfoDTO.setWorkId(work.getId());
         WorkTeachingDTO workTeachingDTO = teachingMapper.getWorkTeachingDTOById(work.getTeachingId());
         if (null == workTeachingDTO) {
             throw new BaseException(Error.TEACHING_IS_NOT_EXIST);
         }
+
         WorkProjectInfoDTO workProjectInfoDTO = workProjectMapper.getWorkProjectInfoById(work.getWorkProjectId());
         if (null == workProjectInfoDTO) {
             throw new BaseException(Error.WORK_PROJECT_IS_NOT_EXIST);
         }
+
         List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectId(workProjectInfoDTO.getId());
         workProjectInfoDTO.setFilelist(fileListDTOList);
 
+        workInfoDTO.setTeaching(workTeachingDTO);
 
-        return Result.success();
+        workInfoDTO.setWorkProjectInfoDTO(workProjectInfoDTO);
+
+        List<CraftCardInfoDTO> craftCardInfoDTOList = craftCardMapper.getCraftCardInfoDTOListByWorkId(work.getId());
+        workInfoDTO.setCraftCardInfoDTOList(craftCardInfoDTOList);
+        TeacherDTO teacher = teacherManager.getTeacherById(workTeachingDTO.getTeacherId());
+        StudentDTO student = studentManager.getStudentById(work.getStudentId());
+        workInfoDTO.setStudentName(student.getName());
+        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId());
+        for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
+            if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                message.setSenderName(student.getName());
+            } else if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                message.setSenderName(teacher.getName());
+            }
+
+        }
+        workInfoDTO.setWorkMessageInfoDTOList(workMessageInfoDTOList);
+
+        return Result.success(workInfoDTO);
     }
 }

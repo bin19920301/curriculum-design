@@ -1,6 +1,7 @@
 package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageDTO;
+import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.entity.WorkMessage;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,6 @@ public interface WorkMessageMapper {
     long countTeacherUnreadMessage(Integer teacherId);
 
     long countStudentUnreadMessage(Integer studentId);
+
+    List<WorkMessageInfoDTO> getWorkMessageInfoDTOByWorkId(Integer workId);
 }

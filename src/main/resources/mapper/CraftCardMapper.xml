@@ -31,6 +31,28 @@
         where f_is_delete = 0
         and f_work_id = #{workId}
     </select>
+    <select id="getCraftCardInfoDTOListByWorkId"
+            resultType="com.hit.curricelumdesign.context.dto.craftcard.CraftCardInfoDTO">
+        select
+            a.f_id as 'id',
+            a.f_surface_id as 'surfaceId',
+            b.f_name as 'surfaceName',
+            a.f_processing_method_id as 'processingMethodId',
+            c.f_name as 'processingMethodName',
+            a.f_process_content as 'processContent',
+            a.f_sort as 'sort'
+        from t_craft_card a
+        left join
+            t_surface b
+        on a.f_surface_id = b.f_id
+        left join
+            t_processing_method c
+        on a.f_processing_method_id = c.f_id
+        where a.f_is_delete = 0
+        and b.f_is_delete = 0
+        and c.f_is_delete = 0
+        and a.f_work_id = #{workId}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_craft_card
     where f_id = #{id,jdbcType=INTEGER}

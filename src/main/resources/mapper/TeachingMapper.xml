@@ -234,7 +234,7 @@
          te.f_name as teacherName
         from t_teaching  tt
         left join t_teacher te on tt.f_teacher_id = te.f_id
-        where tt.f_name = #{name} and tt.f_is_delete = false
+        where tt.f_id = #{teachingId} and tt.f_is_delete = false
     </select>
 
 </mapper>

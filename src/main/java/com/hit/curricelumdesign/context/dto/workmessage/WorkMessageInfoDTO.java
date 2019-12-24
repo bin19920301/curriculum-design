@@ -28,6 +28,11 @@ public class WorkMessageInfoDTO {
     private Integer senderId;
 
     /**
+     * 发送者名称
+     */
+    private String senderName;
+
+    /**
      * 消息发送者的用户类型，1为学生，2为教师
      */
     private Integer senderType;
@@ -56,6 +61,14 @@ public class WorkMessageInfoDTO {
         this.senderId = senderId;
     }
 
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
     public Integer getSenderType() {
         return senderType;
     }
@@ -70,6 +83,7 @@ public class WorkMessageInfoDTO {
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", senderId=" + senderId +
+                ", senderName='" + senderName + '\'' +
                 ", senderType=" + senderType +
                 '}';
     }

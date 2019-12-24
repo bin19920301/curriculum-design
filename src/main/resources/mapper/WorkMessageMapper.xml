@@ -15,6 +15,12 @@
         <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
         <result column="f_is_delete" property="isDelete" jdbcType="BIT"/>
     </resultMap>
+    <resultMap id="WorkMessageInfoDTOMap" type="com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_content" property="content" jdbcType="VARCHAR"/>
+        <result column="f_sender_id" property="senderId" jdbcType="INTEGER"/>
+        <result column="f_sender_type" property="senderType" jdbcType="INTEGER"/>
+    </resultMap>
     <sql id="Base_Column_List">
     f_id, f_teaching_id, f_work_id, f_content, f_is_read, f_sender_id, f_sender_type,
     f_receiver_id, f_receiver_type, f_createtime, f_updatetime, f_is_delete
@@ -84,6 +90,19 @@
             f_is_delete = 0
             AND f_receiver_type = 1
             AND f_receiver_id = #{studentId}
+    </select>
+    <select id="getWorkMessageInfoDTOByWorkId"
+            resultMap="WorkMessageInfoDTOMap">
+        select
+            f_id,
+            f_content,
+            f_sender_id,
+            f_sender_type
+        FROM
+            t_work_message
+        WHERE
+            f_is_delete = 0
+            AND f_work_id = #{workId}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_work_message
