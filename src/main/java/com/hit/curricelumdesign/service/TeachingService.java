@@ -48,29 +48,31 @@ public class TeachingService {
 
     /**
      * 教学信息详情展示
+     *
      * @param teachingParam
      * @return
      */
     public Result getTeachingById(GetTeachingParam teachingParam) {
         //这里是详情展示的详细操作
         TeachingInfoDTO infoDTO = teachingManager.getTeachingDTOById(teachingParam.getId());
-        return  Result.success(this.setStatusDescribeAndStudentCountAndWorkStatus(infoDTO));
+        return Result.success(this.setStatusDescribeAndStudentCountAndWorkStatus(infoDTO));
     }
 
     /**
      * 增加教学信息
+     *
      * @param teachingParam
      * @return
      */
-    public Result addTeaching(AddTeachingParam teachingParam){
-        if (null != teachingMapper.selectByName(teachingParam.getName())){
+    public Result addTeaching(AddTeachingParam teachingParam) {
+        if (null != teachingMapper.selectByName(teachingParam.getName())) {
             throw new BaseException(Error.TEACHING_NAME_IS_EXIST);
         }
-        if (teachingParam.getTeacherReminder().length() > 500){
+        if (teachingParam.getTeacherReminder().length() > 500) {
             throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
         }
         Teaching teaching = new Teaching();
-        BeanUtil.copyProperties(teachingParam,teaching);
+        BeanUtil.copyProperties(teachingParam, teaching);
         teaching.setCreatorId(1);
         teaching.setCreatetime(new Date());
         teaching.setTeacherId(1);
@@ -82,10 +84,10 @@ public class TeachingService {
         //获取保存之后的教学Id
         teachingMapper.insert(teaching);
         int currentTeachingId = teaching.getId();
-                //这里应该增加保存作业相关操作,未完成
+        //这里应该增加保存作业相关操作,未完成
         List<StudentWorkProjectParam> works = teachingParam.getWorks();
         for (int i = 0; i < works.size(); i++) {
-            StudentWorkProjectParam studentWorkProjectParam =  works.get(i);
+            StudentWorkProjectParam studentWorkProjectParam = works.get(i);
             AddWorkBO workBO = new AddWorkBO();
             //设置教学id
             workBO.setTeachingId(currentTeachingId);
@@ -101,49 +103,50 @@ public class TeachingService {
 
     /**
      * 更新教学信息
+     *
      * @param teachingParam
      * @return
      */
-    public Result updateTeaching(UpdateTeachingParam teachingParam){
-        if (teachingParam.getTeacherReminder().length() > 500){
+    public Result updateTeaching(UpdateTeachingParam teachingParam) {
+        if (teachingParam.getTeacherReminder().length() > 500) {
             throw new BaseException(Error.TEACHER_REMINDER_OVER_LENGTH);
         }
         Teaching teaching = new Teaching();
-        BeanUtil.copyProperties(teachingParam,teaching);
+        BeanUtil.copyProperties(teachingParam, teaching);
         teaching.setUpdaterId(2);
         teaching.setUpdatetime(new Date());
         teachingMapper.updateByPrimaryKeySelective(teaching);
         //这里应该有更新作业相关操做，未完成
         Integer currentTeachingId = teachingParam.getId();
         //先查找出没有更新前教学所有的作业项目
-        List<Work> oldWorkList = workMapper.selectByParams(currentTeachingId, null, null);
+        List<Work> oldWorkList = workMapper.selectByParams(currentTeachingId, null, null, null);
         Iterator<Work> oldListIterator = oldWorkList.iterator();
         //更新时的作业项目
         List<StudentWorkProjectParam> currentWorkList = teachingParam.getWorks();
         //设置新增，修改
         for (int i = 0; i < currentWorkList.size(); i++) {
-            StudentWorkProjectParam studentWorkProjectParam =  currentWorkList.get(i);
+            StudentWorkProjectParam studentWorkProjectParam = currentWorkList.get(i);
             //获取老的作业项目
             Work oldWork = null;
-            if (oldListIterator.hasNext()){
+            if (oldListIterator.hasNext()) {
                 oldWork = oldListIterator.next();
             }
             //判断未修改，不做操作，从oldWorkList中删除
-            List<Work> tempWorksForSame = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getStudentId(), studentWorkProjectParam.getWorkProjectId());
-            List<Work> tempWorksForUpdate = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getStudentId(), null);
-            if(tempWorksForSame.size() > 0){
+            List<Work> tempWorksForSame = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getStudentId(), studentWorkProjectParam.getWorkProjectId(), null);
+            List<Work> tempWorksForUpdate = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getStudentId(), null, null);
+            if (tempWorksForSame.size() > 0) {
                 //说明存在相同的作业
-                if (null != oldWork){
-                    if (tempWorksForSame.get(0).getId() == oldWork.getId() && oldWork.getWorkProjectId() == studentWorkProjectParam.getWorkProjectId()){
+                if (null != oldWork) {
+                    if (tempWorksForSame.get(0).getId() == oldWork.getId() && oldWork.getWorkProjectId() == studentWorkProjectParam.getWorkProjectId()) {
                         oldListIterator.remove();
                     }
                 }
             }
             //教学id和学生id相同，说明存在作业，执行更新作业项目的操作
-            else if (tempWorksForUpdate.size() > 0){
+            else if (tempWorksForUpdate.size() > 0) {
                 //说明存在需要更新的作业
-                if (null != oldWork){
-                    if (tempWorksForUpdate.get(0).getId() == oldWork.getId()){
+                if (null != oldWork) {
+                    if (tempWorksForUpdate.get(0).getId() == oldWork.getId()) {
                         UpdateWorkBO updateWorkBO = new UpdateWorkBO();
                         updateWorkBO.setId(oldWork.getId());
                         updateWorkBO.setStudentId(studentWorkProjectParam.getStudentId());
@@ -153,7 +156,7 @@ public class TeachingService {
                     }
                 }
                 continue;
-            }else{
+            } else {
                 //这里是新增操作
                 AddWorkBO addWorkBO = new AddWorkBO();
                 addWorkBO.setTeachingId(currentTeachingId);
@@ -165,7 +168,7 @@ public class TeachingService {
 
         }
         //这里是删除弃用的作业
-        for (int i = 0; i <oldWorkList.size() ; i++) {
+        for (int i = 0; i < oldWorkList.size(); i++) {
             Work next = oldWorkList.get(i);
             next.setIsDelete(Constants.Common.IS_YES);
             next.setUpdatetime(new Date());
@@ -177,10 +180,11 @@ public class TeachingService {
     /**
      * 根据当前登录用户分页查询教学信息，目前教师的id是传送过来的
      * 分页根据需求没有使用，暂时没有完成
+     *
      * @param param
      * @return
      */
-    public Result getTeachingList(BaseListRequestParam param){
+    public Result getTeachingList(BaseListRequestParam param) {
         PageHelper.startPage(param.getPageNum(), param.getPageSize());
         //这里应该是获取到当前登录用户的id
   /*      Integer currentUserId = 1;
@@ -193,15 +197,16 @@ public class TeachingService {
 
     /**
      * 根据当前登录用户查询教学信息,目前教师的id是传送过来的
+     *
      * @param
      * @return
      */
-    public Result getTeachingByCreatorId(ConditionTeachingParam teachingParam){
+    public Result getTeachingByCreatorId(ConditionTeachingParam teachingParam) {
         PageHelper.startPage(teachingParam.getPageNum(), teachingParam.getPageSize());
         //这里应该是获取到当前登录用户的id
         Integer currentUserId = teachingParam.getTeacherId();
         Integer status = teachingParam.getStatus();
-        List<TeachingListDTO> teachingList =  teachingMapper.getTeachingDTOByCreatorIdAndStatus(currentUserId,status);
+        List<TeachingListDTO> teachingList = teachingMapper.getTeachingDTOByCreatorIdAndStatus(currentUserId, status);
         //这里设置教学当前的状态和教学涉及到的教学人数,以及更新作业的状态
         List<TeachingListDTO> newTeachingList = new ArrayList<>();
         for (int i = 0; i < teachingList.size(); i++) {
@@ -212,7 +217,7 @@ public class TeachingService {
         return Result.success(newTeachingDTOList);
     }
 
-    private TeachingListDTO setStatusDescribeAndStudentCount(TeachingListDTO teachingListDTO){
+    private TeachingListDTO setStatusDescribeAndStudentCount(TeachingListDTO teachingListDTO) {
         //设置教学中参与学生人数
         Long studentCount = workMapper.countStudentsByTeachingId(teachingListDTO.getId());
         teachingListDTO.setStudentCount(studentCount);
@@ -230,7 +235,7 @@ public class TeachingService {
         return teachingListDTO;
     }
 
-    private TeachingInfoDTO setStatusDescribeAndStudentCountAndWorkStatus(TeachingInfoDTO teachingInfoDTO){
+    private TeachingInfoDTO setStatusDescribeAndStudentCountAndWorkStatus(TeachingInfoDTO teachingInfoDTO) {
         //设置教学中参与学生人数
         Long studentCount = workMapper.countStudentsByTeachingId(teachingInfoDTO.getId());
         teachingInfoDTO.setStudentCount(studentCount);

@@ -37,6 +37,11 @@ public class WorkMessageInfoDTO {
      */
     private Integer senderType;
 
+    /**
+     * 创建时间
+     */
+    private String createtime;
+
     public Integer getId() {
         return id;
     }
@@ -77,6 +82,14 @@ public class WorkMessageInfoDTO {
         this.senderType = senderType;
     }
 
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
     @Override
     public String toString() {
         return "WorkMessageInfoDTO{" +
@@ -85,6 +98,7 @@ public class WorkMessageInfoDTO {
                 ", senderId=" + senderId +
                 ", senderName='" + senderName + '\'' +
                 ", senderType=" + senderType +
+                ", createtime='" + createtime + '\'' +
                 '}';
     }
 }

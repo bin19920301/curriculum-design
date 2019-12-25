@@ -1,10 +1,7 @@
 package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
-import com.hit.curricelumdesign.context.param.work.AddCraftCardListParam;
-import com.hit.curricelumdesign.context.param.work.AddCraftCardParam;
-import com.hit.curricelumdesign.context.param.work.ScoreForWorkParam;
-import com.hit.curricelumdesign.context.param.work.WorkBaseParam;
+import com.hit.curricelumdesign.context.param.work.*;
 import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByStudentParam;
 import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByTeacherParam;
 import com.hit.curricelumdesign.context.response.Result;
@@ -56,6 +53,12 @@ public class WorkController {
     public Result getWorkInfoById(WorkBaseParam param) {
         return workService.getWorkInfoById(param);
     }
+
+    @RequestMapping(value = "/work/getworklistbystudentid/", method = RequestMethod.POST)
+    public Result getWorkListByStudentId(GetWorkListByStudentIdParam param) {
+        return workService.getWorkListByStudentId(param);
+    }
+
 
 
 }

@@ -42,7 +42,7 @@ public class WorkTeachingDTO {
     /**
      * 截止日期
      */
-    private Date deadlineTime;
+    private String deadlineTime;
 
     /**
      * 状态 1：教学中 2：批阅中 3：批阅完成 4：已完成
@@ -89,11 +89,11 @@ public class WorkTeachingDTO {
         this.teacherReminder = teacherReminder;
     }
 
-    public Date getDeadlineTime() {
+    public String getDeadlineTime() {
         return deadlineTime;
     }
 
-    public void setDeadlineTime(Date deadlineTime) {
+    public void setDeadlineTime(String deadlineTime) {
         this.deadlineTime = deadlineTime;
     }
 
@@ -113,7 +113,7 @@ public class WorkTeachingDTO {
                 ", teacherName='" + teacherName + '\'' +
                 ", name='" + name + '\'' +
                 ", teacherReminder='" + teacherReminder + '\'' +
-                ", deadlineTime=" + deadlineTime +
+                ", deadlineTime='" + deadlineTime + '\'' +
                 ", status=" + status +
                 '}';
     }

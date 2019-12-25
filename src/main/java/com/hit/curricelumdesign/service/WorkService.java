@@ -1,12 +1,16 @@
 package com.hit.curricelumdesign.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hit.curricelumdesign.context.constant.Constants;
+import com.hit.curricelumdesign.context.dto.BaseListDTO;
 import com.hit.curricelumdesign.context.dto.craftcard.CraftCardInfoDTO;
 import com.hit.curricelumdesign.context.dto.file.FileListDTO;
 import com.hit.curricelumdesign.context.dto.student.StudentDTO;
 import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
 import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoDTO;
+import com.hit.curricelumdesign.context.dto.work.WorkInfoListDTO;
 import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoDTO;
 import com.hit.curricelumdesign.context.entity.*;
@@ -24,6 +28,7 @@ import com.hit.curricelumdesign.manager.teacher.TeacherManager;
 import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
+import com.hit.curricelumdesign.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
@@ -257,6 +262,7 @@ public class WorkService {
 
         Work work = workManager.getWorkerById(param.getId());
         workInfoDTO.setWorkId(work.getId());
+        workInfoDTO.setStatus(work.getStatus());
         WorkTeachingDTO workTeachingDTO = teachingMapper.getWorkTeachingDTOById(work.getTeachingId());
         if (null == workTeachingDTO) {
             throw new BaseException(Error.TEACHING_IS_NOT_EXIST);
@@ -291,5 +297,32 @@ public class WorkService {
         workInfoDTO.setWorkMessageInfoDTOList(workMessageInfoDTOList);
 
         return Result.success(workInfoDTO);
+    }
+
+    /**
+     * 根据学生id查询作业列表
+     *
+     * @param param
+     * @return
+     */
+    public Result getWorkListByStudentId(GetWorkListByStudentIdParam param) {
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime desc");
+
+        List<Work> workList = workMapper.selectByParams(null, param.getStudentId(), null, param.getIsDone());
+
+        List<WorkInfoListDTO> workInfoListDTOList = new ArrayList<>();
+
+        for (Work work : workList) {
+            WorkInfoListDTO workInfoListDTO = new WorkInfoListDTO();
+            workInfoListDTO.setWorkId(work.getId());
+            workInfoListDTO.setStatus(work.getStatus());
+            WorkTeachingDTO workTeachingDTO = teachingMapper.getWorkTeachingDTOById(work.getTeachingId());
+            workInfoListDTO.setWorkTeachingDTO(workTeachingDTO);
+            workInfoListDTOList.add(workInfoListDTO);
+        }
+
+        BaseListDTO<WorkInfoListDTO> workInfoListDTOBaseListDTO = new BaseListDTO<WorkInfoListDTO>(workList.size(), workInfoListDTOList);
+
+        return Result.success(workInfoListDTOBaseListDTO);
     }
 }

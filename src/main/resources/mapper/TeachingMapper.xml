@@ -19,7 +19,7 @@
         <result column="f_teacher_id" property="teacherId" jdbcType="INTEGER"/>
         <result column="f_name" property="name" jdbcType="VARCHAR"/>
         <result column="f_teacher_reminder" property="teacherReminder" jdbcType="VARCHAR"/>
-        <result column="f_deadline_time" property="deadlineTime" jdbcType="TIMESTAMP"/>
+        <result column="deadlineTime" property="deadlineTime" jdbcType="TIMESTAMP"/>
         <result column="f_status" property="status" jdbcType="INTEGER"/>
         <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
         <result column="teacherName" property="teacherName"/>
@@ -41,7 +41,7 @@
         <result column="f_teacher_id" property="teacherId" jdbcType="INTEGER"/>
         <result column="f_name" property="name" jdbcType="VARCHAR"/>
         <result column="f_teacher_reminder" property="teacherReminder" jdbcType="VARCHAR"/>
-        <result column="f_deadline_time" property="deadlineTime" jdbcType="TIMESTAMP"/>
+        <result column="deadlineTime" property="deadlineTime" jdbcType="TIMESTAMP"/>
         <result column="f_status" property="status" jdbcType="INTEGER"/>
         <result column="teacherName" property="teacherName"/>
     </resultMap>
@@ -196,7 +196,8 @@
   </update>
     <select id="selectById" resultMap="InfoDTOResultMap" parameterType="java.lang.Integer">
     select
-     tt.f_id, tt.f_teacher_id, tt.f_name, tt.f_teacher_reminder, tt.f_deadline_time, tt.f_status,
+     tt.f_id, tt.f_teacher_id, tt.f_name, tt.f_teacher_reminder,
+     DATE_FORMAT(tt.f_deadline_time ,'%Y-%m-%d %H:%i:%s') as 'deadlineTime', tt.f_status,
      tt.f_creator_id,
      te.f_name as teacherName
     from t_teaching  tt
@@ -229,7 +230,12 @@
     </select>
     <select id="getWorkTeachingDTOById" resultMap="WorkTeachingDTOMap">
         select
-         tt.f_id, tt.f_teacher_id, tt.f_name, tt.f_teacher_reminder, tt.f_deadline_time, tt.f_status,
+         tt.f_id,
+         tt.f_teacher_id,
+         tt.f_name,
+         tt.f_teacher_reminder,
+         DATE_FORMAT(tt.f_deadline_time ,'%Y-%m-%d %H:%i:%s') as 'deadlineTime',
+         tt.f_status,
          tt.f_creator_id,
          te.f_name as teacherName
         from t_teaching  tt

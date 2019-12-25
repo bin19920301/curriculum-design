@@ -20,6 +20,7 @@
         <result column="f_content" property="content" jdbcType="VARCHAR"/>
         <result column="f_sender_id" property="senderId" jdbcType="INTEGER"/>
         <result column="f_sender_type" property="senderType" jdbcType="INTEGER"/>
+        <result column="createtime" property="createtime" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
     f_id, f_teaching_id, f_work_id, f_content, f_is_read, f_sender_id, f_sender_type,
@@ -97,7 +98,8 @@
             f_id,
             f_content,
             f_sender_id,
-            f_sender_type
+            f_sender_type,
+            DATE_FORMAT(f_createtime ,'%Y-%m-%d %H:%i:%s') as 'createtime'
         FROM
             t_work_message
         WHERE

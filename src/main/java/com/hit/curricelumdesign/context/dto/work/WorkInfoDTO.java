@@ -18,6 +18,8 @@ public class WorkInfoDTO {
 
     private Integer workId;
 
+    private Integer status;
+
     private String studentName;
 
     private WorkTeachingDTO teaching;
@@ -34,6 +36,14 @@ public class WorkInfoDTO {
 
     public void setWorkId(Integer workId) {
         this.workId = workId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getStudentName() {
@@ -80,6 +90,7 @@ public class WorkInfoDTO {
     public String toString() {
         return "WorkInfoDTO{" +
                 "workId=" + workId +
+                ", status=" + status +
                 ", studentName='" + studentName + '\'' +
                 ", teaching=" + teaching +
                 ", workProjectInfoDTO=" + workProjectInfoDTO +

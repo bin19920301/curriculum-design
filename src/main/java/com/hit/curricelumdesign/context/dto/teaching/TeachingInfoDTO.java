@@ -30,7 +30,7 @@ public class TeachingInfoDTO {
     /**
      * 截止日期
      */
-    private Date deadlineTime;
+    private String deadlineTime;
 
     /**
      * 状态码 1：教学中 2：批阅中 3：批阅完成 4：已完成
@@ -78,6 +78,14 @@ public class TeachingInfoDTO {
         this.name = name;
     }
 
+    public Long getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(Long studentCount) {
+        this.studentCount = studentCount;
+    }
+
     public String getTeacherReminder() {
         return teacherReminder;
     }
@@ -86,11 +94,11 @@ public class TeachingInfoDTO {
         this.teacherReminder = teacherReminder;
     }
 
-    public Date getDeadlineTime() {
+    public String getDeadlineTime() {
         return deadlineTime;
     }
 
-    public void setDeadlineTime(Date deadlineTime) {
+    public void setDeadlineTime(String deadlineTime) {
         this.deadlineTime = deadlineTime;
     }
 
@@ -100,6 +108,14 @@ public class TeachingInfoDTO {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getStatusDescribe() {
+        return statusDescribe;
+    }
+
+    public void setStatusDescribe(String statusDescribe) {
+        this.statusDescribe = statusDescribe;
     }
 
     public Integer getTeacherId() {
@@ -134,19 +150,21 @@ public class TeachingInfoDTO {
         this.workForTeacherDTOList = workForTeacherDTOList;
     }
 
-    public String getStatusDescribe() {
-        return statusDescribe;
-    }
-
-    public void setStatusDescribe(String statusDescribe) {
-        this.statusDescribe = statusDescribe;
-    }
-
-    public Long getStudentCount() {
-        return studentCount;
-    }
-
-    public void setStudentCount(Long studentCount) {
-        this.studentCount = studentCount;
+    @Override
+    public String toString() {
+        return "TeachingInfoDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", studentCount=" + studentCount +
+                ", teacherReminder='" + teacherReminder + '\'' +
+                ", deadlineTime='" + deadlineTime + '\'' +
+                ", status=" + status +
+                ", statusDescribe='" + statusDescribe + '\'' +
+                ", teacherId=" + teacherId +
+                ", teacherName='" + teacherName + '\'' +
+                ", creatorId=" + creatorId +
+                ", workForTeacherDTOList=" + workForTeacherDTOList +
+                '}';
     }
 }
+
