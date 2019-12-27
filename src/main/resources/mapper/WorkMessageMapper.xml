@@ -39,7 +39,8 @@
             a.f_teaching_id AS 'teachingId',
             b.f_name AS 'teachingName',
             c.f_name AS 'senderName',
-            a.f_content AS 'content'
+            a.f_content AS 'content',
+            DATE_FORMAT(a.f_createtime ,'%Y-%m-%d %H:%i:%s') as 'createtime'
         FROM
             t_work_message a
             LEFT JOIN t_teaching b ON a.f_teaching_id = b.f_id
@@ -59,7 +60,8 @@
             a.f_teaching_id AS 'teachingId',
             b.f_name AS 'teachingName',
             c.f_name AS 'senderName',
-            a.f_content AS 'content'
+            a.f_content AS 'content',
+            DATE_FORMAT(a.f_createtime ,'%Y-%m-%d %H:%i:%s') as 'createtime'
         FROM
             t_work_message a
             LEFT JOIN t_teaching b ON a.f_teaching_id = b.f_id

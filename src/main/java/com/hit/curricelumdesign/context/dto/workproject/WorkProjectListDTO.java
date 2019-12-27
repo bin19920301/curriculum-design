@@ -37,7 +37,7 @@ public class WorkProjectListDTO {
     /**
      * 创建者名称
      */
-    private Integer creatorName;
+    private String creatorName;
 
     /**
      * 资料名称
@@ -84,11 +84,11 @@ public class WorkProjectListDTO {
         this.createtime = createtime;
     }
 
-    public Integer getCreatorName() {
+    public String getCreatorName() {
         return creatorName;
     }
 
-    public void setCreatorName(Integer creatorName) {
+    public void setCreatorName(String creatorName) {
         this.creatorName = creatorName;
     }
 
@@ -108,7 +108,7 @@ public class WorkProjectListDTO {
                 ", desc='" + desc + '\'' +
                 ", useCount=" + useCount +
                 ", createtime='" + createtime + '\'' +
-                ", creatorName=" + creatorName +
+                ", creatorName='" + creatorName + '\'' +
                 ", fileName=" + fileName +
                 '}';
     }

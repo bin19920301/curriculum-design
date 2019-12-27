@@ -1,6 +1,8 @@
 package com.hit.curricelumdesign.context.param.student;
 
-public class ConditionSearchStudentParam {
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
+public class ConditionSearchStudentParam extends BaseRequestParam {
     /**
      * 入学年份id
      */

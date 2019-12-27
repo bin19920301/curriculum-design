@@ -44,13 +44,11 @@ public class EnrollmentYearController {
     }
 
     @RequestMapping(value = "/enrollmentyear/getenrollmentyearbyid/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
     public Result getEnrollmentyearById(EnrollmentYearBaseParam enrollmentyearParam) {
         return enrollmentYearService.getEnrollmentYearById(enrollmentyearParam);
     }
 
     @RequestMapping(value = "/enrollmentyear/listenrollmentyear/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
     public Result listEnrollmentyear(BaseListRequestParam enrollmentyearParam) {
         return enrollmentYearService.getEnrollmentYearList(enrollmentyearParam);
     }

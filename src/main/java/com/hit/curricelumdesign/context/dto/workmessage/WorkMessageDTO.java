@@ -33,6 +33,11 @@ public class WorkMessageDTO {
      */
     private String content;
 
+    /**
+     * 创建时间
+     */
+    private String createtime;
+
     public Integer getWorkId() {
         return workId;
     }
@@ -73,6 +78,14 @@ public class WorkMessageDTO {
         this.content = content;
     }
 
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
     @Override
     public String toString() {
         return "WorkMessageDTO{" +
@@ -81,6 +94,7 @@ public class WorkMessageDTO {
                 ", teachingName='" + teachingName + '\'' +
                 ", senderName='" + senderName + '\'' +
                 ", content='" + content + '\'' +
+                ", createtime='" + createtime + '\'' +
                 '}';
     }
 }

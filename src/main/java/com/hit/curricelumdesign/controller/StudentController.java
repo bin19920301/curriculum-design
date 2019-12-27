@@ -42,13 +42,11 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/student/liststudent/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
     public Result listStudent(BaseListRequestParam studentParam) {
         return studentService.getStudentList(studentParam);
     }
 
     @RequestMapping(value = "/student/liststudentbyparam/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
     public Result listStudentByParams(ConditionSearchStudentParam studentParam) {
         return studentService.getStudentByParams(studentParam);
     }

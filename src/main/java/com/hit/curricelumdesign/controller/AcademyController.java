@@ -37,7 +37,6 @@ public class AcademyController {
     }
 
     @RequestMapping(value = "/academy/getacademylist/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
     public Result getAcademyList(BaseListRequestParam param) {
         return academyService.getAcademyList(param);
     }
