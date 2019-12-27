@@ -18,7 +18,7 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping(value = "/student/getstudentbyid/", method = RequestMethod.POST)
-
+    @HitApi(checkAdminLogin = true)
     public Result getStudentById(GetStudentParam studentParam) {
         return studentService.getStudentById(studentParam);
     }
@@ -60,6 +60,7 @@ public class StudentController {
 
 
     @RequestMapping(value = "/student/logout/", method = RequestMethod.POST)
+    @HitApi(checkStudentLogin = true)
     public Result logout(BaseRequestParam param) {
         return studentService.logout(param);
     }

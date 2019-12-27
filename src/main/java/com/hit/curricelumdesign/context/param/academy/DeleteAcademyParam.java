@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.param.academy;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -8,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * @ClassName DeleteAcademyParam
  * @Description
  */
-public class DeleteAcademyParam {
+public class DeleteAcademyParam extends BaseRequestParam {
     /**
      * 学院id
      */

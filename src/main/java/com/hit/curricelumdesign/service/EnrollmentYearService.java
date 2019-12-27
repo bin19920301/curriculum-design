@@ -56,10 +56,9 @@ public class EnrollmentYearService {
         enrollmentYear = new EnrollmentYear();
         enrollmentYear.setEnrollmentYear(param.getEnrollmentYear());
         enrollmentYear.setIsDelete(Constants.Common.IS_NOT);
-        // todo id
-        enrollmentYear.setCreatorId(0);
+        enrollmentYear.setCreatorId(param.getAdminId());
         enrollmentYear.setCreatetime(now);
-        enrollmentYear.setUpdaterId(0);
+        enrollmentYear.setUpdaterId(param.getAdminId());
         enrollmentYear.setUpdatetime(now);
         enrollmentYearMapper.insert(enrollmentYear);
         return Result.success();
@@ -67,19 +66,23 @@ public class EnrollmentYearService {
 
     /**
      * 删除入学年份
+     *
      * @param param
      * @return
      */
     public Result deleteEnrollmentYear(EnrollmentYearBaseParam param) {
         EnrollmentYear enrollmentYear = new EnrollmentYear();
-        BeanUtil.copyProperties(param,enrollmentYear);
+        BeanUtil.copyProperties(param, enrollmentYear);
         enrollmentYear.setIsDelete(Constants.Common.IS_YES);
+        enrollmentYear.setUpdatetime(new Date());
+        enrollmentYear.setUpdaterId(param.getAdminId());
         enrollmentYearMapper.updateByPrimaryKeySelective(enrollmentYear);
         return Result.success();
     }
 
     /**
      * 更新入学年份
+     *
      * @param param
      * @return
      */
@@ -89,13 +92,16 @@ public class EnrollmentYearService {
             throw new BaseException(Error.ENROLLMENTYEAR_IS_EXIST);
         }
         enrollmentYear = new EnrollmentYear();
-        BeanUtil.copyProperties(param,enrollmentYear);
+        BeanUtil.copyProperties(param, enrollmentYear);
+        enrollmentYear.setUpdaterId(param.getAdminId());
+        enrollmentYear.setUpdatetime(new Date());
         enrollmentYearMapper.updateByPrimaryKeySelective(enrollmentYear);
         return Result.success();
     }
 
     /**
      * 查询详情
+     *
      * @param param
      * @return
      */
@@ -106,6 +112,7 @@ public class EnrollmentYearService {
 
     /**
      * 查询列表分页
+     *
      * @param param
      * @return
      */
@@ -120,6 +127,7 @@ public class EnrollmentYearService {
 
     /**
      * 查询所有入学年份
+     *
      * @param param
      * @return
      */

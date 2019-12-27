@@ -101,8 +101,7 @@ public class AcademyService {
         }
         academy.setName(param.getName());
         academy.setUpdatetime(new Date());
-        //todo id
-        academy.setUpdaterId(0);
+        academy.setUpdaterId(param.getAdminId());
         academyMapper.updateByPrimaryKey(academy);
         return Result.success();
     }
@@ -183,8 +182,7 @@ public class AcademyService {
             return Result.failure(Error.ACADEMY_HAS_TEACHER, String.format("当前有%d位老师属于该院系，不能完成院系删除。", countTeacherByAcademyId));
         }
         academy.setIsDelete(Constants.Common.IS_YES);
-        // todo id
-        academy.setUpdaterId(0);
+        academy.setUpdaterId(param.getAdminId());
         academy.setUpdatetime(new Date());
         academyMapper.updateByPrimaryKey(academy);
         return Result.success();

@@ -28,6 +28,21 @@ public class BaseRequestParam {
      */
     private String studentToken;
 
+    /**
+     * 教师id
+     */
+    private Integer teacherId;
+
+    /**
+     * 管理员id
+     */
+    private Integer adminId;
+
+    /**
+     * 学生id
+     */
+    private Integer studentId;
+
     public String getTeacherToken() {
         return teacherToken;
     }
@@ -52,12 +67,39 @@ public class BaseRequestParam {
         this.studentToken = studentToken;
     }
 
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
     @Override
     public String toString() {
         return "BaseRequestParam{" +
                 "teacherToken='" + teacherToken + '\'' +
                 ", adminToken='" + adminToken + '\'' +
                 ", studentToken='" + studentToken + '\'' +
+                ", teacherId=" + teacherId +
+                ", adminId=" + adminId +
+                ", studentId=" + studentId +
                 '}';
     }
 }

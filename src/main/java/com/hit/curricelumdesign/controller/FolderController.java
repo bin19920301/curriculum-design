@@ -19,37 +19,37 @@ public class FolderController {
     private FolderService folderService;
 
     @RequestMapping(value = "/folder/getfolderbyid/", method = RequestMethod.POST)
-
+    @HitApi(checkTeacherLogin = true)
     public Result getFolderById(GetFolderParam folderParam) {
         return folderService.getFolderById(folderParam);
     }
 
     @RequestMapping(value = "/folder/addfolder/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result addFolder(AddFolderParam folderParam) {
         return  folderService.addFolder(folderParam);
     }
 
     @RequestMapping(value = "/folder/updatefolder/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result updateFolder(UpdateFolderParam folderParam) {
         return folderService.updateFolder(folderParam);
     }
 
     @RequestMapping(value = "/folder/deletefolder/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result deleteFolder(DeleteFolderParam folderParam) {
         return folderService.deleteFolder(folderParam);
     }
 
     @RequestMapping(value = "/folder/listfolder/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result listFolder(BaseListRequestParam folderParam) {
         return folderService.getFolderList(folderParam);
     }
 
     @RequestMapping(value = "/folder/getallfolder/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result getAllFloder() {
         return folderService.getAllFolder();
     }

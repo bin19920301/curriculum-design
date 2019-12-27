@@ -44,10 +44,11 @@ public class FileService {
 
     /**
      * 增加文件信息（文件上传）
+     *
      * @param fileParam
      * @return
      */
-    public Result addFile(AddFileParam fileParam){
+    public Result addFile(AddFileParam fileParam) {
         MultipartFile multipartFile = fileParam.getFile();
         // 当前项目路径
         String currentSystemPath = System.getProperty("user.dir");
@@ -57,29 +58,29 @@ public class FileService {
         Double size = Double.valueOf(multipartFile.getSize());
         String sizeString = "";
         DecimalFormat df = new DecimalFormat("#.00");
-        if (size > 1024 * 1024 * 1024){
-            size = size/(1024 * 1024 * 1024);
+        if (size > 1024 * 1024 * 1024) {
+            size = size / (1024 * 1024 * 1024);
             sizeString = df.format(size) + "GB";
-        }else if (size > 1024 * 1024){
-            size = size/(1024 * 1024);
+        } else if (size > 1024 * 1024) {
+            size = size / (1024 * 1024);
             sizeString = df.format(size) + "MB";
-        }else if(size > 1024){
-            size = size/1024;
+        } else if (size > 1024) {
+            size = size / 1024;
             sizeString = df.format(size) + "KB";
-        }else{
+        } else {
             sizeString = size + "B";
         }
-        System.out.println("获取得文件大小"+multipartFile.getSize());
+        System.out.println("获取得文件大小" + multipartFile.getSize());
         // 获取后缀名
         // String suffixName = fileName.substring(fileName.lastIndexOf("."));
         // 文件保存路径
         String filePath = currentSystemPath + fileUploadPath;
         // 文件重命名，防止重复
-        String pathFileName = filePath + UUID.randomUUID() +"_"+ fileName;
+        String pathFileName = filePath + UUID.randomUUID() + "_" + fileName;
         // 文件对象
         java.io.File dest = new java.io.File(pathFileName);
         // 判断路径是否存在，如果不存在则创建
-        if(!dest.getParentFile().exists()) {
+        if (!dest.getParentFile().exists()) {
             dest.getParentFile().mkdirs();
         }
         File file = new File();
@@ -91,13 +92,13 @@ public class FileService {
             file.setFolderId(fileParam.getFolderId());
             file.setSize(sizeString);
             file.setUseCount(0);
-            file.setCreatorId(1);
+            file.setCreatorId(fileParam.getTeacherId());
             file.setIsDelete(Constants.Common.IS_NOT);
             file.setCreatetime(new Date());
-            file.setUpdaterId(0);
+            file.setUpdaterId(fileParam.getTeacherId());
             file.setUpdatetime(new Date());
             fileMapper.insert(file);
-           return Result.success();
+            return Result.success();
         } catch (Exception e) {
             throw new BaseException(Error.FILE_UPLOAD_FAILURE);
         }
@@ -106,15 +107,16 @@ public class FileService {
 
     /**
      * 下载文件
+     *
      * @param fileParam
      * @return
      */
     public void downloadFile(FileBaseParam fileParam, HttpServletResponse response) throws IOException {
         File currentFile = fileMapper.selectByPrimaryKey(fileParam.getId());
         String filePath = null;
-        if (currentFile != null){
+        if (currentFile != null) {
             filePath = currentFile.getPath();
-        }else{
+        } else {
             throw new BaseException(Error.FILE_IS_NOT_EXIST);
         }
         // 文件地址，真实环境是存放在数据库中的
@@ -130,7 +132,7 @@ public class FileService {
         // 常规操作
         byte[] buf = new byte[1024];
         int len = 0;
-        while((len = fis.read(buf)) != -1) {
+        while ((len = fis.read(buf)) != -1) {
             os.write(buf, 0, len);
         }
         fis.close();
@@ -139,13 +141,16 @@ public class FileService {
 
     /**
      * 删除文件信息
+     *
      * @param fileParam
      * @return
      */
-    public Result deleteFile(FileBaseParam fileParam){
+    public Result deleteFile(FileBaseParam fileParam) {
         File file = new File();
-        BeanUtil.copyProperties(fileParam,file);
+        BeanUtil.copyProperties(fileParam, file);
         file.setIsDelete(Constants.Common.IS_YES);
+        file.setUpdaterId(fileParam.getTeacherId());
+        file.setUpdatetime(new Date());
         fileMapper.updateByPrimaryKeySelective(file);
         return Result.success();
     }
@@ -153,10 +158,11 @@ public class FileService {
 
     /**
      * 查询文件夹下的文件信息所有文件信息
+     *
      * @param
      * @return
      */
-    public Result getFileByFolderId(ConditionFileParam fileParam){
+    public Result getFileByFolderId(ConditionFileParam fileParam) {
         List<FileDTO> fileDTOList = fileMapper.getListByFolderId(fileParam.getFolderId());
         BaseListDTO<FileDTO> fileDTOBaseList = new BaseListDTO<>(fileDTOList.size(), fileDTOList);
         return Result.success(fileDTOBaseList);
@@ -164,19 +170,20 @@ public class FileService {
 
     /**
      * 增加一次使用次数
+     *
      * @param fileParam
      * @return
      */
-    public Result addUseCount(FileBaseParam fileParam){
+    public Result addUseCount(FileBaseParam fileParam) {
         File currentFile = fileMapper.selectByPrimaryKey(fileParam.getId());
         String filePath = null;
-        if (currentFile != null || currentFile.getIsDelete()){
+        if (currentFile != null || currentFile.getIsDelete()) {
             filePath = currentFile.getPath();
-        }else{
+        } else {
             throw new BaseException(Error.FILE_IS_NOT_EXIST);
         }
         currentFile.setUseCount(currentFile.getUseCount() + 1);
         fileMapper.updateByPrimaryKeySelective(currentFile);
-        return  Result.success();
+        return Result.success();
     }
 }

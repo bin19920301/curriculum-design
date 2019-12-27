@@ -46,6 +46,7 @@ public class ClassController {
     }
 
     @RequestMapping(value = "/class/getclassbyacademyid/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
     public Result getClassByAcademyId(GetClassByAcademyIdParam param) {
         return classService.getClassByAcademyId(param);
     }

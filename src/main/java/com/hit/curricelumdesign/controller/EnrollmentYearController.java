@@ -56,7 +56,6 @@ public class EnrollmentYearController {
     }
 
     @RequestMapping(value = "/enrollmentyear/listallenrollmentyear/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
     public Result listEnrollmentyearByParams() {
         return enrollmentYearService.getAllEnrollmentYear();
     }

@@ -49,12 +49,20 @@ public class WorkController {
     }
 
 
-    @RequestMapping(value = "/work/getworkinfobyid/", method = RequestMethod.POST)
-    public Result getWorkInfoById(WorkBaseParam param) {
+    @RequestMapping(value = "/work/getteacherworkinfobyid/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
+    public Result getTeacherWorkInfoById(WorkBaseParam param) {
+        return workService.getWorkInfoById(param);
+    }
+
+    @RequestMapping(value = "/work/getstudentworkinfobyid/", method = RequestMethod.POST)
+    @HitApi(checkStudentLogin = true)
+    public Result getStudentWorkInfoById(WorkBaseParam param) {
         return workService.getWorkInfoById(param);
     }
 
     @RequestMapping(value = "/work/getworklistbystudentid/", method = RequestMethod.POST)
+    @HitApi(checkStudentLogin = true)
     public Result getWorkListByStudentId(GetWorkListByStudentIdParam param) {
         return workService.getWorkListByStudentId(param);
     }

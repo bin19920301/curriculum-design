@@ -2,16 +2,16 @@ package com.hit.curricelumdesign.context.param.teaching;
 
 public class StudentWorkProjectParam {
 
-    private Integer studentId;
+    private Integer workStudentId;
 
     private Integer workProjectId;
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getWorkStudentId() {
+        return workStudentId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setWorkStudentId(Integer workStudentId) {
+        this.workStudentId = workStudentId;
     }
 
     public Integer getWorkProjectId() {

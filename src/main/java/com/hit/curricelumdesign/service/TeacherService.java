@@ -79,7 +79,7 @@ public class TeacherService {
         Teacher teacher = new Teacher();
         BeanUtil.copyProperties(teacherParam, teacher);
         teacher.setIsDelete(false);
-        teacher.setCreatorId(0);
+        teacher.setCreatorId(teacherParam.getAdminId());
         teacher.setCreatetime(new Date());
         teacher.setUpdaterId(0);
         teacher.setPassword(DigestUtils.md5Hex(md5Pre + teacherPasswordDefault));
@@ -97,6 +97,7 @@ public class TeacherService {
         Teacher teacher = new Teacher();
         BeanUtil.copyProperties(teacherParam, teacher, "password");
         teacher.setUpdatetime(new Date());
+        teacher.setUpdaterId(teacherParam.getAdminId());
         teacher.setPassword(DigestUtils.md5Hex(md5Pre + teacherParam.getPassword()));
         teacherMapper.updateByPrimaryKeySelective(teacher);
         return Result.success();
@@ -113,6 +114,7 @@ public class TeacherService {
         BeanUtil.copyProperties(teacherParam, teacher);
         teacher.setIsDelete(Boolean.TRUE);
         teacher.setUpdatetime(new Date());
+        teacher.setUpdaterId(teacherParam.getAdminId());
         teacherMapper.updateByPrimaryKeySelective(teacher);
         return Result.success();
     }
@@ -129,7 +131,7 @@ public class TeacherService {
         BeanUtil.copyProperties(dto, teacher);
         teacher.setPassword(DigestUtils.md5Hex(md5Pre + teacherPasswordDefault));
         //更新操作者的id
-        teacher.setUpdaterId(0);
+        teacher.setUpdaterId(teacherParam.getAdminId());
         teacher.setUpdatetime(new Date());
         teacherMapper.updateByPrimaryKeySelective(teacher);
         return Result.success();
@@ -185,6 +187,7 @@ public class TeacherService {
 
     /**
      * 教师登出
+     *
      * @param param
      * @return
      */
@@ -193,7 +196,7 @@ public class TeacherService {
         if (StringUtils.isBlank(teacherToken)) {
             throw new BaseException(Error._200201);
         }
-        Token token = tokenMapper.getByTokenAndType(teacherToken,Constants.Token.TYPE_TEACHER);
+        Token token = tokenMapper.getByTokenAndType(teacherToken, Constants.Token.TYPE_TEACHER);
         if (null != token) {
             token.setIsDelete(Constants.Common.IS_YES);
             token.setUpdatetime(new Date());

@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.param.admin;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -9,7 +11,7 @@ import javax.validation.constraints.Size;
  * @ClassName UpdateAdminParam
  * @Description
  */
-public class UpdateAdminParam {
+public class UpdateAdminParam extends BaseRequestParam {
 
     /**
      * 管理员编号
@@ -20,14 +22,14 @@ public class UpdateAdminParam {
      * 编号
      */
     @NotNull
-    @Size(min = 0,max = 30 ,message = "编号")
+    @Size(min = 0, max = 30, message = "编号")
     private String number;
 
     /**
      * 姓名
      */
     @NotNull
-    @Size(min = 0,max = 30 ,message = "姓名")
+    @Size(min = 0, max = 30, message = "姓名")
     private String name;
 
     /**

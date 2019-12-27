@@ -30,17 +30,20 @@ public class WorkProjectController {
     }
 
     @RequestMapping(value = "/workproject/getworkprojectlist/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
     public Result getWorkProjectList(GetWorkProjectListParam param) {
         return workProjectService.getWorkProjectList(param);
     }
 
     @RequestMapping(value = "/workproject/getallworkprojectlist/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
     public Result getAllWorkProjectList() {
         return workProjectService.getAllWorkProjectList();
     }
 
 
     @RequestMapping(value = "/workproject/getworkprojectinfo/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
     public Result getWorkProjectInfo(GetWorkProjectInfoParam param) {
         return workProjectService.getWorkProjectInfo(param);
     }

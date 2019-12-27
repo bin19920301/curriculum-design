@@ -48,6 +48,7 @@ public class AcademyController {
     }
 
     @RequestMapping(value = "/academy/deleteacademy/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
     public Result deleteAcademy(DeleteAcademyParam param) {
         return academyService.deleteAcademy(param);
     }

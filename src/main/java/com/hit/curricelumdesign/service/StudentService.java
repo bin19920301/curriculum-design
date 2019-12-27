@@ -66,9 +66,9 @@ public class StudentService {
         Student student = new Student();
         BeanUtil.copyProperties(studentParam, student);
         student.setIsDelete((byte) 0);
-        student.setCreatorId(0);
+        student.setCreatorId(studentParam.getAdminId());
         student.setCreatetime(new Date());
-        student.setUpdaterId(0);
+        student.setUpdaterId(studentParam.getAdminId());
         studentMapper.insert(student);
         return Result.success();
     }
@@ -83,6 +83,7 @@ public class StudentService {
         Student student = new Student();
         BeanUtil.copyProperties(studentParam, student);
         student.setUpdatetime(new Date());
+        student.setUpdaterId(studentParam.getAdminId());
         studentMapper.updateByPrimaryKeySelective(student);
         return Result.success();
     }
@@ -98,6 +99,7 @@ public class StudentService {
         BeanUtil.copyProperties(studentParam, student);
         student.setIsDelete((byte) 1);
         student.setUpdatetime(new Date());
+        student.setUpdaterId(studentParam.getAdminId());
         studentMapper.updateByPrimaryKeySelective(student);
         return Result.success();
     }

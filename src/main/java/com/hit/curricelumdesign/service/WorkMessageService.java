@@ -8,6 +8,7 @@ import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageDTO;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.entity.Work;
 import com.hit.curricelumdesign.context.entity.WorkMessage;
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import com.hit.curricelumdesign.context.param.workmessage.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.WorkMessageMapper;
@@ -58,7 +59,7 @@ public class WorkMessageService {
         msg.setWorkId(work.getId());
         msg.setContent(param.getContent());
         msg.setIsRead(Constants.Common.IS_NOT);
-        msg.setSenderId(teaching.getTeacherId());
+        msg.setSenderId(param.getTeacherId());
         msg.setSenderType(Constants.WorkMessage.SENDER_TYPE_TEACHER);
         msg.setReceiverId(work.getStudentId());
         msg.setReceiverType(Constants.WorkMessage.RECEIVER_TYPE_STUDENT);
@@ -84,7 +85,7 @@ public class WorkMessageService {
         msg.setWorkId(work.getId());
         msg.setContent(param.getContent());
         msg.setIsRead(Constants.Common.IS_NOT);
-        msg.setSenderId(work.getStudentId());
+        msg.setSenderId(param.getStudentId());
         msg.setSenderType(Constants.WorkMessage.SENDER_TYPE_STUDENT);
         msg.setReceiverId(teaching.getTeacherId());
         msg.setReceiverType(Constants.WorkMessage.RECEIVER_TYPE_TEACHER);
@@ -130,7 +131,7 @@ public class WorkMessageService {
      * @param param
      * @return
      */
-    public Result countTeacherUnreadMessage(CountTeacherUnreadMessageParam param) {
+    public Result countTeacherUnreadMessage(BaseRequestParam param) {
         long total = workMessageMapper.countTeacherUnreadMessage(param.getTeacherId());
         Map<String, Long> result = new HashMap<>();
         result.put("total", total);
@@ -143,7 +144,7 @@ public class WorkMessageService {
      * @param param
      * @return
      */
-    public Result countStudentUnreadMessage(CountStudentUnreadMessageParam param) {
+    public Result countStudentUnreadMessage(BaseRequestParam param) {
         long total = workMessageMapper.countStudentUnreadMessage(param.getStudentId());
         Map<String, Long> result = new HashMap<>();
         result.put("total", total);
@@ -165,7 +166,7 @@ public class WorkMessageService {
     }
 
     /**
-     * 删除学生信息
+     * 删除学生消息
      *
      * @param param
      * @return

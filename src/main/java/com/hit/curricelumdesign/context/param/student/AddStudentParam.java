@@ -1,18 +1,20 @@
 package com.hit.curricelumdesign.context.param.student;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.Size;
 
-public class AddStudentParam {
+public class AddStudentParam extends BaseRequestParam {
 
     /**
      * 学号，字符串格式
      */
-    @Size(min = 0,max = 30 ,message = "学号")
+    @Size(min = 0, max = 30, message = "学号")
     private String number;
     /**
      * 学生姓名
      */
-    @Size(min = 0,max = 30 ,message = "学生姓名")
+    @Size(min = 0, max = 30, message = "学生姓名")
     private String name;
 
     /**

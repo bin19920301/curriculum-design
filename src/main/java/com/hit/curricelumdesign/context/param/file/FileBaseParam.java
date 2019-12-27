@@ -1,8 +1,10 @@
 package com.hit.curricelumdesign.context.param.file;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.NotNull;
 
-public class FileBaseParam {
+public class FileBaseParam extends BaseRequestParam {
 
     /**
      * id

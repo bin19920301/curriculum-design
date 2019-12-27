@@ -7,26 +7,12 @@ import javax.validation.constraints.NotNull;
 public class ScoreForWorkParam extends WorkBaseParam {
 
     /**
-     * 教师id
-     */
-    @NotNull
-    private Integer teacherId;
-
-    /**
      * 评分
      */
     @NotNull
     @Min(value = 0, message = "评分")
     @Max(value = 100, message = "评分")
     private Integer score;
-
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
-    }
 
     public Integer getScore() {
         return score;
@@ -39,8 +25,7 @@ public class ScoreForWorkParam extends WorkBaseParam {
     @Override
     public String toString() {
         return "ScoreForWorkParam{" +
-                "teacherId=" + teacherId +
-                ", score=" + score +
+                "score=" + score +
                 '}';
     }
 }

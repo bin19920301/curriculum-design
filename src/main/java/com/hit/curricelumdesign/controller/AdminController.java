@@ -65,7 +65,9 @@ public class AdminController {
     public Result adminLogin(AdminLoginParam param) {
         return adminService.adminLogin(param);
     }
+
     @RequestMapping(value = "/admin/logout/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
     public Result adminLogout(BaseRequestParam param) {
         return adminService.adminLogout(param);
     }

@@ -49,9 +49,6 @@ public class WorkService {
     private WorkManager workManager;
 
     @Autowired
-    private TeachingManager teachingManager;
-
-    @Autowired
     private WorkMessageMapper workMessageMapper;
 
     @Autowired
@@ -75,43 +72,6 @@ public class WorkService {
     @Autowired
     private StudentManager studentManager;
 
-    public Result addWork(AddWorkParam workParam) {
-        Work work = new Work();
-        BeanUtil.copyProperties(workParam, work);
-        //设置分数
-        work.setScore(0);
-        //设置状态
-        work.setStatus(0);
-        //设置未删除
-        work.setIsDelete(Constants.Common.IS_NOT);
-        //设置创建时间
-        work.setCreatetime(new Date());
-        //设置修改时间
-        work.setUpdatetime(new Date());
-        workMapper.insert(work);
-        return Result.success();
-    }
-
-    public Result updateWork(UpdateWorkParam workParam) {
-        //目前只存在一种情况，即更新作业中的作业项目
-        Work work = new Work();
-        BeanUtil.copyProperties(workParam, work);
-        //设置更新时间
-        work.setUpdatetime(new Date());
-        workMapper.updateByPrimaryKeySelective(work);
-        return Result.success();
-    }
-
-    public Result deleteWork(WorkBaseParam workParam) {
-        Work work = new Work();
-        BeanUtil.copyProperties(workParam, work);
-        //设置删除标志位
-        work.setIsDelete(Constants.Common.IS_YES);
-        //设置更新时间
-        work.setUpdatetime(new Date());
-        workMapper.updateByPrimaryKeySelective(work);
-        return Result.success();
-    }
 
     /**
      * 评分
@@ -128,14 +88,6 @@ public class WorkService {
         work.setScore(param.getScore());
         work.setUpdatetime(new Date());
         workMapper.updateByPrimaryKey(work);
-        return Result.success();
-    }
-
-    public Result getWorkByWorkProjectId() {
-        return Result.success();
-    }
-
-    public Result getWorkByStudentId() {
         return Result.success();
     }
 

@@ -64,10 +64,9 @@ public class AdminService {
         admin.setPassword(DigestUtils.md5Hex(md5Pre + param.getPassword()));
         admin.setIsDelete(Constants.Common.NOT);
         admin.setCreatetime(now);
-        // todo id
-        admin.setCreatorId(0);
+        admin.setCreatorId(param.getAdminId());
         admin.setUpdatetime(now);
-        admin.setUpdaterId(0);
+        admin.setUpdaterId(param.getAdminId());
         adminMapper.insert(admin);
         return Result.success();
     }
@@ -120,8 +119,7 @@ public class AdminService {
         BeanUtil.copyProperties(param, admin, "password");
         admin.setPassword(DigestUtils.md5Hex(md5Pre + param.getPassword()));
         admin.setUpdatetime(new Date());
-        // todo id
-        admin.setUpdaterId(0);
+        admin.setUpdaterId(param.getAdminId());
         adminMapper.updateByPrimaryKey(admin);
         return Result.success();
     }
@@ -137,8 +135,7 @@ public class AdminService {
         Admin admin = adminManager.getAminById(param.getId());
         admin.setPassword(DigestUtils.md5Hex(md5Pre + adminPasswordDefault));
         admin.setUpdatetime(new Date());
-        // todo id
-        admin.setUpdaterId(0);
+        admin.setUpdaterId(param.getAdminId());
         adminMapper.updateByPrimaryKey(admin);
         return Result.success();
     }
@@ -152,8 +149,7 @@ public class AdminService {
     public Result deleteAdmin(DeleteAdminParam param) {
         Admin admin = adminManager.getAminById(param.getId());
         admin.setIsDelete(Constants.Common.YES);
-        //todo id
-        admin.setUpdaterId(0);
+        admin.setUpdaterId(param.getAdminId());
         admin.setUpdatetime(new Date());
         adminMapper.updateByPrimaryKey(admin);
         return Result.success();

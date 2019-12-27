@@ -1,11 +1,12 @@
 package com.hit.curricelumdesign.context.param.file;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
-public class AddFileParam {
+public class AddFileParam extends BaseRequestParam {
     /**
      * 上传文件的实体
      */

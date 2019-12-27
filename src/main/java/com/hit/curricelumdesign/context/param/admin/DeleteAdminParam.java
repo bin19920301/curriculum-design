@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.param.admin;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -8,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * @ClassName DeleteAdminParam
  * @Description
  */
-public class DeleteAdminParam {
+public class DeleteAdminParam extends BaseRequestParam {
     /**
      * 管理员id
      */

@@ -7,12 +7,6 @@ import javax.validation.constraints.NotNull;
 public class ConditionTeachingParam extends BaseListRequestParam {
 
     /**
-     * 当前教师id
-     */
-    @NotNull
-    private Integer teacherId;
-
-    /**
      * 教学状态
      */
     @NotNull
@@ -26,11 +20,4 @@ public class ConditionTeachingParam extends BaseListRequestParam {
         this.status = status;
     }
 
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
-    }
 }

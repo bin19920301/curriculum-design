@@ -21,31 +21,31 @@ public class FileController {
     private FileService fileService;
 
     @RequestMapping(value = "/file/addFile/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result addFile(AddFileParam param) {
         return fileService.addFile(param);
     }
 
     @RequestMapping(value = "/file/downloadFile/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public void downloadFile(FileBaseParam param, HttpServletResponse response) throws IOException {
         fileService.downloadFile(param,response);
     }
 
     @RequestMapping(value = "/file/deleteFile/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result deleteFile(FileBaseParam param) {
         return fileService.deleteFile(param);
     }
 
     @RequestMapping(value = "/file/getFileByFolderId/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result getFileByFolderId(ConditionFileParam param)  {
         return fileService.getFileByFolderId(param);
     }
 
     @RequestMapping(value = "/file/addusecount/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result addFileUseCount(FileBaseParam param)  {
         return fileService.addUseCount(param);
     }

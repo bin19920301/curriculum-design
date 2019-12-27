@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.param.academy;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -9,7 +11,7 @@ import javax.validation.constraints.Size;
  * @ClassName RenameAcademyParam
  * @Description
  */
-public class RenameAcademyParam {
+public class RenameAcademyParam extends BaseRequestParam {
 
     /**
      * 学院id
@@ -21,7 +23,7 @@ public class RenameAcademyParam {
      * 学院名称
      */
     @NotNull
-    @Size(min = 0,max = 30 ,message = "学院名称")
+    @Size(min = 0, max = 30, message = "学院名称")
     private String name;
 
     public Integer getId() {

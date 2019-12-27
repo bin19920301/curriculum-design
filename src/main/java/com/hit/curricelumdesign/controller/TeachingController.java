@@ -22,29 +22,29 @@ public class TeachingController {
     private TeachingManager teachingManager;
 
     @RequestMapping(value = "/teaching/addteaching/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
-    public Result addTeaching( @RequestBody  AddTeachingParam teachingParam){
+    @HitApi(checkTeacherLogin = true)
+    public Result addTeaching(@RequestBody AddTeachingParam teachingParam) {
         teachingService.addTeaching(teachingParam);
         return Result.success();
     }
 
     @RequestMapping(value = "/teaching/updateteaching/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
-    public Result updateTeaching(@RequestBody UpdateTeachingParam teachingParam){
+    @HitApi(checkTeacherLogin = true)
+    public Result updateTeaching(@RequestBody UpdateTeachingParam teachingParam) {
         teachingService.updateTeaching(teachingParam);
         return Result.success();
     }
 
 
     @RequestMapping(value = "/teaching/getteachingbycreatoridandstatus/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
-    public Result getTeachingByCreatorId(ConditionTeachingParam teachingParam){
+    @HitApi(checkTeacherLogin = true)
+    public Result getTeachingByCreatorId(ConditionTeachingParam teachingParam) {
         return teachingService.getTeachingByCreatorId(teachingParam);
     }
 
     @RequestMapping(value = "/teaching/getteachingbyId/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
-    public Result getTeachingByCreatorId(GetTeachingParam teachingParam){
+    @HitApi(checkTeacherLogin = true)
+    public Result getTeachingById(GetTeachingParam teachingParam) {
         return teachingService.getTeachingById(teachingParam);
     }
 }

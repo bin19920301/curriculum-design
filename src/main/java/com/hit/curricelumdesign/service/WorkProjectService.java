@@ -39,9 +39,6 @@ import java.util.List;
 public class WorkProjectService {
 
     @Autowired
-    private WorkProjectManager workProjectManager;
-
-    @Autowired
     private WorkProjectMapper workProjectMapper;
 
     @Autowired
@@ -78,10 +75,9 @@ public class WorkProjectService {
         workProject.setUseCount(0);
         workProject.setIsDelete(Constants.Common.IS_NOT);
         workProject.setCreatetime(now);
-        //todo id
-        workProject.setCreatorId(0);
+        workProject.setCreatorId(param.getTeacherId());
         workProject.setUpdatetime(now);
-        workProject.setUpdaterId(0);
+        workProject.setUpdaterId(param.getTeacherId());
         workProjectMapper.insert(workProject);
         List<WorkProjectFile> workProjectFileList = new ArrayList<>();
         for (File file : fileList) {
@@ -170,8 +166,7 @@ public class WorkProjectService {
         }
         workProjectFileMapper.deleteByWorkProjectId(workProject.getId());
         workProject.setUpdatetime(new Date());
-        //todo id
-        workProject.setUpdaterId(0);
+        workProject.setUpdaterId(param.getTeacherId());
         workProject.setName(param.getName());
         workProject.setDesc(param.getDesc());
         workProjectMapper.updateByPrimaryKey(workProject);
@@ -202,8 +197,7 @@ public class WorkProjectService {
             throw new BaseException(Error.WORK_PROJECT_IS_NOT_EXIST);
         }
         workProject.setIsDelete(Constants.Common.IS_YES);
-        // todo id
-        workProject.setUpdaterId(0);
+        workProject.setUpdaterId(param.getTeacherId());
         workProject.setUpdatetime(new Date());
         workProjectMapper.updateByPrimaryKey(workProject);
         workProjectFileMapper.deleteByWorkProjectId(workProject.getId());
@@ -213,6 +207,7 @@ public class WorkProjectService {
 
     /**
      * 获取全部作业项目
+     *
      * @return
      */
     public Result getAllWorkProjectList() {

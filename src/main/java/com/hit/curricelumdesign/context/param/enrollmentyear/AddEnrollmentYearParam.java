@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.param.enrollmentyear;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -8,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * @ClassName AddEnrollmentYearParam
  * @Description
  */
-public class AddEnrollmentYearParam {
+public class AddEnrollmentYearParam extends BaseRequestParam {
 
     /**
      * 入学年份

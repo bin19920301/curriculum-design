@@ -73,10 +73,10 @@ public class TeachingService {
         }
         Teaching teaching = new Teaching();
         BeanUtil.copyProperties(teachingParam, teaching);
-        teaching.setCreatorId(1);
+        teaching.setCreatorId(teachingParam.getTeacherId());
         teaching.setCreatetime(new Date());
-        teaching.setTeacherId(1);
-        teaching.setUpdaterId(0);
+        teaching.setTeacherId(teachingParam.getTeacherId());
+        teaching.setUpdaterId(teachingParam.getTeacherId());
         teaching.setUpdatetime(new Date());
         teaching.setIsDelete(false);
         //设置教学状态
@@ -92,7 +92,7 @@ public class TeachingService {
             //设置教学id
             workBO.setTeachingId(currentTeachingId);
             //设置学生id
-            workBO.setStudentId(studentWorkProjectParam.getStudentId());
+            workBO.setStudentId(studentWorkProjectParam.getWorkStudentId());
             //设置作业项目id
             workBO.setWorkProjectId(studentWorkProjectParam.getWorkProjectId());
             //进行作业的保存操作
@@ -132,8 +132,8 @@ public class TeachingService {
                 oldWork = oldListIterator.next();
             }
             //判断未修改，不做操作，从oldWorkList中删除
-            List<Work> tempWorksForSame = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getStudentId(), studentWorkProjectParam.getWorkProjectId(), null);
-            List<Work> tempWorksForUpdate = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getStudentId(), null, null);
+            List<Work> tempWorksForSame = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getWorkStudentId(), studentWorkProjectParam.getWorkProjectId(), null);
+            List<Work> tempWorksForUpdate = workMapper.selectByParams(currentTeachingId, studentWorkProjectParam.getWorkStudentId(), null, null);
             if (tempWorksForSame.size() > 0) {
                 //说明存在相同的作业
                 if (null != oldWork) {
@@ -149,7 +149,7 @@ public class TeachingService {
                     if (tempWorksForUpdate.get(0).getId() == oldWork.getId()) {
                         UpdateWorkBO updateWorkBO = new UpdateWorkBO();
                         updateWorkBO.setId(oldWork.getId());
-                        updateWorkBO.setStudentId(studentWorkProjectParam.getStudentId());
+                        updateWorkBO.setStudentId(studentWorkProjectParam.getWorkStudentId());
                         updateWorkBO.setWorkProjectId(studentWorkProjectParam.getWorkProjectId());
                         workManager.updateWork(updateWorkBO);
                         oldListIterator.remove();
@@ -160,7 +160,7 @@ public class TeachingService {
                 //这里是新增操作
                 AddWorkBO addWorkBO = new AddWorkBO();
                 addWorkBO.setTeachingId(currentTeachingId);
-                addWorkBO.setStudentId(studentWorkProjectParam.getStudentId());
+                addWorkBO.setStudentId(studentWorkProjectParam.getWorkStudentId());
                 addWorkBO.setWorkProjectId(studentWorkProjectParam.getWorkProjectId());
                 workManager.addWork(addWorkBO);
             }
@@ -175,24 +175,6 @@ public class TeachingService {
             workMapper.updateByPrimaryKeySelective(next);
         }
         return Result.success();
-    }
-
-    /**
-     * 根据当前登录用户分页查询教学信息，目前教师的id是传送过来的
-     * 分页根据需求没有使用，暂时没有完成
-     *
-     * @param param
-     * @return
-     */
-    public Result getTeachingList(BaseListRequestParam param) {
-        PageHelper.startPage(param.getPageNum(), param.getPageSize());
-        //这里应该是获取到当前登录用户的id
-  /*      Integer currentUserId = 1;
-        List<TeachingDTO> teachingList =  teachingMapper.getTeachingDTOByCreatorId(currentUserId);
-        PageInfo<TeachingDTO> pageInfo = new PageInfo<>(teachingList);
-        BaseListDTO<TeachingDTO> teacherBaseListDTO = new BaseListDTO<>(pageInfo.getTotal(), teachingList);
-        return Result.success(teacherBaseListDTO);*/
-        return null;
     }
 
     /**

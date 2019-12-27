@@ -17,7 +17,7 @@ public class TeacherController {
     private TeacherService teacherService;
 
     @RequestMapping(value = "/teacher/getteacherbyid/", method = RequestMethod.POST)
-
+    @HitApi(checkAdminLogin = true)
     public Result getTeacherById(GetTeacherParam teacherParam) {
         return teacherService.getTeacherById(teacherParam);
     }
@@ -25,7 +25,7 @@ public class TeacherController {
     @RequestMapping(value = "/teacher/addteacher/", method = RequestMethod.POST)
     @HitApi(checkAdminLogin = true)
     public Result addTeacher(AddTeacherParam teacherParam) {
-        return  teacherService.addTeacher(teacherParam);
+        return teacherService.addTeacher(teacherParam);
     }
 
     @RequestMapping(value = "/teacher/updateteacher/", method = RequestMethod.POST)
@@ -52,12 +52,14 @@ public class TeacherController {
     public Result resetTeacherPassword(ResetPasswordParam teacherParam) {
         return teacherService.resetTeacherPassword(teacherParam);
     }
+
     @RequestMapping(value = "/teacher/login/", method = RequestMethod.POST)
     public Result teacherLogin(TeacherLoginParam param) {
         return teacherService.teacherLogin(param);
     }
 
     @RequestMapping(value = "/teacher/logout/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
     public Result teacherLogout(BaseRequestParam param) {
         return teacherService.teacherLogout(param);
     }

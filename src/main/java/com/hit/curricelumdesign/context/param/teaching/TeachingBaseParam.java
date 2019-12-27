@@ -1,8 +1,10 @@
 package com.hit.curricelumdesign.context.param.teaching;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.NotNull;
 
-public class TeachingBaseParam {
+public class TeachingBaseParam extends BaseRequestParam {
 
     /**
      * id
