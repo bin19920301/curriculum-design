@@ -59,7 +59,7 @@ public class WorkMessageService {
         msg.setWorkId(work.getId());
         msg.setContent(param.getContent());
         msg.setIsRead(Constants.Common.IS_NOT);
-        msg.setSenderId(param.getTeacherId());
+        msg.setSenderId(param.getLoginTeacherId());
         msg.setSenderType(Constants.WorkMessage.SENDER_TYPE_TEACHER);
         msg.setReceiverId(work.getStudentId());
         msg.setReceiverType(Constants.WorkMessage.RECEIVER_TYPE_STUDENT);
@@ -85,7 +85,7 @@ public class WorkMessageService {
         msg.setWorkId(work.getId());
         msg.setContent(param.getContent());
         msg.setIsRead(Constants.Common.IS_NOT);
-        msg.setSenderId(param.getStudentId());
+        msg.setSenderId(param.getLoginStudentId());
         msg.setSenderType(Constants.WorkMessage.SENDER_TYPE_STUDENT);
         msg.setReceiverId(teaching.getTeacherId());
         msg.setReceiverType(Constants.WorkMessage.RECEIVER_TYPE_TEACHER);
@@ -105,7 +105,7 @@ public class WorkMessageService {
      */
     public Result getTeacherMessage(GetTeacherMessageParam param) {
         PageHelper.startPage(param.getPageNum(), param.getPageSize());
-        List<WorkMessageDTO> workMessageDTOList = workMessageMapper.getTeacherMessageDTOByTeacherId(param.getTeacherId(), param.getRead());
+        List<WorkMessageDTO> workMessageDTOList = workMessageMapper.getTeacherMessageDTOByTeacherId(param.getLoginTeacherId(), param.getRead());
         PageInfo<WorkMessageDTO> pageInfo = new PageInfo<>(workMessageDTOList);
         BaseListDTO<WorkMessageDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
         return Result.success(baseListDTO);
@@ -119,7 +119,7 @@ public class WorkMessageService {
      */
     public Result getStudentMessage(GetStudentMessageParam param) {
         PageHelper.startPage(param.getPageNum(), param.getPageSize());
-        List<WorkMessageDTO> workMessageDTOList = workMessageMapper.getStudentMessageDTOByStudentId(param.getStudentId(), param.getRead());
+        List<WorkMessageDTO> workMessageDTOList = workMessageMapper.getStudentMessageDTOByStudentId(param.getLoginStudentId(), param.getRead());
         PageInfo<WorkMessageDTO> pageInfo = new PageInfo<>(workMessageDTOList);
         BaseListDTO<WorkMessageDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
         return Result.success(baseListDTO);
@@ -132,7 +132,7 @@ public class WorkMessageService {
      * @return
      */
     public Result countTeacherUnreadMessage(BaseRequestParam param) {
-        long total = workMessageMapper.countTeacherUnreadMessage(param.getTeacherId());
+        long total = workMessageMapper.countTeacherUnreadMessage(param.getLoginTeacherId());
         Map<String, Long> result = new HashMap<>();
         result.put("total", total);
         return Result.success(result);
@@ -145,7 +145,7 @@ public class WorkMessageService {
      * @return
      */
     public Result countStudentUnreadMessage(BaseRequestParam param) {
-        long total = workMessageMapper.countStudentUnreadMessage(param.getStudentId());
+        long total = workMessageMapper.countStudentUnreadMessage(param.getLoginStudentId());
         Map<String, Long> result = new HashMap<>();
         result.put("total", total);
         return Result.success(result);

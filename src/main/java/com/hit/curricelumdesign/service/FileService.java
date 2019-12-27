@@ -92,10 +92,10 @@ public class FileService {
             file.setFolderId(fileParam.getFolderId());
             file.setSize(sizeString);
             file.setUseCount(0);
-            file.setCreatorId(fileParam.getTeacherId());
+            file.setCreatorId(fileParam.getLoginTeacherId());
             file.setIsDelete(Constants.Common.IS_NOT);
             file.setCreatetime(new Date());
-            file.setUpdaterId(fileParam.getTeacherId());
+            file.setUpdaterId(fileParam.getLoginTeacherId());
             file.setUpdatetime(new Date());
             fileMapper.insert(file);
             return Result.success();
@@ -149,7 +149,7 @@ public class FileService {
         File file = new File();
         BeanUtil.copyProperties(fileParam, file);
         file.setIsDelete(Constants.Common.IS_YES);
-        file.setUpdaterId(fileParam.getTeacherId());
+        file.setUpdaterId(fileParam.getLoginTeacherId());
         file.setUpdatetime(new Date());
         fileMapper.updateByPrimaryKeySelective(file);
         return Result.success();

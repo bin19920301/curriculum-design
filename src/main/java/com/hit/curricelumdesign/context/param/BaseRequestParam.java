@@ -1,8 +1,5 @@
 package com.hit.curricelumdesign.context.param;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 /**
  * Description: 基础入参类
  * ClassName: BaseRequestParam
@@ -31,17 +28,17 @@ public class BaseRequestParam {
     /**
      * 教师id
      */
-    private Integer teacherId;
+    private Integer loginTeacherId;
 
     /**
      * 管理员id
      */
-    private Integer adminId;
+    private Integer loginAdminId;
 
     /**
      * 学生id
      */
-    private Integer studentId;
+    private Integer loginStudentId;
 
     public String getTeacherToken() {
         return teacherToken;
@@ -67,28 +64,28 @@ public class BaseRequestParam {
         this.studentToken = studentToken;
     }
 
-    public Integer getTeacherId() {
-        return teacherId;
+    public Integer getLoginTeacherId() {
+        return loginTeacherId;
     }
 
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
+    public void setLoginTeacherId(Integer loginTeacherId) {
+        this.loginTeacherId = loginTeacherId;
     }
 
-    public Integer getAdminId() {
-        return adminId;
+    public Integer getLoginAdminId() {
+        return loginAdminId;
     }
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
+    public void setLoginAdminId(Integer loginAdminId) {
+        this.loginAdminId = loginAdminId;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getLoginStudentId() {
+        return loginStudentId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setLoginStudentId(Integer loginStudentId) {
+        this.loginStudentId = loginStudentId;
     }
 
     @Override
@@ -97,9 +94,9 @@ public class BaseRequestParam {
                 "teacherToken='" + teacherToken + '\'' +
                 ", adminToken='" + adminToken + '\'' +
                 ", studentToken='" + studentToken + '\'' +
-                ", teacherId=" + teacherId +
-                ", adminId=" + adminId +
-                ", studentId=" + studentId +
+                ", teacherId=" + loginTeacherId +
+                ", adminId=" + loginAdminId +
+                ", studentId=" + loginStudentId +
                 '}';
     }
 }

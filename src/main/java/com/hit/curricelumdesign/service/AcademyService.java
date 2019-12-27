@@ -8,7 +8,6 @@ import com.hit.curricelumdesign.context.dto.academy.AcademyDTO;
 import com.hit.curricelumdesign.context.dto.clazz.ClassInfoDTO;
 import com.hit.curricelumdesign.context.entity.Academy;
 import com.hit.curricelumdesign.context.entity.Class;
-import com.hit.curricelumdesign.context.entity.Student;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
@@ -78,9 +77,9 @@ public class AcademyService {
         Academy academy = new Academy();
         academy.setName(param.getName());
         academy.setIsDelete(Constants.Common.IS_NOT);
-        academy.setCreateId(0);
+        academy.setCreateId(param.getLoginAdminId());
         academy.setCreatetime(now);
-        academy.setUpdaterId(0);
+        academy.setUpdaterId(param.getLoginAdminId());
         academy.setUpdatetime(now);
         academyMapper.insert(academy);
 
@@ -101,7 +100,7 @@ public class AcademyService {
         }
         academy.setName(param.getName());
         academy.setUpdatetime(new Date());
-        academy.setUpdaterId(param.getAdminId());
+        academy.setUpdaterId(param.getLoginAdminId());
         academyMapper.updateByPrimaryKey(academy);
         return Result.success();
     }
@@ -182,7 +181,7 @@ public class AcademyService {
             return Result.failure(Error.ACADEMY_HAS_TEACHER, String.format("当前有%d位老师属于该院系，不能完成院系删除。", countTeacherByAcademyId));
         }
         academy.setIsDelete(Constants.Common.IS_YES);
-        academy.setUpdaterId(param.getAdminId());
+        academy.setUpdaterId(param.getLoginAdminId());
         academy.setUpdatetime(new Date());
         academyMapper.updateByPrimaryKey(academy);
         return Result.success();

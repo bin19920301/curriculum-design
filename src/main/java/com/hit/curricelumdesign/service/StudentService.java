@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
+import com.hit.curricelumdesign.context.dto.admin.StudentLoginDTO;
 import com.hit.curricelumdesign.context.dto.student.StudentDTO;
 import com.hit.curricelumdesign.context.entity.Student;
 import com.hit.curricelumdesign.context.entity.Token;
@@ -66,9 +67,9 @@ public class StudentService {
         Student student = new Student();
         BeanUtil.copyProperties(studentParam, student);
         student.setIsDelete((byte) 0);
-        student.setCreatorId(studentParam.getAdminId());
+        student.setCreatorId(studentParam.getLoginAdminId());
         student.setCreatetime(new Date());
-        student.setUpdaterId(studentParam.getAdminId());
+        student.setUpdaterId(studentParam.getLoginAdminId());
         studentMapper.insert(student);
         return Result.success();
     }
@@ -83,7 +84,7 @@ public class StudentService {
         Student student = new Student();
         BeanUtil.copyProperties(studentParam, student);
         student.setUpdatetime(new Date());
-        student.setUpdaterId(studentParam.getAdminId());
+        student.setUpdaterId(studentParam.getLoginAdminId());
         studentMapper.updateByPrimaryKeySelective(student);
         return Result.success();
     }
@@ -99,7 +100,7 @@ public class StudentService {
         BeanUtil.copyProperties(studentParam, student);
         student.setIsDelete((byte) 1);
         student.setUpdatetime(new Date());
-        student.setUpdaterId(studentParam.getAdminId());
+        student.setUpdaterId(studentParam.getLoginAdminId());
         studentMapper.updateByPrimaryKeySelective(student);
         return Result.success();
     }
@@ -155,11 +156,11 @@ public class StudentService {
         token.setCreatetime(now);
         token.setUpdatetime(now);
         tokenMapper.insert(token);
-        Map<String, String> result = new HashMap<>();
-        result.put("token", tokenStr);
-        result.put("studentId", student.getId().toString());
-        result.put("studentName", student.getName());
-        return Result.success(result);
+        StudentLoginDTO studentLoginDTO = new StudentLoginDTO();
+        studentLoginDTO.setToken(tokenStr);
+        studentLoginDTO.setStudentId(student.getId());
+        studentLoginDTO.setStudentName(student.getName());
+        return Result.success(studentLoginDTO);
     }
 
     /**

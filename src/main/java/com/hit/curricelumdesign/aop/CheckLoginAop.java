@@ -91,11 +91,11 @@ public class CheckLoginAop {
                 }
 
                 //初始化登录用户ID
-                request.setAttribute("adminId", tokenObj.getUserId());
+                request.setAttribute("loginAdminId", tokenObj.getUserId());
                 Object[] args = pjp.getArgs();
                 for (Object arg : args) {
                     if (arg instanceof BaseRequestParam) {
-                        ((BaseRequestParam) arg).setAdminId(tokenObj.getUserId());
+                        ((BaseRequestParam) arg).setLoginAdminId(tokenObj.getUserId());
                     }
                 }
             } else if (checkTeacherLogin) {
@@ -110,11 +110,11 @@ public class CheckLoginAop {
                 }
 
                 //初始化登录用户ID
-                request.setAttribute("teacherId", tokenObj.getUserId());
+                request.setAttribute("loginTeacherId", tokenObj.getUserId());
                 Object[] args = pjp.getArgs();
                 for (Object arg : args) {
                     if (arg instanceof BaseRequestParam) {
-                        ((BaseRequestParam) arg).setTeacherId(tokenObj.getUserId());
+                        ((BaseRequestParam) arg).setLoginTeacherId(tokenObj.getUserId());
                     }
                 }
             } else if (checkStudentLogin) {
@@ -129,11 +129,11 @@ public class CheckLoginAop {
                 }
 
                 //初始化登录用户ID
-                request.setAttribute("studentId", tokenObj.getUserId());
+                request.setAttribute("loginStudentId", tokenObj.getUserId());
                 Object[] args = pjp.getArgs();
                 for (Object arg : args) {
                     if (arg instanceof BaseRequestParam) {
-                        ((BaseRequestParam) arg).setStudentId(tokenObj.getUserId());
+                        ((BaseRequestParam) arg).setLoginStudentId(tokenObj.getUserId());
                     }
                 }
             }

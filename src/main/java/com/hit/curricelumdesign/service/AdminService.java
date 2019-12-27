@@ -6,8 +6,8 @@ import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
 import com.hit.curricelumdesign.context.dto.admin.AdminDTO;
 import com.hit.curricelumdesign.context.dto.admin.AdminListDTO;
+import com.hit.curricelumdesign.context.dto.admin.AdminLoginDTO;
 import com.hit.curricelumdesign.context.entity.Admin;
-import com.hit.curricelumdesign.context.entity.Teacher;
 import com.hit.curricelumdesign.context.entity.Token;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
@@ -64,9 +64,9 @@ public class AdminService {
         admin.setPassword(DigestUtils.md5Hex(md5Pre + param.getPassword()));
         admin.setIsDelete(Constants.Common.NOT);
         admin.setCreatetime(now);
-        admin.setCreatorId(param.getAdminId());
+        admin.setCreatorId(param.getLoginAdminId());
         admin.setUpdatetime(now);
-        admin.setUpdaterId(param.getAdminId());
+        admin.setUpdaterId(param.getLoginAdminId());
         adminMapper.insert(admin);
         return Result.success();
     }
@@ -119,7 +119,7 @@ public class AdminService {
         BeanUtil.copyProperties(param, admin, "password");
         admin.setPassword(DigestUtils.md5Hex(md5Pre + param.getPassword()));
         admin.setUpdatetime(new Date());
-        admin.setUpdaterId(param.getAdminId());
+        admin.setUpdaterId(param.getLoginAdminId());
         adminMapper.updateByPrimaryKey(admin);
         return Result.success();
     }
@@ -135,7 +135,7 @@ public class AdminService {
         Admin admin = adminManager.getAminById(param.getId());
         admin.setPassword(DigestUtils.md5Hex(md5Pre + adminPasswordDefault));
         admin.setUpdatetime(new Date());
-        admin.setUpdaterId(param.getAdminId());
+        admin.setUpdaterId(param.getLoginAdminId());
         adminMapper.updateByPrimaryKey(admin);
         return Result.success();
     }
@@ -149,7 +149,7 @@ public class AdminService {
     public Result deleteAdmin(DeleteAdminParam param) {
         Admin admin = adminManager.getAminById(param.getId());
         admin.setIsDelete(Constants.Common.YES);
-        admin.setUpdaterId(param.getAdminId());
+        admin.setUpdaterId(param.getLoginAdminId());
         admin.setUpdatetime(new Date());
         adminMapper.updateByPrimaryKey(admin);
         return Result.success();
@@ -181,11 +181,11 @@ public class AdminService {
         token.setCreatetime(now);
         token.setUpdatetime(now);
         tokenMapper.insert(token);
-        Map<String, String> result = new HashMap<>();
-        result.put("token", tokenStr);
-        result.put("adminId", admin.getId().toString());
-        result.put("adminName", admin.getName());
-        return Result.success(result);
+        AdminLoginDTO adminLoginDTO = new AdminLoginDTO();
+        adminLoginDTO.setToken(tokenStr);
+        adminLoginDTO.setAdminId(admin.getId());
+        adminLoginDTO.setAdminName(admin.getName());
+        return Result.success(adminLoginDTO);
     }
 
     /**

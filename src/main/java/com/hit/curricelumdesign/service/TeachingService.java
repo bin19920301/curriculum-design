@@ -13,7 +13,6 @@ import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.entity.Work;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
-import com.hit.curricelumdesign.context.param.BaseListRequestParam;
 import com.hit.curricelumdesign.context.param.teaching.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.TeachingMapper;
@@ -73,10 +72,10 @@ public class TeachingService {
         }
         Teaching teaching = new Teaching();
         BeanUtil.copyProperties(teachingParam, teaching);
-        teaching.setCreatorId(teachingParam.getTeacherId());
+        teaching.setCreatorId(teachingParam.getLoginTeacherId());
         teaching.setCreatetime(new Date());
-        teaching.setTeacherId(teachingParam.getTeacherId());
-        teaching.setUpdaterId(teachingParam.getTeacherId());
+        teaching.setTeacherId(teachingParam.getLoginTeacherId());
+        teaching.setUpdaterId(teachingParam.getLoginTeacherId());
         teaching.setUpdatetime(new Date());
         teaching.setIsDelete(false);
         //设置教学状态
@@ -149,7 +148,7 @@ public class TeachingService {
                     if (tempWorksForUpdate.get(0).getId() == oldWork.getId()) {
                         UpdateWorkBO updateWorkBO = new UpdateWorkBO();
                         updateWorkBO.setId(oldWork.getId());
-                        updateWorkBO.setStudentId(studentWorkProjectParam.getWorkStudentId());
+                        updateWorkBO.setLoginStudentId(studentWorkProjectParam.getWorkStudentId());
                         updateWorkBO.setWorkProjectId(studentWorkProjectParam.getWorkProjectId());
                         workManager.updateWork(updateWorkBO);
                         oldListIterator.remove();
@@ -186,7 +185,7 @@ public class TeachingService {
     public Result getTeachingByCreatorId(ConditionTeachingParam teachingParam) {
         PageHelper.startPage(teachingParam.getPageNum(), teachingParam.getPageSize());
         //这里应该是获取到当前登录用户的id
-        Integer currentUserId = teachingParam.getTeacherId();
+        Integer currentUserId = teachingParam.getLoginTeacherId();
         Integer status = teachingParam.getStatus();
         List<TeachingListDTO> teachingList = teachingMapper.getTeachingDTOByCreatorIdAndStatus(currentUserId, status);
         //这里设置教学当前的状态和教学涉及到的教学人数,以及更新作业的状态

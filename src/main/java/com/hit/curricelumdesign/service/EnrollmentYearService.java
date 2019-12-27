@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
 import com.hit.curricelumdesign.context.dto.enrollmentYear.EnrollmentYearDTO;
-import com.hit.curricelumdesign.context.dto.student.StudentDTO;
 import com.hit.curricelumdesign.context.entity.EnrollmentYear;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
@@ -56,9 +55,9 @@ public class EnrollmentYearService {
         enrollmentYear = new EnrollmentYear();
         enrollmentYear.setEnrollmentYear(param.getEnrollmentYear());
         enrollmentYear.setIsDelete(Constants.Common.IS_NOT);
-        enrollmentYear.setCreatorId(param.getAdminId());
+        enrollmentYear.setCreatorId(param.getLoginAdminId());
         enrollmentYear.setCreatetime(now);
-        enrollmentYear.setUpdaterId(param.getAdminId());
+        enrollmentYear.setUpdaterId(param.getLoginAdminId());
         enrollmentYear.setUpdatetime(now);
         enrollmentYearMapper.insert(enrollmentYear);
         return Result.success();
@@ -75,7 +74,7 @@ public class EnrollmentYearService {
         BeanUtil.copyProperties(param, enrollmentYear);
         enrollmentYear.setIsDelete(Constants.Common.IS_YES);
         enrollmentYear.setUpdatetime(new Date());
-        enrollmentYear.setUpdaterId(param.getAdminId());
+        enrollmentYear.setUpdaterId(param.getLoginAdminId());
         enrollmentYearMapper.updateByPrimaryKeySelective(enrollmentYear);
         return Result.success();
     }
@@ -93,7 +92,7 @@ public class EnrollmentYearService {
         }
         enrollmentYear = new EnrollmentYear();
         BeanUtil.copyProperties(param, enrollmentYear);
-        enrollmentYear.setUpdaterId(param.getAdminId());
+        enrollmentYear.setUpdaterId(param.getLoginAdminId());
         enrollmentYear.setUpdatetime(new Date());
         enrollmentYearMapper.updateByPrimaryKeySelective(enrollmentYear);
         return Result.success();

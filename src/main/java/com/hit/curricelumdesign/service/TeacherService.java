@@ -1,12 +1,11 @@
 package com.hit.curricelumdesign.service;
 
-import com.fasterxml.jackson.datatype.jsr310.DecimalUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
+import com.hit.curricelumdesign.context.dto.admin.TeacherLoginDTO;
 import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
-import com.hit.curricelumdesign.context.entity.Student;
 import com.hit.curricelumdesign.context.entity.Teacher;
 import com.hit.curricelumdesign.context.entity.Token;
 import com.hit.curricelumdesign.context.enums.Error;
@@ -20,7 +19,6 @@ import com.hit.curricelumdesign.dao.TokenMapper;
 import com.hit.curricelumdesign.manager.teacher.TeacherManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import com.hit.curricelumdesign.utils.MsgUtils;
-import com.hit.curricelumdesign.utils.StringUtil;
 import com.hit.curricelumdesign.utils.TokenUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -79,7 +77,7 @@ public class TeacherService {
         Teacher teacher = new Teacher();
         BeanUtil.copyProperties(teacherParam, teacher);
         teacher.setIsDelete(false);
-        teacher.setCreatorId(teacherParam.getAdminId());
+        teacher.setCreatorId(teacherParam.getLoginAdminId());
         teacher.setCreatetime(new Date());
         teacher.setUpdaterId(0);
         teacher.setPassword(DigestUtils.md5Hex(md5Pre + teacherPasswordDefault));
@@ -97,7 +95,7 @@ public class TeacherService {
         Teacher teacher = new Teacher();
         BeanUtil.copyProperties(teacherParam, teacher, "password");
         teacher.setUpdatetime(new Date());
-        teacher.setUpdaterId(teacherParam.getAdminId());
+        teacher.setUpdaterId(teacherParam.getLoginAdminId());
         teacher.setPassword(DigestUtils.md5Hex(md5Pre + teacherParam.getPassword()));
         teacherMapper.updateByPrimaryKeySelective(teacher);
         return Result.success();
@@ -114,7 +112,7 @@ public class TeacherService {
         BeanUtil.copyProperties(teacherParam, teacher);
         teacher.setIsDelete(Boolean.TRUE);
         teacher.setUpdatetime(new Date());
-        teacher.setUpdaterId(teacherParam.getAdminId());
+        teacher.setUpdaterId(teacherParam.getLoginAdminId());
         teacherMapper.updateByPrimaryKeySelective(teacher);
         return Result.success();
     }
@@ -131,7 +129,7 @@ public class TeacherService {
         BeanUtil.copyProperties(dto, teacher);
         teacher.setPassword(DigestUtils.md5Hex(md5Pre + teacherPasswordDefault));
         //更新操作者的id
-        teacher.setUpdaterId(teacherParam.getAdminId());
+        teacher.setUpdaterId(teacherParam.getLoginAdminId());
         teacher.setUpdatetime(new Date());
         teacherMapper.updateByPrimaryKeySelective(teacher);
         return Result.success();
@@ -178,11 +176,11 @@ public class TeacherService {
         token.setCreatetime(now);
         token.setUpdatetime(now);
         tokenMapper.insert(token);
-        Map<String, String> result = new HashMap<>();
-        result.put("token", tokenStr);
-        result.put("teacherId", teacher.getId().toString());
-        result.put("teacherName", teacher.getName());
-        return Result.success(result);
+        TeacherLoginDTO teacherLoginDTO = new TeacherLoginDTO();
+        teacherLoginDTO.setToken(tokenStr);
+        teacherLoginDTO.setTeacherId(teacher.getId());
+        teacherLoginDTO.setTeacherName(teacher.getName());
+        return Result.success(teacherLoginDTO);
     }
 
     /**

@@ -1,7 +1,6 @@
 package com.hit.curricelumdesign.service;
 
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
 import com.hit.curricelumdesign.context.dto.craftcard.CraftCardInfoDTO;
@@ -18,19 +17,14 @@ import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.work.*;
 import com.hit.curricelumdesign.context.param.work.WorkBaseParam;
-import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByStudentParam;
-import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByTeacherParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.*;
 import com.hit.curricelumdesign.manager.craftcard.CraftCardManager;
 import com.hit.curricelumdesign.manager.student.StudentManager;
 import com.hit.curricelumdesign.manager.teacher.TeacherManager;
-import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
-import com.hit.curricelumdesign.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -260,7 +254,7 @@ public class WorkService {
     public Result getWorkListByStudentId(GetWorkListByStudentIdParam param) {
         PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime desc");
 
-        List<Work> workList = workMapper.selectByParams(null, param.getStudentId(), null, param.getIsDone());
+        List<Work> workList = workMapper.selectByParams(null, param.getLoginStudentId(), null, param.getIsDone());
 
         List<WorkInfoListDTO> workInfoListDTOList = new ArrayList<>();
 

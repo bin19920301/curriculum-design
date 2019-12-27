@@ -18,7 +18,6 @@ import com.hit.curricelumdesign.dao.FileMapper;
 import com.hit.curricelumdesign.dao.WorkProjectFileMapper;
 import com.hit.curricelumdesign.dao.WorkProjectMapper;
 import com.hit.curricelumdesign.manager.file.FileManager;
-import com.hit.curricelumdesign.manager.workproject.WorkProjectManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,9 +74,9 @@ public class WorkProjectService {
         workProject.setUseCount(0);
         workProject.setIsDelete(Constants.Common.IS_NOT);
         workProject.setCreatetime(now);
-        workProject.setCreatorId(param.getTeacherId());
+        workProject.setCreatorId(param.getLoginTeacherId());
         workProject.setUpdatetime(now);
-        workProject.setUpdaterId(param.getTeacherId());
+        workProject.setUpdaterId(param.getLoginTeacherId());
         workProjectMapper.insert(workProject);
         List<WorkProjectFile> workProjectFileList = new ArrayList<>();
         for (File file : fileList) {
@@ -166,7 +165,7 @@ public class WorkProjectService {
         }
         workProjectFileMapper.deleteByWorkProjectId(workProject.getId());
         workProject.setUpdatetime(new Date());
-        workProject.setUpdaterId(param.getTeacherId());
+        workProject.setUpdaterId(param.getLoginTeacherId());
         workProject.setName(param.getName());
         workProject.setDesc(param.getDesc());
         workProjectMapper.updateByPrimaryKey(workProject);
@@ -197,7 +196,7 @@ public class WorkProjectService {
             throw new BaseException(Error.WORK_PROJECT_IS_NOT_EXIST);
         }
         workProject.setIsDelete(Constants.Common.IS_YES);
-        workProject.setUpdaterId(param.getTeacherId());
+        workProject.setUpdaterId(param.getLoginTeacherId());
         workProject.setUpdatetime(new Date());
         workProjectMapper.updateByPrimaryKey(workProject);
         workProjectFileMapper.deleteByWorkProjectId(workProject.getId());

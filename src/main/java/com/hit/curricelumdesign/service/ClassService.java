@@ -61,9 +61,9 @@ public class ClassService {
         aClass.setAcademyId(academy.getId());
         aClass.setName(param.getName());
         aClass.setIsDelete(Constants.Common.IS_NOT);
-        aClass.setCreatorId(param.getAdminId());
+        aClass.setCreatorId(param.getLoginAdminId());
         aClass.setCreatetime(now);
-        aClass.setUpdaterId(param.getAdminId());
+        aClass.setUpdaterId(param.getLoginAdminId());
         aClass.setUpdatetime(now);
         classMapper.insert(aClass);
         return Result.success();
@@ -83,7 +83,7 @@ public class ClassService {
         }
 
         aClass.setName(param.getName());
-        aClass.setUpdaterId(param.getAdminId());
+        aClass.setUpdaterId(param.getLoginAdminId());
         aClass.setUpdatetime(new Date());
         classMapper.updateByPrimaryKey(aClass);
         return Result.success();
@@ -104,7 +104,7 @@ public class ClassService {
         }
         aClass.setIsDelete(Constants.Common.IS_YES);
         aClass.setUpdatetime(new Date());
-        aClass.setUpdaterId(param.getAdminId());
+        aClass.setUpdaterId(param.getLoginAdminId());
         classMapper.updateByPrimaryKey(aClass);
         return Result.success();
     }

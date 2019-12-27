@@ -17,11 +17,11 @@ public class UpdateWorkBO extends WorkBaseBO {
         this.workProjectId = workProjectId;
     }
 
-    public Integer getStudentId() {
+    public Integer getLoginStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setLoginStudentId(Integer loginStudentId) {
+        this.studentId = loginStudentId;
     }
 }

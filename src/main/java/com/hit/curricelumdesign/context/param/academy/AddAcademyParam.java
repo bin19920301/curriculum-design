@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.param.academy;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,7 +12,7 @@ import javax.validation.constraints.Size;
  * @ClassName AddAcademyParam
  * @Description
  */
-public class AddAcademyParam {
+public class AddAcademyParam extends BaseRequestParam {
 
     /**
      * 学院名称
