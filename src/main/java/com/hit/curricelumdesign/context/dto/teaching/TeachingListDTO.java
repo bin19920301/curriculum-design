@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.dto.teaching;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class TeachingListDTO {
@@ -27,6 +29,7 @@ public class TeachingListDTO {
     /**
      * 截止日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deadlineTime;
 
     /**
