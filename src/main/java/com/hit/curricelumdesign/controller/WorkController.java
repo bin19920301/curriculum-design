@@ -52,13 +52,13 @@ public class WorkController {
     @RequestMapping(value = "/work/getteacherworkinfobyid/", method = RequestMethod.POST)
     @HitApi(checkTeacherLogin = true)
     public Result getTeacherWorkInfoById(WorkBaseParam param) {
-        return workService.getWorkInfoById(param);
+        return workService.getTeacherWorkInfoById(param);
     }
 
     @RequestMapping(value = "/work/getstudentworkinfobyid/", method = RequestMethod.POST)
     @HitApi(checkStudentLogin = true)
     public Result getStudentWorkInfoById(WorkBaseParam param) {
-        return workService.getWorkInfoById(param);
+        return workService.getStudentWorkInfoById(param);
     }
 
     @RequestMapping(value = "/work/getworklistbystudentid/", method = RequestMethod.POST)

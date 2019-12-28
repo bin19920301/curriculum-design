@@ -197,13 +197,14 @@ public class WorkService {
         return Result.success();
     }
 
+
     /**
-     * 获取作业详情
+     * 教师获取作业详情
      *
      * @param param
      * @return
      */
-    public Result getWorkInfoById(WorkBaseParam param) {
+    public Result getTeacherWorkInfoById(WorkBaseParam param) {
         WorkInfoDTO workInfoDTO = new WorkInfoDTO();
 
         Work work = workManager.getWorkerById(param.getId());
@@ -241,6 +242,59 @@ public class WorkService {
 
         }
         workInfoDTO.setWorkMessageInfoDTOList(workMessageInfoDTOList);
+
+        workMessageMapper.readMessage(param.getLoginTeacherId(), work.getId(), Constants.WorkMessage.RECEIVER_TYPE_TEACHER);
+
+        return Result.success(workInfoDTO);
+    }
+
+
+    /**
+     * 学生获取作业详情
+     *
+     * @param param
+     * @return
+     */
+    public Result getStudentWorkInfoById(WorkBaseParam param) {
+        WorkInfoDTO workInfoDTO = new WorkInfoDTO();
+
+        Work work = workManager.getWorkerById(param.getId());
+        workInfoDTO.setWorkId(work.getId());
+        workInfoDTO.setStatus(work.getStatus());
+        WorkTeachingDTO workTeachingDTO = teachingMapper.getWorkTeachingDTOById(work.getTeachingId());
+        if (null == workTeachingDTO) {
+            throw new BaseException(Error.TEACHING_IS_NOT_EXIST);
+        }
+
+        WorkProjectInfoDTO workProjectInfoDTO = workProjectMapper.getWorkProjectInfoById(work.getWorkProjectId());
+        if (null == workProjectInfoDTO) {
+            throw new BaseException(Error.WORK_PROJECT_IS_NOT_EXIST);
+        }
+
+        List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectId(workProjectInfoDTO.getId());
+        workProjectInfoDTO.setFilelist(fileListDTOList);
+
+        workInfoDTO.setTeaching(workTeachingDTO);
+
+        workInfoDTO.setWorkProjectInfoDTO(workProjectInfoDTO);
+
+        List<CraftCardInfoDTO> craftCardInfoDTOList = craftCardMapper.getCraftCardInfoDTOListByWorkId(work.getId());
+        workInfoDTO.setCraftCardInfoDTOList(craftCardInfoDTOList);
+        TeacherDTO teacher = teacherManager.getTeacherById(workTeachingDTO.getTeacherId());
+        StudentDTO student = studentManager.getStudentById(work.getStudentId());
+        workInfoDTO.setStudentName(student.getName());
+        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId());
+        for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
+            if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                message.setSenderName(student.getName());
+            } else if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                message.setSenderName(teacher.getName());
+            }
+
+        }
+        workInfoDTO.setWorkMessageInfoDTOList(workMessageInfoDTOList);
+
+        workMessageMapper.readMessage(param.getLoginStudentId(), work.getId(), Constants.WorkMessage.RECEIVER_TYPE_STUDENT);
 
         return Result.success(workInfoDTO);
     }

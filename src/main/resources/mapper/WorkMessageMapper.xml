@@ -257,4 +257,14 @@
       f_is_delete = #{isDelete,jdbcType=BIT}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+    <update id="readMessage">
+        UPDATE t_work_message
+        SET f_is_read = 1
+        WHERE
+            f_is_delete = 0
+            AND f_is_read = 0
+            AND f_work_id = #{workId}
+            and f_receiver_id = #{userId}
+            and f_receiver_type = #{receiverType}
+    </update>
 </mapper>

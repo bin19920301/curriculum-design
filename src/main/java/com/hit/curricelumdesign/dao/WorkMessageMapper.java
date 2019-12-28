@@ -4,6 +4,7 @@ import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageDTO;
 import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.entity.WorkMessage;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,4 +33,6 @@ public interface WorkMessageMapper {
     long countStudentUnreadMessage(Integer studentId);
 
     List<WorkMessageInfoDTO> getWorkMessageInfoDTOByWorkId(Integer workId);
+
+    int readMessage(@Param("userId") Integer userId, @Param("workId") Integer workId, @Param("receiverType") Integer receiverType);
 }
