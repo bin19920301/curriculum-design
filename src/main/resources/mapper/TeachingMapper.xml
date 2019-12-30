@@ -242,5 +242,19 @@
         left join t_teacher te on tt.f_teacher_id = te.f_id
         where tt.f_id = #{teachingId} and tt.f_is_delete = false
     </select>
+    <select id="getTeachingByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_teaching
+        where f_status= #{status,jdbcType=INTEGER}
+        and f_is_delete = 0
+    </select>
+    <select id="getunFinishedTeaching" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from t_teaching
+        where f_status != 3
+        and f_is_delete = 0
+    </select>
 
 </mapper>

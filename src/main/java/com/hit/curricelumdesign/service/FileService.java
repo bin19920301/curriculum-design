@@ -164,6 +164,14 @@ public class FileService {
      */
     public Result getFileByFolderId(ConditionFileParam fileParam) {
         List<FileDTO> fileDTOList = fileMapper.getListByFolderId(fileParam.getFolderId());
+        //进行拼接url
+        for (int i = 0; i < fileDTOList.size(); i++) {
+            String filePath = fileMapper.selectByPrimaryKey(fileDTOList.get(i).getId()).getPath();
+            String fileRealName = filePath.substring(filePath.lastIndexOf("/"));
+            String url = "/download"+fileRealName;
+            fileDTOList.get(i).setUrl(url);
+
+        }
         BaseListDTO<FileDTO> fileDTOBaseList = new BaseListDTO<>(fileDTOList.size(), fileDTOList);
         return Result.success(fileDTOBaseList);
     }

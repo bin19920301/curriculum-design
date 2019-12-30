@@ -52,6 +52,8 @@ public class FileDTO {
      */
     private Integer useCount;
 
+    private String url;
+
     public Integer getId() {
         return id;
     }
@@ -122,5 +124,13 @@ public class FileDTO {
 
     public void setCreatorName(String creatorName) {
         this.creatorName = creatorName;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -1,7 +1,6 @@
 package com.hit.curricelumdesign.manager.teaching;
 
 import com.hit.curricelumdesign.context.dto.teaching.TeachingInfoDTO;
-import com.hit.curricelumdesign.context.dto.teaching.TeachingListDTO;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;

@@ -32,4 +32,8 @@ public interface TeachingMapper {
 
     WorkTeachingDTO getWorkTeachingDTOById(Integer teachingId);
 
+    List<Teaching> getTeachingByStatus(Integer status);
+
+    List<Teaching> getunFinishedTeaching();
+
 }

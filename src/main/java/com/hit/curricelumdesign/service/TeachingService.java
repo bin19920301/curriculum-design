@@ -21,6 +21,7 @@ import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -234,4 +235,26 @@ public class TeachingService {
         return teachingInfoDTO;
     }
 
+
+    @Scheduled(cron = "0 0 0 * * ? ")
+    public void scanTeachingAndUpdateStatus(){
+        //每天执行一次
+        //查找所有状态时批阅中的教学
+        //比对截至时间，进行状态修改
+        List<Teaching> teachingInChecking = teachingMapper.getunFinishedTeaching();
+        for (int i = 0; i < teachingInChecking.size(); i++) {
+            Teaching teaching = teachingInChecking.get(i);
+            //获取到教学的截至时间
+            long deadLinTime = teaching.getDeadlineTime().getTime();
+            //获取到当前的系统时间
+            long currentTime = new Date().getTime();
+            //判断是否进行状态变更
+            if (currentTime >= deadLinTime){
+                //更改状态
+                teaching.setStatus(Constants.Teaching.TeachingStatus.CHECKED.getStatus());
+                //执行更新
+                teachingMapper.updateByPrimaryKeySelective(teaching);
+            }
+        }
+    }
 }
