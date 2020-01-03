@@ -41,6 +41,9 @@ public class FileService {
     @Value("${hit.curricelumdesign.file.uploadFolderName}")
     private String fileUploadPath;
 
+    @Value("${hit.curricelumdesign.file.downloadMapping}")
+    private String downloadMapping;
+
 
     /**
      * 增加文件信息（文件上传）
@@ -76,7 +79,11 @@ public class FileService {
         // 文件保存路径
         String filePath = currentSystemPath + fileUploadPath;
         // 文件重命名，防止重复
-        String pathFileName = filePath + UUID.randomUUID() + "_" + fileName;
+        String fileNewName = UUID.randomUUID() + "_" + fileName;
+        // 真实路径
+        String pathFileName = filePath + fileNewName;
+        // 相对路径
+        String relativePath = downloadMapping + fileNewName;
         // 文件对象
         java.io.File dest = new java.io.File(pathFileName);
         // 判断路径是否存在，如果不存在则创建
@@ -88,7 +95,7 @@ public class FileService {
             // 保存到服务器中
             multipartFile.transferTo(dest);
             file.setName(fileName);
-            file.setPath(pathFileName);
+            file.setPath(relativePath);
             file.setFolderId(fileParam.getFolderId());
             file.setSize(sizeString);
             file.setUseCount(0);
@@ -167,8 +174,8 @@ public class FileService {
         //进行拼接url
         for (int i = 0; i < fileDTOList.size(); i++) {
             String filePath = fileMapper.selectByPrimaryKey(fileDTOList.get(i).getId()).getPath();
-            String fileRealName = filePath.substring(filePath.lastIndexOf("/"));
-            String url = "/download"+fileRealName;
+            //String fileRealName = filePath.substring(filePath.lastIndexOf("/"));
+            String url = filePath;
             fileDTOList.get(i).setUrl(url);
 
         }

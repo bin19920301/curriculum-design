@@ -28,6 +28,11 @@ public class FileListDTO {
      */
     private String name;
 
+    /**
+     * 文件相对路径
+     */
+    private String url;
+
     public Integer getId() {
         return id;
     }
@@ -50,6 +55,14 @@ public class FileListDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
