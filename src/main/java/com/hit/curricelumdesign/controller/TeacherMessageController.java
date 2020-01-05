@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.controller;
 
+import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
 import com.hit.curricelumdesign.context.param.teachermessage.AddTeacherMessageParam;
 import com.hit.curricelumdesign.context.param.teachermessage.TeacherMessageBaseParam;
@@ -17,19 +18,19 @@ public class TeacherMessageController {
     private TeacherMessageService teacherMessageService;
 
     @RequestMapping(value = "/teachermessage/addmessage/", method = RequestMethod.POST)
-    //@HitApi(checkTeacherLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result addTeacherMessage(AddTeacherMessageParam param){
         return  teacherMessageService.addTeacherMessage(param);
     }
 
     @RequestMapping(value = "/teachermessage/deletemessage/", method = RequestMethod.POST)
-    //@HitApi(checkTeacherLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result deleteTeacherMessage(TeacherMessageBaseParam param){
         return  teacherMessageService.deleteTeacherMessage(param);
     }
 
     @RequestMapping(value = "/teachermessage/listmessage/", method = RequestMethod.POST)
-    //@HitApi(checkTeacherLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result listTeacherMessage(BaseListRequestParam param){
         return  teacherMessageService.listTeacherMessage(param);
     }

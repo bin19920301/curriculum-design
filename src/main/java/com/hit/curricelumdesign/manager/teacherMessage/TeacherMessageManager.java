@@ -1,4 +1,4 @@
-package com.hit.curricelumdesign.manager.TeacherMessage;
+package com.hit.curricelumdesign.manager.teacherMessage;
 
 import com.hit.curricelumdesign.context.entity.TeacherMessage;
 import com.hit.curricelumdesign.context.enums.Error;

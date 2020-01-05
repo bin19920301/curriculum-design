@@ -2,7 +2,7 @@ package com.hit.curricelumdesign.context.param.teachingmessage;
 
 import com.hit.curricelumdesign.context.param.BaseRequestParam;
 
-public class TeacherMessageBaseParam extends BaseRequestParam {
+public class TeachingMessageBaseParam extends BaseRequestParam {
 
     /**
      * 消息id

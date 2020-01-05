@@ -198,4 +198,14 @@ public class Constants {
         }
     }
 
+    public static class TeachingMessage {
+
+        //发送者类型
+        //学生
+        public static final Integer SENDER_TYPE_STUDENT = 1;
+        //教师
+        public static final Integer SENDER_TYPE_TEACHER = 2;
+
+    }
+
 }

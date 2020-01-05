@@ -136,6 +136,10 @@ public enum Error {
 	//----------------------------------------教师消息
 	TEACHER_MESSAGE_IS_NOT_EXIST("3011001", "教师消息不存在"),
 	TEACHER_MESSAGE_ONLY_DELETE_BY_SELF("3011002", "教师信息只能由本人删除"),
+
+	//----------------------------------------教学消息
+	TEACHING_MESSAGE_IS_NOT_EXIST("3012001", "教学消息不存在"),
+	TEACHING_MESSAGE_ONLY_DELETE_BY_SELF("3012002", "教学信息只能由本人删除"),
 	;
 
 

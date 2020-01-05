@@ -5,7 +5,7 @@ import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AddTeacherMessageParam extends BaseRequestParam {
+public class AddTeachingMessageParam extends BaseRequestParam {
 
     /**
      * 内容
@@ -14,6 +14,10 @@ public class AddTeacherMessageParam extends BaseRequestParam {
     @Size(max = 215)
     private String content;
 
+    /**
+     * 关联的教学id
+     */
+    private Integer teachingId;
 
     public String getContent() {
         return content;
@@ -21,5 +25,13 @@ public class AddTeacherMessageParam extends BaseRequestParam {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getTeachingId() {
+        return teachingId;
+    }
+
+    public void setTeachingId(Integer teachingId) {
+        this.teachingId = teachingId;
     }
 }

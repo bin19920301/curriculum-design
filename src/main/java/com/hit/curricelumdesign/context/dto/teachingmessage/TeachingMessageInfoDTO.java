@@ -7,6 +7,7 @@ package com.hit.curricelumdesign.context.dto.teachingmessage;
  * @Description
  */
 public class TeachingMessageInfoDTO {
+
     /**
      * id主键自增
      */
