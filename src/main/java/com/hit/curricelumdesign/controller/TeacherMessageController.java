@@ -1,9 +1,8 @@
 package com.hit.curricelumdesign.controller;
 
-import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
-import com.hit.curricelumdesign.context.param.TeacherMessage.AddTeacherMessageParam;
-import com.hit.curricelumdesign.context.param.TeacherMessage.TeacherMessageBaseParam;
+import com.hit.curricelumdesign.context.param.teachermessage.AddTeacherMessageParam;
+import com.hit.curricelumdesign.context.param.teachermessage.TeacherMessageBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.service.TeacherMessageService;
 import org.springframework.beans.factory.annotation.Autowired;

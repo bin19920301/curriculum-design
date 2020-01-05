@@ -1,13 +1,7 @@
-package com.hit.curricelumdesign.context.param.TeacherMessage;
+package com.hit.curricelumdesign.context.param.teachermessage;
 
 import com.hit.curricelumdesign.context.param.BaseRequestParam;
 
-/**
- * @author xbr
- * @Date 2019-12-22
- * @ClassName WorkMessageBaseParam
- * @Description
- */
 public class TeacherMessageBaseParam extends BaseRequestParam {
 
     /**

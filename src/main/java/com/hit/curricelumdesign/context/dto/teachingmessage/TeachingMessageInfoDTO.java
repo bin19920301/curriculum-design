@@ -1,7 +1,4 @@
-package com.hit.curricelumdesign.context.dto.teachermessage;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+package com.hit.curricelumdesign.context.dto.teachingmessage;
 
 /**
  * @author
@@ -9,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @ClassName
  * @Description
  */
-public class TeacherMessageInfoDTO {
+public class TeachingMessageInfoDTO {
     /**
      * id主键自增
      */
@@ -21,20 +18,23 @@ public class TeacherMessageInfoDTO {
     private String content;
 
     /**
-     * 消息创建者的id
+     * 消息发送者的id
      */
-    private Integer creatorId;
+    private Integer senderId;
 
     /**
      * 发送者名称
      */
-    private String creatorName;
+    private String senderName;
+
+    /**
+     * 消息发送者的用户类型，1为学生，2为教师
+     */
+    private Integer senderType;
 
     /**
      * 创建时间
      */
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private String createtime;
 
     public Integer getId() {
@@ -53,20 +53,28 @@ public class TeacherMessageInfoDTO {
         this.content = content;
     }
 
-    public Integer getCreatorId() {
-        return creatorId;
+    public Integer getSenderId() {
+        return senderId;
     }
 
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
+    public void setSenderId(Integer senderId) {
+        this.senderId = senderId;
     }
 
-    public String getCreatorName() {
-        return creatorName;
+    public String getSenderName() {
+        return senderName;
     }
 
-    public void setCreatorName(String creatorName) {
-        this.creatorName = creatorName;
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public Integer getSenderType() {
+        return senderType;
+    }
+
+    public void setSenderType(Integer senderType) {
+        this.senderType = senderType;
     }
 
     public String getCreatetime() {
@@ -79,11 +87,12 @@ public class TeacherMessageInfoDTO {
 
     @Override
     public String toString() {
-        return "TeacherMessageInfoDTO{" +
+        return "WorkMessageInfoDTO{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
-                ", creatorId=" + creatorId +
-                ", creatorName='" + creatorName + '\'' +
+                ", senderId=" + senderId +
+                ", senderName='" + senderName + '\'' +
+                ", senderType=" + senderType +
                 ", createtime='" + createtime + '\'' +
                 '}';
     }
