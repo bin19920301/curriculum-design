@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
-import com.hit.curricelumdesign.context.dto.teachermessage.TeacherMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.teachingmessage.TeachingMessageInfoDTO;
 import com.hit.curricelumdesign.context.entity.TeachingMessage;
 import com.hit.curricelumdesign.context.enums.Error;
@@ -36,6 +35,7 @@ public class TeachingMessageService {
         TeachingMessage message = new TeachingMessage();
         BeanUtil.copyProperties(param,message);
         message.setSenderId(param.getLoginTeacherId());
+        //message.setSenderId(1);
         message.setSenderType(Constants.TeachingMessage.SENDER_TYPE_TEACHER);
         message.setCreatetime(new Date());
         message.setUpdatetime(new Date());
@@ -48,6 +48,7 @@ public class TeachingMessageService {
         TeachingMessage message = new TeachingMessage();
         BeanUtil.copyProperties(param,message);
         message.setSenderId(param.getLoginStudentId());
+        //message.setSenderId(1);
         message.setSenderType(Constants.TeachingMessage.SENDER_TYPE_STUDENT);
         message.setCreatetime(new Date());
         message.setUpdatetime(new Date());

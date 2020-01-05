@@ -137,13 +137,13 @@
   <select id="listByTeachingId" resultMap="DTOResultMap" parameterType="java.lang.Integer" >
     select
     ttm.f_id, ttm.f_teaching_id, ttm.f_content, ttm.f_sender_id, ttm.f_sender_type, ttm.f_createtime, ttm.f_updatetime,
-    ttm.f_is_delete
+    ttm.f_is_delete,
     case
-       when ttm.f_sender_type == 1 then //活动
-        tt.f_name AS senderName
-       when ttm.f_sender_type == 1 then //博客
-        ts.f_name AS senderName
-    end
+       when ttm.f_sender_type = 2 then
+        tt.f_name
+       when ttm.f_sender_type = 1 then
+        ts.f_name
+    end AS senderName
     from t_teaching_message ttm
     left join t_teacher tt on ttm.f_sender_id = tt.f_id
     left join t_student ts on ttm.f_sender_id = ts.f_id
