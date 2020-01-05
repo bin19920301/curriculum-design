@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hit.curricelumdesign.dao.TeachingMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.TeachingMessage" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_teaching_id" property="teachingId" jdbcType="INTEGER" />
+    <result column="f_content" property="content" jdbcType="VARCHAR" />
+    <result column="f_sender_id" property="senderId" jdbcType="INTEGER" />
+    <result column="f_sender_type" property="senderType" jdbcType="INTEGER" />
+    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, f_teaching_id, f_content, f_sender_id, f_sender_type, f_createtime, f_updatetime, 
+    f_is_delete
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_teaching_message
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_teaching_message
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.TeachingMessage" >
+    insert into t_teaching_message (f_id, f_teaching_id, f_content, 
+      f_sender_id, f_sender_type, f_createtime, 
+      f_updatetime, f_is_delete)
+    values (#{id,jdbcType=INTEGER}, #{teachingId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{senderId,jdbcType=INTEGER}, #{senderType,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.TeachingMessage" >
+    insert into t_teaching_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        f_id,
+      </if>
+      <if test="teachingId != null" >
+        f_teaching_id,
+      </if>
+      <if test="content != null" >
+        f_content,
+      </if>
+      <if test="senderId != null" >
+        f_sender_id,
+      </if>
+      <if test="senderType != null" >
+        f_sender_type,
+      </if>
+      <if test="createtime != null" >
+        f_createtime,
+      </if>
+      <if test="updatetime != null" >
+        f_updatetime,
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teachingId != null" >
+        #{teachingId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="senderId != null" >
+        #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="senderType != null" >
+        #{senderType,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.TeachingMessage" >
+    update t_teaching_message
+    <set >
+      <if test="teachingId != null" >
+        f_teaching_id = #{teachingId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        f_content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="senderId != null" >
+        f_sender_id = #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="senderType != null" >
+        f_sender_type = #{senderType,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        f_createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.TeachingMessage" >
+    update t_teaching_message
+    set f_teaching_id = #{teachingId,jdbcType=INTEGER},
+      f_content = #{content,jdbcType=VARCHAR},
+      f_sender_id = #{senderId,jdbcType=INTEGER},
+      f_sender_type = #{senderType,jdbcType=INTEGER},
+      f_createtime = #{createtime,jdbcType=TIMESTAMP},
+      f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      f_is_delete = #{isDelete,jdbcType=BIT}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
