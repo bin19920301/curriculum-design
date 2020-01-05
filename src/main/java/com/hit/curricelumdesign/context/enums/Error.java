@@ -131,7 +131,11 @@ public enum Error {
 
 
 	//----------------------------------------作业消息
-	WORK_MESSAGE_IS_NOT_EXIST("301001", "作业消息不存在"),
+	WORK_MESSAGE_IS_NOT_EXIST("3010001", "作业消息不存在"),
+
+	//----------------------------------------教师消息
+	TEACHER_MESSAGE_IS_NOT_EXIST("3011001", "教师消息不存在"),
+	TEACHER_MESSAGE_ONLY_DELETE_BY_SELF("3011002", "教师信息只能由本人删除"),
 	;
 
 
