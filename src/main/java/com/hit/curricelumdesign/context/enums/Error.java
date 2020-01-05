@@ -64,6 +64,8 @@ public enum Error {
 	//----------------------------------------管理员
 	ADMIN_IS_NOT_EXIST("300001","管理员不存在"),
 	ADMIN_NUMBER_IS_EXIST("300002","管理员编号已存在"),
+	ADMIN_PASSWORD_CHECKED_FAIL("300003","管理员密码校验失败"),
+	ADMIN_ONLY_UPDATE_PASSWORD_BY_SELF("300004","只能本人修改密码"),
 
 	//----------------------------------------学院管理
 	ACADEMY_NAME_IS_EXIST("300201","学院名称已经存在"),
@@ -85,6 +87,10 @@ public enum Error {
 	TEACHER_DELETE_FAILURE("300304", "删除教师信息失败"),
 	TEACHER_RESET_PASSWORD_FAILURE("300305", "重置教师密码失败"),
 	TEACHER_NUMBER_IS_EXIST("300306", "教师编号已存在"),
+	TEACHER_TEMPLATE_NAME_ERROR("300407", "请使用学生批量导入的默认模板"),
+	TEACHER_TEMPLATE_HAS_EMPTY_CELL("300408", "教师模板存在空属性"),
+	TEACHER_ONLY_UPDATE_PASSWORD_BY_SELF("300409", "只能本人修改密码"),
+	TEACHER_PASSWORD_CHECKED_FAIL("300010","教师密码校验失败"),
 
 	//----------------------------------------学生
 	STUDENT_IS_NOT_EXIST("300401", "学生信息不存在"),
@@ -92,6 +98,8 @@ public enum Error {
 	STUDENT_UPDATE_FAILURE("300403", "更新学生信息失败"),
 	STUDENT_DELETE_FAILURE("300404", "删除学生信息失败"),
 	STUDENT_NUMBER_IS_EXIST("300405", "学生编号已存在"),
+	STUDENT_TEMPLATE_NAME_ERROR("300406", "请使用学生批量导入的默认模板"),
+	STUDENT_TEMPLATE_HAS_EMPTY_CELL("300407", "学生模板存在空属性"),
 
 	//----------------------------------------文件夹
 	FOLDER_NAME_IS_EXIST("300501", "文件夹名称已存在"),

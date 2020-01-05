@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Mapper
@@ -33,4 +34,10 @@ public interface FileMapper {
     List<String> getFileNameByWorkProjectId(Integer workProjectListId);
 
     List<FileListDTO> getFileListDTOByWorkProjectId(Integer workProjectListId);
+
+    //2020-01-05 根据作业项目id和文件使用类型查找文件名
+    List<String> getFileNameByWorkProjectIdAndType(Integer workProjectListId, Integer type);
+
+    //2020-01-05 根据作业项目id和文件使用类型查找文件
+    List<FileListDTO> getFileListDTOByWorkProjectIdAndType(Integer workProjectListId,Integer type);
 }

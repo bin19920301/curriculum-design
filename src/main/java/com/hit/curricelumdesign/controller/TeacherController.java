@@ -64,5 +64,10 @@ public class TeacherController {
         return teacherService.teacherLogout(param);
     }
 
+    @RequestMapping(value = "/teacher/updatepassword/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
+    public Result updatePassword(UpdatePasswordParam param) {
+        return teacherService.updatePassword(param);
+    }
 
 }

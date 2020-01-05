@@ -44,6 +44,12 @@ public class WorkProjectListDTO {
      */
     private List<String> fileName;
 
+    /**
+     * 参考方案名称
+     * @return
+     */
+    private List<String> referenceSolutionName;
+
     public Integer getId() {
         return id;
     }
@@ -100,6 +106,14 @@ public class WorkProjectListDTO {
         this.fileName = fileName;
     }
 
+    public List<String> getReferenceSolutionName() {
+        return referenceSolutionName;
+    }
+
+    public void setReferenceSolutionName(List<String> referenceSolutionName) {
+        this.referenceSolutionName = referenceSolutionName;
+    }
+
     @Override
     public String toString() {
         return "WorkProjectListDTO{" +
@@ -110,6 +124,7 @@ public class WorkProjectListDTO {
                 ", createtime='" + createtime + '\'' +
                 ", creatorName='" + creatorName + '\'' +
                 ", fileName=" + fileName +
+                ", referenceSolutionName=" + referenceSolutionName +
                 '}';
     }
 }

@@ -6,6 +6,7 @@ import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
 import com.hit.curricelumdesign.context.dto.admin.TeacherLoginDTO;
 import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
+import com.hit.curricelumdesign.context.entity.Admin;
 import com.hit.curricelumdesign.context.entity.Teacher;
 import com.hit.curricelumdesign.context.entity.Token;
 import com.hit.curricelumdesign.context.enums.Error;
@@ -28,9 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Transactional
@@ -203,4 +202,33 @@ public class TeacherService {
 
         return Result.success();
     }
+
+    /**
+     * 教师修改密码
+     * @param param
+     * @return
+     */
+    public Result updatePassword(UpdatePasswordParam param){
+        //判断修改的是用户自己的密码
+     /*   if (!param.getLoginTeacherId().equals(param.getId())){
+            throw new BaseException(Error.TEACHER_ONLY_UPDATE_PASSWORD_BY_SELF);
+        }*/
+        TeacherDTO currentTeacher = teacherManager.getTeacherById(param.getId());
+        String oldPassword = param.getOldPassword();
+        //进行密码比对
+        String md5OldPassword = DigestUtils.md5Hex(md5Pre + oldPassword);
+        if (!currentTeacher.getPassword().equals(md5OldPassword)){
+            throw new BaseException(Error.TEACHER_PASSWORD_CHECKED_FAIL);
+        }
+        //密码校验通过更新新的密码
+        currentTeacher.setPassword(DigestUtils.md5Hex(md5Pre + param.getNewPassword()));
+        Teacher teacher = new Teacher();
+        BeanUtil.copyProperties(currentTeacher,teacher);
+        //设置更新时间和更新者id
+        teacher.setUpdaterId(param.getLoginTeacherId());
+        teacher.setUpdatetime(new Date());
+        teacherMapper.updateByPrimaryKeySelective(teacher);
+        return Result.success();
+    }
+
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author xbr
  * @Date 2019-12-07
@@ -70,6 +72,24 @@ public class AdminController {
     @HitApi(checkAdminLogin = true)
     public Result adminLogout(BaseRequestParam param) {
         return adminService.adminLogout(param);
+    }
+
+    @RequestMapping(value = "/admin/importteacher/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
+    public Result importTeacherData(ImportParam param) {
+        return adminService.importTeacherData(param);
+    }
+
+    @RequestMapping(value = "/admin/importstudent/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
+    public Result importStudentData(ImportParam param) {
+        return adminService.importStudentData(param);
+    }
+
+    @RequestMapping(value = "/admin/updatepassword/", method = RequestMethod.POST)
+    @HitApi(checkAdminLogin = true)
+    public Result updatePassword(UpdatePasswordParam param) {
+        return adminService.updatePassword(param);
     }
 
 }

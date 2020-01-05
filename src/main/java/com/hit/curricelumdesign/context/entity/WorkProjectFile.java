@@ -26,6 +26,12 @@ public class WorkProjectFile {
     private Integer fileId;
 
     /**
+     * 文件使用类型 1：资料 2：参考方案
+     */
+    @Column(name = "f_file_type")
+    private Integer fileType;
+
+    /**
      * 是否删除 0：否 1：是
      */
     @Column(name = "f_is_delete")
@@ -117,5 +123,13 @@ public class WorkProjectFile {
 
     public void setUpdaterId(Integer updaterId) {
         this.updaterId = updaterId;
+    }
+
+    public Integer getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(Integer fileType) {
+        this.fileType = fileType;
     }
 }

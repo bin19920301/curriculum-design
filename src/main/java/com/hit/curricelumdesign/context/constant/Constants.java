@@ -154,4 +154,48 @@ public class Constants {
         }
     }
 
+    public static class File{
+        public enum FileTypes {
+            INFORMATION(1, "资料"),
+            REFERENCE_SOLUTION(2, "参考方案"),
+            ;
+
+            /**
+             * 状态
+             */
+            private Integer status;
+
+            /**
+             * 描述
+             */
+            private String desc;
+
+            private FileTypes(Integer status, String desc) {
+                this.status = status;
+                this.desc = desc;
+            }
+
+            private FileTypes() {
+            }
+
+            public Integer getStatus() {
+                return status;
+            }
+
+
+            public String getDesc() {
+                return desc;
+            }
+
+            public static String getDescByStatus(Integer status){
+                for (FileTypes value : FileTypes.values()) {
+                    if (value.getStatus().equals(status)){
+                        return value.getDesc() ;
+                    }
+                }
+                return null;
+            }
+        }
+    }
+
 }

@@ -227,4 +227,28 @@
         and a.f_is_delete = 0
         and b.f_is_delete = 0;
     </select>
+    <select id="getFileNameByWorkProjectIdAndType" resultType="java.lang.String">
+        select b.f_name
+        from t_work_project_file a
+        left join t_file b
+        on a.f_file_id = b.f_id
+        where a.f_work_project_id = #{workProjectListId}
+        and a.f_file_type = #{type}
+        and a.f_is_delete = 0
+        and b.f_is_delete = 0;
+    </select>
+    <select id="getFileListDTOByWorkProjectIdAndType" resultMap="FileListDTOMap">
+        select
+        b.f_id,
+        b.f_folder_id,
+        b.f_name,
+        b.f_path
+        from t_work_project_file a
+        left join t_file b
+        on a.f_file_id = b.f_id
+        where a.f_work_project_id = #{workProjectListId}
+        and a.f_file_type = #{type}
+        and a.f_is_delete = 0
+        and b.f_is_delete = 0;
+    </select>
 </mapper>

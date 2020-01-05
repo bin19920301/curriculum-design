@@ -34,6 +34,11 @@ public class AddWorkProjectParam extends BaseRequestParam {
      */
     private List<Integer> fileIdList;
 
+    /**
+     * 参考方案文件id列表
+     */
+    private List<Integer> referenceSolutionList;
+
     public String getName() {
         return name;
     }
@@ -58,12 +63,21 @@ public class AddWorkProjectParam extends BaseRequestParam {
         this.fileIdList = fileIdList;
     }
 
+    public List<Integer> getReferenceSolutionList() {
+        return referenceSolutionList;
+    }
+
+    public void setReferenceSolutionList(List<Integer> referenceSolutionList) {
+        this.referenceSolutionList = referenceSolutionList;
+    }
+
     @Override
     public String toString() {
         return "AddWorkProjectParam{" +
                 "name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
                 ", fileIdList=" + fileIdList +
+                ", referenceSolutionList=" + referenceSolutionList +
                 '}';
     }
 }
