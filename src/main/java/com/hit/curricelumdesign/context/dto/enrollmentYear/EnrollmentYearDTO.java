@@ -26,4 +26,12 @@ public class EnrollmentYearDTO {
     public void setEnrollmentYear(Integer enrollmentYear) {
         this.enrollmentYear = enrollmentYear;
     }
+
+    @Override
+    public String toString() {
+        return "EnrollmentYearDTO{" +
+                "id=" + id +
+                ", enrollmentYear=" + enrollmentYear +
+                '}';
+    }
 }

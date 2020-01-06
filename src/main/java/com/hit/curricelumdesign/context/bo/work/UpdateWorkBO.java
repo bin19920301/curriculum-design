@@ -24,4 +24,12 @@ public class UpdateWorkBO extends WorkBaseBO {
     public void setLoginStudentId(Integer loginStudentId) {
         this.studentId = loginStudentId;
     }
+
+    @Override
+    public String toString() {
+        return "UpdateWorkBO{" +
+                "workProjectId=" + workProjectId +
+                ", studentId=" + studentId +
+                '}';
+    }
 }

@@ -79,4 +79,16 @@ public class TeacherDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "TeacherDTO{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                ", academyName='" + academyName + '\'' +
+                ", academyId=" + academyId +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

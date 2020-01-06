@@ -133,4 +133,20 @@ public class FileDTO {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public String toString() {
+        return "FileDTO{" +
+                "id=" + id +
+                ", folderName='" + folderName + '\'' +
+                ", folderId=" + folderId +
+                ", name='" + name + '\'' +
+                ", size='" + size + '\'' +
+                ", creatorId=" + creatorId +
+                ", creatorName='" + creatorName + '\'' +
+                ", createtime=" + createtime +
+                ", useCount=" + useCount +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

@@ -149,4 +149,21 @@ public class WorkForTeacherDTO {
     public void setStatusDescribe(String statusDescribe) {
         this.statusDescribe = statusDescribe;
     }
+
+    @Override
+    public String toString() {
+        return "WorkForTeacherDTO{" +
+                "id=" + id +
+                ", status=" + status +
+                ", statusDescribe='" + statusDescribe + '\'' +
+                ", studentId=" + studentId +
+                ", studentNumber='" + studentNumber + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", enrollmentYear='" + enrollmentYear + '\'' +
+                ", academyName='" + academyName + '\'' +
+                ", className='" + className + '\'' +
+                ", workProjectId=" + workProjectId +
+                ", workProjectName='" + workProjectName + '\'' +
+                '}';
+    }
 }

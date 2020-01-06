@@ -118,4 +118,19 @@ public class StudentDTO {
     public void setClassId(Integer classId) {
         this.classId = classId;
     }
+
+    @Override
+    public String toString() {
+        return "StudentDTO{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                ", enrollmentYear='" + enrollmentYear + '\'' +
+                ", enrollmentId=" + enrollmentId +
+                ", academyName='" + academyName + '\'' +
+                ", academyId=" + academyId +
+                ", className='" + className + '\'' +
+                ", classId=" + classId +
+                '}';
+    }
 }

@@ -29,4 +29,12 @@ public class TeachingMessageListDTO {
     public void setStudentCount(Long studentCount) {
         this.studentCount = studentCount;
     }
+
+    @Override
+    public String toString() {
+        return "TeachingMessageListDTO{" +
+                "teachingMessageInfoDTOBaseListDTO=" + teachingMessageInfoDTOBaseListDTO +
+                ", studentCount=" + studentCount +
+                '}';
+    }
 }

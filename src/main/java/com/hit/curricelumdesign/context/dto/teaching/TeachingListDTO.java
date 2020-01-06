@@ -137,4 +137,20 @@ public class TeachingListDTO {
     public void setStudentCount(Long studentCount) {
         this.studentCount = studentCount;
     }
+
+    @Override
+    public String toString() {
+        return "TeachingListDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", studentCount=" + studentCount +
+                ", teacherReminder='" + teacherReminder + '\'' +
+                ", deadlineTime=" + deadlineTime +
+                ", status=" + status +
+                ", statusDescribe='" + statusDescribe + '\'' +
+                ", teacherId=" + teacherId +
+                ", teacherName='" + teacherName + '\'' +
+                ", creatorId=" + creatorId +
+                '}';
+    }
 }

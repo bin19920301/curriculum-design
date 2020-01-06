@@ -58,4 +58,14 @@ public class FolderDTO {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
+
+    @Override
+    public String toString() {
+        return "FolderDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", num=" + num +
+                ", createtime=" + createtime +
+                '}';
+    }
 }
