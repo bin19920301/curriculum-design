@@ -91,6 +91,6 @@ public class TeachingMessageService {
         TeachingMessageListDTO teachingMessageListDTO = new TeachingMessageListDTO();
         teachingMessageListDTO.setTeachingMessageInfoDTOBaseListDTO(baseListDTO);
         teachingMessageListDTO.setStudentCount(workMapper.countStudentsByTeachingId(param.getTeachingId()));
-        return Result.success(baseListDTO);
+        return Result.success(teachingMessageListDTO);
     }
 }
