@@ -1,9 +1,11 @@
 package com.hit.curricelumdesign.context.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
-@Entity
-@Table(name = "t_craft_card")
+
 public class CraftCard {
     /**
      * id主键自增风控唯一
@@ -22,19 +24,19 @@ public class CraftCard {
     /**
      * 加工表面id
      */
-    @Column(name = "f_surface_id")
-    private Integer surfaceId;
+    @Column(name = "f_surface")
+    private String surface;
 
     /**
      * 加工形式id
      */
-    @Column(name = "f_processing_method_id")
-    private Integer processingMethodId;
+    @Column(name = "f_processing_method")
+    private String processingMethod;
 
     /**
      * 工序内容
      */
-    @Column(name = "f_process _content")
+    @Column(name = "f_process_content")
     private String processContent;
 
     /**
@@ -89,20 +91,20 @@ public class CraftCard {
         this.workId = workId;
     }
 
-    public Integer getSurfaceId() {
-        return surfaceId;
+    public String getSurface() {
+        return surface;
     }
 
-    public void setSurfaceId(Integer surfaceId) {
-        this.surfaceId = surfaceId;
+    public void setSurface(String surface) {
+        this.surface = surface;
     }
 
-    public Integer getProcessingMethodId() {
-        return processingMethodId;
+    public String getProcessingMethod() {
+        return processingMethod;
     }
 
-    public void setProcessingMethodId(Integer processingMethodId) {
-        this.processingMethodId = processingMethodId;
+    public void setProcessingMethod(String processingMethod) {
+        this.processingMethod = processingMethod;
     }
 
     public String getProcessContent() {

@@ -112,6 +112,7 @@ public class WorkService {
     @Transactional
     public Result addCraftCardList(AddCraftCardListParam param) {
         Integer workId = param.getWorkId();
+        Integer studentId = param.getLoginStudentId();
         Work work = workManager.getWorkerById(workId);
         List<AddCraftCardParam> paramList = param.getList();
         List<CraftCard> newCraftCardList = new ArrayList<>();
@@ -120,28 +121,29 @@ public class WorkService {
 
         List<CraftCard> oldCraftCardList = craftCardMapper.getCraftCardListByWorkId(param.getWorkId());
 
+        Date now = new Date();
         for (int i = 0; i < paramList.size(); i++) {
             AddCraftCardParam addCraftCardParam = paramList.get(i);
-            if (null == addCraftCardParam.getCraftCardId()) {
-                newCraftCardList.add(buildCraftCard(addCraftCardParam, workId));
+            if (null == addCraftCardParam.getCraftCardId()) {//如果没有工艺卡片id则添加新的
+                newCraftCardList.add(buildCraftCard(addCraftCardParam, workId, studentId));
                 continue;
-            } else {
-                if (oldCraftCardList.isEmpty()) {
-                    newCraftCardList.add(buildCraftCard(addCraftCardParam, workId));
-                    break;
+            } else {//如果有工艺卡片id
+                if (oldCraftCardList.isEmpty()) {//如果旧的工艺卡片为空 则添加新的
+                    newCraftCardList.add(buildCraftCard(addCraftCardParam, workId, studentId));
+                    continue;
                 }
-                for (int j = 0; j < oldCraftCardList.size(); j++) {
+                for (int j = 0; j < oldCraftCardList.size(); j++) {//匹配旧的工艺卡片
                     CraftCard craftCard = oldCraftCardList.get(j);
-                    if (addCraftCardParam.getCraftCardId().compareTo(craftCard.getId()) == 0) {
+                    if (addCraftCardParam.getCraftCardId().compareTo(craftCard.getId()) == 0) {//如果匹配到
                         BeanUtil.copyProperties(addCraftCardParam, craftCard);
-                        craftCard.setUpdatetime(new Date());
+                        craftCard.setUpdatetime(now);
                         updateCraftCardList.add(craftCard);
                         oldCraftCardList.remove(j);
                         break;
                     }
-                    if (j == (oldCraftCardList.size() - 1)) {
-                        //如果有匹配的旧的工艺卡片,则添加新的
-                        newCraftCardList.add(buildCraftCard(addCraftCardParam, workId));
+                    if (j == (oldCraftCardList.size() - 1)) {//如果当前为最后一条旧的工艺卡片,则表示未匹配到工艺卡片,则添加新的
+                        //如果没有匹配的旧的工艺卡片,则添加新的
+                        newCraftCardList.add(buildCraftCard(addCraftCardParam, workId, studentId));
                     }
                 }
             }
@@ -150,7 +152,7 @@ public class WorkService {
 
         for (CraftCard craftCard : deleteCraftCardList) {
             craftCard.setIsDelete(Constants.Common.IS_YES);
-            craftCard.setUpdatetime(new Date());
+            craftCard.setUpdatetime(now);
         }
 
         //保存新的工艺卡片
@@ -164,13 +166,13 @@ public class WorkService {
         return Result.success();
     }
 
-    private CraftCard buildCraftCard(AddCraftCardParam addCraftCardParam, Integer workId) {
+    private CraftCard buildCraftCard(AddCraftCardParam addCraftCardParam, Integer workId, Integer studentId) {
         CraftCard craftCard = new CraftCard();
         craftCard.setWorkId(workId);
         BeanUtil.copyProperties(addCraftCardParam, craftCard);
         craftCard.setIsDelete(Constants.Common.IS_NOT);
-        craftCard.setCreatorId(0);
-        craftCard.setUpdaterId(0);
+        craftCard.setCreatorId(studentId);
+        craftCard.setUpdaterId(studentId);
         Date now = new Date();
         craftCard.setCreatetime(now);
         craftCard.setUpdatetime(now);

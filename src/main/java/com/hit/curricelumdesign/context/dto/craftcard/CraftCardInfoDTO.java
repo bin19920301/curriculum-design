@@ -18,19 +18,9 @@ public class CraftCardInfoDTO {
     private Integer id;
 
     /**
-     * 加工表面id
-     */
-    private Integer surfaceId;
-
-    /**
      * 加工表面名称
      */
     private String surfaceName;
-
-    /**
-     * 加工形式id
-     */
-    private Integer processingMethodId;
 
     /**
      * 加工形式名称
@@ -55,28 +45,12 @@ public class CraftCardInfoDTO {
         this.id = id;
     }
 
-    public Integer getSurfaceId() {
-        return surfaceId;
-    }
-
-    public void setSurfaceId(Integer surfaceId) {
-        this.surfaceId = surfaceId;
-    }
-
     public String getSurfaceName() {
         return surfaceName;
     }
 
     public void setSurfaceName(String surfaceName) {
         this.surfaceName = surfaceName;
-    }
-
-    public Integer getProcessingMethodId() {
-        return processingMethodId;
-    }
-
-    public void setProcessingMethodId(Integer processingMethodId) {
-        this.processingMethodId = processingMethodId;
     }
 
     public String getProcessingMethodName() {
@@ -107,9 +81,7 @@ public class CraftCardInfoDTO {
     public String toString() {
         return "CraftCardInfoDTO{" +
                 "id=" + id +
-                ", surfaceId=" + surfaceId +
                 ", surfaceName='" + surfaceName + '\'' +
-                ", processingMethodId=" + processingMethodId +
                 ", processingMethodName='" + processingMethodName + '\'' +
                 ", processContent='" + processContent + '\'' +
                 ", sort=" + sort +

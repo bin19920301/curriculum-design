@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
 @Repository
+@Mapper
 public interface CraftCardMapper {
     int deleteByPrimaryKey(Integer id);
 

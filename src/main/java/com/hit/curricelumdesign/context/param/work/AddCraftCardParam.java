@@ -18,14 +18,14 @@ public class AddCraftCardParam {
     private Integer craftCardId;
 
     /**
-     * 加工表面id
+     * 加工表面
      */
-    private Integer surfaceId;
+    private Integer surface;
 
     /**
-     * 加工形式id
+     * 加工形式
      */
-    private Integer processingMethodId;
+    private Integer processingMethod;
 
     /**
      * 工序内容
@@ -45,20 +45,20 @@ public class AddCraftCardParam {
         this.craftCardId = craftCardId;
     }
 
-    public Integer getSurfaceId() {
-        return surfaceId;
+    public Integer getSurface() {
+        return surface;
     }
 
-    public void setSurfaceId(Integer surfaceId) {
-        this.surfaceId = surfaceId;
+    public void setSurface(Integer surface) {
+        this.surface = surface;
     }
 
-    public Integer getProcessingMethodId() {
-        return processingMethodId;
+    public Integer getProcessingMethod() {
+        return processingMethod;
     }
 
-    public void setProcessingMethodId(Integer processingMethodId) {
-        this.processingMethodId = processingMethodId;
+    public void setProcessingMethod(Integer processingMethod) {
+        this.processingMethod = processingMethod;
     }
 
     public String getProcessContent() {
@@ -81,8 +81,8 @@ public class AddCraftCardParam {
     public String toString() {
         return "AddCraftCardParam{" +
                 "craftCardId=" + craftCardId +
-                ", surfaceId=" + surfaceId +
-                ", processingMethodId=" + processingMethodId +
+                ", surface=" + surface +
+                ", processingMethod=" + processingMethod +
                 ", processContent='" + processContent + '\'' +
                 ", sort=" + sort +
                 '}';
