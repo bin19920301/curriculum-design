@@ -20,12 +20,12 @@ public class AddCraftCardParam {
     /**
      * 加工表面
      */
-    private Integer surface;
+    private String surface;
 
     /**
      * 加工形式
      */
-    private Integer processingMethod;
+    private String processingMethod;
 
     /**
      * 工序内容
@@ -45,19 +45,19 @@ public class AddCraftCardParam {
         this.craftCardId = craftCardId;
     }
 
-    public Integer getSurface() {
+    public String getSurface() {
         return surface;
     }
 
-    public void setSurface(Integer surface) {
+    public void setSurface(String surface) {
         this.surface = surface;
     }
 
-    public Integer getProcessingMethod() {
+    public String getProcessingMethod() {
         return processingMethod;
     }
 
-    public void setProcessingMethod(Integer processingMethod) {
+    public void setProcessingMethod(String processingMethod) {
         this.processingMethod = processingMethod;
     }
 
@@ -81,8 +81,8 @@ public class AddCraftCardParam {
     public String toString() {
         return "AddCraftCardParam{" +
                 "craftCardId=" + craftCardId +
-                ", surface=" + surface +
-                ", processingMethod=" + processingMethod +
+                ", surface='" + surface + '\'' +
+                ", processingMethod='" + processingMethod + '\'' +
                 ", processContent='" + processContent + '\'' +
                 ", sort=" + sort +
                 '}';
