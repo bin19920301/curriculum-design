@@ -92,10 +92,9 @@ public class TeacherService {
      */
     public Result updateTeacher(UpdateTeacherParam teacherParam) {
         Teacher teacher = new Teacher();
-        BeanUtil.copyProperties(teacherParam, teacher, "password");
+        BeanUtil.copyProperties(teacherParam, teacher);
         teacher.setUpdatetime(new Date());
         teacher.setUpdaterId(teacherParam.getLoginAdminId());
-        teacher.setPassword(DigestUtils.md5Hex(md5Pre + teacherParam.getPassword()));
         teacherMapper.updateByPrimaryKeySelective(teacher);
         return Result.success();
     }
@@ -205,10 +204,11 @@ public class TeacherService {
 
     /**
      * 教师修改密码
+     *
      * @param param
      * @return
      */
-    public Result updatePassword(UpdatePasswordParam param){
+    public Result updatePassword(UpdatePasswordParam param) {
         //判断修改的是用户自己的密码
      /*   if (!param.getLoginTeacherId().equals(param.getId())){
             throw new BaseException(Error.TEACHER_ONLY_UPDATE_PASSWORD_BY_SELF);
@@ -217,13 +217,13 @@ public class TeacherService {
         String oldPassword = param.getOldPassword();
         //进行密码比对
         String md5OldPassword = DigestUtils.md5Hex(md5Pre + oldPassword);
-        if (!currentTeacher.getPassword().equals(md5OldPassword)){
+        if (!currentTeacher.getPassword().equals(md5OldPassword)) {
             throw new BaseException(Error.TEACHER_PASSWORD_CHECKED_FAIL);
         }
         //密码校验通过更新新的密码
         currentTeacher.setPassword(DigestUtils.md5Hex(md5Pre + param.getNewPassword()));
         Teacher teacher = new Teacher();
-        BeanUtil.copyProperties(currentTeacher,teacher);
+        BeanUtil.copyProperties(currentTeacher, teacher);
         //设置更新时间和更新者id
         teacher.setUpdaterId(param.getLoginTeacherId());
         teacher.setUpdatetime(new Date());

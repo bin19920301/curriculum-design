@@ -32,12 +32,6 @@ public class UpdateAdminParam extends BaseRequestParam {
     @Size(min = 0, max = 30, message = "姓名")
     private String name;
 
-    /**
-     * 密码
-     */
-    @NotNull
-    private String password;
-
     public Integer getId() {
         return id;
     }
@@ -62,21 +56,12 @@ public class UpdateAdminParam extends BaseRequestParam {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
         return "UpdateAdminParam{" +
                 "id=" + id +
                 ", number='" + number + '\'' +
                 ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

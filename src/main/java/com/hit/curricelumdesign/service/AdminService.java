@@ -120,8 +120,7 @@ public class AdminService {
         if (null != adminByNumber && admin.getId().compareTo(adminByNumber.getId()) != 0) {
             throw new BaseException(Error.ADMIN_NUMBER_IS_EXIST);
         }
-        BeanUtil.copyProperties(param, admin, "password");
-        admin.setPassword(DigestUtils.md5Hex(md5Pre + param.getPassword()));
+        BeanUtil.copyProperties(param, admin);
         admin.setUpdatetime(new Date());
         admin.setUpdaterId(param.getLoginAdminId());
         adminMapper.updateByPrimaryKey(admin);
@@ -214,39 +213,42 @@ public class AdminService {
 
     /**
      * 教师批量导入
+     *
      * @param param
      * @return
      */
-    public Result importTeacherData(ImportParam param){
+    public Result importTeacherData(ImportParam param) {
 
-        return adminManager.importTeacherData(param,md5Pre,teacherPasswordDefault);
+        return adminManager.importTeacherData(param, md5Pre, teacherPasswordDefault);
     }
 
     /**
      * 学生批量导入
+     *
      * @param param
      * @return
      */
-    public Result importStudentData(ImportParam param){
+    public Result importStudentData(ImportParam param) {
 
         return adminManager.importStudentData(param);
     }
 
     /**
      * 管理员修改密码
+     *
      * @param param
      * @return
      */
-    public Result updatePassword(UpdatePasswordParam param){
+    public Result updatePassword(UpdatePasswordParam param) {
         //判断修改的是用户自己的密码
-        if (!param.getLoginAdminId().equals(param.getId())){
+        if (!param.getLoginAdminId().equals(param.getId())) {
             throw new BaseException(Error.ADMIN_ONLY_UPDATE_PASSWORD_BY_SELF);
         }
         Admin currentAdmin = adminManager.getAminById(param.getId());
         String oldPassword = param.getOldPassword();
         //进行密码比对
         String md5OldPassword = DigestUtils.md5Hex(md5Pre + oldPassword);
-        if (!currentAdmin.getPassword().equals(md5OldPassword)){
+        if (!currentAdmin.getPassword().equals(md5OldPassword)) {
             throw new BaseException(Error.ADMIN_PASSWORD_CHECKED_FAIL);
         }
         //密码校验通过更新新的密码

@@ -34,12 +34,6 @@ public class UpdateTeacherParam extends BaseRequestParam {
     @Size(min = 0, max = 30, message = "教师姓名")
     private String name;
 
-    /**
-     * 登录密码
-     */
-    @Null
-    private String password;
-
     public Integer getId() {
         return id;
     }
@@ -72,11 +66,13 @@ public class UpdateTeacherParam extends BaseRequestParam {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String toString() {
+        return "UpdateTeacherParam{" +
+                "id=" + id +
+                ", academyId=" + academyId +
+                ", number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
