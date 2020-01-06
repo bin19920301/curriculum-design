@@ -149,5 +149,6 @@
     left join t_student ts on ttm.f_sender_id = ts.f_id
     where ttm.f_is_delete = 0
     and ttm.f_teaching_id = #{teachingId,jdbcType=INTEGER}
+    order by ttm.f_createtime desc
   </select>
 </mapper>

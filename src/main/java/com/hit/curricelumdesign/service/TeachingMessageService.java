@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
 import com.hit.curricelumdesign.context.dto.teachingmessage.TeachingMessageInfoDTO;
+import com.hit.curricelumdesign.context.dto.teachingmessage.TeachingMessageListDTO;
 import com.hit.curricelumdesign.context.entity.TeachingMessage;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
@@ -12,7 +13,9 @@ import com.hit.curricelumdesign.context.param.teachingmessage.AddTeachingMessage
 import com.hit.curricelumdesign.context.param.teachingmessage.ListByTeachingIdParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.TeachingMessageBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
+import com.hit.curricelumdesign.dao.TeachingMapper;
 import com.hit.curricelumdesign.dao.TeachingMessageMapper;
+import com.hit.curricelumdesign.dao.WorkMapper;
 import com.hit.curricelumdesign.manager.teachingmessage.TeachingMessageManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,8 @@ public class TeachingMessageService {
     private TeachingMessageManager teachingMessageManager;
     @Autowired
     private TeachingMessageMapper teachingMessageMapper;
+    @Autowired
+    private WorkMapper workMapper;
 
     public Result addTeacherMessage(AddTeachingMessageParam param){
         TeachingMessage message = new TeachingMessage();
@@ -83,6 +88,9 @@ public class TeachingMessageService {
         List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listByTeachingId(param.getTeachingId());
         PageInfo<TeachingMessageInfoDTO> pageInfo = new PageInfo<>(teachingMessageInfoDTOList);
         BaseListDTO<TeachingMessageInfoDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
+        TeachingMessageListDTO teachingMessageListDTO = new TeachingMessageListDTO();
+        teachingMessageListDTO.setTeachingMessageInfoDTOBaseListDTO(baseListDTO);
+        teachingMessageListDTO.setStudentCount(workMapper.countStudentsByTeachingId(param.getTeachingId()));
         return Result.success(baseListDTO);
     }
 }

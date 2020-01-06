@@ -42,7 +42,7 @@ public class TeachingMessageController {
     }
 
     @RequestMapping(value = "/teachingmessage/listbyteachindid/", method = RequestMethod.POST)
-    @HitApi(checkTeacherLogin = true)
+    //@HitApi(checkTeacherLogin = true)
     public Result listTeachingMessageByTeachingId(ListByTeachingIdParam param){
         return  teachingMessageService.listTeachingMessageByTeachingId(param);
     }
