@@ -71,4 +71,15 @@ public class AddStudentParam extends BaseRequestParam {
     public void setClassId(Integer classId) {
         this.classId = classId;
     }
+
+    @Override
+    public String toString() {
+        return "AddStudentParam{" +
+                "number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                ", academyId=" + academyId +
+                ", enrollmentId=" + enrollmentId +
+                ", classId=" + classId +
+                '}';
+    }
 }

@@ -92,4 +92,16 @@ public class TeacherMessage {
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
+
+    @Override
+    public String toString() {
+        return "TeacherMessage{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", creatorId=" + creatorId +
+                ", createtime=" + createtime +
+                ", updatetime=" + updatetime +
+                ", isDelete=" + isDelete +
+                '}';
+    }
 }

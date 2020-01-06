@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @Table(name = "t_teaching")
 public class Teaching {
@@ -159,5 +160,22 @@ public class Teaching {
 
     public void setUpdaterId(Integer updaterId) {
         this.updaterId = updaterId;
+    }
+
+    @Override
+    public String toString() {
+        return "Teaching{" +
+                "id=" + id +
+                ", teacherId=" + teacherId +
+                ", name='" + name + '\'' +
+                ", teacherReminder='" + teacherReminder + '\'' +
+                ", deadlineTime=" + deadlineTime +
+                ", status=" + status +
+                ", isDelete=" + isDelete +
+                ", createtime=" + createtime +
+                ", creatorId=" + creatorId +
+                ", updatetime=" + updatetime +
+                ", updaterId=" + updaterId +
+                '}';
     }
 }

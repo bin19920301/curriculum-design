@@ -162,4 +162,21 @@ public class CraftCard {
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
     }
+
+    @Override
+    public String toString() {
+        return "CraftCard{" +
+                "id=" + id +
+                ", workId=" + workId +
+                ", surface='" + surface + '\'' +
+                ", processingMethod='" + processingMethod + '\'' +
+                ", processContent='" + processContent + '\'' +
+                ", sort=" + sort +
+                ", isDelete=" + isDelete +
+                ", creatorId=" + creatorId +
+                ", createtime=" + createtime +
+                ", updaterId=" + updaterId +
+                ", updatetime=" + updatetime +
+                '}';
+    }
 }

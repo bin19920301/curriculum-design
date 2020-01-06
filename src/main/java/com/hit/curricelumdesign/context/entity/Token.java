@@ -119,4 +119,5 @@ public class Token {
                 ", updatetime=" + updatetime +
                 '}';
     }
+
 }

@@ -41,4 +41,13 @@ public class ConditionSearchStudentParam extends BaseRequestParam {
     public void setClassId(Integer classId) {
         this.classId = classId;
     }
+
+    @Override
+    public String toString() {
+        return "ConditionSearchStudentParam{" +
+                "enrollmentId=" + enrollmentId +
+                ", academyId=" + academyId +
+                ", classId=" + classId +
+                '}';
+    }
 }

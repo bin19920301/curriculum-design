@@ -19,4 +19,11 @@ public class StudentBaseParam extends BaseRequestParam {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "StudentBaseParam{" +
+                "id=" + id +
+                '}';
+    }
 }

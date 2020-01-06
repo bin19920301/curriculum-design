@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @Table(name = "t_file")
 public class File {
@@ -159,5 +160,22 @@ public class File {
 
     public void setUpdaterId(Integer updaterId) {
         this.updaterId = updaterId;
+    }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "id=" + id +
+                ", folderId=" + folderId +
+                ", name='" + name + '\'' +
+                ", size='" + size + '\'' +
+                ", path='" + path + '\'' +
+                ", useCount=" + useCount +
+                ", isDelete=" + isDelete +
+                ", createtime=" + createtime +
+                ", creatorId=" + creatorId +
+                ", updatetime=" + updatetime +
+                ", updaterId=" + updaterId +
+                '}';
     }
 }

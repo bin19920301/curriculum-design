@@ -22,4 +22,11 @@ public class AddTeacherMessageParam extends BaseRequestParam {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "AddTeacherMessageParam{" +
+                "content='" + content + '\'' +
+                '}';
+    }
 }

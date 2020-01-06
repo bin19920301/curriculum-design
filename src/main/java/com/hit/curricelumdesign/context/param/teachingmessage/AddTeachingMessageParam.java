@@ -34,4 +34,12 @@ public class AddTeachingMessageParam extends BaseRequestParam {
     public void setTeachingId(Integer teachingId) {
         this.teachingId = teachingId;
     }
+
+    @Override
+    public String toString() {
+        return "AddTeachingMessageParam{" +
+                "content='" + content + '\'' +
+                ", teachingId=" + teachingId +
+                '}';
+    }
 }

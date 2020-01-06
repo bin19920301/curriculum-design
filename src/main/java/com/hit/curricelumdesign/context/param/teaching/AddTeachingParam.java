@@ -65,4 +65,13 @@ public class AddTeachingParam extends BaseRequestParam {
         this.works = works;
     }
 
+    @Override
+    public String toString() {
+        return "AddTeachingParam{" +
+                "name='" + name + '\'' +
+                ", teacherReminder='" + teacherReminder + '\'' +
+                ", deadlineTime=" + deadlineTime +
+                ", works=" + works +
+                '}';
+    }
 }

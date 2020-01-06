@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @Table(name = "t_work_project_file")
 public class WorkProjectFile {
@@ -131,5 +132,20 @@ public class WorkProjectFile {
 
     public void setFileType(Integer fileType) {
         this.fileType = fileType;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkProjectFile{" +
+                "id=" + id +
+                ", workProjectId=" + workProjectId +
+                ", fileId=" + fileId +
+                ", fileType=" + fileType +
+                ", isDelete=" + isDelete +
+                ", createtime=" + createtime +
+                ", creatorId=" + creatorId +
+                ", updatetime=" + updatetime +
+                ", updaterId=" + updaterId +
+                '}';
     }
 }

@@ -51,4 +51,12 @@ public class AddTeacherParam extends BaseRequestParam {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "AddTeacherParam{" +
+                "academyId=" + academyId +
+                ", number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

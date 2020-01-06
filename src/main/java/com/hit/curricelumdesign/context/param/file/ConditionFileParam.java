@@ -15,4 +15,11 @@ public class ConditionFileParam {
     public void setFolderId(Integer folderId) {
         this.folderId = folderId;
     }
+
+    @Override
+    public String toString() {
+        return "ConditionFileParam{" +
+                "folderId=" + folderId +
+                '}';
+    }
 }

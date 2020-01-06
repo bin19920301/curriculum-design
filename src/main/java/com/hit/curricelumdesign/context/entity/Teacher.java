@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @Table(name = "t_teacher")
 public class Teacher {
@@ -145,5 +146,21 @@ public class Teacher {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", academyId=" + academyId +
+                ", number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", isDelete=" + isDelete +
+                ", creatorId=" + creatorId +
+                ", createtime=" + createtime +
+                ", updaterId=" + updaterId +
+                ", updatetime=" + updatetime +
+                '}';
     }
 }

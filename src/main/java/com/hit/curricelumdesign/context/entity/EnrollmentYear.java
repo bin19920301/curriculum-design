@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @Table(name = "t_enrollment_year")
 public class EnrollmentYear {
@@ -103,5 +104,18 @@ public class EnrollmentYear {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    @Override
+    public String toString() {
+        return "EnrollmentYear{" +
+                "id=" + id +
+                ", enrollmentYear=" + enrollmentYear +
+                ", isDelete=" + isDelete +
+                ", creatorId=" + creatorId +
+                ", createtime=" + createtime +
+                ", updaterId=" + updaterId +
+                ", updatetime=" + updatetime +
+                '}';
     }
 }

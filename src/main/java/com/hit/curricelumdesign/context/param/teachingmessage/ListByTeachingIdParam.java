@@ -19,4 +19,11 @@ public class ListByTeachingIdParam extends BaseListRequestParam {
     public void setTeachingId(Integer teachingId) {
         this.teachingId = teachingId;
     }
+
+    @Override
+    public String toString() {
+        return "ListByTeachingIdParam{" +
+                "teachingId=" + teachingId +
+                '}';
+    }
 }

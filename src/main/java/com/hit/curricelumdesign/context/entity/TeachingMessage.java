@@ -120,4 +120,18 @@ public class TeachingMessage {
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
+
+    @Override
+    public String toString() {
+        return "TeachingMessage{" +
+                "id=" + id +
+                ", teachingId=" + teachingId +
+                ", content='" + content + '\'' +
+                ", senderId=" + senderId +
+                ", senderType=" + senderType +
+                ", createtime=" + createtime +
+                ", updatetime=" + updatetime +
+                ", isDelete=" + isDelete +
+                '}';
+    }
 }

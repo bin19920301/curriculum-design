@@ -16,4 +16,10 @@ public class UpdateWorkParam extends WorkBaseParam {
         this.workProjectId = workProjectId;
     }
 
+    @Override
+    public String toString() {
+        return "UpdateWorkParam{" +
+                "workProjectId=" + workProjectId +
+                '}';
+    }
 }

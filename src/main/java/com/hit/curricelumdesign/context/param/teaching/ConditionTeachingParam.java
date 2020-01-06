@@ -20,4 +20,10 @@ public class ConditionTeachingParam extends BaseListRequestParam {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "ConditionTeachingParam{" +
+                "status=" + status +
+                '}';
+    }
 }

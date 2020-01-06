@@ -21,4 +21,12 @@ public class StudentWorkProjectParam {
     public void setWorkProjectId(Integer workProjectId) {
         this.workProjectId = workProjectId;
     }
+
+    @Override
+    public String toString() {
+        return "StudentWorkProjectParam{" +
+                "workStudentId=" + workStudentId +
+                ", workProjectId=" + workProjectId +
+                '}';
+    }
 }

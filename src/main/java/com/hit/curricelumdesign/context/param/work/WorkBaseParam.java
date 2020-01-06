@@ -19,4 +19,11 @@ public class WorkBaseParam extends BaseRequestParam {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "WorkBaseParam{" +
+                "id=" + id +
+                '}';
+    }
 }

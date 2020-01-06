@@ -32,14 +32,14 @@ public class UpdateStudentParam extends StudentBaseParam {
      * 学生姓名
      */
     @NotNull
-    @Size(min = 0,max = 30 ,message = "学生姓名")
+    @Size(min = 0, max = 30, message = "学生姓名")
     private String name;
 
     /**
      * 学号，字符串格式
      */
     @NotNull
-    @Size(min = 0,max = 30 ,message = "学号")
+    @Size(min = 0, max = 30, message = "学号")
     private String number;
 
     @Override
@@ -90,5 +90,17 @@ public class UpdateStudentParam extends StudentBaseParam {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return "UpdateStudentParam{" +
+                "id=" + id +
+                ", academyId=" + academyId +
+                ", enrollmentId=" + enrollmentId +
+                ", classId=" + classId +
+                ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                '}';
     }
 }

@@ -106,4 +106,17 @@ public class ProcessingMethod {
     public void setUpdaterId(Integer updaterId) {
         this.updaterId = updaterId;
     }
+
+    @Override
+    public String toString() {
+        return "ProcessingMethod{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isDelete=" + isDelete +
+                ", createtime=" + createtime +
+                ", creatorId=" + creatorId +
+                ", updatetime=" + updatetime +
+                ", updaterId=" + updaterId +
+                '}';
+    }
 }

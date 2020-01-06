@@ -3,6 +3,7 @@ package com.hit.curricelumdesign.context.param.teacher;
 import com.hit.curricelumdesign.context.param.BaseRequestParam;
 
 import javax.validation.constraints.NotNull;
+
 public class DeleteTeacherParam extends BaseRequestParam {
     /**
      * 教师id
@@ -16,5 +17,12 @@ public class DeleteTeacherParam extends BaseRequestParam {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "DeleteTeacherParam{" +
+                "id=" + id +
+                '}';
     }
 }

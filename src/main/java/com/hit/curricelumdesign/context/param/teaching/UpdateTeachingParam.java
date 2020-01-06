@@ -27,11 +27,11 @@ public class UpdateTeachingParam extends TeachingBaseParam {
      * 截止日期
      */
     @NotNull
-    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deadlineTime;
 
     //这里应该有更新的作业集合
-    @JsonArr(type = StudentWorkProjectParam.class,paramName = "works")
+    @JsonArr(type = StudentWorkProjectParam.class, paramName = "works")
     private List<StudentWorkProjectParam> works;
 
 
@@ -65,5 +65,15 @@ public class UpdateTeachingParam extends TeachingBaseParam {
 
     public void setWorks(List<StudentWorkProjectParam> works) {
         this.works = works;
+    }
+
+    @Override
+    public String toString() {
+        return "UpdateTeachingParam{" +
+                "name='" + name + '\'' +
+                ", teacherReminder='" + teacherReminder + '\'' +
+                ", deadlineTime=" + deadlineTime +
+                ", works=" + works +
+                '}';
     }
 }

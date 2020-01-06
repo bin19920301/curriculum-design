@@ -2,7 +2,7 @@ package com.hit.curricelumdesign.context.param.enrollmentyear;
 
 import javax.validation.constraints.NotNull;
 
-public class UpdateEnrollmentYearParam extends EnrollmentYearBaseParam{
+public class UpdateEnrollmentYearParam extends EnrollmentYearBaseParam {
     /**
      * 入学年份
      */
@@ -15,5 +15,12 @@ public class UpdateEnrollmentYearParam extends EnrollmentYearBaseParam{
 
     public void setEnrollmentYear(Integer enrollmentYear) {
         this.enrollmentYear = enrollmentYear;
+    }
+
+    @Override
+    public String toString() {
+        return "UpdateEnrollmentYearParam{" +
+                "enrollmentYear=" + enrollmentYear +
+                '}';
     }
 }

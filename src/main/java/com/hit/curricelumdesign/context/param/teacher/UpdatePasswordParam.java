@@ -48,4 +48,13 @@ public class UpdatePasswordParam extends BaseRequestParam {
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
+
+    @Override
+    public String toString() {
+        return "UpdatePasswordParam{" +
+                "id=" + id +
+                ", oldPassword='" + oldPassword + '\'' +
+                ", newPassword='" + newPassword + '\'' +
+                '}';
+    }
 }

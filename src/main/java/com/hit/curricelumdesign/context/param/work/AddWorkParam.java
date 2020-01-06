@@ -40,4 +40,13 @@ public class AddWorkParam {
     public void setTeachingId(Integer teachingId) {
         this.teachingId = teachingId;
     }
+
+    @Override
+    public String toString() {
+        return "AddWorkParam{" +
+                "teachingId=" + teachingId +
+                ", workProjectId=" + workProjectId +
+                ", studentId=" + studentId +
+                '}';
+    }
 }

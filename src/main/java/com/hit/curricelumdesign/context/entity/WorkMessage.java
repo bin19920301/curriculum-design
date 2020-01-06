@@ -2,6 +2,7 @@ package com.hit.curricelumdesign.context.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @Table(name = "t_work_message")
 public class WorkMessage {
@@ -173,5 +174,23 @@ public class WorkMessage {
 
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkMessage{" +
+                "id=" + id +
+                ", teachingId=" + teachingId +
+                ", workId=" + workId +
+                ", content='" + content + '\'' +
+                ", isRead=" + isRead +
+                ", senderId=" + senderId +
+                ", senderType=" + senderType +
+                ", receiverId=" + receiverId +
+                ", receiverType=" + receiverType +
+                ", createtime=" + createtime +
+                ", updatetime=" + updatetime +
+                ", isDelete=" + isDelete +
+                '}';
     }
 }

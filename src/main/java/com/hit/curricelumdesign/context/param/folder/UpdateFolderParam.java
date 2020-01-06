@@ -8,7 +8,7 @@ public class UpdateFolderParam extends FolderBaseParam {
      * 文件夹名称
      */
     @NotNull
-    @Size(min = 0,max = 30 ,message = "文件夹名称")
+    @Size(min = 0, max = 30, message = "文件夹名称")
     private String name;
 
     public String getName() {
@@ -17,5 +17,12 @@ public class UpdateFolderParam extends FolderBaseParam {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "UpdateFolderParam{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }
