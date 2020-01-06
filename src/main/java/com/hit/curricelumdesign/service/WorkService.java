@@ -10,6 +10,7 @@ import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
 import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoListDTO;
+import com.hit.curricelumdesign.context.dto.workfile.WorkFileDTO;
 import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoDTO;
 import com.hit.curricelumdesign.context.entity.*;
@@ -65,6 +66,9 @@ public class WorkService {
 
     @Autowired
     private StudentManager studentManager;
+
+    @Autowired
+    private WorkFileMapper workFileMapper;
 
 
     /**
@@ -245,6 +249,10 @@ public class WorkService {
         }
         workInfoDTO.setWorkMessageInfoDTOList(workMessageInfoDTOList);
 
+        //2020-01-06增加作业文件
+        List<WorkFileDTO> workFileDTOList = workFileMapper.getByWorkId(workInfoDTO.getWorkId());
+        workInfoDTO.setWorkFileDTOList(workFileDTOList);
+
         workMessageMapper.readMessage(param.getLoginTeacherId(), work.getId(), Constants.WorkMessage.RECEIVER_TYPE_TEACHER);
 
         return Result.success(workInfoDTO);
@@ -295,6 +303,10 @@ public class WorkService {
 
         }
         workInfoDTO.setWorkMessageInfoDTOList(workMessageInfoDTOList);
+
+        //2020-01-06增加作业文件
+        List<WorkFileDTO> workFileDTOList = workFileMapper.getByWorkId(workInfoDTO.getWorkId());
+        workInfoDTO.setWorkFileDTOList(workFileDTOList);
 
         workMessageMapper.readMessage(param.getLoginStudentId(), work.getId(), Constants.WorkMessage.RECEIVER_TYPE_STUDENT);
 

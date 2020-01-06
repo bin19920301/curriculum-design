@@ -2,9 +2,10 @@ package com.hit.curricelumdesign.context.dto.work;
 
 import com.hit.curricelumdesign.context.dto.craftcard.CraftCardInfoDTO;
 import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
+import com.hit.curricelumdesign.context.dto.workfile.WorkFileDTO;
 import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoDTO;
-import com.hit.curricelumdesign.context.entity.WorkProject;
+import com.hit.curricelumdesign.context.entity.WorkFile;
 
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class WorkInfoDTO {
     private List<WorkMessageInfoDTO> workMessageInfoDTOList;
 
     private List<CraftCardInfoDTO> craftCardInfoDTOList;
+
+    private List<WorkFileDTO> workFileDTOList;
 
     public Integer getWorkId() {
         return workId;
@@ -86,6 +89,14 @@ public class WorkInfoDTO {
         this.craftCardInfoDTOList = craftCardInfoDTOList;
     }
 
+    public List<WorkFileDTO> getWorkFileDTOList() {
+        return workFileDTOList;
+    }
+
+    public void setWorkFileDTOList(List<WorkFileDTO> workFileDTOList) {
+        this.workFileDTOList = workFileDTOList;
+    }
+
     @Override
     public String toString() {
         return "WorkInfoDTO{" +
@@ -96,6 +107,7 @@ public class WorkInfoDTO {
                 ", workProjectInfoDTO=" + workProjectInfoDTO +
                 ", workMessageInfoDTOList=" + workMessageInfoDTOList +
                 ", craftCardInfoDTOList=" + craftCardInfoDTOList +
+                ", workFileDTOList=" + workFileDTOList +
                 '}';
     }
 }
