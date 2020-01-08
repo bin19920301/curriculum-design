@@ -213,7 +213,7 @@ public class TeacherService {
      /*   if (!param.getLoginTeacherId().equals(param.getId())){
             throw new BaseException(Error.TEACHER_ONLY_UPDATE_PASSWORD_BY_SELF);
         }*/
-        TeacherDTO currentTeacher = teacherManager.getTeacherById(param.getId());
+        TeacherDTO currentTeacher = teacherManager.getTeacherById(param.getLoginTeacherId());
         String oldPassword = param.getOldPassword();
         //进行密码比对
         String md5OldPassword = DigestUtils.md5Hex(md5Pre + oldPassword);

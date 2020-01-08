@@ -240,11 +240,7 @@ public class AdminService {
      * @return
      */
     public Result updatePassword(UpdatePasswordParam param) {
-        //判断修改的是用户自己的密码
-        if (!param.getLoginAdminId().equals(param.getId())) {
-            throw new BaseException(Error.ADMIN_ONLY_UPDATE_PASSWORD_BY_SELF);
-        }
-        Admin currentAdmin = adminManager.getAminById(param.getId());
+        Admin currentAdmin = adminManager.getAminById(param.getLoginAdminId());
         String oldPassword = param.getOldPassword();
         //进行密码比对
         String md5OldPassword = DigestUtils.md5Hex(md5Pre + oldPassword);

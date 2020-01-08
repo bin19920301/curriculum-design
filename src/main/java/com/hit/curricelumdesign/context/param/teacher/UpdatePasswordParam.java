@@ -5,11 +5,6 @@ import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import javax.validation.constraints.NotNull;
 
 public class UpdatePasswordParam extends BaseRequestParam {
-    /**
-     * 教师id
-     */
-    @NotNull
-    private Integer id;
 
 
     /**
@@ -24,14 +19,6 @@ public class UpdatePasswordParam extends BaseRequestParam {
      */
     @NotNull
     private String newPassword;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getOldPassword() {
         return oldPassword;
@@ -52,8 +39,7 @@ public class UpdatePasswordParam extends BaseRequestParam {
     @Override
     public String toString() {
         return "UpdatePasswordParam{" +
-                "id=" + id +
-                ", oldPassword='" + oldPassword + '\'' +
+                "oldPassword='" + oldPassword + '\'' +
                 ", newPassword='" + newPassword + '\'' +
                 '}';
     }
