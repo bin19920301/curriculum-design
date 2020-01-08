@@ -199,7 +199,7 @@ public class WorkMessageService {
      */
     public Result listWorkMessage(WorkMessageListParam param) {
         Work work = workManager.getWorkerById(param.getWorkId());
-        StudentDTO student = studentManager.getStudentById(param.getLoginStudentId());
+        StudentDTO student = studentManager.getStudentById(work.getStudentId());
         Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
         TeacherDTO teacher = teacherManager.getTeacherById(teaching.getTeacherId());
         PageHelper.startPage(param.getPageNum(), param.getPageSize());

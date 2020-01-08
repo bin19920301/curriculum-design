@@ -17,13 +17,13 @@ public class WorkFileController {
     private WorkFileService workFileService;
 
     @RequestMapping(value = "/workfile/addworkfile/", method = RequestMethod.POST)
-    @HitApi(checkTeacherLogin = true)
+    @HitApi(checkStudentLogin = true)
     public Result addFile(AddWorkFileParam param) {
         return workFileService.addFile(param);
     }
 
     @RequestMapping(value = "/workfile/deletewrokfile/", method = RequestMethod.POST)
-    @HitApi(checkTeacherLogin = true)
+    @HitApi(checkStudentLogin = true)
     public Result deleteFile(WorkFileBaseParam param) {
         return workFileService.deleteFile(param);
     }
