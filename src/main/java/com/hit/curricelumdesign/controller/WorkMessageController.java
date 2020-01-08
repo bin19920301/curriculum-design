@@ -64,12 +64,21 @@ public class WorkMessageController {
     }
 
     @RequestMapping(value = "/workmessage/deleteteahcermessage/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
     public Result deleteTeahcerMessage(WorkMessageBaseParam param) {
         return workMessageService.deleteTeahcerMessage(param);
     }
+
     @RequestMapping(value = "/workmessage/deletestudentmessage/", method = RequestMethod.POST)
+    @HitApi(checkStudentLogin = true)
     public Result deleteStudentMessage(WorkMessageBaseParam param) {
         return workMessageService.deleteStudentMessage(param);
+    }
+
+
+    @RequestMapping(value = "/workmessage/listmessage/", method = RequestMethod.POST)
+    public Result listWorkMessage(WorkMessageListParam param) {
+        return workMessageService.listWorkMessage(param);
     }
 
 

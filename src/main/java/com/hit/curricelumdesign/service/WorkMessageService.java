@@ -4,7 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
+import com.hit.curricelumdesign.context.dto.student.StudentDTO;
+import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
 import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageDTO;
+import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.entity.Work;
 import com.hit.curricelumdesign.context.entity.WorkMessage;
@@ -12,10 +15,13 @@ import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import com.hit.curricelumdesign.context.param.workmessage.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.WorkMessageMapper;
+import com.hit.curricelumdesign.manager.student.StudentManager;
+import com.hit.curricelumdesign.manager.teacher.TeacherManager;
 import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
 import com.hit.curricelumdesign.manager.workmessage.WorkMessageManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -44,6 +50,12 @@ public class WorkMessageService {
 
     @Autowired
     private TeachingManager teachingManager;
+
+    @Autowired
+    private StudentManager studentManager;
+
+    @Autowired
+    private TeacherManager teacherManager;
 
     /**
      * 教师添加作业消息
@@ -177,5 +189,31 @@ public class WorkMessageService {
         workMessage.setUpdatetime(new Date());
         workMessageMapper.updateByPrimaryKey(workMessage);
         return Result.success();
+    }
+
+    /**
+     * 获取作业消息列表
+     *
+     * @param param
+     * @return
+     */
+    public Result listWorkMessage(WorkMessageListParam param) {
+        Work work = workManager.getWorkerById(param.getWorkId());
+        StudentDTO student = studentManager.getStudentById(param.getLoginStudentId());
+        Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
+        TeacherDTO teacher = teacherManager.getTeacherById(teaching.getTeacherId());
+        PageHelper.startPage(param.getPageNum(), param.getPageSize());
+        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId());
+        for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
+            if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                message.setSenderName(student.getName());
+            } else if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                message.setSenderName(teacher.getName());
+            }
+        }
+        PageInfo<WorkMessageInfoDTO> pageInfo = new PageInfo<>(workMessageInfoDTOList);
+
+        BaseListDTO<WorkMessageInfoDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
+        return Result.success(baseListDTO);
     }
 }

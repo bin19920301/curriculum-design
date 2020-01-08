@@ -19,31 +19,30 @@ public class TeachingMessageController {
 
     @RequestMapping(value = "/teachingmessage/addteachermessage/", method = RequestMethod.POST)
     @HitApi(checkTeacherLogin = true)
-    public Result addTeacherMessage(AddTeachingMessageParam param){
-        return  teachingMessageService.addTeacherMessage(param);
+    public Result addTeacherMessage(AddTeachingMessageParam param) {
+        return teachingMessageService.addTeacherMessage(param);
     }
 
     @RequestMapping(value = "/teachingmessage/addstudentmessage/", method = RequestMethod.POST)
-    @HitApi(checkTeacherLogin = true)
-    public Result addStudentMessage(AddTeachingMessageParam param){
-        return  teachingMessageService.addStudentMessage(param);
+    @HitApi(checkStudentLogin = true)
+    public Result addStudentMessage(AddTeachingMessageParam param) {
+        return teachingMessageService.addStudentMessage(param);
     }
 
     @RequestMapping(value = "/teachingmessage/deleteteachermessage/", method = RequestMethod.POST)
     @HitApi(checkTeacherLogin = true)
-    public Result deleteTeacherMessage(TeachingMessageBaseParam param){
-        return  teachingMessageService.deleteTeacherMessage(param);
+    public Result deleteTeacherMessage(TeachingMessageBaseParam param) {
+        return teachingMessageService.deleteTeacherMessage(param);
     }
 
     @RequestMapping(value = "/teachingmessage/deletestudentmessage/", method = RequestMethod.POST)
-    @HitApi(checkTeacherLogin = true)
-    public Result deleteStudentMessage(TeachingMessageBaseParam param){
-        return  teachingMessageService.deleteStudentMessage(param);
+    @HitApi(checkStudentLogin = true)
+    public Result deleteStudentMessage(TeachingMessageBaseParam param) {
+        return teachingMessageService.deleteStudentMessage(param);
     }
 
     @RequestMapping(value = "/teachingmessage/listbyteachindid/", method = RequestMethod.POST)
-    @HitApi(checkTeacherLogin = true)
-    public Result listTeachingMessageByTeachingId(ListByTeachingIdParam param){
-        return  teachingMessageService.listTeachingMessageByTeachingId(param);
+    public Result listTeachingMessageByTeachingId(ListByTeachingIdParam param) {
+        return teachingMessageService.listTeachingMessageByTeachingId(param);
     }
 }
