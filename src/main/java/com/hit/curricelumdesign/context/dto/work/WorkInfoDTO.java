@@ -27,8 +27,6 @@ public class WorkInfoDTO {
 
     private WorkProjectInfoDTO workProjectInfoDTO;
 
-    private List<WorkMessageInfoDTO> workMessageInfoDTOList;
-
     private List<CraftCardInfoDTO> craftCardInfoDTOList;
 
     private List<WorkFileDTO> workFileDTOList;
@@ -73,14 +71,6 @@ public class WorkInfoDTO {
         this.workProjectInfoDTO = workProjectInfoDTO;
     }
 
-    public List<WorkMessageInfoDTO> getWorkMessageInfoDTOList() {
-        return workMessageInfoDTOList;
-    }
-
-    public void setWorkMessageInfoDTOList(List<WorkMessageInfoDTO> workMessageInfoDTOList) {
-        this.workMessageInfoDTOList = workMessageInfoDTOList;
-    }
-
     public List<CraftCardInfoDTO> getCraftCardInfoDTOList() {
         return craftCardInfoDTOList;
     }
@@ -105,7 +95,6 @@ public class WorkInfoDTO {
                 ", studentName='" + studentName + '\'' +
                 ", teaching=" + teaching +
                 ", workProjectInfoDTO=" + workProjectInfoDTO +
-                ", workMessageInfoDTOList=" + workMessageInfoDTOList +
                 ", craftCardInfoDTOList=" + craftCardInfoDTOList +
                 ", workFileDTOList=" + workFileDTOList +
                 '}';

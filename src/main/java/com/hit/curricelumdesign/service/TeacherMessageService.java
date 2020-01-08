@@ -10,6 +10,7 @@ import com.hit.curricelumdesign.context.entity.TeacherMessage;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
 import com.hit.curricelumdesign.context.param.teachermessage.AddTeacherMessageParam;
+import com.hit.curricelumdesign.context.param.teachermessage.ListTeacherMessageParam;
 import com.hit.curricelumdesign.context.param.teachermessage.TeacherMessageBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.TeacherMessageMapper;
@@ -31,32 +32,39 @@ public class TeacherMessageService {
     @Autowired
     private TeacherMessageManager teacherMessageManager;
 
-    public Result addTeacherMessage(AddTeacherMessageParam param){
+    public Result addTeacherMessage(AddTeacherMessageParam param) {
         TeacherMessage message = new TeacherMessage();
-        BeanUtil.copyProperties(param,message);
+        BeanUtil.copyProperties(param, message);
         message.setCreatorId(param.getLoginTeacherId());
         //message.setCreatorId(1);
         message.setCreatetime(new Date());
         message.setUpdatetime(new Date());
         message.setIsDelete(Constants.Common.IS_NOT);
         teacherMessageMapper.insert(message);
-        return  Result.success();
+        return Result.success();
     }
 
-    public Result deleteTeacherMessage(TeacherMessageBaseParam param){
+    public Result deleteTeacherMessage(TeacherMessageBaseParam param) {
         TeacherMessage message = teacherMessageManager.getById(param.getId());
-        if(param.getLoginTeacherId() != message.getCreatorId()){
+        if (param.getLoginTeacherId() != message.getCreatorId()) {
             throw new BaseException(Error.TEACHER_MESSAGE_ONLY_DELETE_BY_SELF);
         }
         message.setIsDelete(Constants.Common.IS_YES);
         message.setUpdatetime(new Date());
         teacherMessageMapper.updateByPrimaryKeySelective(message);
-        return  Result.success();
+        return Result.success();
     }
 
-    public Result listTeacherMessage(BaseListRequestParam param){
-        PageHelper.startPage(param.getPageNum(), param.getPageSize());
+    public Result listTeacherMessage(ListTeacherMessageParam param) {
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
         List<TeacherMessageInfoDTO> teacherMessageDTOList = teacherMessageMapper.listTeacherMessageDTO();
+        for (TeacherMessageInfoDTO dto : teacherMessageDTOList) {
+            if (dto.getCreatorId().compareTo(param.getLoginTeacherId()) == 0) {
+                dto.setCanDelete(Constants.Common.YES);
+            } else {
+                dto.setCanDelete(Constants.Common.NOT);
+            }
+        }
         PageInfo<TeacherMessageInfoDTO> pageInfo = new PageInfo<>(teacherMessageDTOList);
         BaseListDTO<TeacherMessageInfoDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
         return Result.success(baseListDTO);

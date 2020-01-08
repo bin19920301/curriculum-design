@@ -18,6 +18,11 @@ public class WorkMessageListParam extends BaseListRequestParam {
     @NotNull
     private Integer workId;
 
+    /**
+     * 最早的消息id
+     */
+    private Integer earlyMsgId;
+
     public Integer getWorkId() {
         return workId;
     }
@@ -26,10 +31,19 @@ public class WorkMessageListParam extends BaseListRequestParam {
         this.workId = workId;
     }
 
+    public Integer getEarlyMsgId() {
+        return earlyMsgId;
+    }
+
+    public void setEarlyMsgId(Integer earlyMsgId) {
+        this.earlyMsgId = earlyMsgId;
+    }
+
     @Override
     public String toString() {
         return "WorkMessageListParam{" +
                 "workId=" + workId +
+                ", earlyMsgId=" + earlyMsgId +
                 '}';
     }
 }

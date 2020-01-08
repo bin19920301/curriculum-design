@@ -235,19 +235,8 @@ public class WorkService {
 
         List<CraftCardInfoDTO> craftCardInfoDTOList = craftCardMapper.getCraftCardInfoDTOListByWorkId(work.getId());
         workInfoDTO.setCraftCardInfoDTOList(craftCardInfoDTOList);
-        TeacherDTO teacher = teacherManager.getTeacherById(workTeachingDTO.getTeacherId());
         StudentDTO student = studentManager.getStudentById(work.getStudentId());
         workInfoDTO.setStudentName(student.getName());
-        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId());
-        for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
-            if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
-                message.setSenderName(student.getName());
-            } else if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
-                message.setSenderName(teacher.getName());
-            }
-
-        }
-        workInfoDTO.setWorkMessageInfoDTOList(workMessageInfoDTOList);
 
         //2020-01-06增加作业文件
         List<WorkFileDTO> workFileDTOList = workFileMapper.getByWorkId(workInfoDTO.getWorkId());

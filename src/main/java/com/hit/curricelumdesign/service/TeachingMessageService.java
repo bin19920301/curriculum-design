@@ -36,9 +36,9 @@ public class TeachingMessageService {
     @Autowired
     private WorkMapper workMapper;
 
-    public Result addTeacherMessage(AddTeachingMessageParam param){
+    public Result addTeacherMessage(AddTeachingMessageParam param) {
         TeachingMessage message = new TeachingMessage();
-        BeanUtil.copyProperties(param,message);
+        BeanUtil.copyProperties(param, message);
         message.setSenderId(param.getLoginTeacherId());
         //message.setSenderId(1);
         message.setSenderType(Constants.TeachingMessage.SENDER_TYPE_TEACHER);
@@ -49,9 +49,9 @@ public class TeachingMessageService {
         return Result.success();
     }
 
-    public Result addStudentMessage(AddTeachingMessageParam param){
+    public Result addStudentMessage(AddTeachingMessageParam param) {
         TeachingMessage message = new TeachingMessage();
-        BeanUtil.copyProperties(param,message);
+        BeanUtil.copyProperties(param, message);
         message.setSenderId(param.getLoginStudentId());
         //message.setSenderId(1);
         message.setSenderType(Constants.TeachingMessage.SENDER_TYPE_STUDENT);
@@ -62,19 +62,9 @@ public class TeachingMessageService {
         return Result.success();
     }
 
-    public Result deleteTeacherMessage(TeachingMessageBaseParam param){
+    public Result deleteTeacherMessage(TeachingMessageBaseParam param) {
         TeachingMessage message = teachingMessageManager.getById(param.getId());
-        if (!param.getLoginTeacherId().equals(message.getSenderId()) || Constants.TeachingMessage.SENDER_TYPE_TEACHER.equals(message.getSenderType())){
-            throw new BaseException(Error.TEACHING_MESSAGE_ONLY_DELETE_BY_SELF);
-        }
-        message.setUpdatetime(new Date());
-        message.setIsDelete(Constants.Common.IS_YES);
-        teachingMessageMapper.updateByPrimaryKeySelective(message);
-        return Result.success();
-    }
-    public Result deleteStudentMessage(TeachingMessageBaseParam param){
-        TeachingMessage message = teachingMessageManager.getById(param.getId());
-        if (!param.getLoginStudentId().equals(message.getSenderId()) || Constants.TeachingMessage.SENDER_TYPE_STUDENT.equals(message.getSenderType())){
+        if (!param.getLoginTeacherId().equals(message.getSenderId()) || Constants.TeachingMessage.SENDER_TYPE_TEACHER.equals(message.getSenderType())) {
             throw new BaseException(Error.TEACHING_MESSAGE_ONLY_DELETE_BY_SELF);
         }
         message.setUpdatetime(new Date());
@@ -83,9 +73,45 @@ public class TeachingMessageService {
         return Result.success();
     }
 
-    public Result listTeachingMessageByTeachingId(ListByTeachingIdParam param){
-        PageHelper.startPage(param.getPageNum(), param.getPageSize());
+    public Result deleteStudentMessage(TeachingMessageBaseParam param) {
+        TeachingMessage message = teachingMessageManager.getById(param.getId());
+        if (!param.getLoginStudentId().equals(message.getSenderId()) || Constants.TeachingMessage.SENDER_TYPE_STUDENT.equals(message.getSenderType())) {
+            throw new BaseException(Error.TEACHING_MESSAGE_ONLY_DELETE_BY_SELF);
+        }
+        message.setUpdatetime(new Date());
+        message.setIsDelete(Constants.Common.IS_YES);
+        teachingMessageMapper.updateByPrimaryKeySelective(message);
+        return Result.success();
+    }
+
+    public Result teacherListTeachingMessageByTeachingId(ListByTeachingIdParam param) {
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
         List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listByTeachingId(param.getTeachingId());
+        for (TeachingMessageInfoDTO dto : teachingMessageInfoDTOList) {
+            if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                dto.setCanDelete(Constants.Common.NOT);
+            } else if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                dto.setCanDelete(Constants.Common.YES);
+            }
+        }
+        PageInfo<TeachingMessageInfoDTO> pageInfo = new PageInfo<>(teachingMessageInfoDTOList);
+        BaseListDTO<TeachingMessageInfoDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
+        TeachingMessageListDTO teachingMessageListDTO = new TeachingMessageListDTO();
+        teachingMessageListDTO.setTeachingMessageInfoDTOBaseListDTO(baseListDTO);
+        teachingMessageListDTO.setStudentCount(workMapper.countStudentsByTeachingId(param.getTeachingId()));
+        return Result.success(teachingMessageListDTO);
+    }
+
+    public Result studentListTeachingMessageByTeachingId(ListByTeachingIdParam param) {
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
+        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listByTeachingId(param.getTeachingId());
+        for (TeachingMessageInfoDTO dto : teachingMessageInfoDTOList) {
+            if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                dto.setCanDelete(Constants.Common.YES);
+            } else if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                dto.setCanDelete(Constants.Common.NOT);
+            }
+        }
         PageInfo<TeachingMessageInfoDTO> pageInfo = new PageInfo<>(teachingMessageInfoDTOList);
         BaseListDTO<TeachingMessageInfoDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
         TeachingMessageListDTO teachingMessageListDTO = new TeachingMessageListDTO();

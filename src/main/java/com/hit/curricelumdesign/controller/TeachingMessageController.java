@@ -41,8 +41,15 @@ public class TeachingMessageController {
         return teachingMessageService.deleteStudentMessage(param);
     }
 
-    @RequestMapping(value = "/teachingmessage/listbyteachindid/", method = RequestMethod.POST)
-    public Result listTeachingMessageByTeachingId(ListByTeachingIdParam param) {
-        return teachingMessageService.listTeachingMessageByTeachingId(param);
+    @RequestMapping(value = "/teachingmessage/teacherlistbyteachindid/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
+    public Result teacherListTeachingMessageByTeachingId(ListByTeachingIdParam param) {
+        return teachingMessageService.teacherListTeachingMessageByTeachingId(param);
+    }
+
+    @RequestMapping(value = "/teachingmessage/studentlistbyteachindid/", method = RequestMethod.POST)
+    @HitApi(checkStudentLogin = true)
+    public Result studentListTeachingMessageByTeachingId(ListByTeachingIdParam param) {
+        return teachingMessageService.studentListTeachingMessageByTeachingId(param);
     }
 }

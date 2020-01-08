@@ -3,6 +3,7 @@ package com.hit.curricelumdesign.controller;
 import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
 import com.hit.curricelumdesign.context.param.teachermessage.AddTeacherMessageParam;
+import com.hit.curricelumdesign.context.param.teachermessage.ListTeacherMessageParam;
 import com.hit.curricelumdesign.context.param.teachermessage.TeacherMessageBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.service.TeacherMessageService;
@@ -31,7 +32,7 @@ public class TeacherMessageController {
 
     @RequestMapping(value = "/teachermessage/listmessage/", method = RequestMethod.POST)
     @HitApi(checkTeacherLogin = true)
-    public Result listTeacherMessage(BaseListRequestParam param){
+    public Result listTeacherMessage(ListTeacherMessageParam param){
         return  teacherMessageService.listTeacherMessage(param);
     }
 }

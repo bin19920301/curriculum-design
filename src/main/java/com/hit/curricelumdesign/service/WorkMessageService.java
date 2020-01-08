@@ -192,23 +192,53 @@ public class WorkMessageService {
     }
 
     /**
-     * 获取作业消息列表
+     * 教师获取作业消息列表
      *
      * @param param
      * @return
      */
-    public Result listWorkMessage(WorkMessageListParam param) {
+    public Result teacherListWorkMessage(WorkMessageListParam param) {
         Work work = workManager.getWorkerById(param.getWorkId());
         StudentDTO student = studentManager.getStudentById(work.getStudentId());
         Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
         TeacherDTO teacher = teacherManager.getTeacherById(teaching.getTeacherId());
-        PageHelper.startPage(param.getPageNum(), param.getPageSize());
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
         List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId());
         for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
             if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
                 message.setSenderName(student.getName());
+                message.setCanDelete(Constants.Common.NOT);
             } else if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
                 message.setSenderName(teacher.getName());
+                message.setCanDelete(Constants.Common.YES);
+            }
+        }
+        PageInfo<WorkMessageInfoDTO> pageInfo = new PageInfo<>(workMessageInfoDTOList);
+
+        BaseListDTO<WorkMessageInfoDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
+        return Result.success(baseListDTO);
+    }
+
+    /**
+     * 学生获取作业消息列表
+     *
+     * @param param
+     * @return
+     */
+    public Result studentListWorkMessage(WorkMessageListParam param) {
+        Work work = workManager.getWorkerById(param.getWorkId());
+        StudentDTO student = studentManager.getStudentById(work.getStudentId());
+        Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
+        TeacherDTO teacher = teacherManager.getTeacherById(teaching.getTeacherId());
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
+        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId());
+        for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
+            if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                message.setSenderName(student.getName());
+                message.setCanDelete(Constants.Common.YES);
+            } else if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                message.setSenderName(teacher.getName());
+                message.setCanDelete(Constants.Common.NOT);
             }
         }
         PageInfo<WorkMessageInfoDTO> pageInfo = new PageInfo<>(workMessageInfoDTOList);

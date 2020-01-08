@@ -38,6 +38,12 @@ public class TeachingMessageInfoDTO {
      */
     private String createtime;
 
+
+    /**
+     * 可以删除 0否 1是
+     */
+    private Integer canDelete;
+
     public Integer getId() {
         return id;
     }
@@ -86,15 +92,24 @@ public class TeachingMessageInfoDTO {
         this.createtime = createtime;
     }
 
+    public Integer getCanDelete() {
+        return canDelete;
+    }
+
+    public void setCanDelete(Integer canDelete) {
+        this.canDelete = canDelete;
+    }
+
     @Override
     public String toString() {
-        return "WorkMessageInfoDTO{" +
+        return "TeachingMessageInfoDTO{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", senderId=" + senderId +
                 ", senderName='" + senderName + '\'' +
                 ", senderType=" + senderType +
                 ", createtime='" + createtime + '\'' +
+                ", canDelete=" + canDelete +
                 '}';
     }
 }

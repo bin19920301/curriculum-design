@@ -33,9 +33,15 @@ public class TeacherMessageInfoDTO {
     /**
      * 创建时间
      */
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String createtime;
+
+
+    /**
+     * 可以删除 0否 1是
+     */
+    private Integer canDelete;
 
     public Integer getId() {
         return id;
@@ -77,6 +83,14 @@ public class TeacherMessageInfoDTO {
         this.createtime = createtime;
     }
 
+    public Integer getCanDelete() {
+        return canDelete;
+    }
+
+    public void setCanDelete(Integer canDelete) {
+        this.canDelete = canDelete;
+    }
+
     @Override
     public String toString() {
         return "TeacherMessageInfoDTO{" +
@@ -85,6 +99,7 @@ public class TeacherMessageInfoDTO {
                 ", creatorId=" + creatorId +
                 ", creatorName='" + creatorName + '\'' +
                 ", createtime='" + createtime + '\'' +
+                ", canDelete=" + canDelete +
                 '}';
     }
 }

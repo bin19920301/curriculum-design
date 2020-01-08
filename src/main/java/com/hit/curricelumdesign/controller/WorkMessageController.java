@@ -76,9 +76,14 @@ public class WorkMessageController {
     }
 
 
-    @RequestMapping(value = "/workmessage/listmessage/", method = RequestMethod.POST)
-    public Result listWorkMessage(WorkMessageListParam param) {
-        return workMessageService.listWorkMessage(param);
+    @RequestMapping(value = "/workmessage/teacherlistmessage/", method = RequestMethod.POST)
+    public Result teacherListWorkMessage(WorkMessageListParam param) {
+        return workMessageService.teacherListWorkMessage(param);
+    }
+
+    @RequestMapping(value = "/workmessage/studentlistmessage/", method = RequestMethod.POST)
+    public Result studentListWorkMessage(WorkMessageListParam param) {
+        return workMessageService.studentListWorkMessage(param);
     }
 
 
