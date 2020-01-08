@@ -17,8 +17,8 @@ public class Academy {
     /**
      * 学院名称
      */
-    @Column(name = "f_academy_name")
-    private String academyName;
+    @Column(name = "f_name")
+    private String name;
 
     /**
      * 删除的标志位
@@ -35,9 +35,8 @@ public class Academy {
     /**
      * 创建日期
      */
-    @Column(name = "f_create_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
+    @Column(name = "f_createtime")
+    private Date createtime;
 
     /**
      * 更新时操作者的id
@@ -48,9 +47,8 @@ public class Academy {
     /**
      * 更新时间
      */
-    @Column(name = "f_update_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
+    @Column(name = "f_updatetime")
+    private Date updatetime;
 
     public Integer getId() {
         return id;
@@ -60,12 +58,12 @@ public class Academy {
         this.id = id;
     }
 
-    public String getAcademyName() {
-        return academyName;
+    public String getName() {
+        return name;
     }
 
-    public void setAcademyName(String academyName) {
-        this.academyName = academyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean getIsDelete() {
@@ -84,12 +82,12 @@ public class Academy {
         this.createId = createId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     public Integer getUpdaterId() {
@@ -100,11 +98,24 @@ public class Academy {
         this.updaterId = updaterId;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    @Override
+    public String toString() {
+        return "Academy{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isDelete=" + isDelete +
+                ", createId=" + createId +
+                ", createtime=" + createtime +
+                ", updaterId=" + updaterId +
+                ", updatetime=" + updatetime +
+                '}';
     }
 }

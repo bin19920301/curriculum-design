@@ -1,9 +1,14 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.folder.FolderDTO;
 import com.hit.curricelumdesign.context.entity.Folder;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
+@Repository
 public interface FolderMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +21,10 @@ public interface FolderMapper {
     int updateByPrimaryKeySelective(Folder record);
 
     int updateByPrimaryKey(Folder record);
+
+    FolderDTO selectById(Integer id);
+
+    FolderDTO selectByName(String name);
+
+    List<FolderDTO> getFolderDTOList();
 }

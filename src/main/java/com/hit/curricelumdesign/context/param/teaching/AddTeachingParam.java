@@ -1,0 +1,77 @@
+package com.hit.curricelumdesign.context.param.teaching;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.hit.curricelumdesign.context.annotation.JsonArr;
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.List;
+
+public class AddTeachingParam extends BaseRequestParam {
+    /**
+     * 教学名称
+     */
+    @NotNull
+    private String name;
+
+    /**
+     * 教师提示
+     */
+    @NotNull
+    private String teacherReminder;
+
+    /**
+     * 截止日期
+     */
+    @NotNull
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date deadlineTime;
+
+    //这里缺少作业的集合
+    @JsonArr(type = StudentWorkProjectParam.class, paramName = "works")
+    private List<StudentWorkProjectParam> works;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTeacherReminder() {
+        return teacherReminder;
+    }
+
+    public void setTeacherReminder(String teacherReminder) {
+        this.teacherReminder = teacherReminder;
+    }
+
+    public Date getDeadlineTime() {
+        return deadlineTime;
+    }
+
+    public void setDeadlineTime(Date deadlineTime) {
+        this.deadlineTime = deadlineTime;
+    }
+
+    public List<StudentWorkProjectParam> getWorks() {
+        return works;
+    }
+
+    public void setWorks(List<StudentWorkProjectParam> works) {
+        this.works = works;
+    }
+
+    @Override
+    public String toString() {
+        return "AddTeachingParam{" +
+                "name='" + name + '\'' +
+                ", teacherReminder='" + teacherReminder + '\'' +
+                ", deadlineTime=" + deadlineTime +
+                ", works=" + works +
+                '}';
+    }
+}

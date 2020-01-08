@@ -15,16 +15,16 @@ public class Work {
     private Integer id;
 
     /**
-     * 课程设计id
-     */
-    @Column(name = "f_project_id")
-    private Integer projectId;
-
-    /**
      * 教学id
      */
     @Column(name = "f_teaching_id")
     private Integer teachingId;
+
+    /**
+     * 作业项目id
+     */
+    @Column(name = "f_work_project_id")
+    private Integer workProjectId;
 
     /**
      * 学生id
@@ -39,16 +39,22 @@ public class Work {
     private Integer score;
 
     /**
-     * 作业状态：0未提交，1已提交，2退回，3已完成
+     * 提交时间
+     */
+    @Column(name = "f_submittime")
+    private Date submittime;
+
+    /**
+     * 退回时间
+     */
+    @Column(name = "f_returntime")
+    private Date returntime;
+
+    /**
+     * 作业状态：0未提交，1已提交，2已退回，3已完成
      */
     @Column(name = "f_status")
     private Integer status;
-
-    /**
-     * 提交时间
-     */
-    @Column(name = "f_submit_time")
-    private Date submitTime;
 
     /**
      * 删除标志位
@@ -59,22 +65,14 @@ public class Work {
     /**
      * 创建时间
      */
-    @Column(name = "f_create_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
-
-    /**
-     * 修改者id
-     */
-    @Column(name = "f_updater_id")
-    private Integer updaterId;
+    @Column(name = "f_createtime")
+    private Date createtime;
 
     /**
      * 修改时间
      */
-    @Column(name = "f_update_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
+    @Column(name = "f_updatetime")
+    private Date updatetime;
 
     public Integer getId() {
         return id;
@@ -84,20 +82,20 @@ public class Work {
         this.id = id;
     }
 
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
-
     public Integer getTeachingId() {
         return teachingId;
     }
 
     public void setTeachingId(Integer teachingId) {
         this.teachingId = teachingId;
+    }
+
+    public Integer getWorkProjectId() {
+        return workProjectId;
+    }
+
+    public void setWorkProjectId(Integer workProjectId) {
+        this.workProjectId = workProjectId;
     }
 
     public Integer getStudentId() {
@@ -116,20 +114,28 @@ public class Work {
         this.score = score;
     }
 
+    public Date getSubmittime() {
+        return submittime;
+    }
+
+    public void setSubmittime(Date submittime) {
+        this.submittime = submittime;
+    }
+
+    public Date getReturntime() {
+        return returntime;
+    }
+
+    public void setReturntime(Date returntime) {
+        this.returntime = returntime;
+    }
+
     public Integer getStatus() {
         return status;
     }
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public Date getSubmitTime() {
-        return submitTime;
-    }
-
-    public void setSubmitTime(Date submitTime) {
-        this.submitTime = submitTime;
     }
 
     public Boolean getIsDelete() {
@@ -140,27 +146,36 @@ public class Work {
         this.isDelete = isDelete;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
-    public Integer getUpdaterId() {
-        return updaterId;
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdaterId(Integer updaterId) {
-        this.updaterId = updaterId;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    @Override
+    public String toString() {
+        return "Work{" +
+                "id=" + id +
+                ", teachingId=" + teachingId +
+                ", workProjectId=" + workProjectId +
+                ", studentId=" + studentId +
+                ", score=" + score +
+                ", submittime=" + submittime +
+                ", returntime=" + returntime +
+                ", status=" + status +
+                ", isDelete=" + isDelete +
+                ", createtime=" + createtime +
+                ", updatetime=" + updatetime +
+                '}';
     }
 }

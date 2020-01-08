@@ -133,4 +133,19 @@ public class WorkProject {
     public void setUpdaterId(Integer updaterId) {
         this.updaterId = updaterId;
     }
+
+    @Override
+    public String toString() {
+        return "WorkProject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", useCount=" + useCount +
+                ", isDelete=" + isDelete +
+                ", createtime=" + createtime +
+                ", creatorId=" + creatorId +
+                ", updatetime=" + updatetime +
+                ", updaterId=" + updaterId +
+                '}';
+    }
 }

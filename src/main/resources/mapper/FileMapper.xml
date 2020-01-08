@@ -1,153 +1,171 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hit.curricelumdesign.dao.FileMapper">
-  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.File">
-    <id column="f_id" jdbcType="INTEGER" property="id" />
-    <result column="f_folder_id" jdbcType="INTEGER" property="folderId" />
-    <result column="f_name" jdbcType="VARCHAR" property="name" />
-    <result column="f_size" jdbcType="VARCHAR" property="size" />
-    <result column="f_path" jdbcType="VARCHAR" property="path" />
-    <result column="f_use_count" jdbcType="INTEGER" property="useCount" />
-    <result column="f_is_delete" jdbcType="BIT" property="isDelete" />
-    <result column="f_createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="f_creator_id" jdbcType="INTEGER" property="creatorId" />
-    <result column="f_updatetime" jdbcType="TIMESTAMP" property="updatetime" />
-    <result column="f_updater_id" jdbcType="INTEGER" property="updaterId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    f_id, f_folder_id, f_name, f_size, f_path, f_use_count, f_is_delete, f_createtime, 
+    <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.File">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_folder_id" property="folderId" jdbcType="INTEGER"/>
+        <result column="f_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_size" property="size" jdbcType="VARCHAR"/>
+        <result column="f_path" property="path" jdbcType="VARCHAR"/>
+        <result column="f_use_count" property="useCount" jdbcType="INTEGER"/>
+        <result column="f_is_delete" property="isDelete" jdbcType="BIT"/>
+        <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
+        <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+        <result column="f_updater_id" property="updaterId" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.file.FileDTO">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_folder_id" property="folderId" jdbcType="INTEGER"/>
+        <result column="f_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_size" property="size" jdbcType="VARCHAR"/>
+        <result column="f_use_count" property="useCount" jdbcType="INTEGER"/>
+        <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
+        <result column="teacherName" property="creatorName" jdbcType="VARCHAR"/>
+        <result column="folderName" property="folderName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="FileListDTOMap" type="com.hit.curricelumdesign.context.dto.file.FileListDTO">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_folder_id" property="folderId" jdbcType="INTEGER"/>
+        <result column="f_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_path" property="url" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    f_id, f_folder_id, f_name, f_size, f_path, f_use_count, f_is_delete, f_createtime,
     f_creator_id, f_updatetime, f_updater_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_file
-    where f_id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_file
+        where f_id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_file
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.File">
-    insert into t_file (f_id, f_folder_id, f_name, 
-      f_size, f_path, f_use_count, 
-      f_is_delete, f_createtime, f_creator_id, 
+    <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.File">
+    insert into t_file (f_id, f_folder_id, f_name,
+      f_size, f_path, f_use_count,
+      f_is_delete, f_createtime, f_creator_id,
       f_updatetime, f_updater_id)
-    values (#{id,jdbcType=INTEGER}, #{folderId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{size,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{useCount,jdbcType=INTEGER}, 
-      #{isDelete,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{folderId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{size,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{useCount,jdbcType=INTEGER},
+      #{isDelete,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=INTEGER},
       #{updatetime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.File">
-    insert into t_file
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        f_id,
-      </if>
-      <if test="folderId != null">
-        f_folder_id,
-      </if>
-      <if test="name != null">
-        f_name,
-      </if>
-      <if test="size != null">
-        f_size,
-      </if>
-      <if test="path != null">
-        f_path,
-      </if>
-      <if test="useCount != null">
-        f_use_count,
-      </if>
-      <if test="isDelete != null">
-        f_is_delete,
-      </if>
-      <if test="createtime != null">
-        f_createtime,
-      </if>
-      <if test="creatorId != null">
-        f_creator_id,
-      </if>
-      <if test="updatetime != null">
-        f_updatetime,
-      </if>
-      <if test="updaterId != null">
-        f_updater_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="folderId != null">
-        #{folderId,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null">
-        #{size,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null">
-        #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="useCount != null">
-        #{useCount,jdbcType=INTEGER},
-      </if>
-      <if test="isDelete != null">
-        #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creatorId != null">
-        #{creatorId,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null">
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null">
-        #{updaterId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.File">
-    update t_file
-    <set>
-      <if test="folderId != null">
-        f_folder_id = #{folderId,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        f_name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null">
-        f_size = #{size,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null">
-        f_path = #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="useCount != null">
-        f_use_count = #{useCount,jdbcType=INTEGER},
-      </if>
-      <if test="isDelete != null">
-        f_is_delete = #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="createtime != null">
-        f_createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creatorId != null">
-        f_creator_id = #{creatorId,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null">
-        f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null">
-        f_updater_id = #{updaterId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where f_id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.File">
+    <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.File">
+        insert into t_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                f_id,
+            </if>
+            <if test="folderId != null">
+                f_folder_id,
+            </if>
+            <if test="name != null">
+                f_name,
+            </if>
+            <if test="size != null">
+                f_size,
+            </if>
+            <if test="path != null">
+                f_path,
+            </if>
+            <if test="useCount != null">
+                f_use_count,
+            </if>
+            <if test="isDelete != null">
+                f_is_delete,
+            </if>
+            <if test="createtime != null">
+                f_createtime,
+            </if>
+            <if test="creatorId != null">
+                f_creator_id,
+            </if>
+            <if test="updatetime != null">
+                f_updatetime,
+            </if>
+            <if test="updaterId != null">
+                f_updater_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="folderId != null">
+                #{folderId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null">
+                #{size,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="useCount != null">
+                #{useCount,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creatorId != null">
+                #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaterId != null">
+                #{updaterId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.File">
+        update t_file
+        <set>
+            <if test="folderId != null">
+                f_folder_id = #{folderId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                f_name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null">
+                f_size = #{size,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                f_path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="useCount != null">
+                f_use_count = #{useCount,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                f_is_delete = #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="createtime != null">
+                f_createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creatorId != null">
+                f_creator_id = #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaterId != null">
+                f_updater_id = #{updaterId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where f_id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.File">
     update t_file
     set f_folder_id = #{folderId,jdbcType=INTEGER},
       f_name = #{name,jdbcType=VARCHAR},
@@ -161,4 +179,76 @@
       f_updater_id = #{updaterId,jdbcType=INTEGER}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="getListByFolderId" resultMap="DTOResultMap">
+    select
+    fi.f_id, fi.f_folder_id, fi.f_name, fi.f_size, fi.f_path, fi.f_use_count, fi.f_is_delete, fi.f_createtime,
+    fi.f_creator_id, fo.f_name as folderName,te.f_name as teacherName
+    from t_file fi
+    left join t_folder fo on fi.f_folder_id = fo.f_id
+    left join t_teacher te on fi.f_creator_id = te.f_id
+    where fi.f_is_delete = false and fi.f_folder_id = #{folderId}
+  </select>
+    <select id="countFileByFolderId" resultType="java.lang.Long">
+      select
+        count(*)
+        from t_file
+        where f_is_delete = 0
+        and f_folder_id = #{folderId,jdbcType=INTEGER}
+  </select>
+    <select id="getFileByIdList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_file
+        where f_is_delete = 0
+        and f_id in
+        <foreach collection="fileIdList" item="fileId" separator="," index="index" open="(" close=")">
+            #{fileId}
+        </foreach>
+    </select>
+    <select id="getFileNameByWorkProjectId" resultType="java.lang.String">
+        select b.f_name
+        from t_work_project_file a
+        left join t_file b
+        on a.f_file_id = b.f_id
+        where a.f_work_project_id = #{workProjectListId}
+        and a.f_is_delete = 0
+        and b.f_is_delete = 0;
+    </select>
+    <select id="getFileListDTOByWorkProjectId" resultMap="FileListDTOMap">
+        select
+        b.f_id,
+        b.f_folder_id,
+        b.f_name,
+        b.f_path
+        from t_work_project_file a
+        left join t_file b
+        on a.f_file_id = b.f_id
+        where a.f_work_project_id = #{workProjectListId}
+        and a.f_is_delete = 0
+        and b.f_is_delete = 0;
+    </select>
+    <select id="getFileNameByWorkProjectIdAndType" resultType="java.lang.String">
+        select b.f_name
+        from t_work_project_file a
+        left join t_file b
+        on a.f_file_id = b.f_id
+        where a.f_work_project_id = #{workProjectListId}
+        and a.f_file_type = #{type}
+        and a.f_is_delete = 0
+        and b.f_is_delete = 0;
+    </select>
+    <select id="getFileListDTOByWorkProjectIdAndType" resultMap="FileListDTOMap">
+        select
+        b.f_id,
+        b.f_folder_id,
+        b.f_name,
+        b.f_path
+        from t_work_project_file a
+        left join t_file b
+        on a.f_file_id = b.f_id
+        where a.f_work_project_id = #{workProjectListId}
+        and a.f_file_type = #{type}
+        and a.f_is_delete = 0
+        and b.f_is_delete = 0;
+    </select>
 </mapper>

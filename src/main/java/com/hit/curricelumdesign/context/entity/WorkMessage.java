@@ -15,22 +15,22 @@ public class WorkMessage {
     private Integer id;
 
     /**
-     * 关联的课程设计的id
+     * 教学的id
      */
     @Column(name = "f_teaching_id")
     private Integer teachingId;
 
     /**
-     * 关联的作业id
+     * 作业id
      */
-    @Column(name = "f_project_id")
-    private Integer projectId;
+    @Column(name = "f_work_id")
+    private Integer workId;
 
     /**
      * 消息的具体内容
      */
-    @Column(name = "f_message_content")
-    private String messageContent;
+    @Column(name = "f_content")
+    private String content;
 
     /**
      * 消息是否阅读
@@ -45,7 +45,7 @@ public class WorkMessage {
     private Integer senderId;
 
     /**
-     * 消息发送者的用户类型，1为学生，2为教师，3为管理员
+     * 消息发送者的用户类型，1为学生，2为教师
      */
     @Column(name = "f_sender_type")
     private Integer senderType;
@@ -57,7 +57,7 @@ public class WorkMessage {
     private Integer receiverId;
 
     /**
-     * 消息接收者的用户类型，1为学生，2为教师，3为管理员
+     * 消息接收者的用户类型，1为学生，2为教师
      */
     @Column(name = "f_receiver_type")
     private Integer receiverType;
@@ -65,28 +65,14 @@ public class WorkMessage {
     /**
      * 创建时间
      */
-    @Column(name = "f_create_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
-
-    /**
-     * 创建者的id
-     */
-    @Column(name = "f_creator_id")
-    private Integer creatorId;
+    @Column(name = "f_createtime")
+    private Date createtime;
 
     /**
      * 更新时间
      */
-    @Column(name = "f_update_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
-
-    /**
-     * 修改时操作者的id
-     */
-    @Column(name = "f_updater_id")
-    private Integer updaterId;
+    @Column(name = "f_updatetime")
+    private Date updatetime;
 
     /**
      * 是否删除 0：否 1：是
@@ -110,20 +96,20 @@ public class WorkMessage {
         this.teachingId = teachingId;
     }
 
-    public Integer getProjectId() {
-        return projectId;
+    public Integer getWorkId() {
+        return workId;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public void setWorkId(Integer workId) {
+        this.workId = workId;
     }
 
-    public String getMessageContent() {
-        return messageContent;
+    public String getContent() {
+        return content;
     }
 
-    public void setMessageContent(String messageContent) {
-        this.messageContent = messageContent;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Boolean getIsRead() {
@@ -166,36 +152,20 @@ public class WorkMessage {
         this.receiverType = receiverType;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
-    public Integer getCreatorId() {
-        return creatorId;
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Integer getUpdaterId() {
-        return updaterId;
-    }
-
-    public void setUpdaterId(Integer updaterId) {
-        this.updaterId = updaterId;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 
     public Boolean getIsDelete() {
@@ -204,5 +174,23 @@ public class WorkMessage {
 
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkMessage{" +
+                "id=" + id +
+                ", teachingId=" + teachingId +
+                ", workId=" + workId +
+                ", content='" + content + '\'' +
+                ", isRead=" + isRead +
+                ", senderId=" + senderId +
+                ", senderType=" + senderType +
+                ", receiverId=" + receiverId +
+                ", receiverType=" + receiverType +
+                ", createtime=" + createtime +
+                ", updatetime=" + updatetime +
+                ", isDelete=" + isDelete +
+                '}';
     }
 }

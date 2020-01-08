@@ -1,10 +1,11 @@
 package com.hit.curricelumdesign.context.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
-@Entity
-@Table(name = "t_craft_card")
 public class CraftCard {
     /**
      * id主键自增风控唯一
@@ -15,58 +16,64 @@ public class CraftCard {
     private Integer id;
 
     /**
-     * 工艺名称
+     * 作业id
      */
-    @Column(name = "t_craft_name")
-    private String tCraftName;
+    @Column(name = "f_work_id")
+    private Integer workId;
 
     /**
-     * 加工表面
+     * 加工表面id
      */
-    @Column(name = "t_finished_surface")
-    private Integer tFinishedSurface;
+    @Column(name = "f_surface")
+    private String surface;
 
     /**
-     * 加工形式
+     * 加工形式id
      */
-    @Column(name = "t_processing_method")
-    private Integer tProcessingMethod;
+    @Column(name = "f_processing_method")
+    private String processingMethod;
 
     /**
      * 工序内容
      */
-    @Column(name = "t_process _content")
-    private String tProcessContent;
+    @Column(name = "f_process_content")
+    private String processContent;
+
+    /**
+     * 排序
+     */
+    @Column(name = "f_sort")
+    private Integer sort;
 
     /**
      * 删除标志位
      */
-    @Column(name = "t_is_delete")
-    private Boolean tIsDelete;
+    @Column(name = "f_is_delete")
+    private Boolean isDelete;
 
     /**
      * 创建者id
      */
-    @Column(name = "t_creator_id")
-    private Integer tCreatorId;
+    @Column(name = "f_creator_id")
+    private Integer creatorId;
 
     /**
      * 创建时间
      */
-    @Column(name = "t_create_time")
-    private Date tCreateTime;
+    @Column(name = "f_createtime")
+    private Date createtime;
 
     /**
      * 修改者
      */
-    @Column(name = "t_updater_id")
-    private Integer tUpdaterId;
+    @Column(name = "f_updater_id")
+    private Integer updaterId;
 
     /**
      * 更新时间
      */
-    @Column(name = "t_update_time")
-    private Date tUpdateTime;
+    @Column(name = "f_updatetime")
+    private Date updatetime;
 
     public Integer getId() {
         return id;
@@ -76,75 +83,100 @@ public class CraftCard {
         this.id = id;
     }
 
-    public String gettCraftName() {
-        return tCraftName;
+    public Integer getWorkId() {
+        return workId;
     }
 
-    public void settCraftName(String tCraftName) {
-        this.tCraftName = tCraftName;
+    public void setWorkId(Integer workId) {
+        this.workId = workId;
     }
 
-    public Integer gettFinishedSurface() {
-        return tFinishedSurface;
+    public String getSurface() {
+        return surface;
     }
 
-    public void settFinishedSurface(Integer tFinishedSurface) {
-        this.tFinishedSurface = tFinishedSurface;
+    public void setSurface(String surface) {
+        this.surface = surface;
     }
 
-    public Integer gettProcessingMethod() {
-        return tProcessingMethod;
+    public String getProcessingMethod() {
+        return processingMethod;
     }
 
-    public void settProcessingMethod(Integer tProcessingMethod) {
-        this.tProcessingMethod = tProcessingMethod;
+    public void setProcessingMethod(String processingMethod) {
+        this.processingMethod = processingMethod;
     }
 
-    public String gettProcessContent() {
-        return tProcessContent;
+    public String getProcessContent() {
+        return processContent;
     }
 
-    public void settProcessContent(String tProcessContent) {
-        this.tProcessContent = tProcessContent;
+    public void setProcessContent(String processContent) {
+        this.processContent = processContent;
     }
 
-    public Boolean gettIsDelete() {
-        return tIsDelete;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void settIsDelete(Boolean tIsDelete) {
-        this.tIsDelete = tIsDelete;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
-    public Integer gettCreatorId() {
-        return tCreatorId;
+    public Boolean getIsDelete() {
+        return isDelete;
     }
 
-    public void settCreatorId(Integer tCreatorId) {
-        this.tCreatorId = tCreatorId;
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
 
-    public Date gettCreateTime() {
-        return tCreateTime;
+    public Integer getCreatorId() {
+        return creatorId;
     }
 
-    public void settCreateTime(Date tCreateTime) {
-        this.tCreateTime = tCreateTime;
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
     }
 
-    public Integer gettUpdaterId() {
-        return tUpdaterId;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void settUpdaterId(Integer tUpdaterId) {
-        this.tUpdaterId = tUpdaterId;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
-    public Date gettUpdateTime() {
-        return tUpdateTime;
+    public Integer getUpdaterId() {
+        return updaterId;
     }
 
-    public void settUpdateTime(Date tUpdateTime) {
-        this.tUpdateTime = tUpdateTime;
+    public void setUpdaterId(Integer updaterId) {
+        this.updaterId = updaterId;
+    }
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    @Override
+    public String toString() {
+        return "CraftCard{" +
+                "id=" + id +
+                ", workId=" + workId +
+                ", surface='" + surface + '\'' +
+                ", processingMethod='" + processingMethod + '\'' +
+                ", processContent='" + processContent + '\'' +
+                ", sort=" + sort +
+                ", isDelete=" + isDelete +
+                ", creatorId=" + creatorId +
+                ", createtime=" + createtime +
+                ", updaterId=" + updaterId +
+                ", updatetime=" + updatetime +
+                '}';
     }
 }
