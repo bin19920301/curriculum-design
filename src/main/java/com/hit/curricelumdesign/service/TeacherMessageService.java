@@ -56,8 +56,8 @@ public class TeacherMessageService {
     }
 
     public Result listTeacherMessage(ListTeacherMessageParam param) {
-        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
-        List<TeacherMessageInfoDTO> teacherMessageDTOList = teacherMessageMapper.listTeacherMessageDTO();
+        PageHelper.startPage(param.getPageNum(), param.getPageSize());
+        List<TeacherMessageInfoDTO> teacherMessageDTOList = teacherMessageMapper.listTeacherMessageDTO(param.getStartId());
         for (TeacherMessageInfoDTO dto : teacherMessageDTOList) {
             if (dto.getCreatorId().compareTo(param.getLoginTeacherId()) == 0) {
                 dto.setCanDelete(Constants.Common.YES);

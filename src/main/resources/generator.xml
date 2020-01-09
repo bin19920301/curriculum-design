@@ -41,7 +41,7 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名 -->
-        <table schema="curriculum_design" tableName="t_work_file" domainObjectName="WorkFile"
+        <table schema="curriculum_design" tableName="t_work_project_file" domainObjectName="WorkProjectFile"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"

@@ -85,8 +85,8 @@ public class TeachingMessageService {
     }
 
     public Result teacherListTeachingMessageByTeachingId(ListByTeachingIdParam param) {
-        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
-        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listByTeachingId(param.getTeachingId());
+        PageHelper.startPage(param.getPageNum(), param.getPageSize());
+        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listByTeachingId(param.getTeachingId(), param.getStartId());
         for (TeachingMessageInfoDTO dto : teachingMessageInfoDTOList) {
             if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
                 dto.setCanDelete(Constants.Common.NOT);
@@ -103,8 +103,8 @@ public class TeachingMessageService {
     }
 
     public Result studentListTeachingMessageByTeachingId(ListByTeachingIdParam param) {
-        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
-        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listByTeachingId(param.getTeachingId());
+        PageHelper.startPage(param.getPageNum(), param.getPageSize());
+        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listByTeachingId(param.getTeachingId(), param.getStartId());
         for (TeachingMessageInfoDTO dto : teachingMessageInfoDTOList) {
             if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
                 dto.setCanDelete(Constants.Common.YES);

@@ -32,7 +32,7 @@ public interface WorkMessageMapper {
 
     long countStudentUnreadMessage(Integer studentId);
 
-    List<WorkMessageInfoDTO> getWorkMessageInfoDTOByWorkId(Integer workId);
+    List<WorkMessageInfoDTO> getWorkMessageInfoDTOByWorkId(Integer workId, Integer startId);
 
     int readMessage(@Param("userId") Integer userId, @Param("workId") Integer workId, @Param("receiverType") Integer receiverType);
 }

@@ -94,8 +94,7 @@
             AND f_receiver_type = 1
             AND f_receiver_id = #{studentId}
     </select>
-    <select id="getWorkMessageInfoDTOByWorkId"
-            resultMap="WorkMessageInfoDTOMap">
+    <select id="getWorkMessageInfoDTOByWorkId" resultMap="WorkMessageInfoDTOMap">
         select
         f_id,
         f_content,
@@ -107,6 +106,9 @@
         WHERE
         f_is_delete = 0
         AND f_work_id = #{workId}
+        <if test="startId != null and startId != 0">
+            and f_id &lt;= #{startId}
+        </if>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_work_message

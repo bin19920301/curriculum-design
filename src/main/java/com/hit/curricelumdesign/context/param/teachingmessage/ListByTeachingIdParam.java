@@ -13,9 +13,9 @@ public class ListByTeachingIdParam extends BaseListRequestParam {
     private Integer teachingId;
 
     /**
-     * 最早的消息id
+     * 起始id
      */
-    private Integer earlyMsgId;
+    private Integer startId;
 
     public Integer getTeachingId() {
         return teachingId;
@@ -25,19 +25,19 @@ public class ListByTeachingIdParam extends BaseListRequestParam {
         this.teachingId = teachingId;
     }
 
-    public Integer getEarlyMsgId() {
-        return earlyMsgId;
+    public Integer getStartId() {
+        return startId;
     }
 
-    public void setEarlyMsgId(Integer earlyMsgId) {
-        this.earlyMsgId = earlyMsgId;
+    public void setStartId(Integer startId) {
+        this.startId = startId;
     }
 
     @Override
     public String toString() {
         return "ListByTeachingIdParam{" +
                 "teachingId=" + teachingId +
-                ", earlyMsgId=" + earlyMsgId +
+                ", startId=" + startId +
                 '}';
     }
 }

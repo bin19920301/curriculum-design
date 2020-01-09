@@ -27,7 +27,7 @@ public class WorkProjectFile {
     private Integer fileId;
 
     /**
-     * 文件使用类型 1：资料 2：参考方案
+     * 文件使用类型 1:资料 2:参考方案
      */
     @Column(name = "f_file_type")
     private Integer fileType;
@@ -86,6 +86,14 @@ public class WorkProjectFile {
         this.fileId = fileId;
     }
 
+    public Integer getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(Integer fileType) {
+        this.fileType = fileType;
+    }
+
     public Boolean getIsDelete() {
         return isDelete;
     }
@@ -124,14 +132,6 @@ public class WorkProjectFile {
 
     public void setUpdaterId(Integer updaterId) {
         this.updaterId = updaterId;
-    }
-
-    public Integer getFileType() {
-        return fileType;
-    }
-
-    public void setFileType(Integer fileType) {
-        this.fileType = fileType;
     }
 
     @Override

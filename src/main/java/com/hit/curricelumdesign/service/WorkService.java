@@ -85,7 +85,7 @@ public class WorkService {
         work.setStatus(Constants.Work.WorkStatus.DONE.getStatus());
         work.setScore(param.getScore());
         work.setUpdatetime(new Date());
-        workMapper.updateByPrimaryKey(work);
+        workMapper.updateByPrimaryKeySelective(work);
         return Result.success();
     }
 
@@ -102,7 +102,7 @@ public class WorkService {
         }
         work.setStatus(Constants.Work.WorkStatus.RETURN.getStatus());
         work.setUpdatetime(new Date());
-        workMapper.updateByPrimaryKey(work);
+        workMapper.updateByPrimaryKeySelective(work);
         return Result.success();
     }
 
@@ -199,7 +199,7 @@ public class WorkService {
         }
         work.setStatus(Constants.Work.WorkStatus.SUBMIT.getStatus());
         work.setUpdatetime(new Date());
-        workMapper.updateByPrimaryKey(work);
+        workMapper.updateByPrimaryKeySelective(work);
         return Result.success();
     }
 

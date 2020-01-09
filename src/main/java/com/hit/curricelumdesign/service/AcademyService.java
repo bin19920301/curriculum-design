@@ -101,7 +101,7 @@ public class AcademyService {
         academy.setName(param.getName());
         academy.setUpdatetime(new Date());
         academy.setUpdaterId(param.getLoginAdminId());
-        academyMapper.updateByPrimaryKey(academy);
+        academyMapper.updateByPrimaryKeySelective(academy);
         return Result.success();
     }
 
@@ -183,7 +183,7 @@ public class AcademyService {
         academy.setIsDelete(Constants.Common.IS_YES);
         academy.setUpdaterId(param.getLoginAdminId());
         academy.setUpdatetime(new Date());
-        academyMapper.updateByPrimaryKey(academy);
+        academyMapper.updateByPrimaryKeySelective(academy);
         return Result.success();
     }
 }

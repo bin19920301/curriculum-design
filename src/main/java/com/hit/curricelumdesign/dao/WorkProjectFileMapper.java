@@ -25,4 +25,5 @@ public interface WorkProjectFileMapper {
     int updateByPrimaryKey(WorkProjectFile record);
 
     int deleteByWorkProjectId(Integer workProjectId);
+
 }

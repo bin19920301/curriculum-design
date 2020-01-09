@@ -196,7 +196,7 @@ public class TeacherService {
         if (null != token) {
             token.setIsDelete(Constants.Common.IS_YES);
             token.setUpdatetime(new Date());
-            tokenMapper.updateByPrimaryKey(token);
+            tokenMapper.updateByPrimaryKeySelective(token);
         }
 
         return Result.success();

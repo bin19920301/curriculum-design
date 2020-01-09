@@ -94,7 +94,7 @@ public class WorkProjectService {
         }
         workProjectFileMapper.insertList(workProjectFileList);
         for (File file : fileList) {
-            fileMapper.updateByPrimaryKey(file);
+            fileMapper.updateByPrimaryKeySelective(file);
         }
         //2020-01-05增加参考方案的部分
         List<WorkProjectFile> workProjectReferenceSolutionList = new ArrayList<>();
@@ -108,7 +108,7 @@ public class WorkProjectService {
         }
         workProjectFileMapper.insertList(workProjectReferenceSolutionList);
         for (File file : referenceSolutionList) {
-            fileMapper.updateByPrimaryKey(file);
+            fileMapper.updateByPrimaryKeySelective(file);
         }
         return Result.success();
     }
@@ -141,10 +141,10 @@ public class WorkProjectService {
             //2020-01-05 区分资料和参考方案，更换mapper方法，增加文件类型的控制
             // List<String> fileNameList = fileMapper.getFileNameByWorkProjectId(workProjectListDTO.getId());
             // 获取文件名称list
-            List<String> fileNameList = fileMapper.getFileNameByWorkProjectIdAndType(workProjectListDTO.getId(),Constants.File.FileTypes.INFORMATION.getStatus());
+            List<String> fileNameList = fileMapper.getFileNameByWorkProjectIdAndType(workProjectListDTO.getId(), Constants.File.FileTypes.INFORMATION.getStatus());
             workProjectListDTO.setFileName(fileNameList);
             // 获取参考方案名称list
-            List<String>  referenceSolutionNameList = fileMapper.getFileNameByWorkProjectIdAndType(workProjectListDTO.getId(),Constants.File.FileTypes.REFERENCE_SOLUTION.getStatus());
+            List<String> referenceSolutionNameList = fileMapper.getFileNameByWorkProjectIdAndType(workProjectListDTO.getId(), Constants.File.FileTypes.REFERENCE_SOLUTION.getStatus());
             workProjectListDTO.setReferenceSolutionName(referenceSolutionNameList);
         }
         BaseListDTO<WorkProjectListDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
@@ -166,10 +166,10 @@ public class WorkProjectService {
         //2020-01-05 区分资料和参考方案，更换mapper方法，增加文件类型的控制
         //List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectId(workProjectInfoDTO.getId());
         //获取资料文件
-        List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectIdAndType(workProjectInfoDTO.getId(),Constants.File.FileTypes.INFORMATION.getStatus());
+        List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectIdAndType(workProjectInfoDTO.getId(), Constants.File.FileTypes.INFORMATION.getStatus());
         workProjectInfoDTO.setFilelist(fileListDTOList);
         //获取参考方案文件
-        List<FileListDTO> referenceSolutionListDTOList = fileMapper.getFileListDTOByWorkProjectIdAndType(workProjectInfoDTO.getId(),Constants.File.FileTypes.REFERENCE_SOLUTION.getStatus());
+        List<FileListDTO> referenceSolutionListDTOList = fileMapper.getFileListDTOByWorkProjectIdAndType(workProjectInfoDTO.getId(), Constants.File.FileTypes.REFERENCE_SOLUTION.getStatus());
         workProjectInfoDTO.setReferenceSolutionList(referenceSolutionListDTOList);
 
         return Result.success(workProjectInfoDTO);
@@ -207,7 +207,7 @@ public class WorkProjectService {
         workProject.setUpdaterId(param.getLoginTeacherId());
         workProject.setName(param.getName());
         workProject.setDesc(param.getDesc());
-        workProjectMapper.updateByPrimaryKey(workProject);
+        workProjectMapper.updateByPrimaryKeySelective(workProject);
         List<WorkProjectFile> workProjectFileList = new ArrayList<>();
         for (File file : fileList) {
             WorkProjectFile workProjectFile = buildWorkProjectFile(file, workProject);
@@ -219,7 +219,7 @@ public class WorkProjectService {
         }
         workProjectFileMapper.insertList(workProjectFileList);
         for (File file : fileList) {
-            fileMapper.updateByPrimaryKey(file);
+            fileMapper.updateByPrimaryKeySelective(file);
         }
         //2020-01-05增加参考方案的部分
         List<WorkProjectFile> workProjectReferenceSolutionList = new ArrayList<>();
@@ -233,7 +233,7 @@ public class WorkProjectService {
         }
         workProjectFileMapper.insertList(workProjectReferenceSolutionList);
         for (File file : referenceSolutionList) {
-            fileMapper.updateByPrimaryKey(file);
+            fileMapper.updateByPrimaryKeySelective(file);
         }
 
         return Result.success();
@@ -253,7 +253,7 @@ public class WorkProjectService {
         workProject.setIsDelete(Constants.Common.IS_YES);
         workProject.setUpdaterId(param.getLoginTeacherId());
         workProject.setUpdatetime(new Date());
-        workProjectMapper.updateByPrimaryKey(workProject);
+        workProjectMapper.updateByPrimaryKeySelective(workProject);
         workProjectFileMapper.deleteByWorkProjectId(workProject.getId());
 
         return Result.success();
@@ -270,10 +270,10 @@ public class WorkProjectService {
             //2020-01-05 区分资料和参考方案，更换mapper方法，增加文件类型的控制
             //List<String> fileNameList = fileMapper.getFileNameByWorkProjectId(workProjectListDTO.getId());
             // 获取文件名称list
-            List<String> fileNameList = fileMapper.getFileNameByWorkProjectIdAndType(workProjectListDTO.getId(),Constants.File.FileTypes.INFORMATION.getStatus());
+            List<String> fileNameList = fileMapper.getFileNameByWorkProjectIdAndType(workProjectListDTO.getId(), Constants.File.FileTypes.INFORMATION.getStatus());
             workProjectListDTO.setFileName(fileNameList);
             // 获取参考方案名称list
-            List<String>  referenceSolutionNameList = fileMapper.getFileNameByWorkProjectIdAndType(workProjectListDTO.getId(),Constants.File.FileTypes.REFERENCE_SOLUTION.getStatus());
+            List<String> referenceSolutionNameList = fileMapper.getFileNameByWorkProjectIdAndType(workProjectListDTO.getId(), Constants.File.FileTypes.REFERENCE_SOLUTION.getStatus());
             workProjectListDTO.setReferenceSolutionName(referenceSolutionNameList);
         }
         BaseListDTO<WorkProjectListDTO> baseListDTO = new BaseListDTO<>(workProjectListDTOList.size(), workProjectListDTOList);

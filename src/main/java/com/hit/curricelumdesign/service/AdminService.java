@@ -123,7 +123,7 @@ public class AdminService {
         BeanUtil.copyProperties(param, admin);
         admin.setUpdatetime(new Date());
         admin.setUpdaterId(param.getLoginAdminId());
-        adminMapper.updateByPrimaryKey(admin);
+        adminMapper.updateByPrimaryKeySelective(admin);
         return Result.success();
     }
 
@@ -139,7 +139,7 @@ public class AdminService {
         admin.setPassword(DigestUtils.md5Hex(md5Pre + adminPasswordDefault));
         admin.setUpdatetime(new Date());
         admin.setUpdaterId(param.getLoginAdminId());
-        adminMapper.updateByPrimaryKey(admin);
+        adminMapper.updateByPrimaryKeySelective(admin);
         return Result.success();
     }
 
@@ -154,7 +154,7 @@ public class AdminService {
         admin.setIsDelete(Constants.Common.YES);
         admin.setUpdaterId(param.getLoginAdminId());
         admin.setUpdatetime(new Date());
-        adminMapper.updateByPrimaryKey(admin);
+        adminMapper.updateByPrimaryKeySelective(admin);
         return Result.success();
     }
 
@@ -206,7 +206,7 @@ public class AdminService {
         if (null != token) {
             token.setIsDelete(Constants.Common.IS_YES);
             token.setUpdatetime(new Date());
-            tokenMapper.updateByPrimaryKey(token);
+            tokenMapper.updateByPrimaryKeySelective(token);
         }
         return Result.success();
     }

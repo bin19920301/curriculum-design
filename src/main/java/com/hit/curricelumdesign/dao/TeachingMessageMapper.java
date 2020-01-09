@@ -22,5 +22,5 @@ public interface TeachingMessageMapper {
 
     int updateByPrimaryKey(TeachingMessage record);
 
-    List<TeachingMessageInfoDTO> listByTeachingId(Integer teachingId);
+    List<TeachingMessageInfoDTO> listByTeachingId(Integer teachingId, Integer startId);
 }

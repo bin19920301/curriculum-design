@@ -202,8 +202,8 @@ public class WorkMessageService {
         StudentDTO student = studentManager.getStudentById(work.getStudentId());
         Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
         TeacherDTO teacher = teacherManager.getTeacherById(teaching.getTeacherId());
-        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
-        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId());
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime desc ");
+        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId(),param.getStartId());
         for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
             if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
                 message.setSenderName(student.getName());
@@ -230,8 +230,8 @@ public class WorkMessageService {
         StudentDTO student = studentManager.getStudentById(work.getStudentId());
         Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
         TeacherDTO teacher = teacherManager.getTeacherById(teaching.getTeacherId());
-        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime asc ");
-        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId());
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), " f_createtime desc ");
+        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getWorkMessageInfoDTOByWorkId(work.getId(),param.getStartId());
         for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
             if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
                 message.setSenderName(student.getName());

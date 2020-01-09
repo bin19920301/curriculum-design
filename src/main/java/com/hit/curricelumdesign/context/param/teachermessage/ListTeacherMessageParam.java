@@ -2,8 +2,6 @@ package com.hit.curricelumdesign.context.param.teachermessage;
 
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * @author xbr
  * @Date 2020-01-08
@@ -13,22 +11,22 @@ import javax.validation.constraints.NotNull;
 public class ListTeacherMessageParam extends BaseListRequestParam {
 
     /**
-     * 最早的消息id
+     * 起始id
      */
-    private Integer earlyMsgId;
+    private Integer startId;
 
-    public Integer getEarlyMsgId() {
-        return earlyMsgId;
+    public Integer getStartId() {
+        return startId;
     }
 
-    public void setEarlyMsgId(Integer earlyMsgId) {
-        this.earlyMsgId = earlyMsgId;
+    public void setStartId(Integer startId) {
+        this.startId = startId;
     }
 
     @Override
     public String toString() {
         return "ListTeacherMessageParam{" +
-                "earlyMsgId=" + earlyMsgId +
+                "startId=" + startId +
                 '}';
     }
 }

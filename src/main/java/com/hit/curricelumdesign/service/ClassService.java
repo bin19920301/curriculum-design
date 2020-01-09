@@ -85,7 +85,7 @@ public class ClassService {
         aClass.setName(param.getName());
         aClass.setUpdaterId(param.getLoginAdminId());
         aClass.setUpdatetime(new Date());
-        classMapper.updateByPrimaryKey(aClass);
+        classMapper.updateByPrimaryKeySelective(aClass);
         return Result.success();
     }
 
@@ -105,7 +105,7 @@ public class ClassService {
         aClass.setIsDelete(Constants.Common.IS_YES);
         aClass.setUpdatetime(new Date());
         aClass.setUpdaterId(param.getLoginAdminId());
-        classMapper.updateByPrimaryKey(aClass);
+        classMapper.updateByPrimaryKeySelective(aClass);
         return Result.success();
     }
 
