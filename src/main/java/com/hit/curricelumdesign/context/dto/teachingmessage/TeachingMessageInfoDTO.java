@@ -1,5 +1,9 @@
 package com.hit.curricelumdesign.context.dto.teachingmessage;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 /**
  * @author
  * @Date
@@ -36,7 +40,8 @@ public class TeachingMessageInfoDTO {
     /**
      * 创建时间
      */
-    private String createtime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createtime;
 
 
     /**
@@ -84,11 +89,11 @@ public class TeachingMessageInfoDTO {
         this.senderType = senderType;
     }
 
-    public String getCreatetime() {
+    public Date getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(String createtime) {
+    public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
 
@@ -108,7 +113,7 @@ public class TeachingMessageInfoDTO {
                 ", senderId=" + senderId +
                 ", senderName='" + senderName + '\'' +
                 ", senderType=" + senderType +
-                ", createtime='" + createtime + '\'' +
+                ", createtime=" + createtime +
                 ", canDelete=" + canDelete +
                 '}';
     }

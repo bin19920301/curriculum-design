@@ -91,7 +91,11 @@ public class TeachingMessageService {
             if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
                 dto.setCanDelete(Constants.Common.NOT);
             } else if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
-                dto.setCanDelete(Constants.Common.YES);
+                if (dto.getSenderId().compareTo(param.getLoginTeacherId()) == 0) {
+                    dto.setCanDelete(Constants.Common.YES);
+                } else {
+                    dto.setCanDelete(Constants.Common.NOT);
+                }
             }
         }
         PageInfo<TeachingMessageInfoDTO> pageInfo = new PageInfo<>(teachingMessageInfoDTOList);
@@ -107,7 +111,11 @@ public class TeachingMessageService {
         List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listByTeachingId(param.getTeachingId(), param.getStartId());
         for (TeachingMessageInfoDTO dto : teachingMessageInfoDTOList) {
             if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
-                dto.setCanDelete(Constants.Common.YES);
+                if (dto.getSenderId().compareTo(param.getLoginStudentId()) == 0) {
+                    dto.setCanDelete(Constants.Common.YES);
+                } else {
+                    dto.setCanDelete(Constants.Common.NOT);
+                }
             } else if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
                 dto.setCanDelete(Constants.Common.NOT);
             }
