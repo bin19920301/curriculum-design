@@ -33,6 +33,11 @@ public class FileListDTO {
      */
     private String url;
 
+    /**
+     * 资料类型
+     */
+    private Integer fileType;
+
     public Integer getId() {
         return id;
     }
@@ -65,13 +70,22 @@ public class FileListDTO {
         this.url = url;
     }
 
+    public Integer getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(Integer fileType) {
+        this.fileType = fileType;
+    }
+
     @Override
     public String toString() {
-        return "FileListDto{" +
+        return "FileListDTO{" +
                 "id=" + id +
                 ", folderId=" + folderId +
                 ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", fileType=" + fileType +
                 '}';
     }
-
 }

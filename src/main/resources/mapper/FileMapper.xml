@@ -30,6 +30,7 @@
         <result column="f_folder_id" property="folderId" jdbcType="INTEGER"/>
         <result column="f_name" property="name" jdbcType="VARCHAR"/>
         <result column="f_path" property="url" jdbcType="VARCHAR"/>
+        <result column="f_file_type" property="fileType" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -219,7 +220,8 @@
         b.f_id,
         b.f_folder_id,
         b.f_name,
-        b.f_path
+        b.f_path,
+        a.f_file_type
         from t_work_project_file a
         left join t_file b
         on a.f_file_id = b.f_id
