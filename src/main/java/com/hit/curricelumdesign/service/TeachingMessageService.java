@@ -64,7 +64,7 @@ public class TeachingMessageService {
 
     public Result deleteTeacherMessage(TeachingMessageBaseParam param) {
         TeachingMessage message = teachingMessageManager.getById(param.getId());
-        if (!param.getLoginTeacherId().equals(message.getSenderId()) || Constants.TeachingMessage.SENDER_TYPE_TEACHER.equals(message.getSenderType())) {
+        if (!param.getLoginTeacherId().equals(message.getSenderId()) || !Constants.TeachingMessage.SENDER_TYPE_TEACHER.equals(message.getSenderType())) {
             throw new BaseException(Error.TEACHING_MESSAGE_ONLY_DELETE_BY_SELF);
         }
         message.setUpdatetime(new Date());
@@ -75,7 +75,7 @@ public class TeachingMessageService {
 
     public Result deleteStudentMessage(TeachingMessageBaseParam param) {
         TeachingMessage message = teachingMessageManager.getById(param.getId());
-        if (!param.getLoginStudentId().equals(message.getSenderId()) || Constants.TeachingMessage.SENDER_TYPE_STUDENT.equals(message.getSenderType())) {
+        if (!param.getLoginStudentId().equals(message.getSenderId()) || !Constants.TeachingMessage.SENDER_TYPE_STUDENT.equals(message.getSenderType())) {
             throw new BaseException(Error.TEACHING_MESSAGE_ONLY_DELETE_BY_SELF);
         }
         message.setUpdatetime(new Date());
