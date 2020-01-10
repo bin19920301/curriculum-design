@@ -28,4 +28,8 @@ public interface WorkProjectMapper {
     List<WorkProjectListDTO> getWorkProjectList();
 
     WorkProjectInfoDTO getWorkProjectInfoById(Integer workProjectId);
+
+    void reduceOneUseTimes(Integer id);
+
+    void increaseOneUseTimes(Integer id);
 }

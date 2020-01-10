@@ -1,10 +1,12 @@
 package com.hit.curricelumdesign.context.param.folder;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AddFolderParam {
+public class AddFolderParam extends BaseRequestParam {
     /**
      * 文件夹名称
      */

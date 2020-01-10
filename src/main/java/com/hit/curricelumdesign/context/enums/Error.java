@@ -116,6 +116,7 @@ public enum Error {
 	WORK_PROJECT_NEED_ASSOCIATE_FILE("300702", "作业项目的资料不能为空"),
 	WORK_PROJECT_ASSOCIATE_FILE_HAS_NOT_EXIST("300703", "作业项目关联了不存在的资料"),
 	WORK_PROJECT_IS_NOT_EXIST("300704", "作业项目不存在"),
+	WORK_CAN_NOT_DELETE_IN_USING("300705", "该作业项目已使用,请勿删除"),
 
 	//----------------------------------------教学
 	TEACHER_REMINDER_OVER_LENGTH("300801", "教师提示超长，应不超过500字"),

@@ -17,6 +17,7 @@ import com.hit.curricelumdesign.context.param.teaching.*;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.TeachingMapper;
 import com.hit.curricelumdesign.dao.WorkMapper;
+import com.hit.curricelumdesign.dao.WorkProjectMapper;
 import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
@@ -45,6 +46,9 @@ public class TeachingService {
 
     @Autowired
     private WorkMapper workMapper;
+
+    @Autowired
+    private WorkProjectMapper workProjectMapper;
 
     /**
      * 教学信息详情展示
@@ -151,6 +155,10 @@ public class TeachingService {
                         updateWorkBO.setId(oldWork.getId());
                         updateWorkBO.setLoginStudentId(studentWorkProjectParam.getWorkStudentId());
                         updateWorkBO.setWorkProjectId(studentWorkProjectParam.getWorkProjectId());
+                        //原先的作业项目,需要减少一次使用次数
+                        workProjectMapper.reduceOneUseTimes(oldWork.getWorkProjectId());
+                        //现在的作业项目,需要增加一次使用次数
+                        workProjectMapper.increaseOneUseTimes(studentWorkProjectParam.getWorkProjectId());
                         workManager.updateWork(updateWorkBO);
                         oldListIterator.remove();
                     }
@@ -161,6 +169,7 @@ public class TeachingService {
                 AddWorkBO addWorkBO = new AddWorkBO();
                 addWorkBO.setTeachingId(currentTeachingId);
                 addWorkBO.setStudentId(studentWorkProjectParam.getWorkStudentId());
+                //新增作业时,需要增加作业项目的使用次数,已经在mapper增加作业的方法中进行了增加,这里不需要处理
                 addWorkBO.setWorkProjectId(studentWorkProjectParam.getWorkProjectId());
                 workManager.addWork(addWorkBO);
             }
@@ -172,6 +181,8 @@ public class TeachingService {
             Work next = oldWorkList.get(i);
             next.setIsDelete(Constants.Common.IS_YES);
             next.setUpdatetime(new Date());
+            //弃用的作业,需要减少一次作业项目
+            workProjectMapper.reduceOneUseTimes(next.getWorkProjectId());
             workMapper.updateByPrimaryKeySelective(next);
         }
         return Result.success();

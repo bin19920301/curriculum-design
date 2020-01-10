@@ -250,6 +250,9 @@ public class WorkProjectService {
         if (null == workProject) {
             throw new BaseException(Error.WORK_PROJECT_IS_NOT_EXIST);
         }
+        if (workProject.getUseCount() != 0) {
+            throw new BaseException(Error.WORK_CAN_NOT_DELETE_IN_USING);
+        }
         workProject.setIsDelete(Constants.Common.IS_YES);
         workProject.setUpdaterId(param.getLoginTeacherId());
         workProject.setUpdatetime(new Date());

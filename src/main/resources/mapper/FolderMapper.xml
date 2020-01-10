@@ -121,44 +121,39 @@
     where f_id = #{id,jdbcType=INTEGER}
   </update>
     <select id="selectById" resultMap="DTOResultMap" parameterType="java.lang.Integer">
-      select
-      a.f_folder_id as 'id',
-      b.f_name as 'name',
-      count(a.f_id) as 'num',
-      b.f_createtime as 'createtime'
-      from t_file a
-      left join t_folder b
-      on a.f_folder_id = b.f_id
-      where a.f_is_delete = 0
-      and b.f_is_delete = 0
-      and  a.f_folder_id = #{id,jdbcType=INTEGER}
-      GROUP BY a.f_folder_id
+        select
+        tfl.f_id AS 'id',
+        tfl.f_name AS 'name',
+        tfl.f_createtime AS 'createtime',
+        count(tfi.f_id) AS 'num'
+        from t_folder tfl
+        left join t_file tfi
+        on tfl.f_id = tfi.f_folder_id  and tfi.f_is_delete = 0
+        where tfl.f_is_delete = 0 and tfl.f_id = #{id,jdbcType=INTEGER}
+        group by tfl.f_id
     </select>
     <select id="selectByName" resultMap="DTOResultMap">
-      select
-      a.f_folder_id as 'id',
-      b.f_name as 'name',
-      count(a.f_id) as 'num',
-      b.f_createtime as 'createtime'
-      from t_file a
-      left join t_folder b
-      on a.f_folder_id = b.f_id
-      where a.f_is_delete = 0
-      and b.f_is_delete = 0
-      and  b.f_name = #{name}
-      GROUP BY a.f_folder_id
+        select
+        tfl.f_id AS 'id',
+        tfl.f_name AS 'name',
+        tfl.f_createtime AS 'createtime',
+        count(tfi.f_id) AS 'num'
+        from t_folder tfl
+        left join t_file tfi
+        on tfl.f_id = tfi.f_folder_id  and tfi.f_is_delete = 0
+        where tfl.f_is_delete = 0 and tfl.f_name = #{name}
+        group by tfl.f_id
     </select>
     <select id="getFolderDTOList" resultMap="DTOResultMap">
         select
-            a.f_folder_id as 'id',
-            b.f_name as 'name',
-            count(a.f_id) as 'num',
-            b.f_createtime as 'createtime'
-        from t_file a
-        left join t_folder b
-        on a.f_folder_id = b.f_id
-        where a.f_is_delete = 0
-        and b.f_is_delete = 0
-        GROUP BY a.f_folder_id
+        tfl.f_id AS 'id',
+        tfl.f_name AS 'name',
+        tfl.f_createtime AS 'createtime',
+        count(tfi.f_id) AS 'num'
+        from t_folder tfl
+        left join t_file tfi
+        on tfl.f_id = tfi.f_folder_id  and tfi.f_is_delete = 0
+        where tfl.f_is_delete = 0
+        group by tfl.f_id
   </select>
 </mapper>

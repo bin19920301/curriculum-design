@@ -172,16 +172,14 @@
         </set>
         where f_id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.WorkProject">
+    <update id="reduceOneUseTimes" parameterType="java.lang.Integer">
     update t_work_project
-    set f_name = #{name,jdbcType=VARCHAR},
-      f_desc = #{desc,jdbcType=VARCHAR},
-      f_use_count = #{useCount,jdbcType=INTEGER},
-      f_is_delete = #{isDelete,jdbcType=BIT},
-      f_createtime = #{createtime,jdbcType=TIMESTAMP},
-      f_creator_id = #{creatorId,jdbcType=INTEGER},
-      f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      f_updater_id = #{updaterId,jdbcType=INTEGER}
+    set f_use_count = f_use_count - 1
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="java.lang.Integer">
+   update t_work_project
+    set f_use_count = f_use_count + 1
     where f_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

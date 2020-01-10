@@ -61,9 +61,9 @@ public class FolderService {
         Folder folder = new Folder();
         BeanUtil.copyProperties(folderParam,folder);
         folder.setIsDelete(false);
-        folder.setCreatorId(0);
+        folder.setCreatorId(folderParam.getLoginTeacherId());
         folder.setCreatetime(new Date());
-        folder.setUpdaterId(0);
+        folder.setUpdaterId(folderParam.getLoginTeacherId());
         folder.setUpdatetime(new Date());
         folderMapper.insert(folder);
         return Result.success();

@@ -7,6 +7,7 @@ import com.hit.curricelumdesign.context.entity.Work;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.dao.WorkMapper;
+import com.hit.curricelumdesign.dao.WorkProjectMapper;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,8 @@ public class WorkManager {
 
     @Autowired
     private WorkMapper workMapper;
+    @Autowired
+    private WorkProjectMapper projectMapper;
 
     /**
      * 根据作业id查询作业
@@ -50,6 +53,10 @@ public class WorkManager {
         //设置修改时间
         work.setUpdatetime(new Date());
         workMapper.insert(work);
+
+        //增加作业项目的使用次数
+        projectMapper.increaseOneUseTimes(work.getWorkProjectId());
+
     }
 
     /**
