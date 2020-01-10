@@ -83,6 +83,7 @@
             f_is_delete = 0
             AND f_receiver_type = 2
             AND f_receiver_id = #{teacherId}
+            AND f_is_read = 0
   </select>
     <select id="countStudentUnreadMessage" resultType="java.lang.Long">
         SELECT
@@ -93,6 +94,7 @@
             f_is_delete = 0
             AND f_receiver_type = 1
             AND f_receiver_id = #{studentId}
+            AND f_is_read = 0
     </select>
     <select id="getWorkMessageInfoDTOByWorkId" resultMap="WorkMessageInfoDTOMap">
         select
