@@ -86,10 +86,15 @@ public enum Error {
     TEACHER_DELETE_FAILURE("300304", "删除教师信息失败"),
     TEACHER_RESET_PASSWORD_FAILURE("300305", "重置教师密码失败"),
     TEACHER_NUMBER_IS_EXIST("300306", "教师编号已存在"),
-    TEACHER_TEMPLATE_NAME_ERROR("300407", "请使用学生批量导入的默认模板"),
-    TEACHER_TEMPLATE_HAS_EMPTY_CELL("300408", "教师模板存在空属性"),
-    TEACHER_ONLY_UPDATE_PASSWORD_BY_SELF("300409", "只能本人修改密码"),
-    TEACHER_PASSWORD_CHECKED_FAIL("300010", "教师密码校验失败"),
+    TEACHER_TEMPLATE_NAME_ERROR("300307", "请使用学生批量导入的默认模板"),
+    TEACHER_TEMPLATE_HAS_EMPTY_CELL("300308", "学生模板存在空属性,第%d行"),
+    TEACHER_ONLY_UPDATE_PASSWORD_BY_SELF("300309", "只能本人修改密码"),
+    TEACHER_PASSWORD_CHECKED_FAIL("300310", "教师密码校验失败"),
+	//2020-01-11
+	TEACHER_IMPORT_NUMBER_IS_EXIST("300311", "导入教师模板,教师编号%s已存在"),
+	TEACHER_IMPORT_ACADEMY_IS_NOT_EXIST("300312", "导入教师模板,学院%s不存在"),
+    TEACHER_IMPORT_ERROR("300313", "导入教师信息发生系统错误"),
+    TEACHER_TEMPLATE_IS_EMPTY("300314", "导入教师模板为空"),
 
     //----------------------------------------学生
     STUDENT_IS_NOT_EXIST("300401", "学生信息不存在"),
@@ -104,6 +109,8 @@ public enum Error {
     STUDENT_IMPORT_ENROLLMENT_YEAR_IS_NOT_EXIST("300410", "导入学生模板,入学年份%s不存在"),
     STUDENT_IMPORT_ACADEMY_IS_NOT_EXIST("300411", "导入学生模板,学院%s不存在"),
     STUDENT_IMPORT_CLASS_IS_NOT_EXIST("300412", "导入学生模板,班级%s不存在"),
+    STUDENT_IMPORT_ERROR("300413", "导入学生信息发生系统错误"),
+    STUDENT_TEMPLATE_IS_EMPTY("300414", "导入学生模板为空"),
 
     //----------------------------------------文件夹
     FOLDER_NAME_IS_EXIST("300501", "文件夹名称已存在"),

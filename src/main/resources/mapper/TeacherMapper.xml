@@ -186,4 +186,18 @@
         where f_is_delete = 0
         and f_academy_id = #{academyId,jdbcType=INTEGER}
     </select>
+  <insert id="insertList" parameterType="com.hit.curricelumdesign.context.entity.Teacher">
+    insert into t_teacher (f_id, f_academy_id, f_number,
+    f_name, f_password, f_is_delete,
+    f_creator_id, f_createtime, f_updater_id,
+    f_updatetime)
+    values
+        <foreach collection="teacherList" item="teacher" separator="," open="" close="" index="index">
+        (#{teacher.id,jdbcType=INTEGER}, #{teacher.academyId,jdbcType=INTEGER}, #{teacher.number,jdbcType=VARCHAR},
+        #{teacher.name,jdbcType=VARCHAR}, #{teacher.password,jdbcType=VARCHAR}, #{teacher.isDelete,jdbcType=BIT},
+        #{teacher.creatorId,jdbcType=INTEGER}, #{teacher.createtime,jdbcType=TIMESTAMP}, #{teacher.updaterId,jdbcType=INTEGER},
+        #{teacher.updatetime,jdbcType=TIMESTAMP})
+        </foreach>
+
+  </insert>
 </mapper>

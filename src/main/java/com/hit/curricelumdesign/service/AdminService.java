@@ -217,9 +217,9 @@ public class AdminService {
      * @param param
      * @return
      */
-    public Result importTeacherData(ImportParam param) {
+    public Result importTeacherData (ImportParam param) {
 
-        return adminManager.importTeacherData(param, md5Pre, teacherPasswordDefault);
+        return adminManager.importTeacherData(param);
     }
 
     /**

@@ -21,8 +21,6 @@ public interface WorkProjectMapper {
 
     int updateByPrimaryKeySelective(WorkProject record);
 
-    int updateByPrimaryKey(WorkProject record);
-
     WorkProject getWorkProjectByName(String name);
 
     List<WorkProjectListDTO> getWorkProjectList();

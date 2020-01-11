@@ -1,8 +1,10 @@
 package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
+import com.hit.curricelumdesign.context.entity.Student;
 import com.hit.curricelumdesign.context.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +30,6 @@ public interface TeacherMapper {
     Teacher getTeacherByNumber(String number);
 
     Long countTeacherByAcademyId(Integer academyId);
+
+    int insertList(@Param("teacherList") List<Teacher> teacherList);
 }
