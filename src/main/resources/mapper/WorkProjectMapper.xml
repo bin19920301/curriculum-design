@@ -177,7 +177,7 @@
     set f_use_count = f_use_count - 1
     where f_id = #{id,jdbcType=INTEGER}
   </update>
-    <update id="updateByPrimaryKey" parameterType="java.lang.Integer">
+    <update id="increaseOneUseTimes" parameterType="java.lang.Integer">
    update t_work_project
     set f_use_count = f_use_count + 1
     where f_id = #{id,jdbcType=INTEGER}
