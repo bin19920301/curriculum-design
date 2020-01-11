@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.manager.admin;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.entity.*;
 import com.hit.curricelumdesign.context.entity.Class;
@@ -66,19 +67,19 @@ public class AdminManager {
         return adminMapper.getAdminList();
     }
 
-    public Result importTeacherData (ImportParam param,String md5Pre,String teacherPasswordDefault){
+    public Result importTeacherData(ImportParam param, String md5Pre, String teacherPasswordDefault) {
         MultipartFile file = param.getFile();
         String fileName = file.getOriginalFilename();
         //获取文件名
-        if (!fileName.equals("教师模板.xls")){
+        if (!fileName.equals("教师模板.xls")) {
             throw new BaseException(Error.TEACHER_TEMPLATE_NAME_ERROR);
         }
         List<Teacher> errorList = new ArrayList<>();
         try {
             //HSSFWorkbook workbook = new HSSFWorkbook(new POIFSFileSystem(file.getInputStream()));
             InputStream inputStream = file.getInputStream();
-            XSSFWorkbook workbook=null;
-            workbook=new XSSFWorkbook(inputStream);
+            XSSFWorkbook workbook = null;
+            workbook = new XSSFWorkbook(inputStream);
             // 有多少个sheet
             int sheets = workbook.getNumberOfSheets();
             for (int i = 0; i < sheets; i++) {
@@ -97,8 +98,8 @@ public class AdminManager {
                     //获取教师姓名
                     String name = row.getCell(1).toString();
                     //获取教师学院
-                    String academy= row.getCell(2).toString();
-                    if (StringUtils.isBlank(number) || StringUtils.isBlank(name) ||  StringUtils.isBlank(academy)){
+                    String academy = row.getCell(2).toString();
+                    if (StringUtils.isBlank(number) || StringUtils.isBlank(name) || StringUtils.isBlank(academy)) {
                         throw new BaseException(Error.TEACHER_TEMPLATE_HAS_EMPTY_CELL);
                     }
 
@@ -106,13 +107,13 @@ public class AdminManager {
                     teacher.setName(name);
 
                     Teacher teacherByNumber = teacherMapper.getTeacherByNumber(number);
-                    if (null != teacherByNumber){
+                    if (null != teacherByNumber) {
                         errorList.add(teacher);
                         continue;
                     }
                     //入学年份判断,学院，班级
                     Academy academyByName = academyMapper.getAcademyByName(academy);
-                    if ( null == academyByName ){
+                    if (null == academyByName) {
                         errorList.add(teacher);
                         continue;
                     }
@@ -133,82 +134,101 @@ public class AdminManager {
         return Result.success(errorList);
     }
 
-    public Result importStudentData(ImportParam param){
+    public Result importStudentData(ImportParam param) {
         MultipartFile file = param.getFile();
         String fileName = file.getOriginalFilename(); //获取文件名
-        if (!fileName.equals("学生模板.xls")){
+        if (!fileName.equals("学生模板.xls")) {
             throw new BaseException(Error.STUDENT_TEMPLATE_NAME_ERROR);
         }
         List<Student> errorList = new ArrayList<>();
+        Integer loginAdminId = param.getLoginAdminId();
+
         try {
             InputStream inputStream = file.getInputStream();
-            XSSFWorkbook workbook=null;
+            XSSFWorkbook workbook = null;
             //int sheetsNumber=book.getNumberOfSheets();
 
             //XSSFWorkbook workbook = new XSSFWorkbook(request.getInputStream());
             //HSSFWorkbook workbook = new HSSFWorkbook(new POIFSFileSystem(file.getInputStream()));
             // 有多少个sheet
-            workbook=new XSSFWorkbook(inputStream);
+            workbook = new XSSFWorkbook(inputStream);
             int sheets = workbook.getNumberOfSheets();
+
+            List<Student> studentList = new ArrayList<>();
             for (int i = 0; i < sheets; i++) {
-               // HSSFSheet sheet = workbook.getSheetAt(i);
-              XSSFSheet sheet = workbook.getSheetAt(i);
+                // HSSFSheet sheet = workbook.getSheetAt(i);
+                XSSFSheet sheet = workbook.getSheetAt(i);
                 // 获取多少行
                 //Sheet sheet = workbook.getSheetAt(0);
                 int rows = sheet.getPhysicalNumberOfRows();
                 // 遍历每一行，注意：第 0 行为标题
                 for (int j = 1; j < rows; j++) {
-                    Student student = new Student();
                     // 获得第 j 行
                     //Row row =  sheet.getRow(j);
-                   // HSSFRow row = sheet.getRow(j);
+                    // HSSFRow row = sheet.getRow(j);
                     XSSFRow row = sheet.getRow(j);
-                    //获取学号
-                    String number = row.getCell(0).toString();
-                    //获取学生姓名
-                    String name = row.getCell(1).toString();
-                    //获取学生入学年份
-                    String enrollmentYear = row.getCell(2).toString().substring(0,row.getCell(2).toString().lastIndexOf("."));
-                    //获取学生学院
-                    String  academy= row.getCell(3).toString();
-                    //获取学生班级
-                    String clazz = row.getCell(4).toString();
-                    if (StringUtils.isBlank(number) || StringUtils.isBlank(name) || StringUtils.isBlank(enrollmentYear) || StringUtils.isBlank(academy) || StringUtils.isBlank(clazz)){
-                        throw new BaseException(Error.STUDENT_TEMPLATE_HAS_EMPTY_CELL);
-                    }
-                    Student sameNumberStudent = studentMapper.selectByNumber(number);
 
-                    student.setNumber(number);
-                    student.setName(name);
-
-                    if (null != sameNumberStudent){
-                        errorList.add(student);
-                        continue;
-                    }
-                    //入学年份判断,学院，班级
-                    EnrollmentYear enrollmentYearByEnrollmentYear = enrollmentYearMapper.getEnrollmentYearByEnrollmentYear(Integer.parseInt(enrollmentYear));
-                    Academy academyByName = academyMapper.getAcademyByName(academy);
-                    Class classByName = classMapper.getClassByName(clazz);
-                    if (null == enrollmentYear || null == academyByName || null == classByName){
-                        errorList.add(student);
-                        continue;
-                    }
-                    student.setEnrollmentId(enrollmentYearByEnrollmentYear.getId());
-                    student.setAcademyId(academyByName.getId());
-                    student.setClassId(classByName.getId());
-                    student.setCreatetime(new Date());
-                    student.setCreatorId(param.getLoginAdminId());
-                    //student.setCreatorId(1);
-                    student.setUpdaterId(0);
-                    student.setUpdatetime(new Date());
-                    student.setIsDelete((byte) 0);
-
-                    studentMapper.insert(student);
+                    Student student = getStudentByExcel(errorList, loginAdminId, row, j);
+                    if (student == null) continue;
+                    studentList.add(student);
                 }
             }
+
+            studentMapper.insertList(studentList);
+        } catch (BaseException e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return Result.success(errorList);
+    }
+
+    private Student getStudentByExcel(List<Student> errorList, Integer loginAdminId, XSSFRow row, int rowIndex) {
+        Student student = new Student();
+        Date now = new Date();
+        //获取学号
+        String number = row.getCell(0).toString();
+        //获取学生姓名
+        String name = row.getCell(1).toString();
+        //获取学生入学年份
+        String enrollmentYear = row.getCell(2).toString().substring(0, row.getCell(2).toString().lastIndexOf("."));
+        //获取学生学院
+        String academy = row.getCell(3).toString();
+        //获取学生班级
+        String clazz = row.getCell(4).toString();
+        if (StringUtils.isBlank(number) || StringUtils.isBlank(name) || StringUtils.isBlank(enrollmentYear) || StringUtils.isBlank(academy) || StringUtils.isBlank(clazz)) {
+            throw new BaseException(Error.STUDENT_TEMPLATE_HAS_EMPTY_CELL.getErrorCode(), String.format(Error.STUDENT_TEMPLATE_HAS_EMPTY_CELL.getErrorMsg(), rowIndex + 1));
+        }
+        Student sameNumberStudent = studentMapper.selectByNumber(number);
+
+        student.setNumber(number);
+        student.setName(name);
+
+        if (null != sameNumberStudent) {
+            throw new BaseException(Error.STUDENT_IMPORT_NUMBER_IS_EXIST.getErrorCode(), String.format(Error.STUDENT_IMPORT_NUMBER_IS_EXIST.getErrorMsg(), number));
+        }
+        //入学年份判断,学院，班级
+        EnrollmentYear enrollmentYearByEnrollmentYear = enrollmentYearMapper.getEnrollmentYearByEnrollmentYear(Integer.parseInt(enrollmentYear));
+        Academy academyByName = academyMapper.getAcademyByName(academy);
+        Class classByName = classMapper.getClassByName(clazz);
+        if (null == enrollmentYear) {
+            throw new BaseException(Error.STUDENT_IMPORT_ENROLLMENT_YEAR_IS_NOT_EXIST.getErrorCode(), String.format(Error.STUDENT_IMPORT_ENROLLMENT_YEAR_IS_NOT_EXIST.getErrorMsg(), enrollmentYear));
+        } else if (null == academyByName) {
+            throw new BaseException(Error.STUDENT_IMPORT_ACADEMY_IS_NOT_EXIST.getErrorCode(), String.format(Error.STUDENT_IMPORT_ACADEMY_IS_NOT_EXIST.getErrorMsg(), academy));
+        } else if (null == classByName) {
+            throw new BaseException(Error.STUDENT_IMPORT_CLASS_IS_NOT_EXIST.getErrorCode(), String.format(Error.STUDENT_IMPORT_CLASS_IS_NOT_EXIST.getErrorMsg(), clazz));
+        } else if (!classByName.getAcademyId().equals(academyByName.getId())) {
+            throw new BaseException(Error.STUDENT_IMPORT_CLASS_IS_NOT_BELONG_ACADEMY.getErrorCode(), String.format(Error.STUDENT_IMPORT_CLASS_IS_NOT_BELONG_ACADEMY.getErrorMsg(), clazz, academy));
+        }
+        student.setEnrollmentId(enrollmentYearByEnrollmentYear.getId());
+        student.setAcademyId(academyByName.getId());
+        student.setClassId(classByName.getId());
+        student.setCreatetime(now);
+        student.setCreatorId(loginAdminId);
+        //student.setCreatorId(1);
+        student.setUpdaterId(0);
+        student.setUpdatetime(now);
+        student.setIsDelete((byte) 0);
+        return student;
     }
 }

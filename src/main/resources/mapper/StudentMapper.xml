@@ -138,6 +138,20 @@
             </if>
         </trim>
     </insert>
+    <insert id="insertList" parameterType="com.hit.curricelumdesign.context.entity.Student">
+        insert into t_student (f_id, f_academy_id, f_enrollment_id,
+        f_class_id, f_name, f_number,
+        f_is_delete, f_creator_id, f_createtime,
+        f_updater_id, f_updatetime)
+        values
+        <foreach collection="studentList" item="student" separator="," open="" close="" index="index">
+            (#{student.id,jdbcType=INTEGER}, #{student.academyId,jdbcType=INTEGER}, #{student.enrollmentId,jdbcType=INTEGER},
+            #{student.classId,jdbcType=INTEGER}, #{student.name,jdbcType=VARCHAR}, #{student.number,jdbcType=VARCHAR},
+            #{student.isDelete,jdbcType=TINYINT}, #{student.creatorId,jdbcType=INTEGER}, #{student.createtime,jdbcType=TIMESTAMP},
+            #{student.updaterId,jdbcType=INTEGER}, #{student.updatetime,jdbcType=TIMESTAMP})
+        </foreach>
+
+    </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.Student">
         update t_student
         <set>
