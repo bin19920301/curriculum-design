@@ -1,9 +1,8 @@
 package com.hit.curricelumdesign.manager.admin;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.hit.curricelumdesign.context.constant.Constants;
-import com.hit.curricelumdesign.context.entity.*;
 import com.hit.curricelumdesign.context.entity.Class;
+import com.hit.curricelumdesign.context.entity.*;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.admin.ImportParam;
@@ -11,22 +10,17 @@ import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.javassist.util.proxy.ProxyObjectInputStream;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +34,9 @@ import java.util.List;
  */
 @Component
 public class AdminManager {
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminManager.class);
+
     @Autowired
     private AdminMapper adminMapper;
     @Autowired
@@ -52,6 +49,12 @@ public class AdminManager {
     private EnrollmentYearMapper enrollmentYearMapper;
     @Autowired
     private ClassMapper classMapper;
+
+    @Value("${hit.curricelumdesign.teacher.password.default}")
+    private String teacherPasswordDefault;
+
+    @Value("${hit.curricelumdesign.password.md5.pre}")
+    private String md5Pre;
 
 
     public Admin getAminById(Integer id) {
@@ -67,7 +70,7 @@ public class AdminManager {
         return adminMapper.getAdminList();
     }
 
-    public Result importTeacherData(ImportParam param, String md5Pre, String teacherPasswordDefault) {
+    public Result importTeacherData(ImportParam param) {
         MultipartFile file = param.getFile();
         String fileName = file.getOriginalFilename();
         //获取文件名
@@ -75,6 +78,7 @@ public class AdminManager {
             throw new BaseException(Error.TEACHER_TEMPLATE_NAME_ERROR);
         }
         List<Teacher> errorList = new ArrayList<>();
+        Integer loginAdminId = param.getLoginAdminId();
         try {
             //HSSFWorkbook workbook = new HSSFWorkbook(new POIFSFileSystem(file.getInputStream()));
             InputStream inputStream = file.getInputStream();
@@ -82,56 +86,36 @@ public class AdminManager {
             workbook = new XSSFWorkbook(inputStream);
             // 有多少个sheet
             int sheets = workbook.getNumberOfSheets();
+            List<Teacher> teacherList = new ArrayList<>();
             for (int i = 0; i < sheets; i++) {
                 //HSSFSheet sheet = workbook.getSheetAt(i);
                 XSSFSheet sheet = workbook.getSheetAt(i);
                 // 获取多少行
                 int rows = sheet.getPhysicalNumberOfRows();
+                if (rows < 2){
+                    throw new BaseException(Error.TEACHER_TEMPLATE_IS_EMPTY);
+                }
                 // 遍历每一行，注意：第 0 行为标题
                 for (int j = 1; j < rows; j++) {
-                    Teacher teacher = new Teacher();
                     // 获得第 j 行
                     //HSSFRow row = sheet.getRow(j);
                     XSSFRow row = sheet.getRow(j);
-                    //获取教师编号
-                    String number = row.getCell(0).toString();
-                    //获取教师姓名
-                    String name = row.getCell(1).toString();
-                    //获取教师学院
-                    String academy = row.getCell(2).toString();
-                    if (StringUtils.isBlank(number) || StringUtils.isBlank(name) || StringUtils.isBlank(academy)) {
-                        throw new BaseException(Error.TEACHER_TEMPLATE_HAS_EMPTY_CELL);
-                    }
 
-                    teacher.setNumber(number);
-                    teacher.setName(name);
-
-                    Teacher teacherByNumber = teacherMapper.getTeacherByNumber(number);
-                    if (null != teacherByNumber) {
-                        errorList.add(teacher);
+                    Teacher teacher = this.getTeacherByExcel(loginAdminId,row,j);
+                    if (null == teacher){
                         continue;
                     }
-                    //入学年份判断,学院，班级
-                    Academy academyByName = academyMapper.getAcademyByName(academy);
-                    if (null == academyByName) {
-                        errorList.add(teacher);
-                        continue;
-                    }
-                    teacher.setAcademyId(academyByName.getId());
-                    teacher.setCreatetime(new Date());
-                    teacher.setCreatorId(param.getLoginAdminId());
-                    //teacher.setCreatorId(1);
-                    teacher.setUpdaterId(0);
-                    teacher.setUpdatetime(new Date());
-                    teacher.setIsDelete(Constants.Common.IS_NOT);
-                    teacher.setPassword(DigestUtils.md5Hex(md5Pre + teacherPasswordDefault));
-                    teacherMapper.insert(teacher);
+                    teacherList.add(teacher);
                 }
+                teacherMapper.insertList(teacherList);
             }
+        }catch (BaseException e){
+            throw  e;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("批量导入教师信息错误"+ ExceptionUtils.getStackTrace(e));
+            throw new BaseException(Error.TEACHER_IMPORT_ERROR);
         }
-        return Result.success(errorList);
+        return Result.success();
     }
 
     public Result importStudentData(ImportParam param) {
@@ -161,6 +145,9 @@ public class AdminManager {
                 // 获取多少行
                 //Sheet sheet = workbook.getSheetAt(0);
                 int rows = sheet.getPhysicalNumberOfRows();
+                if (rows < 2){
+                    throw new BaseException(Error.STUDENT_TEMPLATE_IS_EMPTY);
+                }
                 // 遍历每一行，注意：第 0 行为标题
                 for (int j = 1; j < rows; j++) {
                     // 获得第 j 行
@@ -179,6 +166,8 @@ public class AdminManager {
             throw e;
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error("批量导学学生信息错误"+ ExceptionUtils.getStackTrace(e));
+            throw new BaseException(Error.STUDENT_IMPORT_ERROR);
         }
         return Result.success(errorList);
     }
@@ -230,5 +219,45 @@ public class AdminManager {
         student.setUpdatetime(now);
         student.setIsDelete((byte) 0);
         return student;
+    }
+
+    private Teacher getTeacherByExcel(Integer loginAdminId, XSSFRow row, int rowIndex) {
+        Teacher teacher = new Teacher();
+        Date now = new Date();
+
+        //获取教师编号
+        String number = row.getCell(0).toString();
+        //获取教师姓名
+        String name = row.getCell(1).toString();
+        //获取教师学院
+        String academy = row.getCell(2).toString();
+        if (StringUtils.isBlank(number) || StringUtils.isBlank(name) || StringUtils.isBlank(academy)) {
+            throw new BaseException(Error.TEACHER_TEMPLATE_HAS_EMPTY_CELL.getErrorCode(),String.format(Error.STUDENT_TEMPLATE_HAS_EMPTY_CELL.getErrorMsg(), rowIndex + 1));
+        }
+
+        teacher.setNumber(number);
+        teacher.setName(name);
+
+        Teacher teacherByNumber = teacherMapper.getTeacherByNumber(number);
+        if (null != teacherByNumber) {
+            throw new BaseException(Error.TEACHER_IMPORT_NUMBER_IS_EXIST.getErrorCode(), String.format(Error.TEACHER_IMPORT_NUMBER_IS_EXIST.getErrorMsg(), number));
+        }
+        //判断学院是否存在
+        Academy academyByName = academyMapper.getAcademyByName(academy);
+        if (null == academyByName) {
+            throw new BaseException(Error.TEACHER_IMPORT_ACADEMY_IS_NOT_EXIST.getErrorCode(), String.format(Error.TEACHER_IMPORT_ACADEMY_IS_NOT_EXIST.getErrorMsg(), academy));
+        }
+
+        teacher.setAcademyId(academyByName.getId());
+        teacher.setCreatetime(new Date());
+        //teacher.setCreatorId(loginAdminId);
+        teacher.setCreatorId(1);
+        //teacher.setUpdaterId(loginAdminId);
+        teacher.setUpdaterId(0);
+        teacher.setUpdatetime(new Date());
+        teacher.setIsDelete(Constants.Common.IS_NOT);
+        teacher.setPassword(DigestUtils.md5Hex(md5Pre + teacherPasswordDefault));
+
+        return teacher;
     }
 }

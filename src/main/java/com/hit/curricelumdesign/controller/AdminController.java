@@ -75,7 +75,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/importteacher/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    //@HitApi(checkAdminLogin = true)
     public Result importTeacherData(ImportParam param) {
         return adminService.importTeacherData(param);
     }
