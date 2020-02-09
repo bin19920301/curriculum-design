@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hit.curricelumdesign.dao.FinishedSurfaceMapper" >
+  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.FinishedSurface" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_work_project_id" property="workProjectId" jdbcType="INTEGER" />
+    <result column="f_type" property="type" jdbcType="INTEGER" />
+    <result column="f_name" property="name" jdbcType="VARCHAR" />
+    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
+    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, f_work_project_id, f_type, f_name, f_is_delete, f_creator_id, f_createtime, 
+    f_updater_id, f_updatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_finished_surface
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_finished_surface
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.FinishedSurface" >
+    insert into t_finished_surface (f_id, f_work_project_id, f_type, 
+      f_name, f_is_delete, f_creator_id, 
+      f_createtime, f_updater_id, f_updatetime
+      )
+    values (#{id,jdbcType=INTEGER}, #{workProjectId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.FinishedSurface" >
+    insert into t_finished_surface
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        f_id,
+      </if>
+      <if test="workProjectId != null" >
+        f_work_project_id,
+      </if>
+      <if test="type != null" >
+        f_type,
+      </if>
+      <if test="name != null" >
+        f_name,
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete,
+      </if>
+      <if test="creatorId != null" >
+        f_creator_id,
+      </if>
+      <if test="createtime != null" >
+        f_createtime,
+      </if>
+      <if test="updaterId != null" >
+        f_updater_id,
+      </if>
+      <if test="updatetime != null" >
+        f_updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="workProjectId != null" >
+        #{workProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null" >
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.FinishedSurface" >
+    update t_finished_surface
+    <set >
+      <if test="workProjectId != null" >
+        f_work_project_id = #{workProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        f_type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        f_name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="creatorId != null" >
+        f_creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        f_createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null" >
+        f_updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.FinishedSurface" >
+    update t_finished_surface
+    set f_work_project_id = #{workProjectId,jdbcType=INTEGER},
+      f_type = #{type,jdbcType=INTEGER},
+      f_name = #{name,jdbcType=VARCHAR},
+      f_is_delete = #{isDelete,jdbcType=BIT},
+      f_creator_id = #{creatorId,jdbcType=INTEGER},
+      f_createtime = #{createtime,jdbcType=TIMESTAMP},
+      f_updater_id = #{updaterId,jdbcType=INTEGER},
+      f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

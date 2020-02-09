@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hit.curricelumdesign.dao.WorkingStepMapper" >
+  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.WorkingStep" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_position_id" property="positionId" jdbcType="INTEGER" />
+    <result column="f_tool" property="tool" jdbcType="INTEGER" />
+    <result column="f_cutter" property="cutter" jdbcType="VARCHAR" />
+    <result column="f_cut_depth" property="cutDepth" jdbcType="INTEGER" />
+    <result column="f_mainshaft_speed" property="mainshaftSpeed" jdbcType="INTEGER" />
+    <result column="f_fixture" property="fixture" jdbcType="VARCHAR" />
+    <result column="f_feeding_depth" property="feedingDepth" jdbcType="INTEGER" />
+    <result column="f_load" property="load" jdbcType="INTEGER" />
+    <result column="f_cut_speed" property="cutSpeed" jdbcType="INTEGER" />
+    <result column="f_basic_time" property="basicTime" jdbcType="INTEGER" />
+    <result column="f_assist_time" property="assistTime" jdbcType="INTEGER" />
+    <result column="f_workspace_service_time" property="workspaceServiceTime" jdbcType="INTEGER" />
+    <result column="f_sort" property="sort" jdbcType="INTEGER" />
+    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
+    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, f_position_id, f_tool, f_cutter, f_cut_depth, f_mainshaft_speed, f_fixture, 
+    f_feeding_depth, f_load, f_cut_speed, f_basic_time, f_assist_time, f_workspace_service_time, 
+    f_sort, f_is_delete, f_creator_id, f_createtime, f_updater_id, f_updatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_working_step
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_working_step
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.WorkingStep" >
+    insert into t_working_step (f_id, f_position_id, f_tool, 
+      f_cutter, f_cut_depth, f_mainshaft_speed, 
+      f_fixture, f_feeding_depth, f_load, 
+      f_cut_speed, f_basic_time, f_assist_time, 
+      f_workspace_service_time, f_sort, f_is_delete, 
+      f_creator_id, f_createtime, f_updater_id, 
+      f_updatetime)
+    values (#{id,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER}, #{tool,jdbcType=INTEGER}, 
+      #{cutter,jdbcType=VARCHAR}, #{cutDepth,jdbcType=INTEGER}, #{mainshaftSpeed,jdbcType=INTEGER}, 
+      #{fixture,jdbcType=VARCHAR}, #{feedingDepth,jdbcType=INTEGER}, #{load,jdbcType=INTEGER}, 
+      #{cutSpeed,jdbcType=INTEGER}, #{basicTime,jdbcType=INTEGER}, #{assistTime,jdbcType=INTEGER}, 
+      #{workspaceServiceTime,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{isDelete,jdbcType=BIT}, 
+      #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.WorkingStep" >
+    insert into t_working_step
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        f_id,
+      </if>
+      <if test="positionId != null" >
+        f_position_id,
+      </if>
+      <if test="tool != null" >
+        f_tool,
+      </if>
+      <if test="cutter != null" >
+        f_cutter,
+      </if>
+      <if test="cutDepth != null" >
+        f_cut_depth,
+      </if>
+      <if test="mainshaftSpeed != null" >
+        f_mainshaft_speed,
+      </if>
+      <if test="fixture != null" >
+        f_fixture,
+      </if>
+      <if test="feedingDepth != null" >
+        f_feeding_depth,
+      </if>
+      <if test="load != null" >
+        f_load,
+      </if>
+      <if test="cutSpeed != null" >
+        f_cut_speed,
+      </if>
+      <if test="basicTime != null" >
+        f_basic_time,
+      </if>
+      <if test="assistTime != null" >
+        f_assist_time,
+      </if>
+      <if test="workspaceServiceTime != null" >
+        f_workspace_service_time,
+      </if>
+      <if test="sort != null" >
+        f_sort,
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete,
+      </if>
+      <if test="creatorId != null" >
+        f_creator_id,
+      </if>
+      <if test="createtime != null" >
+        f_createtime,
+      </if>
+      <if test="updaterId != null" >
+        f_updater_id,
+      </if>
+      <if test="updatetime != null" >
+        f_updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="positionId != null" >
+        #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="tool != null" >
+        #{tool,jdbcType=INTEGER},
+      </if>
+      <if test="cutter != null" >
+        #{cutter,jdbcType=VARCHAR},
+      </if>
+      <if test="cutDepth != null" >
+        #{cutDepth,jdbcType=INTEGER},
+      </if>
+      <if test="mainshaftSpeed != null" >
+        #{mainshaftSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="fixture != null" >
+        #{fixture,jdbcType=VARCHAR},
+      </if>
+      <if test="feedingDepth != null" >
+        #{feedingDepth,jdbcType=INTEGER},
+      </if>
+      <if test="load != null" >
+        #{load,jdbcType=INTEGER},
+      </if>
+      <if test="cutSpeed != null" >
+        #{cutSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="basicTime != null" >
+        #{basicTime,jdbcType=INTEGER},
+      </if>
+      <if test="assistTime != null" >
+        #{assistTime,jdbcType=INTEGER},
+      </if>
+      <if test="workspaceServiceTime != null" >
+        #{workspaceServiceTime,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null" >
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.WorkingStep" >
+    update t_working_step
+    <set >
+      <if test="positionId != null" >
+        f_position_id = #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="tool != null" >
+        f_tool = #{tool,jdbcType=INTEGER},
+      </if>
+      <if test="cutter != null" >
+        f_cutter = #{cutter,jdbcType=VARCHAR},
+      </if>
+      <if test="cutDepth != null" >
+        f_cut_depth = #{cutDepth,jdbcType=INTEGER},
+      </if>
+      <if test="mainshaftSpeed != null" >
+        f_mainshaft_speed = #{mainshaftSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="fixture != null" >
+        f_fixture = #{fixture,jdbcType=VARCHAR},
+      </if>
+      <if test="feedingDepth != null" >
+        f_feeding_depth = #{feedingDepth,jdbcType=INTEGER},
+      </if>
+      <if test="load != null" >
+        f_load = #{load,jdbcType=INTEGER},
+      </if>
+      <if test="cutSpeed != null" >
+        f_cut_speed = #{cutSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="basicTime != null" >
+        f_basic_time = #{basicTime,jdbcType=INTEGER},
+      </if>
+      <if test="assistTime != null" >
+        f_assist_time = #{assistTime,jdbcType=INTEGER},
+      </if>
+      <if test="workspaceServiceTime != null" >
+        f_workspace_service_time = #{workspaceServiceTime,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        f_sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        f_is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="creatorId != null" >
+        f_creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        f_createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null" >
+        f_updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.WorkingStep" >
+    update t_working_step
+    set f_position_id = #{positionId,jdbcType=INTEGER},
+      f_tool = #{tool,jdbcType=INTEGER},
+      f_cutter = #{cutter,jdbcType=VARCHAR},
+      f_cut_depth = #{cutDepth,jdbcType=INTEGER},
+      f_mainshaft_speed = #{mainshaftSpeed,jdbcType=INTEGER},
+      f_fixture = #{fixture,jdbcType=VARCHAR},
+      f_feeding_depth = #{feedingDepth,jdbcType=INTEGER},
+      f_load = #{load,jdbcType=INTEGER},
+      f_cut_speed = #{cutSpeed,jdbcType=INTEGER},
+      f_basic_time = #{basicTime,jdbcType=INTEGER},
+      f_assist_time = #{assistTime,jdbcType=INTEGER},
+      f_workspace_service_time = #{workspaceServiceTime,jdbcType=INTEGER},
+      f_sort = #{sort,jdbcType=INTEGER},
+      f_is_delete = #{isDelete,jdbcType=BIT},
+      f_creator_id = #{creatorId,jdbcType=INTEGER},
+      f_createtime = #{createtime,jdbcType=TIMESTAMP},
+      f_updater_id = #{updaterId,jdbcType=INTEGER},
+      f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
