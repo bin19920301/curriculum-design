@@ -18,4 +18,6 @@ public interface WorkingPositionMapper {
     int updateByPrimaryKeySelective(WorkingPosition record);
 
     int updateByPrimaryKey(WorkingPosition record);
+
+    int deleteByCardId(Integer cardId);
 }

@@ -161,4 +161,8 @@
       f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="deleteByCardId" parameterType="java.lang.Integer" >
+    delete from t_process
+    where f_card_id = #{cardId,jdbcType=INTEGER}
+  </delete>
 </mapper>

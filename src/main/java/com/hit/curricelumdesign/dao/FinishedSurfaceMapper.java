@@ -18,4 +18,6 @@ public interface FinishedSurfaceMapper {
     int updateByPrimaryKeySelective(FinishedSurface record);
 
     int updateByPrimaryKey(FinishedSurface record);
+
+    int deleteByCardId(Integer cardId);
 }

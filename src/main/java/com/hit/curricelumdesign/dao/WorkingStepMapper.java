@@ -18,4 +18,6 @@ public interface WorkingStepMapper {
     int updateByPrimaryKeySelective(WorkingStep record);
 
     int updateByPrimaryKey(WorkingStep record);
+
+    int deleteByCardId(Integer cardId);
 }

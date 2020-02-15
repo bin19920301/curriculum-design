@@ -18,4 +18,6 @@ public interface ProcedureRulesMapper {
     int updateByPrimaryKeySelective(ProcedureRules record);
 
     int updateByPrimaryKey(ProcedureRules record);
+
+    int deleteByCardId(Integer cardId);
 }
