@@ -2,16 +2,12 @@ package com.hit.curricelumdesign.service;
 
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.entity.ProcessFile;
-import com.hit.curricelumdesign.context.entity.WorkFile;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.ProcessFile.AddProcessFileParam;
 import com.hit.curricelumdesign.context.param.ProcessFile.ProcessFileBaseParam;
-import com.hit.curricelumdesign.context.param.workfile.AddWorkFileParam;
-import com.hit.curricelumdesign.context.param.workfile.WorkFileBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.ProcessFileMapper;
-import com.hit.curricelumdesign.dao.WorkFileMapper;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

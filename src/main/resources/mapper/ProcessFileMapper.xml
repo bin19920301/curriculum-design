@@ -11,7 +11,7 @@
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    f_id, f_name, f_size, f_path, f_is_delete, f_createtime, f_updatetime
+    f_id,  f_name, f_size, f_path, f_is_delete, f_createtime, f_updatetime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,12 +23,12 @@
     delete from t_process_file
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.hit.curricelumdesign.context.entity.ProcessFile" >
-    insert into t_process_file (f_id, f_name, f_size, 
-      f_path, f_is_delete, f_createtime, 
+  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.ProcessFile" >
+    insert into t_process_file (f_id,  f_name,
+      f_size, f_path, f_is_delete, f_createtime, 
       f_updatetime)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
-      #{path,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{size,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}, 
       #{updatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.ProcessFile" >

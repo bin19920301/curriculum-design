@@ -1,7 +1,9 @@
 package com.hit.curricelumdesign.context.entity;
 
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 public class ProcessFile {

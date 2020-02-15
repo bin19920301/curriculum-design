@@ -41,20 +41,6 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名 -->
-        <table schema="curriculum_design" tableName="t_card" domainObjectName="Card"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <columnRenamingRule searchString="^f_" replaceString=""/>
-        </table>
-        <table schema="curriculum_design" tableName="t_process" domainObjectName="Process"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <columnRenamingRule searchString="^f_" replaceString=""/>
-        </table>
         <table schema="curriculum_design" tableName="t_process_file" domainObjectName="ProcessFile"
                enableCountByExample="false"
                enableDeleteByExample="false"

@@ -1,7 +1,11 @@
 package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.entity.WorkingPosition;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+@Mapper
+@Repository
 public interface WorkingPositionMapper {
     int deleteByPrimaryKey(Integer id);
 

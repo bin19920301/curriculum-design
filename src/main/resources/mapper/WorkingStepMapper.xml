@@ -3,6 +3,7 @@
 <mapper namespace="com.hit.curricelumdesign.dao.WorkingStepMapper" >
   <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.WorkingStep" >
     <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_card_id" property="cardId" jdbcType="INTEGER" />
     <result column="f_position_id" property="positionId" jdbcType="INTEGER" />
     <result column="f_tool" property="tool" jdbcType="INTEGER" />
     <result column="f_cutter" property="cutter" jdbcType="VARCHAR" />
@@ -23,8 +24,8 @@
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    f_id, f_position_id, f_tool, f_cutter, f_cut_depth, f_mainshaft_speed, f_fixture, 
-    f_feeding_depth, f_load, f_cut_speed, f_basic_time, f_assist_time, f_workspace_service_time, 
+    f_id, f_card_id, f_position_id, f_tool, f_cutter, f_cut_depth, f_mainshaft_speed, 
+    f_fixture, f_feeding_depth, f_load, f_cut_speed, f_basic_time, f_assist_time, f_workspace_service_time, 
     f_sort, f_is_delete, f_creator_id, f_createtime, f_updater_id, f_updatetime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -38,26 +39,29 @@
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.WorkingStep" >
-    insert into t_working_step (f_id, f_position_id, f_tool, 
-      f_cutter, f_cut_depth, f_mainshaft_speed, 
-      f_fixture, f_feeding_depth, f_load, 
-      f_cut_speed, f_basic_time, f_assist_time, 
-      f_workspace_service_time, f_sort, f_is_delete, 
-      f_creator_id, f_createtime, f_updater_id, 
-      f_updatetime)
-    values (#{id,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER}, #{tool,jdbcType=INTEGER}, 
-      #{cutter,jdbcType=VARCHAR}, #{cutDepth,jdbcType=INTEGER}, #{mainshaftSpeed,jdbcType=INTEGER}, 
-      #{fixture,jdbcType=VARCHAR}, #{feedingDepth,jdbcType=INTEGER}, #{load,jdbcType=INTEGER}, 
-      #{cutSpeed,jdbcType=INTEGER}, #{basicTime,jdbcType=INTEGER}, #{assistTime,jdbcType=INTEGER}, 
-      #{workspaceServiceTime,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{isDelete,jdbcType=BIT}, 
-      #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER}, 
-      #{updatetime,jdbcType=TIMESTAMP})
+    insert into t_working_step (f_id, f_card_id, f_position_id, 
+      f_tool, f_cutter, f_cut_depth, 
+      f_mainshaft_speed, f_fixture, f_feeding_depth, 
+      f_load, f_cut_speed, f_basic_time, 
+      f_assist_time, f_workspace_service_time, f_sort, 
+      f_is_delete, f_creator_id, f_createtime, 
+      f_updater_id, f_updatetime)
+    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER}, 
+      #{tool,jdbcType=INTEGER}, #{cutter,jdbcType=VARCHAR}, #{cutDepth,jdbcType=INTEGER}, 
+      #{mainshaftSpeed,jdbcType=INTEGER}, #{fixture,jdbcType=VARCHAR}, #{feedingDepth,jdbcType=INTEGER}, 
+      #{load,jdbcType=INTEGER}, #{cutSpeed,jdbcType=INTEGER}, #{basicTime,jdbcType=INTEGER}, 
+      #{assistTime,jdbcType=INTEGER}, #{workspaceServiceTime,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updaterId,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.WorkingStep" >
     insert into t_working_step
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         f_id,
+      </if>
+      <if test="cardId != null" >
+        f_card_id,
       </if>
       <if test="positionId != null" >
         f_position_id,
@@ -118,6 +122,9 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=INTEGER},
+      </if>
       <if test="positionId != null" >
         #{positionId,jdbcType=INTEGER},
       </if>
@@ -177,6 +184,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.WorkingStep" >
     update t_working_step
     <set >
+      <if test="cardId != null" >
+        f_card_id = #{cardId,jdbcType=INTEGER},
+      </if>
       <if test="positionId != null" >
         f_position_id = #{positionId,jdbcType=INTEGER},
       </if>
@@ -236,7 +246,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.WorkingStep" >
     update t_working_step
-    set f_position_id = #{positionId,jdbcType=INTEGER},
+    set f_card_id = #{cardId,jdbcType=INTEGER},
+      f_position_id = #{positionId,jdbcType=INTEGER},
       f_tool = #{tool,jdbcType=INTEGER},
       f_cutter = #{cutter,jdbcType=VARCHAR},
       f_cut_depth = #{cutDepth,jdbcType=INTEGER},

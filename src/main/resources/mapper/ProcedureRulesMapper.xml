@@ -3,6 +3,7 @@
 <mapper namespace="com.hit.curricelumdesign.dao.ProcedureRulesMapper" >
   <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.ProcedureRules" >
     <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_card_id" property="cardId" jdbcType="INTEGER" />
     <result column="f_work_project_id" property="workProjectId" jdbcType="INTEGER" />
     <result column="f_rules_type" property="rulesType" jdbcType="INTEGER" />
     <result column="f_rules_details" property="rulesDetails" jdbcType="VARCHAR" />
@@ -13,7 +14,7 @@
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    f_id, f_work_project_id, f_rules_type, f_rules_details, f_is_delete, f_creator_id, 
+    f_id, f_card_id, f_work_project_id, f_rules_type, f_rules_details, f_is_delete, f_creator_id, 
     f_createtime, f_updater_id, f_updatetime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -27,20 +28,23 @@
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.ProcedureRules" >
-    insert into t_procedure_rules (f_id, f_work_project_id, f_rules_type, 
-      f_rules_details, f_is_delete, f_creator_id, 
-      f_createtime, f_updater_id, f_updatetime
-      )
-    values (#{id,jdbcType=INTEGER}, #{workProjectId,jdbcType=INTEGER}, #{rulesType,jdbcType=INTEGER}, 
-      #{rulesDetails,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}
-      )
+    insert into t_procedure_rules (f_id, f_card_id, f_work_project_id, 
+      f_rules_type, f_rules_details, f_is_delete, 
+      f_creator_id, f_createtime, f_updater_id, 
+      f_updatetime)
+    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{workProjectId,jdbcType=INTEGER}, 
+      #{rulesType,jdbcType=INTEGER}, #{rulesDetails,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, 
+      #{creatorId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.ProcedureRules" >
     insert into t_procedure_rules
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         f_id,
+      </if>
+      <if test="cardId != null" >
+        f_card_id,
       </if>
       <if test="workProjectId != null" >
         f_work_project_id,
@@ -71,6 +75,9 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=INTEGER},
+      </if>
       <if test="workProjectId != null" >
         #{workProjectId,jdbcType=INTEGER},
       </if>
@@ -100,6 +107,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.ProcedureRules" >
     update t_procedure_rules
     <set >
+      <if test="cardId != null" >
+        f_card_id = #{cardId,jdbcType=INTEGER},
+      </if>
       <if test="workProjectId != null" >
         f_work_project_id = #{workProjectId,jdbcType=INTEGER},
       </if>
@@ -129,7 +139,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.ProcedureRules" >
     update t_procedure_rules
-    set f_work_project_id = #{workProjectId,jdbcType=INTEGER},
+    set f_card_id = #{cardId,jdbcType=INTEGER},
+      f_work_project_id = #{workProjectId,jdbcType=INTEGER},
       f_rules_type = #{rulesType,jdbcType=INTEGER},
       f_rules_details = #{rulesDetails,jdbcType=VARCHAR},
       f_is_delete = #{isDelete,jdbcType=BIT},

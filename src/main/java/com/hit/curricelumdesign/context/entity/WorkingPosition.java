@@ -1,6 +1,5 @@
 package com.hit.curricelumdesign.context.entity;
 
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,6 +11,12 @@ public class WorkingPosition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "f_id")
     private Integer id;
+
+    /**
+     * 工艺卡片id
+     */
+    @Column(name = "f_card_id")
+    private Integer cardId;
 
     /**
      * 工序id
@@ -61,6 +66,14 @@ public class WorkingPosition {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
     }
 
     public Integer getProcessId() {
