@@ -2,19 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hit.curricelumdesign.dao.CardMapper" >
   <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.Card" >
+  <id column="f_id" property="id" jdbcType="INTEGER" />
+  <result column="f_work_id" property="workId" jdbcType="INTEGER" />
+  <result column="f_part_number" property="partNumber" jdbcType="VARCHAR" />
+  <result column="f_part_name" property="partName" jdbcType="VARCHAR" />
+  <result column="f_product_type" property="productType" jdbcType="VARCHAR" />
+  <result column="f_materials" property="materials" jdbcType="VARCHAR" />
+  <result column="f_workblank_weight" property="workblankWeight" jdbcType="DOUBLE" />
+  <result column="f_workblank_kind" property="workblankKind" jdbcType="VARCHAR" />
+  <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
+  <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
+  <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
+  <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
+  <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+</resultMap>
+  <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.card.CardDTO" >
     <id column="f_id" property="id" jdbcType="INTEGER" />
-    <result column="f_work_id" property="workId" jdbcType="INTEGER" />
     <result column="f_part_number" property="partNumber" jdbcType="VARCHAR" />
     <result column="f_part_name" property="partName" jdbcType="VARCHAR" />
     <result column="f_product_type" property="productType" jdbcType="VARCHAR" />
     <result column="f_materials" property="materials" jdbcType="VARCHAR" />
     <result column="f_workblank_weight" property="workblankWeight" jdbcType="DOUBLE" />
     <result column="f_workblank_kind" property="workblankKind" jdbcType="VARCHAR" />
-    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
-    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
-    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
-    <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     f_id, f_work_id, f_part_number, f_part_name, f_product_type, f_materials, f_workblank_weight, 
@@ -185,4 +194,11 @@
       f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findByWorkId" resultMap="DTOResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_card
+    where f_work_id = #{workId,jdbcType=INTEGER}
+    and f_is_delete = false
+  </select>
 </mapper>

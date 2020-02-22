@@ -1,8 +1,11 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO;
 import com.hit.curricelumdesign.context.entity.WorkingStep;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -20,4 +23,6 @@ public interface WorkingStepMapper {
     int updateByPrimaryKey(WorkingStep record);
 
     int deleteByCardId(Integer cardId);
+
+    List<WorkingStepDTO> findByWorkingPositionId(Integer workingPositionId);
 }

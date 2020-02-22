@@ -1,8 +1,11 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.workingposition.WoekingPositionDTO;
 import com.hit.curricelumdesign.context.entity.WorkingPosition;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -20,4 +23,6 @@ public interface WorkingPositionMapper {
     int updateByPrimaryKey(WorkingPosition record);
 
     int deleteByCardId(Integer cardId);
+
+    List<WoekingPositionDTO> findByProcessId(Integer processId);
 }

@@ -23,6 +23,20 @@
     <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO" >
+    <result column="f_tool" property="tool" jdbcType="INTEGER" />
+    <result column="f_cutter" property="cutter" jdbcType="VARCHAR" />
+    <result column="f_cut_depth" property="cutDepth" jdbcType="INTEGER" />
+    <result column="f_mainshaft_speed" property="mainshaftSpeed" jdbcType="INTEGER" />
+    <result column="f_fixture" property="fixture" jdbcType="VARCHAR" />
+    <result column="f_feeding_depth" property="feedingDepth" jdbcType="INTEGER" />
+    <result column="f_load" property="load" jdbcType="INTEGER" />
+    <result column="f_cut_speed" property="cutSpeed" jdbcType="INTEGER" />
+    <result column="f_basic_time" property="basicTime" jdbcType="INTEGER" />
+    <result column="f_assist_time" property="assistTime" jdbcType="INTEGER" />
+    <result column="f_workspace_service_time" property="workspaceServiceTime" jdbcType="INTEGER" />
+    <result column="f_sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Base_Column_List" >
     f_id, f_card_id, f_position_id, f_tool, f_cutter, f_cut_depth, f_mainshaft_speed, 
     f_fixture, f_feeding_depth, f_load, f_cut_speed, f_basic_time, f_assist_time, f_workspace_service_time, 
@@ -271,4 +285,13 @@
     delete from t_working_step
     where f_card_id = #{cardId,jdbcType=INTEGER}
   </delete>
+  <select id="findByWorkingPositionId" resultMap="DTOResultMap" parameterType="java.lang.Integer" >
+    select
+    f_id, f_card_id, f_position_id, f_tool, f_cutter, f_cut_depth, f_mainshaft_speed,
+    f_fixture, f_feeding_depth, f_load, f_cut_speed, f_basic_time, f_assist_time, f_workspace_service_time,
+    f_sort, f_is_delete, f_creator_id, f_createtime, f_updater_id, f_updatetime
+    from t_working_step
+    where f_position_id = #{positionId,jdbcType=INTEGER}
+    and  f_is_delete = false
+  </select>
 </mapper>

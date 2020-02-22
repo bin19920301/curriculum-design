@@ -12,6 +12,10 @@
     <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.workingposition.WoekingPositionDTO" >
+    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <result column="f_sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Base_Column_List" >
     f_id, f_card_id, f_process_id, f_sort, f_is_delete, f_creator_id, f_createtime, f_updater_id, 
     f_updatetime
@@ -143,4 +147,11 @@
     delete from t_working_position
     where f_card_id = #{cardId,jdbcType=INTEGER}
   </delete>
+  <select id="findByProcessId" resultMap="DTOResultMap" parameterType="java.lang.Integer" >
+    select
+    f_id,  f_sort
+    from t_working_position
+    where  f_process_id = #{processId,jdbcType=INTEGER}
+    and f_is_delete = false
+  </select>
 </mapper>
