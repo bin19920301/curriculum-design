@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.card.CardDTO;
 import com.hit.curricelumdesign.context.entity.Card;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +22,6 @@ public interface CardMapper {
     int updateByPrimaryKey(Card record);
 
     Card selectByWorkId(@Param("workId") Integer workId);
+
+    CardDTO findByWorkId(Integer workId);
 }

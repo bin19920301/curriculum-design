@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.process.ProcessDTO;
 import com.hit.curricelumdesign.context.entity.Process;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,6 +24,8 @@ public interface ProcessMapper {
     int updateByPrimaryKey(Process record);
 
     int deleteByCardId(Integer cardId);
+
+    List<ProcessDTO> findByCardId(Integer cardId);
 
     List<Process> selectByCardId(@Param("cardId") Integer cardId);
 

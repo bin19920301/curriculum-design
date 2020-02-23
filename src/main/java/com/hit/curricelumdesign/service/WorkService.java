@@ -3,14 +3,19 @@ package com.hit.curricelumdesign.service;
 import com.github.pagehelper.PageHelper;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
+import com.hit.curricelumdesign.context.dto.card.CardDTO;
 import com.hit.curricelumdesign.context.dto.craftcard.CraftCardInfoDTO;
 import com.hit.curricelumdesign.context.dto.file.FileListDTO;
+import com.hit.curricelumdesign.context.dto.process.ProcessDTO;
 import com.hit.curricelumdesign.context.dto.student.StudentDTO;
 import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
 import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoListDTO;
 import com.hit.curricelumdesign.context.dto.workfile.WorkFileDTO;
+import com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO;
+import com.hit.curricelumdesign.context.dto.workingposition.WoekingPositionDTO;
+import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoDTO;
 import com.hit.curricelumdesign.context.entity.*;
 import com.hit.curricelumdesign.context.entity.Process;
@@ -347,14 +352,35 @@ public class WorkService {
 
         workInfoDTO.setWorkProjectInfoDTO(workProjectInfoDTO);
 
-        List<CraftCardInfoDTO> craftCardInfoDTOList = craftCardMapper.getCraftCardInfoDTOListByWorkId(work.getId());
-        workInfoDTO.setCraftCardInfoDTOList(craftCardInfoDTOList);
+        //2020-02-22
+        //查找工艺卡片
+        CardDTO cardDTO = cardMapper.findByWorkId(workInfoDTO.getWorkId());
+        //查找工序
+        List<ProcessDTO> processDTOList = processMapper.findByCardId(cardDTO.getId());
+        //查找工位
+        for (int i = 0; i <processDTOList.size() ; i++) {
+            List<WoekingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getId());
+            //查找工步
+            for (int j = 0; j < workingPositionDTOList.size() ; j++) {
+                List<WorkingStepDTO> workingStepDTOList = workingStepMapper.findByWorkingPositionId(workingPositionDTOList.get(j).getId());
+                //工位中放入工步
+                workingPositionDTOList.get(j).setWorkingStepDTOList(workingStepDTOList);
+            }
+            //工序中放入工位
+            processDTOList.get(i).setWoekingPositionDTOList(workingPositionDTOList);
+        }
+        //卡片中放工序
+        cardDTO.setProcessDTOList(processDTOList);
+
+        //2020-02-22屏蔽掉之前的工艺卡片
+        //List<CraftCardInfoDTO> craftCardInfoDTOList = craftCardMapper.getCraftCardInfoDTOListByWorkId(work.getId());
+        //workInfoDTO.setCraftCardInfoDTOList(craftCardInfoDTOList);
         StudentDTO student = studentManager.getStudentById(work.getStudentId());
         workInfoDTO.setStudentName(student.getName());
 
         //2020-01-06增加作业文件
         List<WorkFileDTO> workFileDTOList = workFileMapper.getByWorkId(workInfoDTO.getWorkId());
-        workInfoDTO.setWorkFileDTOList(workFileDTOList);
+        //workInfoDTO.setWorkFileDTOList(workFileDTOList);
 
         workMessageMapper.readMessage(param.getLoginTeacherId(), work.getId(), Constants.WorkMessage.RECEIVER_TYPE_TEACHER);
 
@@ -391,15 +417,36 @@ public class WorkService {
 
         workInfoDTO.setWorkProjectInfoDTO(workProjectInfoDTO);
 
-        List<CraftCardInfoDTO> craftCardInfoDTOList = craftCardMapper.getCraftCardInfoDTOListByWorkId(work.getId());
-        workInfoDTO.setCraftCardInfoDTOList(craftCardInfoDTOList);
+        //2020-02-22
+        //查找工艺卡片
+        CardDTO cardDTO = cardMapper.findByWorkId(workInfoDTO.getWorkId());
+        //查找工序
+        List<ProcessDTO> processDTOList = processMapper.findByCardId(cardDTO.getId());
+        //查找工位
+        for (int i = 0; i <processDTOList.size() ; i++) {
+            List<WoekingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getId());
+            //查找工步
+            for (int j = 0; j < workingPositionDTOList.size() ; j++) {
+                List<WorkingStepDTO> workingStepDTOList = workingStepMapper.findByWorkingPositionId(workingPositionDTOList.get(j).getId());
+                //工位中放入工步
+                workingPositionDTOList.get(j).setWorkingStepDTOList(workingStepDTOList);
+            }
+            //工序中放入工位
+            processDTOList.get(i).setWoekingPositionDTOList(workingPositionDTOList);
+        }
+        //卡片中放工序
+        cardDTO.setProcessDTOList(processDTOList);
+
+        //2020-02-22屏蔽掉之前的工艺卡片
+        //List<CraftCardInfoDTO> craftCardInfoDTOList = craftCardMapper.getCraftCardInfoDTOListByWorkId(work.getId());
+        //workInfoDTO.setCraftCardInfoDTOList(craftCardInfoDTOList);
         TeacherDTO teacher = teacherManager.getTeacherById(workTeachingDTO.getTeacherId());
         StudentDTO student = studentManager.getStudentById(work.getStudentId());
         workInfoDTO.setStudentName(student.getName());
 
         //2020-01-06增加作业文件
         List<WorkFileDTO> workFileDTOList = workFileMapper.getByWorkId(workInfoDTO.getWorkId());
-        workInfoDTO.setWorkFileDTOList(workFileDTOList);
+        //workInfoDTO.setWorkFileDTOList(workFileDTOList);
 
         workMessageMapper.readMessage(param.getLoginStudentId(), work.getId(), Constants.WorkMessage.RECEIVER_TYPE_STUDENT);
 
