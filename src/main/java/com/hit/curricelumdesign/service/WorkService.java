@@ -11,12 +11,14 @@ import com.hit.curricelumdesign.context.dto.student.StudentDTO;
 import com.hit.curricelumdesign.context.dto.teacher.TeacherDTO;
 import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoDTO;
+import com.hit.curricelumdesign.context.dto.work.WorkInfoForStudentDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoListDTO;
 import com.hit.curricelumdesign.context.dto.workfile.WorkFileDTO;
 import com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO;
 import com.hit.curricelumdesign.context.dto.workingposition.WoekingPositionDTO;
 import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoDTO;
+import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoForStudentDTO;
 import com.hit.curricelumdesign.context.entity.*;
 import com.hit.curricelumdesign.context.entity.Process;
 import com.hit.curricelumdesign.context.enums.Error;
@@ -345,14 +347,21 @@ public class WorkService {
             throw new BaseException(Error.WORK_PROJECT_IS_NOT_EXIST);
         }
 
-        List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectId(workProjectInfoDTO.getId());
+        //2020-02-23区分资料和参考资料
+        //List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectId(workProjectInfoDTO.getId());
+        //workProjectInfoDTO.setFilelist(fileListDTOList);
+        //获取资料文件
+        List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectIdAndType(workProjectInfoDTO.getId(), Constants.File.FileTypes.INFORMATION.getStatus());
         workProjectInfoDTO.setFilelist(fileListDTOList);
+        //获取参考方案文件
+        List<FileListDTO> referenceSolutionListDTOList = fileMapper.getFileListDTOByWorkProjectIdAndType(workProjectInfoDTO.getId(), Constants.File.FileTypes.REFERENCE_SOLUTION.getStatus());
+        workProjectInfoDTO.setReferenceSolutionList(referenceSolutionListDTOList);
 
         workInfoDTO.setTeaching(workTeachingDTO);
 
         workInfoDTO.setWorkProjectInfoDTO(workProjectInfoDTO);
 
-        //2020-02-22
+     /*   //2020-02-22
         //查找工艺卡片
         CardDTO cardDTO = cardMapper.findByWorkId(workInfoDTO.getWorkId());
         //查找工序
@@ -371,6 +380,9 @@ public class WorkService {
         }
         //卡片中放工序
         cardDTO.setProcessDTOList(processDTOList);
+
+        //作业中放入卡片
+        workInfoDTO.setCardDTO(cardDTO);*/
 
         //2020-02-22屏蔽掉之前的工艺卡片
         //List<CraftCardInfoDTO> craftCardInfoDTOList = craftCardMapper.getCraftCardInfoDTOListByWorkId(work.getId());
@@ -395,7 +407,7 @@ public class WorkService {
      * @return
      */
     public Result getStudentWorkInfoById(WorkBaseParam param) {
-        WorkInfoDTO workInfoDTO = new WorkInfoDTO();
+        WorkInfoForStudentDTO workInfoDTO = new WorkInfoForStudentDTO();
 
         Work work = workManager.getWorkerById(param.getId());
         workInfoDTO.setWorkId(work.getId());
@@ -409,15 +421,21 @@ public class WorkService {
         if (null == workProjectInfoDTO) {
             throw new BaseException(Error.WORK_PROJECT_IS_NOT_EXIST);
         }
+        WorkProjectInfoForStudentDTO workProjectInfoForStudentDTO = new WorkProjectInfoForStudentDTO();
+        BeanUtil.copyProperties(workProjectInfoDTO, workProjectInfoForStudentDTO);
 
-        List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectId(workProjectInfoDTO.getId());
-        workProjectInfoDTO.setFilelist(fileListDTOList);
+        //2020-02-23区分资料和参考资料
+        //List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectId(workProjectInfoDTO.getId());
+        //workProjectInfoDTO.setFilelist(fileListDTOList);
+        //获取资料文件
+        List<FileListDTO> fileListDTOList = fileMapper.getFileListDTOByWorkProjectIdAndType(workProjectInfoDTO.getId(), Constants.File.FileTypes.INFORMATION.getStatus());
+        workProjectInfoForStudentDTO.setFilelist(fileListDTOList);
 
         workInfoDTO.setTeaching(workTeachingDTO);
 
-        workInfoDTO.setWorkProjectInfoDTO(workProjectInfoDTO);
+        workInfoDTO.setWorkProjectInfoDTO(workProjectInfoForStudentDTO);
 
-        //2020-02-22
+ /*       //2020-02-22
         //查找工艺卡片
         CardDTO cardDTO = cardMapper.findByWorkId(workInfoDTO.getWorkId());
         //查找工序
@@ -436,6 +454,9 @@ public class WorkService {
         }
         //卡片中放工序
         cardDTO.setProcessDTOList(processDTOList);
+
+        //作业中放入卡片
+        workInfoDTO.setCardDTO(cardDTO);*/
 
         //2020-02-22屏蔽掉之前的工艺卡片
         //List<CraftCardInfoDTO> craftCardInfoDTOList = craftCardMapper.getCraftCardInfoDTOListByWorkId(work.getId());

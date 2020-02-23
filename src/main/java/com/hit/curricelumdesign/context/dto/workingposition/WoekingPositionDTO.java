@@ -17,7 +17,7 @@ public class WoekingPositionDTO {
     private Integer sort;
 
     /**
-     * 工布集合
+     * 工步集合
      */
     private List<WorkingStepDTO> workingStepDTOList;
 

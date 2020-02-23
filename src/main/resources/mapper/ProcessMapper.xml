@@ -23,7 +23,7 @@
     <association property="file" javaType="com.hit.curricelumdesign.context.dto.processfile.ProcessFileDTO">
       <result column="tpfname" property="name" />
       <result column="tpfsize" property="size" />
-      <result column="tpfpsth" property="path" />
+      <result column="tpfpath" property="path" />
     </association>
   </resultMap>
   <sql id="Base_Column_List" >
