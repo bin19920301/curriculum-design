@@ -2,8 +2,6 @@ package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.param.work.*;
-import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByStudentParam;
-import com.hit.curricelumdesign.context.param.workmessage.AddWorkMessageByTeacherParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +40,10 @@ public class WorkController {
         return workService.submitWork(param);
     }
 
-    @RequestMapping(value = "/work/addcraftcardlist/", method = RequestMethod.POST)
+    @RequestMapping(value = "/work/addcard/", method = RequestMethod.POST)
     @HitApi(checkStudentLogin = true)
-    public Result addCraftCardList(@RequestBody AddCraftCardListParam param) {
-        return workService.addCraftCardList(param);
+    public Result addCard(@RequestBody AddCardParam param) {
+        return workService.addCard(param);
     }
 
 

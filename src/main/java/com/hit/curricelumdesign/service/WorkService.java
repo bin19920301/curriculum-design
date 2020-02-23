@@ -11,9 +11,9 @@ import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoDTO;
 import com.hit.curricelumdesign.context.dto.work.WorkInfoListDTO;
 import com.hit.curricelumdesign.context.dto.workfile.WorkFileDTO;
-import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoDTO;
 import com.hit.curricelumdesign.context.entity.*;
+import com.hit.curricelumdesign.context.entity.Process;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.work.*;
@@ -25,13 +25,14 @@ import com.hit.curricelumdesign.manager.student.StudentManager;
 import com.hit.curricelumdesign.manager.teacher.TeacherManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -70,6 +71,17 @@ public class WorkService {
     @Autowired
     private WorkFileMapper workFileMapper;
 
+    @Autowired
+    private CardMapper cardMapper;
+
+    @Autowired
+    private ProcessMapper processMapper;
+
+    @Autowired
+    private WorkingPositionMapper workingPositionMapper;
+
+    @Autowired
+    private WorkingStepMapper workingStepMapper;
 
     /**
      * 评分
@@ -114,74 +126,176 @@ public class WorkService {
      * @return
      */
     @Transactional
-    public Result addCraftCardList(AddCraftCardListParam param) {
+    public Result addCard(AddCardParam param) {
         Integer workId = param.getWorkId();
         Integer studentId = param.getLoginStudentId();
         Work work = workManager.getWorkerById(workId);
-        List<AddCraftCardParam> paramList = param.getList();
-        List<CraftCard> newCraftCardList = new ArrayList<>();
-        List<CraftCard> updateCraftCardList = new ArrayList<>();
-        List<CraftCard> deleteCraftCardList = new ArrayList<>();
-
-        List<CraftCard> oldCraftCardList = craftCardMapper.getCraftCardListByWorkId(param.getWorkId());
-
+        Card card = null;
         Date now = new Date();
-        for (int i = 0; i < paramList.size(); i++) {
-            AddCraftCardParam addCraftCardParam = paramList.get(i);
-            if (null == addCraftCardParam.getCraftCardId()) {//如果没有工艺卡片id则添加新的
-                newCraftCardList.add(buildCraftCard(addCraftCardParam, workId, studentId));
-                continue;
-            } else {//如果有工艺卡片id
-                if (oldCraftCardList.isEmpty()) {//如果旧的工艺卡片为空 则添加新的
-                    newCraftCardList.add(buildCraftCard(addCraftCardParam, workId, studentId));
-                    continue;
-                }
-                for (int j = 0; j < oldCraftCardList.size(); j++) {//匹配旧的工艺卡片
-                    CraftCard craftCard = oldCraftCardList.get(j);
-                    if (addCraftCardParam.getCraftCardId().compareTo(craftCard.getId()) == 0) {//如果匹配到
-                        BeanUtil.copyProperties(addCraftCardParam, craftCard);
-                        craftCard.setUpdatetime(now);
-                        updateCraftCardList.add(craftCard);
-                        oldCraftCardList.remove(j);
-                        break;
+        Integer cardId = null;
+        if (!Objects.isNull(param.getWorkId())) {
+            card = cardMapper.selectByWorkId(param.getWorkId());
+        }
+
+        //添加工艺卡片
+        if (Objects.isNull(card)) {
+            card = getNewCard(param, workId, studentId, now);
+            cardId = card.getId();
+        } else {
+            BeanUtil.copyProperties(param, card);
+            cardMapper.updateByPrimaryKeySelective(card);
+            cardId = card.getId();
+        }
+        List<Process> processExistList = processMapper.selectByCardId(cardId);
+        Map<Integer, Process> processExistIdMap = new HashMap<>();
+        if (CollectionUtils.isNotEmpty(processExistList)) {
+            processExistIdMap = processExistList.stream().collect(Collectors.toMap(process -> process.getId(), process -> process, (v1, v2) -> v2));
+        }
+        List<WorkingPosition> workingPositionExistList = workingPositionMapper.selectByCardId(cardId);
+        Map<Integer, WorkingPosition> workingPositionExistIdMap = new HashMap<>();
+        if (CollectionUtils.isNotEmpty(workingPositionExistList)) {
+            workingPositionExistIdMap = workingPositionExistList.stream().collect(Collectors.toMap(workingPosition -> workingPosition.getId(), workingPosition -> workingPosition, (v1, v2) -> v2));
+        }
+        List<WorkingStep> workingStepExistList = workingStepMapper.selectByCardId(cardId);
+        Map<Integer, WorkingStep> workingStepExistIdMap = new HashMap<>();
+        if (CollectionUtils.isNotEmpty(workingStepExistList)) {
+            workingStepExistIdMap = workingStepExistList.stream().collect(Collectors.toMap(workingStep -> workingStep.getId(), workingStep -> workingStep, (v1, v2) -> v2));
+        }
+
+        //添加工序
+        List<ProcessParam> processParamList = param.getProcessList();
+        if (CollectionUtils.isNotEmpty(processParamList)) {
+            for (ProcessParam processParam : processParamList) {
+                Process process = null;
+                if (Objects.isNull(processParam.getProcessId())) {
+                    process = getNewProcess(studentId, now, cardId, processParam);
+                } else {
+                    if (processExistIdMap.containsKey(processParam.getProcessId())) {
+                        process = processExistIdMap.get(processParam.getProcessId());
+                        BeanUtil.copyProperties(processParam, process);
+                        process.setUpdatetime(now);
+                        processMapper.updateByPrimaryKeySelective(process);
+                        processExistList.remove(process);
+                    } else {
+                        process = getNewProcess(studentId, now, cardId, processParam);
                     }
-                    if (j == (oldCraftCardList.size() - 1)) {//如果当前为最后一条旧的工艺卡片,则表示未匹配到工艺卡片,则添加新的
-                        //如果没有匹配的旧的工艺卡片,则添加新的
-                        newCraftCardList.add(buildCraftCard(addCraftCardParam, workId, studentId));
+                }
+                List<WorkingPositionParam> workingPositionParamList = processParam.getWorkingPositionList();
+                if (CollectionUtils.isNotEmpty(workingPositionParamList)) {
+                    for (WorkingPositionParam workingPositionParam : workingPositionParamList) {
+                        WorkingPosition workingPosition = null;
+                        //添加工位
+                        if (Objects.isNull(workingPositionParam.getWorkingPositionId())) {
+                            workingPosition = getNewWorkingPosition(studentId, now, cardId, process, workingPositionParam);
+                        } else {
+                            if (workingPositionExistIdMap.containsKey(workingPositionParam.getWorkingPositionId())) {
+                                workingPosition = workingPositionExistIdMap.get(workingPositionParam.getWorkingPositionId());
+                                BeanUtil.copyProperties(workingPositionParam, workingPosition);
+                                workingPosition.setUpdatetime(now);
+                                workingPositionMapper.updateByPrimaryKeySelective(workingPosition);
+                                workingPositionExistList.remove(workingPosition);
+                            } else {
+                                workingPosition = getNewWorkingPosition(studentId, now, cardId, process, workingPositionParam);
+                            }
+                        }
+                        //添加工步
+                        List<WorkingStepParam> workingStepParamList = workingPositionParam.getWorkingStepList();
+                        if (CollectionUtils.isNotEmpty(workingStepParamList)) {
+                            for (WorkingStepParam workingStepParam : workingStepParamList) {
+                                if (workingStepExistIdMap.containsKey(workingStepParam.getWorkingStepId())) {
+                                    WorkingStep workingStep = workingStepExistIdMap.get(workingStepParam.getWorkingStepId());
+                                    BeanUtil.copyProperties(workingStepParam, workingStep);
+                                    workingStepMapper.updateByPrimaryKeySelective(workingStep);
+                                } else {
+                                    getNewWorkingStep(studentId, now, cardId, workingPosition, workingStepParam);
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
-        deleteCraftCardList.addAll(oldCraftCardList);
-
-        for (CraftCard craftCard : deleteCraftCardList) {
-            craftCard.setIsDelete(Constants.Common.IS_YES);
-            craftCard.setUpdatetime(now);
+        //删除不需要的工序 工位 工步
+        if (CollectionUtils.isNotEmpty(processExistList)) {
+            for (Process process : processExistList) {
+                process.setIsDelete(Constants.Common.IS_YES);
+                process.setUpdatetime(now);
+                processMapper.updateByPrimaryKeySelective(process);
+            }
         }
-
-        //保存新的工艺卡片
-        Long i = craftCardManager.insertCraftCardList(newCraftCardList);
-        //更新工艺卡片
-        craftCardManager.updateCraftCardList(updateCraftCardList);
-        //删除工艺卡片
-        craftCardManager.updateCraftCardList(deleteCraftCardList);
-
+        if (CollectionUtils.isNotEmpty(workingPositionExistList)) {
+            for (WorkingPosition workingPosition : workingPositionExistList) {
+                workingPosition.setIsDelete(Constants.Common.IS_YES);
+                workingPosition.setUpdatetime(now);
+                workingPositionMapper.updateByPrimaryKeySelective(workingPosition);
+            }
+        }
+        if (CollectionUtils.isNotEmpty(workingStepExistList)) {
+            for (WorkingStep workingStep : workingStepExistList) {
+                workingStep.setIsDelete(Constants.Common.IS_YES);
+                workingStep.setUpdatetime(now);
+                workingStepMapper.updateByPrimaryKeySelective(workingStep);
+            }
+        }
 
         return Result.success();
     }
 
-    private CraftCard buildCraftCard(AddCraftCardParam addCraftCardParam, Integer workId, Integer studentId) {
-        CraftCard craftCard = new CraftCard();
-        craftCard.setWorkId(workId);
-        BeanUtil.copyProperties(addCraftCardParam, craftCard);
-        craftCard.setIsDelete(Constants.Common.IS_NOT);
-        craftCard.setCreatorId(studentId);
-        craftCard.setUpdaterId(studentId);
-        Date now = new Date();
-        craftCard.setCreatetime(now);
-        craftCard.setUpdatetime(now);
-        return craftCard;
+    private WorkingStep getNewWorkingStep(Integer studentId, Date now, Integer cardId, WorkingPosition workingPosition, WorkingStepParam workingStepParam) {
+        WorkingStep workingStep = new WorkingStep();
+        workingStep.setCardId(cardId);
+        workingStep.setPositionId(workingPosition.getId());
+        BeanUtil.copyProperties(workingStepParam, workingStep);
+        workingStep.setIsDelete(Constants.Common.IS_NOT);
+        workingStep.setCreatetime(now);
+        workingStep.setCreatorId(studentId);
+        workingStep.setUpdatetime(now);
+        workingStep.setUpdaterId(studentId);
+        workingStepMapper.insertSelective(workingStep);
+        return workingStep;
     }
+
+    private WorkingPosition getNewWorkingPosition(Integer studentId, Date now, Integer cardId, Process process, WorkingPositionParam workingPositionParam) {
+        WorkingPosition workingPosition = new WorkingPosition();
+        workingPosition.setCardId(cardId);
+        workingPosition.setProcessId(process.getId());
+        workingPosition.setSort(workingPositionParam.getSort());
+        workingPosition.setIsDelete(Constants.Common.IS_NOT);
+        workingPosition.setCreatetime(now);
+        workingPosition.setCreatorId(studentId);
+        workingPosition.setUpdatetime(now);
+        workingPosition.setUpdaterId(studentId);
+        workingPositionMapper.insertSelective(workingPosition);
+        return workingPosition;
+    }
+
+    private Process getNewProcess(Integer studentId, Date now, Integer cardId, ProcessParam processParam) {
+        Process process = new Process();
+        process.setCardId(cardId);
+        BeanUtil.copyProperties(processParam, process);
+        process.setIsDelete(Constants.Common.IS_NOT);
+        process.setCreatetime(now);
+        process.setCreatorId(studentId);
+        process.setUpdatetime(now);
+        process.setUpdaterId(studentId);
+        processMapper.insertSelective(process);
+        return process;
+    }
+
+    private Card getNewCard(AddCardParam param, Integer workId, Integer studentId, Date now) {
+        Card card;
+        card = new Card();
+        card.setWorkId(workId);
+        BeanUtil.copyProperties(param, card);
+        card.setCreatetime(now);
+        card.setCreatorId(studentId);
+        card.setUpdatetime(now);
+        card.setUpdaterId(studentId);
+        card.setIsDelete(Constants.Common.IS_NOT);
+        cardMapper.insertSelective(card);
+        return card;
+    }
+
 
     /**
      * 提交作业

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @RequestMapping(value = "/test/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
     public Result getAdmin(GetAdminParam param) {
         return Result.success();
     }

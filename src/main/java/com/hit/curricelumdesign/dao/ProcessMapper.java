@@ -2,7 +2,10 @@ package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.entity.Process;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @Mapper
@@ -20,4 +23,8 @@ public interface ProcessMapper {
     int updateByPrimaryKey(Process record);
 
     int deleteByCardId(Integer cardId);
+
+    List<Process> selectByCardId(@Param("cardId") Integer cardId);
+
+    void deleteProcessByCardId(@Param("cardId") Integer cardId);
 }
