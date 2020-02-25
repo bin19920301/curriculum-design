@@ -1,8 +1,10 @@
 package com.hit.curricelumdesign.context.param.procedurerules;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.NotNull;
 
-public class ProcedureRulesBaseParam {
+public class ProcedureRulesBaseParam extends BaseRequestParam {
     /**
      * id
      */

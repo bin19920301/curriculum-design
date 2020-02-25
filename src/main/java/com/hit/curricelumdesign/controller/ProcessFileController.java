@@ -1,8 +1,8 @@
 package com.hit.curricelumdesign.controller;
 
 import com.hit.curricelumdesign.context.annotation.HitApi;
-import com.hit.curricelumdesign.context.param.ProcessFile.AddProcessFileParam;
-import com.hit.curricelumdesign.context.param.ProcessFile.ProcessFileBaseParam;
+import com.hit.curricelumdesign.context.param.processFile.AddProcessFileParam;
+import com.hit.curricelumdesign.context.param.processFile.ProcessFileBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.service.ProcessFileService;
 import org.springframework.beans.factory.annotation.Autowired;

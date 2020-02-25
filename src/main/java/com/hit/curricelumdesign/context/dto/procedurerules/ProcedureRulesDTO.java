@@ -1,27 +1,34 @@
-package com.hit.curricelumdesign.context.param.procedurerules;
+package com.hit.curricelumdesign.context.dto.procedurerules;
 
-import javax.validation.constraints.NotNull;
+public class ProcedureRulesDTO {
 
-public class UpdateProcedureRulesParam extends ProcedureRulesBaseParam {
+    /**
+     * id
+     */
+    private Integer id;
+
+    /**
+     * 作业项目id
+     */
+    private Integer workProjectId;
 
     /**
      * 规则类型;1加工优先级2加工方法
      */
-    @NotNull
     private Integer rulesType;
 
     /**
      * 规则详情
      */
-
-    @NotNull
     private String rulesDetails;
 
-    /**
-     * 作业项目id
-     */
-    @NotNull
-    private Integer workProjectId;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getWorkProjectId() {
         return workProjectId;

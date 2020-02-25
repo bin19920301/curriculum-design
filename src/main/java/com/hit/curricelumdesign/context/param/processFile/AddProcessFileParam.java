@@ -1,4 +1,4 @@
-package com.hit.curricelumdesign.context.param.ProcessFile;
+package com.hit.curricelumdesign.context.param.processFile;
 
 import com.hit.curricelumdesign.context.param.BaseRequestParam;
 import org.springframework.web.multipart.MultipartFile;

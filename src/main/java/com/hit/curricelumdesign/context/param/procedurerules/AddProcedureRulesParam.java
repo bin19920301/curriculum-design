@@ -1,6 +1,8 @@
 package com.hit.curricelumdesign.context.param.procedurerules;
 
-public class AddProcedureRulesParam {
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
+public class AddProcedureRulesParam extends BaseRequestParam {
 
     /**
      * 作业项目id
