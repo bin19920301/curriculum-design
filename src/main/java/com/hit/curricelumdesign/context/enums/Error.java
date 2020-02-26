@@ -128,6 +128,8 @@ public enum Error {
     WORK_PROJECT_ASSOCIATE_FILE_HAS_NOT_EXIST("300703", "作业项目关联了不存在的资料"),
     WORK_PROJECT_IS_NOT_EXIST("300704", "作业项目不存在"),
     WORK_CAN_NOT_DELETE_IN_USING("300705", "该作业项目已使用,请勿删除"),
+    FINISHED_SURFACE_SURFACE_ID_IS_EXIST("300706","表面id已存在"),
+    FINISHED_SURFACE_IS_NOT_EXIST("300707","表面不存在"),
 
     //----------------------------------------教学
     TEACHER_REMINDER_OVER_LENGTH("300801", "教师提示超长，应不超过500字"),
@@ -152,6 +154,8 @@ public enum Error {
     //----------------------------------------教学消息
     TEACHING_MESSAGE_IS_NOT_EXIST("3012001", "教学消息不存在"),
     TEACHING_MESSAGE_ONLY_DELETE_BY_SELF("3012002", "教学信息只能由本人删除"),
+
+
     ;
 
 

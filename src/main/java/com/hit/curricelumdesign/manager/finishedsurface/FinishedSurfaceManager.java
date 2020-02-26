@@ -9,8 +9,4 @@ public class FinishedSurfaceManager {
 
     @Autowired
     private FinishedSurfaceMapper finishedSurfaceMapper;
-
-    public int deleteByCardId(Integer cardId){
-        return finishedSurfaceMapper.deleteByCardId(cardId);
-    }
 }

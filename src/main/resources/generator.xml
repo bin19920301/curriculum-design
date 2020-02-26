@@ -41,35 +41,7 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名 -->
-        <table schema="curriculum_design" tableName="t_process_file" domainObjectName="ProcessFile"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <columnRenamingRule searchString="^f_" replaceString=""/>
-        </table>
-        <table schema="curriculum_design" tableName="t_working_position" domainObjectName="WorkingPosition"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <columnRenamingRule searchString="^f_" replaceString=""/>
-        </table>
         <table schema="curriculum_design" tableName="t_finished_surface" domainObjectName="FinishedSurface"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <columnRenamingRule searchString="^f_" replaceString=""/>
-        </table>
-        <table schema="curriculum_design" tableName="t_procedure_rules" domainObjectName="ProcedureRules"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <columnRenamingRule searchString="^f_" replaceString=""/>
-        </table>
-        <table schema="curriculum_design" tableName="t_working_step" domainObjectName="WorkingStep"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"

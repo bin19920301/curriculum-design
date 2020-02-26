@@ -1,8 +1,12 @@
 package com.hit.curricelumdesign.dao;
 
+import com.hit.curricelumdesign.context.dto.finishedsurface.FinishedSurfaceDTO;
 import com.hit.curricelumdesign.context.entity.FinishedSurface;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -19,5 +23,7 @@ public interface FinishedSurfaceMapper {
 
     int updateByPrimaryKey(FinishedSurface record);
 
-    int deleteByCardId(Integer cardId);
+    List<FinishedSurfaceDTO> selectByWorkProjectId(@Param("workProjectId") Integer workProjectId);
+
+    FinishedSurface selectBySurfaceId(@Param("workProjectId") Integer workProjectId, @Param("surfaceId") Integer surfaceId);
 }

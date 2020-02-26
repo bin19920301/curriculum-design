@@ -1,6 +1,9 @@
 package com.hit.curricelumdesign.context.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 public class FinishedSurface {
@@ -13,16 +16,16 @@ public class FinishedSurface {
     private Integer id;
 
     /**
-     * 工艺卡片id
-     */
-    @Column(name = "f_card_id")
-    private Integer cardId;
-
-    /**
      * 作业项目id
      */
     @Column(name = "f_work_project_id")
     private Integer workProjectId;
+
+    /**
+     * 表面id
+     */
+    @Column(name = "f_surface_id")
+    private Integer surfaceId;
 
     /**
      * 类型;1平面,2外圆,3孔
@@ -74,20 +77,20 @@ public class FinishedSurface {
         this.id = id;
     }
 
-    public Integer getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
-    }
-
     public Integer getWorkProjectId() {
         return workProjectId;
     }
 
     public void setWorkProjectId(Integer workProjectId) {
         this.workProjectId = workProjectId;
+    }
+
+    public Integer getSurfaceId() {
+        return surfaceId;
+    }
+
+    public void setSurfaceId(Integer surfaceId) {
+        this.surfaceId = surfaceId;
     }
 
     public Integer getType() {
