@@ -13,12 +13,6 @@ public class ProcedureRules {
     private Integer id;
 
     /**
-     * 工艺卡片id
-     */
-    @Column(name = "f_card_id")
-    private Integer cardId;
-
-    /**
      * 作业项目id
      */
     @Column(name = "f_work_project_id")
@@ -72,14 +66,6 @@ public class ProcedureRules {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
     }
 
     public Integer getWorkProjectId() {

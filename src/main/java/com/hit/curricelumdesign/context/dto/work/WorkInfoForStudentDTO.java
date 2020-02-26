@@ -1,14 +1,8 @@
 package com.hit.curricelumdesign.context.dto.work;
 
-import com.hit.curricelumdesign.context.dto.card.CardDTO;
-import com.hit.curricelumdesign.context.dto.craftcard.CraftCardInfoDTO;
 import com.hit.curricelumdesign.context.dto.teaching.WorkTeachingDTO;
-import com.hit.curricelumdesign.context.dto.workfile.WorkFileDTO;
-import com.hit.curricelumdesign.context.dto.workmessage.WorkMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoDTO;
-import com.hit.curricelumdesign.context.entity.WorkFile;
-
-import java.util.List;
+import com.hit.curricelumdesign.context.dto.workproject.WorkProjectInfoForStudentDTO;
 
 /**
  * @author xbr
@@ -16,7 +10,7 @@ import java.util.List;
  * @ClassName WorkInfoDTO
  * @Description
  */
-public class WorkInfoDTO {
+public class WorkInfoForStudentDTO {
 
     private Integer workId;
 
@@ -26,7 +20,7 @@ public class WorkInfoDTO {
 
     private WorkTeachingDTO teaching;
 
-    private WorkProjectInfoDTO workProjectInfoDTO;
+    private WorkProjectInfoForStudentDTO workProjectInfoDTO;
 
     //private List<CraftCardInfoDTO> craftCardInfoDTOList;
 
@@ -68,12 +62,11 @@ public class WorkInfoDTO {
         this.teaching = teaching;
     }
 
-    public WorkProjectInfoDTO getWorkProjectInfoDTO() {
+    public WorkProjectInfoForStudentDTO getWorkProjectInfoDTO() {
         return workProjectInfoDTO;
     }
 
-    public void setWorkProjectInfoDTO(WorkProjectInfoDTO workProjectInfoDTO) {
+    public void setWorkProjectInfoDTO(WorkProjectInfoForStudentDTO workProjectInfoDTO) {
         this.workProjectInfoDTO = workProjectInfoDTO;
     }
-
 }

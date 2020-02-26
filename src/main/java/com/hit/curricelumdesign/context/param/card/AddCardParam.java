@@ -2,7 +2,7 @@ package com.hit.curricelumdesign.context.param.card;
 
 import javax.persistence.Column;
 
-public class AddCCardParam {
+public class AddCardParam {
 
     /**
      * 作业id

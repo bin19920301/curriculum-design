@@ -244,7 +244,8 @@
         b.f_id,
         b.f_folder_id,
         b.f_name,
-        b.f_path
+        b.f_path,
+        a.f_file_type
         from t_work_project_file a
         left join t_file b
         on a.f_file_id = b.f_id
