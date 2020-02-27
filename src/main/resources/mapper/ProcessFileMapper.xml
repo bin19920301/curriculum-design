@@ -27,7 +27,7 @@
     insert into t_process_file (f_id,  f_name,
       f_size, f_path, f_is_delete, f_createtime, 
       f_updatetime)
-    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
       #{size,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}, 
       #{updatetime,jdbcType=TIMESTAMP})
   </insert>

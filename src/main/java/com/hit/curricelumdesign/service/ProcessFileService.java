@@ -104,7 +104,7 @@ public class ProcessFileService {
     }
 
     /**
-     * 删除作业文件信息
+     * 删除工序文件信息
      *
      * @param workFileParam
      * @return
