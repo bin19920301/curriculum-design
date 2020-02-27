@@ -9,6 +9,7 @@ import com.hit.curricelumdesign.dao.CardMapper;
 import com.hit.curricelumdesign.dao.ProcessMapper;
 import com.hit.curricelumdesign.dao.WorkingPositionMapper;
 import com.hit.curricelumdesign.dao.WorkingStepMapper;
+import com.hit.curricelumdesign.manager.card.CardManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,10 +32,14 @@ public class CardService {
     @Autowired
     private WorkingStepMapper workingStepMapper;
 
+    @Autowired
+    private CardManager cardManager;
+
     public CardDTO getTeacherCardDTOByWorkId(CardBaseParam param){
         //2020-02-22
         //查找工艺卡片
-        CardDTO cardDTO = cardMapper.findByWorkId(param.getId());
+        //CardDTO cardDTO = cardMapper.findByWorkId(param.getId());
+        CardDTO cardDTO = cardManager.findByWorkId(param.getId());
         //查找工序
         List<ProcessDTO> processDTOList = processMapper.findByCardId(cardDTO.getId());
         //查找工位
@@ -57,7 +62,8 @@ public class CardService {
     public CardDTO getStudentCardDTOByWorkId(CardBaseParam param){
         //2020-02-22
         //查找工艺卡片
-        CardDTO cardDTO = cardMapper.findByWorkId(param.getId());
+        //CardDTO cardDTO = cardMapper.findByWorkId(param.getId());
+        CardDTO cardDTO = cardManager.findByWorkId(param.getId());
         //查找工序
         List<ProcessDTO> processDTOList = processMapper.findByCardId(cardDTO.getId());
         //查找工位

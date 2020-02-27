@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.service;
 
+import com.hit.curricelumdesign.aop.CheckLoginAop;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.entity.WorkFile;
 import com.hit.curricelumdesign.context.enums.Error;
@@ -9,6 +10,8 @@ import com.hit.curricelumdesign.context.param.workfile.WorkFileBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.WorkFileMapper;
 import com.hit.curricelumdesign.utils.BeanUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,8 @@ import java.util.UUID;
 @Service
 @Transactional
 public class WorkFileService {
+
+    private static final Logger logger = LoggerFactory.getLogger(CheckLoginAop.class);
 
     @Autowired
     private WorkFileMapper workFileMapper;
@@ -90,6 +95,7 @@ public class WorkFileService {
             workFileMapper.insert(file);
             return Result.success();
         } catch (Exception e) {
+            logger.error("作业件上传异常,异常信息: "+e.toString());
             throw new BaseException(Error.FILE_UPLOAD_FAILURE);
         }
     }

@@ -155,6 +155,8 @@ public enum Error {
     TEACHING_MESSAGE_IS_NOT_EXIST("3012001", "教学消息不存在"),
     TEACHING_MESSAGE_ONLY_DELETE_BY_SELF("3012002", "教学信息只能由本人删除"),
 
+    //----------------------------------------工艺卡片
+    CARD_IS_NOT_EXIST("3013001", "工艺卡片不存在"),
 
     ;
 

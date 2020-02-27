@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.service;
 
+import com.hit.curricelumdesign.aop.CheckLoginAop;
 import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
 import com.hit.curricelumdesign.context.dto.file.FileDTO;
@@ -13,6 +14,8 @@ import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.FileMapper;
 import com.hit.curricelumdesign.manager.file.FileManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,8 @@ import java.util.UUID;
 @Service
 @Transactional
 public class FileService {
+
+    private static final Logger logger = LoggerFactory.getLogger(CheckLoginAop.class);
 
     @Autowired
     private FileManager fileManager;
@@ -107,6 +112,7 @@ public class FileService {
             fileMapper.insert(file);
             return Result.success();
         } catch (Exception e) {
+            logger.error("文件上传异常,异常信息: "+e.toString());
             throw new BaseException(Error.FILE_UPLOAD_FAILURE);
         }
 
