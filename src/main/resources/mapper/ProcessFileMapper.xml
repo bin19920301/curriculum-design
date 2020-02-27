@@ -23,7 +23,8 @@
     delete from t_process_file
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.ProcessFile" >
+  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.ProcessFile" useGeneratedKeys="true"
+          keyProperty="id" keyColumn="f_id" >
     insert into t_process_file (f_id,  f_name,
       f_size, f_path, f_is_delete, f_createtime, 
       f_updatetime)

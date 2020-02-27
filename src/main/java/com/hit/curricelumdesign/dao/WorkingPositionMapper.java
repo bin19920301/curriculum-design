@@ -1,6 +1,6 @@
 package com.hit.curricelumdesign.dao;
 
-import com.hit.curricelumdesign.context.dto.workingposition.WoekingPositionDTO;
+import com.hit.curricelumdesign.context.dto.workingposition.WorkingPositionDTO;
 import com.hit.curricelumdesign.context.entity.WorkingPosition;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,7 +25,7 @@ public interface WorkingPositionMapper {
 
     int deleteByCardId(Integer cardId);
 
-    List<WoekingPositionDTO> findByProcessId(Integer processId);
+    List<WorkingPositionDTO> findByProcessId(Integer processId);
 
     List<WorkingPosition> selectByCardId(@Param("cardId") Integer cardId);
 

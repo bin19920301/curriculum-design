@@ -1,9 +1,8 @@
 package com.hit.curricelumdesign.context.dto.process;
 
 import com.hit.curricelumdesign.context.dto.processfile.ProcessFileDTO;
-import com.hit.curricelumdesign.context.dto.workingposition.WoekingPositionDTO;
+import com.hit.curricelumdesign.context.dto.workingposition.WorkingPositionDTO;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public class ProcessDTO {
@@ -41,7 +40,7 @@ public class ProcessDTO {
     /**
      * 工位集合
      */
-    private List<WoekingPositionDTO> woekingPositionDTOList;
+    private List<WorkingPositionDTO> workingPositionDTOList;
 
     public Integer getId() {
         return id;
@@ -92,11 +91,11 @@ public class ProcessDTO {
         this.file = file;
     }
 
-    public List<WoekingPositionDTO> getWoekingPositionDTOList() {
-        return woekingPositionDTOList;
+    public List<WorkingPositionDTO> getWorkingPositionDTOList() {
+        return workingPositionDTOList;
     }
 
-    public void setWoekingPositionDTOList(List<WoekingPositionDTO> woekingPositionDTOList) {
-        this.woekingPositionDTOList = woekingPositionDTOList;
+    public void setWorkingPositionDTOList(List<WorkingPositionDTO> workingPositionDTOList) {
+        this.workingPositionDTOList = workingPositionDTOList;
     }
 }

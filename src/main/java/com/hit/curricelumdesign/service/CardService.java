@@ -3,7 +3,7 @@ package com.hit.curricelumdesign.service;
 import com.hit.curricelumdesign.context.dto.card.CardDTO;
 import com.hit.curricelumdesign.context.dto.process.ProcessDTO;
 import com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO;
-import com.hit.curricelumdesign.context.dto.workingposition.WoekingPositionDTO;
+import com.hit.curricelumdesign.context.dto.workingposition.WorkingPositionDTO;
 import com.hit.curricelumdesign.context.param.card.CardBaseParam;
 import com.hit.curricelumdesign.dao.CardMapper;
 import com.hit.curricelumdesign.dao.ProcessMapper;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -51,7 +50,7 @@ public class CardService {
         //查找工位
         if (CollectionUtils.isNotEmpty(processDTOList)){
             for (int i = 0; i <processDTOList.size() ; i++) {
-                List<WoekingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getId());
+                List<WorkingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getId());
                 //查找工步
                 if(CollectionUtils.isNotEmpty(workingPositionDTOList)){
                     for (int j = 0; j < workingPositionDTOList.size() ; j++) {
@@ -62,7 +61,7 @@ public class CardService {
                        }
                     }
                     //工序中放入工位
-                    processDTOList.get(i).setWoekingPositionDTOList(workingPositionDTOList);
+                    processDTOList.get(i).setWorkingPositionDTOList(workingPositionDTOList);
                 }
             }
             //卡片中放工序
@@ -85,7 +84,7 @@ public class CardService {
         //查找工位
         if (CollectionUtils.isNotEmpty(processDTOList)){
             for (int i = 0; i <processDTOList.size() ; i++) {
-                List<WoekingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getId());
+                List<WorkingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getId());
                 //查找工步
                 if(CollectionUtils.isNotEmpty(workingPositionDTOList)){
                     for (int j = 0; j < workingPositionDTOList.size() ; j++) {
@@ -96,7 +95,7 @@ public class CardService {
                         }
                     }
                     //工序中放入工位
-                    processDTOList.get(i).setWoekingPositionDTOList(workingPositionDTOList);
+                    processDTOList.get(i).setWorkingPositionDTOList(workingPositionDTOList);
                 }
             }
             //卡片中放工序

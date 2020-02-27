@@ -4,7 +4,7 @@ import com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO;
 
 import java.util.List;
 
-public class WoekingPositionDTO {
+public class WorkingPositionDTO {
 
     /**
      * 工位id
