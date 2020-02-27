@@ -392,7 +392,7 @@ public class WorkService {
 
         //2020-01-06增加作业文件
         List<WorkFileDTO> workFileDTOList = workFileMapper.getByWorkId(workInfoDTO.getWorkId());
-        //workInfoDTO.setWorkFileDTOList(workFileDTOList);
+        workInfoDTO.setWorkFileDTOList(workFileDTOList);
 
         workMessageMapper.readMessage(param.getLoginTeacherId(), work.getId(), Constants.WorkMessage.RECEIVER_TYPE_TEACHER);
 
@@ -467,7 +467,7 @@ public class WorkService {
 
         //2020-01-06增加作业文件
         List<WorkFileDTO> workFileDTOList = workFileMapper.getByWorkId(workInfoDTO.getWorkId());
-        //workInfoDTO.setWorkFileDTOList(workFileDTOList);
+        workInfoDTO.setWorkFileDTOList(workFileDTOList);
 
         workMessageMapper.readMessage(param.getLoginStudentId(), work.getId(), Constants.WorkMessage.RECEIVER_TYPE_STUDENT);
 
