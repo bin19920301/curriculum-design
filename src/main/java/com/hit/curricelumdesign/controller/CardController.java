@@ -16,13 +16,13 @@ public class CardController {
     private CardService cardService;
 
     @RequestMapping(value = "/card/getteachercardbyworkid/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result getTeacherCardDTOByWorkId(CardBaseParam param) {
         return Result.success(cardService.getTeacherCardDTOByWorkId(param));
     }
 
     @RequestMapping(value = "/card/getstudentcardbyworkid/", method = RequestMethod.POST)
-    @HitApi(checkAdminLogin = true)
+    @HitApi(checkStudentLogin = true)
     public Result getStudentCardDTOByWorkId(CardBaseParam param) {
         return Result.success(cardService.getStudentCardDTOByWorkId(param));
     }
