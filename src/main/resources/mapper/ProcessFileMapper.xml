@@ -18,6 +18,7 @@
     <include refid="Base_Column_List" />
     from t_process_file
     where f_id = #{id,jdbcType=INTEGER}
+    and f_is_delete = false
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_process_file

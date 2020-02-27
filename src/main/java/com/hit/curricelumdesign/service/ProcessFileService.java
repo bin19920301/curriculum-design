@@ -94,8 +94,9 @@ public class ProcessFileService {
             processFile.setCreatetime(new Date());
             processFile.setUpdatetime(new Date());
             processFileMapper.insert(processFile);
-            Map<String,Integer> idMap = new HashMap<>();
+            Map<String,Object> idMap = new HashMap<>();
             idMap.put("id",processFile.getId());
+            idMap.put("path",processFile.getPath());
             return Result.success(idMap);
         } catch (Exception e) {
             logger.error("工序文件上传异常,异常信息: "+e.toString());
