@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hit.curricelumdesign.dao.ProcessMapper" >
-  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.Process" >
-    <id column="f_id" property="id" jdbcType="INTEGER" />
-    <result column="f_card_id" property="cardId" jdbcType="INTEGER" />
-    <result column="f_surface_id" property="surfaceId" jdbcType="INTEGER" />
-    <result column="f_process_file_id" property="processFileId" jdbcType="INTEGER" />
-    <result column="f_name" property="name" jdbcType="VARCHAR" />
-    <result column="f_sort" property="sort" jdbcType="INTEGER" />
-    <result column="f_is_delete" property="isDelete" jdbcType="BIT" />
-    <result column="f_creator_id" property="creatorId" jdbcType="INTEGER" />
-    <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="f_updater_id" property="updaterId" jdbcType="INTEGER" />
-    <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.process.ProcessDTO" >
-    <id column="tpid" property="id" jdbcType="INTEGER" />
-    <result column="tpname" property="name" jdbcType="VARCHAR" />
-    <result column="tfsname" property="surfaceName" jdbcType="VARCHAR" />
-    <result column="tpsort" property="sort" jdbcType="INTEGER" />
-    <result column="tfstype" property="surfaceType" jdbcType="INTEGER" />
-    <association property="file" javaType="com.hit.curricelumdesign.context.dto.processfile.ProcessFileDTO">
-      <result column="tpfname" property="name" />
-      <result column="tpfsize" property="size" />
-      <result column="tpfpath" property="path" />
-    </association>
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.hit.curricelumdesign.dao.ProcessMapper">
+    <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.Process">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_card_id" property="cardId" jdbcType="INTEGER"/>
+        <result column="f_surface_id" property="surfaceId" jdbcType="INTEGER"/>
+        <result column="f_process_file_id" property="processFileId" jdbcType="INTEGER"/>
+        <result column="f_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_sort" property="sort" jdbcType="INTEGER"/>
+        <result column="f_is_delete" property="isDelete" jdbcType="BIT"/>
+        <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
+        <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="f_updater_id" property="updaterId" jdbcType="INTEGER"/>
+        <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.process.ProcessDTO">
+        <id column="tpid" property="processId" jdbcType="INTEGER"/>
+        <result column="tpname" property="name" jdbcType="VARCHAR"/>
+        <result column="tfsname" property="surfaceName" jdbcType="VARCHAR"/>
+        <result column="tpsort" property="sort" jdbcType="INTEGER"/>
+        <result column="tfstype" property="surfaceType" jdbcType="INTEGER"/>
+        <result column="tpfid" property="processFileId"/>
+        <association property="processFile" javaType="com.hit.curricelumdesign.context.dto.processfile.ProcessFileDTO">
+            <result column="tpfname" property="name"/>
+            <result column="tpfsize" property="size"/>
+            <result column="tpfpath" property="path"/>
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
     f_id, f_card_id, f_surface_id, f_process_file_id, f_name, f_sort, f_is_delete, f_creator_id,
     f_createtime, f_updater_id, f_updatetime
   </sql>
@@ -187,10 +188,10 @@
     delete from t_process
     where f_card_id = #{cardId,jdbcType=INTEGER}
   </delete>
-  <select id="findByCardId" resultMap="DTOResultMap" parameterType="java.lang.Integer" >
+    <select id="findByCardId" resultMap="DTOResultMap" parameterType="java.lang.Integer">
     select
       tp.f_id tpid,tp.f_name tpname, tp.f_sort tpsort,
-      tpf.f_name tpfname,tpf.f_size tpfsize,tpf.f_path tpfpath,
+      tpf.f_id tpfid,tpf.f_name tpfname,tpf.f_size tpfsize,tpf.f_path tpfpath,
       tfs.f_name tfsname,tfs.f_type tfstype
     from t_process tp
      left join t_process_file tpf on tp.f_process_file_id = tpf.f_id

@@ -1,6 +1,12 @@
 package com.hit.curricelumdesign.context.dto.workingkstep;
 
 public class WorkingStepDTO {
+
+    /**
+     * 工步id
+     */
+    private Integer workingStepId;
+
     /**
      * 机床;1车床,2铣床,3刨床,4磨床
      */
@@ -60,6 +66,14 @@ public class WorkingStepDTO {
      * 排序
      */
     private Integer sort;
+
+    public Integer getWorkingStepId() {
+        return workingStepId;
+    }
+
+    public void setWorkingStepId(Integer workingStepId) {
+        this.workingStepId = workingStepId;
+    }
 
     public Integer getTool() {
         return tool;

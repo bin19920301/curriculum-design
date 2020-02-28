@@ -36,71 +36,71 @@ public class CardService {
     @Autowired
     private CardManager cardManager;
 
-    public CardDTO getTeacherCardDTOByWorkId(CardBaseParam param){
+    public CardDTO getTeacherCardDTOByWorkId(CardBaseParam param) {
         //2020-02-22
         //查找工艺卡片
         CardDTO cardDTO = cardMapper.findByWorkId(param.getId());
         //2020-02-27 增加非空判断
-        if (null == cardDTO){
+        if (null == cardDTO) {
             return null;
         }
         //CardDTO cardDTO = cardManager.findByWorkId(param.getId());
         //查找工序
-        List<ProcessDTO> processDTOList = processMapper.findByCardId(cardDTO.getId());
+        List<ProcessDTO> processDTOList = processMapper.findByCardId(cardDTO.getCardId());
         //查找工位
-        if (CollectionUtils.isNotEmpty(processDTOList)){
-            for (int i = 0; i <processDTOList.size() ; i++) {
-                List<WorkingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getId());
+        if (CollectionUtils.isNotEmpty(processDTOList)) {
+            for (int i = 0; i < processDTOList.size(); i++) {
+                List<WorkingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getProcessId());
                 //查找工步
-                if(CollectionUtils.isNotEmpty(workingPositionDTOList)){
-                    for (int j = 0; j < workingPositionDTOList.size() ; j++) {
-                        List<WorkingStepDTO> workingStepDTOList = workingStepMapper.findByWorkingPositionId(workingPositionDTOList.get(j).getId());
-                       if(CollectionUtils.isNotEmpty(workingStepDTOList)){
-                           //工位中放入工步
-                           workingPositionDTOList.get(j).setWorkingStepDTOList(workingStepDTOList);
-                       }
+                if (CollectionUtils.isNotEmpty(workingPositionDTOList)) {
+                    for (int j = 0; j < workingPositionDTOList.size(); j++) {
+                        List<WorkingStepDTO> workingStepDTOList = workingStepMapper.findByWorkingPositionId(workingPositionDTOList.get(j).getWorkingPositionId());
+                        if (CollectionUtils.isNotEmpty(workingStepDTOList)) {
+                            //工位中放入工步
+                            workingPositionDTOList.get(j).setWorkingStepList(workingStepDTOList);
+                        }
                     }
                     //工序中放入工位
-                    processDTOList.get(i).setWorkingPositionDTOList(workingPositionDTOList);
+                    processDTOList.get(i).setWorkingPositionList(workingPositionDTOList);
                 }
             }
             //卡片中放工序
-            cardDTO.setProcessDTOList(processDTOList);
+            cardDTO.setProcessList(processDTOList);
         }
-        return  cardDTO;
+        return cardDTO;
     }
 
-    public CardDTO getStudentCardDTOByWorkId(CardBaseParam param){
+    public CardDTO getStudentCardDTOByWorkId(CardBaseParam param) {
         //2020-02-22
         //查找工艺卡片
         CardDTO cardDTO = cardMapper.findByWorkId(param.getId());
         //2020-02-27 增加非空判断
-        if (null == cardDTO){
+        if (null == cardDTO) {
             return null;
         }
         // CardDTO cardDTO = cardManager.findByWorkId(param.getId());
         //查找工序
-        List<ProcessDTO> processDTOList = processMapper.findByCardId(cardDTO.getId());
+        List<ProcessDTO> processDTOList = processMapper.findByCardId(cardDTO.getCardId());
         //查找工位
-        if (CollectionUtils.isNotEmpty(processDTOList)){
-            for (int i = 0; i <processDTOList.size() ; i++) {
-                List<WorkingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getId());
+        if (CollectionUtils.isNotEmpty(processDTOList)) {
+            for (int i = 0; i < processDTOList.size(); i++) {
+                List<WorkingPositionDTO> workingPositionDTOList = workingPositionMapper.findByProcessId(processDTOList.get(i).getProcessId());
                 //查找工步
-                if(CollectionUtils.isNotEmpty(workingPositionDTOList)){
-                    for (int j = 0; j < workingPositionDTOList.size() ; j++) {
-                        List<WorkingStepDTO> workingStepDTOList = workingStepMapper.findByWorkingPositionId(workingPositionDTOList.get(j).getId());
-                        if(CollectionUtils.isNotEmpty(workingStepDTOList)){
+                if (CollectionUtils.isNotEmpty(workingPositionDTOList)) {
+                    for (int j = 0; j < workingPositionDTOList.size(); j++) {
+                        List<WorkingStepDTO> workingStepDTOList = workingStepMapper.findByWorkingPositionId(workingPositionDTOList.get(j).getWorkingPositionId());
+                        if (CollectionUtils.isNotEmpty(workingStepDTOList)) {
                             //工位中放入工步
-                            workingPositionDTOList.get(j).setWorkingStepDTOList(workingStepDTOList);
+                            workingPositionDTOList.get(j).setWorkingStepList(workingStepDTOList);
                         }
                     }
                     //工序中放入工位
-                    processDTOList.get(i).setWorkingPositionDTOList(workingPositionDTOList);
+                    processDTOList.get(i).setWorkingPositionList(workingPositionDTOList);
                 }
             }
             //卡片中放工序
-            cardDTO.setProcessDTOList(processDTOList);
+            cardDTO.setProcessList(processDTOList);
         }
-        return  cardDTO;
+        return cardDTO;
     }
 }

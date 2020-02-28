@@ -9,7 +9,7 @@ public class WorkingPositionDTO {
     /**
      * 工位id
      */
-    private Integer id;
+    private Integer workingPositionId;
 
     /**
      * 排序
@@ -19,14 +19,14 @@ public class WorkingPositionDTO {
     /**
      * 工步集合
      */
-    private List<WorkingStepDTO> workingStepDTOList;
+    private List<WorkingStepDTO> workingStepList;
 
-    public Integer getId() {
-        return id;
+    public Integer getWorkingPositionId() {
+        return workingPositionId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setWorkingPositionId(Integer workingPositionId) {
+        this.workingPositionId = workingPositionId;
     }
 
     public Integer getSort() {
@@ -37,11 +37,11 @@ public class WorkingPositionDTO {
         this.sort = sort;
     }
 
-    public List<WorkingStepDTO> getWorkingStepDTOList() {
-        return workingStepDTOList;
+    public List<WorkingStepDTO> getWorkingStepList() {
+        return workingStepList;
     }
 
-    public void setWorkingStepDTOList(List<WorkingStepDTO> workingStepDTOList) {
-        this.workingStepDTOList = workingStepDTOList;
+    public void setWorkingStepList(List<WorkingStepDTO> workingStepList) {
+        this.workingStepList = workingStepList;
     }
 }

@@ -10,7 +10,7 @@ public class ProcessDTO {
     /**
      * 工序id
      */
-    private Integer id;
+    private Integer processId;
 
     /**
      * 工序名称
@@ -33,21 +33,26 @@ public class ProcessDTO {
     private String surfaceName;
 
     /**
+     * 工序文件id
+     */
+    private Integer processFileId;
+
+    /**
      * 工序文件
      */
-    private ProcessFileDTO file;
+    private ProcessFileDTO processFile;
 
     /**
      * 工位集合
      */
-    private List<WorkingPositionDTO> workingPositionDTOList;
+    private List<WorkingPositionDTO> workingPositionList;
 
-    public Integer getId() {
-        return id;
+    public Integer getProcessId() {
+        return processId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setProcessId(Integer processId) {
+        this.processId = processId;
     }
 
     public String getName() {
@@ -62,6 +67,10 @@ public class ProcessDTO {
         return sort;
     }
 
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
     public Integer getSurfaceType() {
         return surfaceType;
     }
@@ -69,11 +78,6 @@ public class ProcessDTO {
     public void setSurfaceType(Integer surfaceType) {
         this.surfaceType = surfaceType;
     }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
 
     public String getSurfaceName() {
         return surfaceName;
@@ -83,19 +87,27 @@ public class ProcessDTO {
         this.surfaceName = surfaceName;
     }
 
-    public ProcessFileDTO getFile() {
-        return file;
+    public Integer getProcessFileId() {
+        return processFileId;
     }
 
-    public void setFile(ProcessFileDTO file) {
-        this.file = file;
+    public void setProcessFileId(Integer processFileId) {
+        this.processFileId = processFileId;
     }
 
-    public List<WorkingPositionDTO> getWorkingPositionDTOList() {
-        return workingPositionDTOList;
+    public ProcessFileDTO getProcessFile() {
+        return processFile;
     }
 
-    public void setWorkingPositionDTOList(List<WorkingPositionDTO> workingPositionDTOList) {
-        this.workingPositionDTOList = workingPositionDTOList;
+    public void setProcessFile(ProcessFileDTO processFile) {
+        this.processFile = processFile;
+    }
+
+    public List<WorkingPositionDTO> getWorkingPositionList() {
+        return workingPositionList;
+    }
+
+    public void setWorkingPositionList(List<WorkingPositionDTO> workingPositionList) {
+        this.workingPositionList = workingPositionList;
     }
 }

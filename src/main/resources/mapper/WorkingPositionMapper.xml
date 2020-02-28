@@ -13,7 +13,7 @@
     <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.workingposition.WorkingPositionDTO" >
-    <id column="f_id" property="id" jdbcType="INTEGER" />
+    <id column="f_id" property="workingPositionId" jdbcType="INTEGER" />
     <result column="f_sort" property="sort" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >

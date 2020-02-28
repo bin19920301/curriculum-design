@@ -9,7 +9,7 @@ public class CardDTO {
     /**
      * 工艺卡片id
      */
-    private Integer id;
+    private Integer cardId;
 
     /**
      * 零件号
@@ -44,14 +44,14 @@ public class CardDTO {
     /**
      * 工序集合
      */
-    private List<ProcessDTO> processDTOList;
+    private List<ProcessDTO> processList;
 
-    public Integer getId() {
-        return id;
+    public Integer getCardId() {
+        return cardId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
     }
 
     public String getPartNumber() {
@@ -102,11 +102,11 @@ public class CardDTO {
         this.workblankKind = workblankKind;
     }
 
-    public List<ProcessDTO> getProcessDTOList() {
-        return processDTOList;
+    public List<ProcessDTO> getProcessList() {
+        return processList;
     }
 
-    public void setProcessDTOList(List<ProcessDTO> processDTOList) {
-        this.processDTOList = processDTOList;
+    public void setProcessList(List<ProcessDTO> processList) {
+        this.processList = processList;
     }
 }
