@@ -206,6 +206,7 @@ public class WorkService {
                                     WorkingStep workingStep = workingStepExistIdMap.get(workingStepParam.getWorkingStepId());
                                     BeanUtil.copyProperties(workingStepParam, workingStep);
                                     workingStepMapper.updateByPrimaryKeySelective(workingStep);
+                                    workingStepExistList.remove(workingStep);
                                 } else {
                                     getNewWorkingStep(studentId, now, cardId, workingPosition, workingStepParam);
                                 }
