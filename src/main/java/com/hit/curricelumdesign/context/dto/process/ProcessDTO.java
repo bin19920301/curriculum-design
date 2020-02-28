@@ -23,6 +23,11 @@ public class ProcessDTO {
     private Integer sort;
 
     /**
+     * 加工表面id
+     */
+    private Integer surfaceId;
+
+    /**
      * 加工表面类型
      */
     private Integer surfaceType;
@@ -69,6 +74,14 @@ public class ProcessDTO {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Integer getSurfaceId() {
+        return surfaceId;
+    }
+
+    public void setSurfaceId(Integer surfaceId) {
+        this.surfaceId = surfaceId;
     }
 
     public Integer getSurfaceType() {

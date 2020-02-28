@@ -20,6 +20,7 @@
         <result column="tfsname" property="surfaceName" jdbcType="VARCHAR"/>
         <result column="tpsort" property="sort" jdbcType="INTEGER"/>
         <result column="tfstype" property="surfaceType" jdbcType="INTEGER"/>
+        <result column="tpsid" property="surfaceId" jdbcType="INTEGER"/>
         <result column="tpfid" property="processFileId"/>
         <association property="processFile" javaType="com.hit.curricelumdesign.context.dto.processfile.ProcessFileDTO">
             <result column="tpfname" property="name"/>
@@ -190,7 +191,7 @@
   </delete>
     <select id="findByCardId" resultMap="DTOResultMap" parameterType="java.lang.Integer">
     select
-      tp.f_id tpid,tp.f_name tpname, tp.f_sort tpsort,
+      tp.f_id tpid,tp.f_name tpname, tp.f_sort tpsort,tp.f_surface_id tpsid,
       tpf.f_id tpfid,tpf.f_name tpfname,tpf.f_size tpfsize,tpf.f_path tpfpath,
       tfs.f_name tfsname,tfs.f_type tfstype
     from t_process tp
