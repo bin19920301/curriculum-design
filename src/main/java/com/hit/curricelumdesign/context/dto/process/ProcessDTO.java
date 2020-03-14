@@ -6,7 +6,7 @@ import com.hit.curricelumdesign.context.dto.workingposition.WorkingPositionDTO;
 import java.util.List;
 import java.util.Map;
 
-public class ProcessDTO {
+public class ProcessDTO implements Comparable {
 
     /**
      * 工序id
@@ -150,5 +150,12 @@ public class ProcessDTO {
                 ", workingPositionList=" + workingPositionList +
                 ", errorMsg=" + errorMsg +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        ProcessDTO dto = (ProcessDTO) o;
+        return this.getSort().compareTo(dto.getSort());
+
     }
 }

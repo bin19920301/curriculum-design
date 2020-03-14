@@ -22,10 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @Transactional
@@ -100,6 +97,7 @@ public class CardService {
 
         ArrayList<SurfaceBO> surfaceList = new ArrayList<>();
         ArrayList<FinishedMethodBO> finishedMethodBOList = new ArrayList<>();
+        Collections.sort(processDTOList);
         for (ProcessDTO processDTO : processDTOList) {
             if (!Objects.isNull(processDTO.getSurfaceId())) {
                 SurfaceBO surfaceBO = new SurfaceBO(processDTO.getProcessId(), processDTO.getSurfaceId());
