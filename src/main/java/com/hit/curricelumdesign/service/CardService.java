@@ -1,21 +1,29 @@
 package com.hit.curricelumdesign.service;
 
+import com.hit.curricelumdesign.context.bo.rule.FinishedMethodBO;
+import com.hit.curricelumdesign.context.bo.rule.RuleBO;
+import com.hit.curricelumdesign.context.bo.rule.SurfaceBO;
+import com.hit.curricelumdesign.context.bo.rule.WorkCardBO;
 import com.hit.curricelumdesign.context.dto.card.CardDTO;
+import com.hit.curricelumdesign.context.dto.procedurerules.ProcedureRulesDTO;
 import com.hit.curricelumdesign.context.dto.process.ProcessDTO;
 import com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO;
 import com.hit.curricelumdesign.context.dto.workingposition.WorkingPositionDTO;
+import com.hit.curricelumdesign.context.entity.Work;
 import com.hit.curricelumdesign.context.param.card.CardBaseParam;
-import com.hit.curricelumdesign.dao.CardMapper;
-import com.hit.curricelumdesign.dao.ProcessMapper;
-import com.hit.curricelumdesign.dao.WorkingPositionMapper;
-import com.hit.curricelumdesign.dao.WorkingStepMapper;
+import com.hit.curricelumdesign.dao.*;
 import com.hit.curricelumdesign.manager.card.CardManager;
+import com.hit.curricelumdesign.manager.work.WorkManager;
+import com.hit.curricelumdesign.rule.Rule;
+import com.hit.curricelumdesign.rule.RuleChainFactory;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -36,7 +44,17 @@ public class CardService {
     @Autowired
     private CardManager cardManager;
 
+    @Autowired
+    private RuleChainFactory ruleChainFactory;
+
+    @Autowired
+    private ProcedureRulesMapper procedureRulesMapper;
+
+    @Autowired
+    private WorkManager workManager;
+
     public CardDTO getTeacherCardDTOByWorkId(CardBaseParam param) {
+        Work work = workManager.getWorkerById(param.getId());
         //2020-02-22
         //查找工艺卡片
         CardDTO cardDTO = cardMapper.findByWorkId(param.getId());
@@ -67,6 +85,35 @@ public class CardService {
             //卡片中放工序
             cardDTO.setProcessList(processDTOList);
         }
+
+        List<ProcedureRulesDTO> rulesDTOList = procedureRulesMapper.findByProjectId(work.getWorkProjectId());
+        List<RuleBO> ruleBOList = new ArrayList<>();
+        for (ProcedureRulesDTO dto : rulesDTOList) {
+            RuleBO bo = new RuleBO();
+            bo.setRuleId(dto.getId());
+            bo.setType(dto.getRulesType());
+            bo.setRuleString(dto.getRulesDetails());
+            ruleBOList.add(bo);
+        }
+
+        ArrayList<SurfaceBO> surfaceList = new ArrayList<>();
+        ArrayList<FinishedMethodBO> finishedMethodBOList = new ArrayList<>();
+        for (ProcessDTO processDTO : processDTOList) {
+            if (!Objects.isNull(processDTO.getSurfaceId())) {
+                SurfaceBO surfaceBO = new SurfaceBO(processDTO.getProcessId(), processDTO.getSurfaceId());
+                surfaceList.add(surfaceBO);
+
+                for (WorkingPositionDTO workingPositionDTO : processDTO.getWorkingPositionList()) {
+                    for (WorkingStepDTO workingStepDTO : workingPositionDTO.getWorkingStepList()) {
+                        if (!Objects.isNull(workingStepDTO.getTool())) {
+                            
+                        }
+                    }
+                }
+            }
+        }
+        WorkCardBO workCardBO = new WorkCardBO(surfaceList, finishedMethodBOList);
+
         return cardDTO;
     }
 
