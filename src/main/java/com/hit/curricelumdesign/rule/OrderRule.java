@@ -16,19 +16,27 @@ public class OrderRule implements Rule {
     private Integer currentSurface;
 
     @Override
+    public String toString() {
+        return "OrderRule{" +
+                "preSurfaceIdSet=" + preSurfaceIdSet +
+                ", currentSurface=" + currentSurface +
+                '}';
+    }
+
+    public OrderRule(Set<Integer> preSurfaceIdSet, Integer currentSurface) {
+        this.preSurfaceIdSet = preSurfaceIdSet;
+        this.currentSurface = currentSurface;
+    }
+
+    @Override
     public void check(WorkCardBO workCardBO) {
         ArrayList<SurfaceBO> surfaceList = workCardBO.getSurfaceList();
-        Map<Integer, Set<SurfaceBO>> surfaceBOMap = new HashMap<>();
-        for (SurfaceBO bo : surfaceList) {
-            Integer surfaceId = bo.getSurfaceId();
-            if (surfaceBOMap.containsKey(surfaceId)) {
+        for (int i = 0; i < surfaceList.size(); i++) {
+            SurfaceBO bo = surfaceList.get(i);
+            if (currentSurface.equals(bo.getSurfaceId())) {
 
-            } else {
-                Set<SurfaceBO> surfaceBOSet = new HashSet<>();
-                surfaceBOSet.add(bo);
-                surfaceBOMap.put(surfaceId, surfaceBOSet);
+                preSurfaceIdSet.containsAll(null);
             }
-
         }
     }
 }
