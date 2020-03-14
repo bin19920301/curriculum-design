@@ -10,6 +10,7 @@ import com.hit.curricelumdesign.context.dto.process.ProcessDTO;
 import com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO;
 import com.hit.curricelumdesign.context.dto.workingposition.WorkingPositionDTO;
 import com.hit.curricelumdesign.context.entity.Work;
+import com.hit.curricelumdesign.context.enums.ToolEnums;
 import com.hit.curricelumdesign.context.param.card.CardBaseParam;
 import com.hit.curricelumdesign.dao.*;
 import com.hit.curricelumdesign.manager.card.CardManager;
@@ -102,11 +103,13 @@ public class CardService {
             if (!Objects.isNull(processDTO.getSurfaceId())) {
                 SurfaceBO surfaceBO = new SurfaceBO(processDTO.getProcessId(), processDTO.getSurfaceId());
                 surfaceList.add(surfaceBO);
-
                 for (WorkingPositionDTO workingPositionDTO : processDTO.getWorkingPositionList()) {
                     for (WorkingStepDTO workingStepDTO : workingPositionDTO.getWorkingStepList()) {
                         if (!Objects.isNull(workingStepDTO.getTool())) {
-                            
+                            //2020-03-14组装加工方法规则 加工表面id从工序中获取,加工方法从公布中获取
+                            FinishedMethodBO finishedMethodBO = new FinishedMethodBO(processDTO.getSurfaceId(), ToolEnums.intToChar(workingStepDTO.getTool()).toString());
+                            //填入list中
+                            finishedMethodBOList.add(finishedMethodBO);
                         }
                     }
                 }
