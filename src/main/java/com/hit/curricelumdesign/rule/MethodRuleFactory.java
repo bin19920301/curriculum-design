@@ -13,7 +13,7 @@ import java.util.List;
 @Component("MethodRuleFactory")
 public class MethodRuleFactory implements RuleFactory {
     @Override
-    public List<Rule> resolve(String ruleString) {
+    public List<Rule> resolve(RuleBO ruleBO) {
         return null;
     }
 }

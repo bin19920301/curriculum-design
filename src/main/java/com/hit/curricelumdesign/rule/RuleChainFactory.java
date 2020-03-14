@@ -22,10 +22,10 @@ public class RuleChainFactory {
             Integer type = ruleBO.getType();
             //规则类型;1加工优先级2加工方法
             if (type == 1) {
-                List<Rule> orderRuleList = orderRuleFactory.resolve(ruleBO.getRuleString());
+                List<Rule> orderRuleList = orderRuleFactory.resolve(ruleBO);
                 ruleList.addAll(orderRuleList);
             } else if (type == 2) {
-                List<Rule> methodRuleList = methodRuleFactory.resolve(ruleBO.getRuleString());
+                List<Rule> methodRuleList = methodRuleFactory.resolve(ruleBO);
                 ruleList.addAll(methodRuleList);
             }
         }

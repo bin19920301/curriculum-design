@@ -11,7 +11,8 @@ import java.util.Set;
 @Component("OrderRuleFactory")
 public class OrderRuleFactory implements RuleFactory {
     @Override
-    public List<Rule> resolve(String ruleString) {
+    public List<Rule> resolve(RuleBO ruleBO) {
+        String ruleString = ruleBO.getRuleString();
         List<Rule> ruleList = new ArrayList<>();
 
         Rule rule;
@@ -26,7 +27,7 @@ public class OrderRuleFactory implements RuleFactory {
                 for (int j = 0; j < i; j++) {
                     preSurfaceIdSet.add(Integer.parseInt(ruleStringArray[j]));
                 }
-                rule = new OrderRule(preSurfaceIdSet, currentSurface);
+                rule = new OrderRule(preSurfaceIdSet, currentSurface, ruleBO);
                 ruleList.add(rule);
             }
         }
