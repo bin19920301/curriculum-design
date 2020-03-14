@@ -51,8 +51,6 @@ public class MethodRule implements Rule {
                 if (StringUtil.isBlank(method) || !method.equals(methodCharacter)){
                     finishedMethodBO.addErrorMsg(ruleBO.getRuleId(),ruleBO.getRuleString());
                 }
-                //该工位的加工规则已经判断过了,从集合中移除
-                iterator.remove();
             }
         }
 
