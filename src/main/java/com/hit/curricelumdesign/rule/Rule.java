@@ -9,5 +9,5 @@ import java.util.List;
  * @Description
  */
 public interface Rule {
-    void check(List<WorkCardBO> workCardBOList);
+    void check(WorkCardBO workCardBO);
 }

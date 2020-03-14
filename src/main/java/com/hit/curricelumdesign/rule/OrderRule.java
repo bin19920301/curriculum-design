@@ -1,6 +1,7 @@
 package com.hit.curricelumdesign.rule;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author xbr
@@ -9,8 +10,12 @@ import java.util.List;
  * @Description
  */
 public class OrderRule implements Rule {
+
+    private Set<Integer> preSurfaceIdSet;
+    private Integer currentSurface;
+
     @Override
-    public void check(List<WorkCardBO> workCardBOList) {
+    public void check(WorkCardBO workCardBO) {
 
     }
 }
