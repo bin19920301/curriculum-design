@@ -4,16 +4,17 @@ import com.hit.curricelumdesign.context.bo.rule.RuleBO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class RuleChainFactory {
 
-    @Qualifier("MethodRuleFactory")
+    @Resource(name = "MethodRuleFactory")
     RuleFactory methodRuleFactory;
 
-    @Qualifier("OrderRuleFactory")
+    @Resource(name = "OrderRuleFactory")
     RuleFactory orderRuleFactory;
 
     public RuleChain createRuleChain(List<RuleBO> ruleBOList) {
