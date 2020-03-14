@@ -7,10 +7,10 @@
      <property name="ACCESS_PATTERN"
 		value="%date{yyyy-MM-dd HH:mm:ss}|2|%level|%msg%n"/>
 
-    <property name="LOG_FILE_PATH" value="/data/logs/hit-curricelum-design/logs/app-logs/"/>
+    <property name="LOG_FILE_PATH" value="./hit-curricelum-design/logs/app-logs/"/>
 
 	<property name="ACCESS_FILE_PATH"
-		value="/data/logs/hit-curricelum-design/logs/app-access-logs/" />
+		value="./hit-curricelum-design/logs/app-access-logs/" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

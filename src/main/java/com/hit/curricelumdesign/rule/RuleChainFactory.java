@@ -1,16 +1,21 @@
 package com.hit.curricelumdesign.rule;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class RuleChainFactory {
-    RuleFactory methodRuleFactory;
-    RuleFactory orderRuleFactory;
 
-    public RuleChainFactory(RuleFactory methodRuleFactory, RuleFactory orderRuleFactory) {
-        this.methodRuleFactory = methodRuleFactory;
-        this.orderRuleFactory = orderRuleFactory;
-    }
+    @Qualifier("MethodRuleFactory")
+    RuleFactory methodRuleFactory;
+
+    @Qualifier("OrderRuleFactory")
+    RuleFactory orderRuleFactory;
 
     RuleChain createRuleChain(List<RuleBO> ruleBOList) {
         RuleChain ruleChain = new RuleChain();
