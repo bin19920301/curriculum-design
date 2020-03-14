@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.context.bo.rule;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -37,6 +38,7 @@ public class FinishedMethodBO {
         this.stepId = stepId;
         this.surfaceId = surfaceId;
         this.method = method;
+        this.errorMsg = new HashMap<>();
     }
 
     public Integer getProcessId() {
