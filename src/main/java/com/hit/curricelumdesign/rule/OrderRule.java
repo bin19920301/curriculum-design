@@ -1,7 +1,8 @@
 package com.hit.curricelumdesign.rule;
 
-import java.util.List;
-import java.util.Set;
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.*;
 
 /**
  * @author xbr
@@ -16,6 +17,18 @@ public class OrderRule implements Rule {
 
     @Override
     public void check(WorkCardBO workCardBO) {
+        ArrayList<SurfaceBO> surfaceList = workCardBO.getSurfaceList();
+        Map<Integer, Set<SurfaceBO>> surfaceBOMap = new HashMap<>();
+        for (SurfaceBO bo : surfaceList) {
+            Integer surfaceId = bo.getSurfaceId();
+            if (surfaceBOMap.containsKey(surfaceId)) {
 
+            } else {
+                Set<SurfaceBO> surfaceBOSet = new HashSet<>();
+                surfaceBOSet.add(bo);
+                surfaceBOMap.put(surfaceId, surfaceBOSet);
+            }
+
+        }
     }
 }

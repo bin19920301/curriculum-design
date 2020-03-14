@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class MethodRule implements Rule {
     @Override
-    public void check(List<WorkCardBO> workCardBOList) {
+    public void check(WorkCardBO workCardBO) {
 
     }
 }

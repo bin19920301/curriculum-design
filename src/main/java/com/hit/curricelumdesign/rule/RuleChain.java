@@ -19,9 +19,9 @@ public class RuleChain {
         this.chain = chain;
     }
 
-    void check(List<WorkCardBO> workCardBOList) {
+    void check(WorkCardBO workCardBO) {
         for (Rule rule : chain) {
-            rule.check(workCardBOList);
+            rule.check(workCardBO);
         }
     }
 
