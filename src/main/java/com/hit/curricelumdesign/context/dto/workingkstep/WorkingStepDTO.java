@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.dto.workingkstep;
 
+import java.util.List;
+
 public class WorkingStepDTO {
 
     /**
@@ -66,6 +68,9 @@ public class WorkingStepDTO {
      * 排序
      */
     private Integer sort;
+
+    //<规则详情>
+    private List<String> errorMsg;
 
     public Integer getWorkingStepId() {
         return workingStepId;
@@ -169,5 +174,33 @@ public class WorkingStepDTO {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public List<String> getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(List<String> errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkingStepDTO{" +
+                "workingStepId=" + workingStepId +
+                ", tool=" + tool +
+                ", cutter='" + cutter + '\'' +
+                ", cutDepth=" + cutDepth +
+                ", mainshaftSpeed=" + mainshaftSpeed +
+                ", fixture='" + fixture + '\'' +
+                ", feedingDepth=" + feedingDepth +
+                ", load=" + load +
+                ", cutSpeed=" + cutSpeed +
+                ", basicTime=" + basicTime +
+                ", assistTime=" + assistTime +
+                ", workspaceServiceTime=" + workspaceServiceTime +
+                ", sort=" + sort +
+                ", errorMsg=" + errorMsg +
+                '}';
     }
 }

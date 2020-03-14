@@ -21,6 +21,7 @@ public class WorkingPositionDTO {
      */
     private List<WorkingStepDTO> workingStepList;
 
+
     public Integer getWorkingPositionId() {
         return workingPositionId;
     }
@@ -43,5 +44,14 @@ public class WorkingPositionDTO {
 
     public void setWorkingStepList(List<WorkingStepDTO> workingStepList) {
         this.workingStepList = workingStepList;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkingPositionDTO{" +
+                "workingPositionId=" + workingPositionId +
+                ", sort=" + sort +
+                ", workingStepList=" + workingStepList +
+                '}';
     }
 }

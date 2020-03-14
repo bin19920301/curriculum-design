@@ -4,6 +4,7 @@ import com.hit.curricelumdesign.context.dto.processfile.ProcessFileDTO;
 import com.hit.curricelumdesign.context.dto.workingposition.WorkingPositionDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProcessDTO {
 
@@ -51,6 +52,9 @@ public class ProcessDTO {
      * 工位集合
      */
     private List<WorkingPositionDTO> workingPositionList;
+
+    //<规则详情>
+    private List<String> errorMsg;
 
     public Integer getProcessId() {
         return processId;
@@ -122,5 +126,29 @@ public class ProcessDTO {
 
     public void setWorkingPositionList(List<WorkingPositionDTO> workingPositionList) {
         this.workingPositionList = workingPositionList;
+    }
+
+    public List<String> getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(List<String> errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    @Override
+    public String toString() {
+        return "ProcessDTO{" +
+                "processId=" + processId +
+                ", name='" + name + '\'' +
+                ", sort=" + sort +
+                ", surfaceId=" + surfaceId +
+                ", surfaceType=" + surfaceType +
+                ", surfaceName='" + surfaceName + '\'' +
+                ", processFileId=" + processFileId +
+                ", processFile=" + processFile +
+                ", workingPositionList=" + workingPositionList +
+                ", errorMsg=" + errorMsg +
+                '}';
     }
 }

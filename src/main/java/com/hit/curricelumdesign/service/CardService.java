@@ -15,7 +15,7 @@ import com.hit.curricelumdesign.context.param.card.CardBaseParam;
 import com.hit.curricelumdesign.dao.*;
 import com.hit.curricelumdesign.manager.card.CardManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
-import com.hit.curricelumdesign.rule.Rule;
+import com.hit.curricelumdesign.rule.RuleChain;
 import com.hit.curricelumdesign.rule.RuleChainFactory;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -107,7 +108,11 @@ public class CardService {
                     for (WorkingStepDTO workingStepDTO : workingPositionDTO.getWorkingStepList()) {
                         if (!Objects.isNull(workingStepDTO.getTool())) {
                             //2020-03-14组装加工方法规则 加工表面id从工序中获取,加工方法从公布中获取
-                            FinishedMethodBO finishedMethodBO = new FinishedMethodBO(processDTO.getSurfaceId(), ToolEnums.intToChar(workingStepDTO.getTool()).toString());
+                            FinishedMethodBO finishedMethodBO = new FinishedMethodBO(processDTO.getProcessId(),
+                                    workingPositionDTO.getWorkingPositionId(),
+                                    workingStepDTO.getWorkingStepId(),
+                                    processDTO.getSurfaceId(),
+                                    ToolEnums.intToChar(workingStepDTO.getTool()).toString());
                             //填入list中
                             finishedMethodBOList.add(finishedMethodBO);
                         }
@@ -116,7 +121,44 @@ public class CardService {
             }
         }
         WorkCardBO workCardBO = new WorkCardBO(surfaceList, finishedMethodBOList);
-
+        RuleChain ruleChain = ruleChainFactory.createRuleChain(ruleBOList);
+        ruleChain.check(workCardBO);
+        for (SurfaceBO surfaceBO : surfaceList) {
+            Collection<String> errorMsgCollection = surfaceBO.getErrorMsg().values();
+            if (CollectionUtils.isNotEmpty(errorMsgCollection)) {
+                for (ProcessDTO processDTO : processDTOList) {
+                    if (surfaceBO.getProcessId().equals(processDTO.getProcessId())) {
+                        List<String> errorMsgList = new ArrayList<String>();
+                        for (String s : errorMsgCollection) {
+                            errorMsgList.add(s);
+                        }
+                        processDTO.setErrorMsg(errorMsgList);
+                    }
+                }
+            }
+        }
+        for (FinishedMethodBO finishedMethodBO : finishedMethodBOList) {
+            Collection<String> errorMsgCollection = finishedMethodBO.getErrorMsg().values();
+            if (CollectionUtils.isNotEmpty(errorMsgCollection)) {
+                for (ProcessDTO processDTO : processDTOList) {
+                    if (processDTO.getProcessId().equals(finishedMethodBO.getProcessId())) {
+                        for (WorkingPositionDTO workingPositionDTO : processDTO.getWorkingPositionList()) {
+                            if (workingPositionDTO.getWorkingPositionId().equals(finishedMethodBO.getPositionId())) {
+                                for (WorkingStepDTO workingStepDTO : workingPositionDTO.getWorkingStepList()) {
+                                    if (workingStepDTO.getWorkingStepId().equals(finishedMethodBO.getStepId())) {
+                                        List<String> errorMsgList = new ArrayList<String>();
+                                        for (String s : errorMsgCollection) {
+                                            errorMsgList.add(s);
+                                        }
+                                        workingStepDTO.setErrorMsg(errorMsgList);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         return cardDTO;
     }
 

@@ -1,6 +1,5 @@
 package com.hit.curricelumdesign.context.bo.rule;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,8 +10,18 @@ import java.util.Map;
  */
 public class FinishedMethodBO {
 
-    //工位id
+    /**
+     * 工序id
+     */
+    private Integer processId;
+
+    /**
+     * 工位id
+     */
     private Integer positionId;
+
+    //工步id
+    private Integer stepId;
 
     //加工表面id
     private Integer surfaceId;
@@ -22,10 +31,20 @@ public class FinishedMethodBO {
     //<规则id,规则详情>
     private Map<Integer, String> errorMsg;
 
-    public FinishedMethodBO(Integer surfaceId, String method) {
+    public FinishedMethodBO(Integer processId, Integer positionId, Integer stepId, Integer surfaceId, String method) {
+        this.processId = processId;
+        this.positionId = positionId;
+        this.stepId = stepId;
         this.surfaceId = surfaceId;
         this.method = method;
-        this.errorMsg = new HashMap<>();
+    }
+
+    public Integer getProcessId() {
+        return processId;
+    }
+
+    public void setProcessId(Integer processId) {
+        this.processId = processId;
     }
 
     public Integer getPositionId() {
@@ -34,6 +53,14 @@ public class FinishedMethodBO {
 
     public void setPositionId(Integer positionId) {
         this.positionId = positionId;
+    }
+
+    public Integer getStepId() {
+        return stepId;
+    }
+
+    public void setStepId(Integer stepId) {
+        this.stepId = stepId;
     }
 
     public Integer getSurfaceId() {

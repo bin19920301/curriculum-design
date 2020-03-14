@@ -16,7 +16,7 @@ public class RuleChainFactory {
     @Qualifier("OrderRuleFactory")
     RuleFactory orderRuleFactory;
 
-    RuleChain createRuleChain(List<RuleBO> ruleBOList) {
+    public RuleChain createRuleChain(List<RuleBO> ruleBOList) {
         RuleChain ruleChain = new RuleChain();
         List<Rule> ruleList = new ArrayList<>();
         for (RuleBO ruleBO : ruleBOList) {
