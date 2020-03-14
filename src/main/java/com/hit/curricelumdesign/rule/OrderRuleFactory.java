@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.rule;
 
+import com.hit.curricelumdesign.context.bo.rule.RuleBO;
 import com.hit.curricelumdesign.utils.StringUtil;
 import org.springframework.stereotype.Component;
 

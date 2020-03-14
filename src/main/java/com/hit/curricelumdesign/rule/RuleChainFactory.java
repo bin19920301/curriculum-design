@@ -1,5 +1,6 @@
 package com.hit.curricelumdesign.rule;
 
+import com.hit.curricelumdesign.context.bo.rule.RuleBO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 

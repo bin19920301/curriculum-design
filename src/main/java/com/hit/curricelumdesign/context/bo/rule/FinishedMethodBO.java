@@ -1,4 +1,4 @@
-package com.hit.curricelumdesign.rule;
+package com.hit.curricelumdesign.context.bo.rule;
 
 import java.util.HashMap;
 import java.util.Map;

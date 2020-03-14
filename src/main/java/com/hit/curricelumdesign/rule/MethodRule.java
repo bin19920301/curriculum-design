@@ -1,6 +1,6 @@
 package com.hit.curricelumdesign.rule;
 
-import java.util.List;
+import com.hit.curricelumdesign.context.bo.rule.WorkCardBO;
 
 /**
  * @author xbr

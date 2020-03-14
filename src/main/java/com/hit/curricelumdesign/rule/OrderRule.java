@@ -1,6 +1,8 @@
 package com.hit.curricelumdesign.rule;
 
-import org.apache.commons.collections4.CollectionUtils;
+import com.hit.curricelumdesign.context.bo.rule.RuleBO;
+import com.hit.curricelumdesign.context.bo.rule.SurfaceBO;
+import com.hit.curricelumdesign.context.bo.rule.WorkCardBO;
 
 import java.util.*;
 

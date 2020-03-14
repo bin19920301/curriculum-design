@@ -1,9 +1,6 @@
-package com.hit.curricelumdesign.rule;
-
-import com.hit.curricelumdesign.context.entity.FinishedSurface;
+package com.hit.curricelumdesign.context.bo.rule;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * @author xbr

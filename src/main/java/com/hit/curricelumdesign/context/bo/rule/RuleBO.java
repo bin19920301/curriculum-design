@@ -1,4 +1,4 @@
-package com.hit.curricelumdesign.rule;
+package com.hit.curricelumdesign.context.bo.rule;
 
 /**
  * @author xbr

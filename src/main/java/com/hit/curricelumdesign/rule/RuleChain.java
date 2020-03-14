@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.rule;
 
+import com.hit.curricelumdesign.context.bo.rule.WorkCardBO;
+
 import java.util.List;
 
 /**
