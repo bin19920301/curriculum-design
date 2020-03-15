@@ -2,7 +2,7 @@ package com.hit.curricelumdesign.context.dto.workingkstep;
 
 import java.util.List;
 
-public class WorkingStepDTO {
+public class WorkingStepDTO implements Comparable {
 
     /**
      * 工步id
@@ -202,5 +202,12 @@ public class WorkingStepDTO {
                 ", sort=" + sort +
                 ", errorMsg=" + errorMsg +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        WorkingStepDTO dto = (WorkingStepDTO) o;
+        return this.getSort().compareTo(dto.getSort());
+
     }
 }

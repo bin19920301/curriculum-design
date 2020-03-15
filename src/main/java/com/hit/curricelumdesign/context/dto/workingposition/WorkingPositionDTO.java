@@ -4,7 +4,7 @@ import com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO;
 
 import java.util.List;
 
-public class WorkingPositionDTO {
+public class WorkingPositionDTO implements Comparable {
 
     /**
      * 工位id
@@ -53,5 +53,11 @@ public class WorkingPositionDTO {
                 ", sort=" + sort +
                 ", workingStepList=" + workingStepList +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        WorkingPositionDTO dto = (WorkingPositionDTO) o;
+        return this.getSort().compareTo(dto.getSort());
     }
 }
