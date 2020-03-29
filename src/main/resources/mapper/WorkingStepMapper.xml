@@ -7,15 +7,15 @@
         <result column="f_position_id" property="positionId" jdbcType="INTEGER"/>
         <result column="f_tool" property="tool" jdbcType="INTEGER"/>
         <result column="f_cutter" property="cutter" jdbcType="VARCHAR"/>
-        <result column="f_cut_depth" property="cutDepth" jdbcType="INTEGER"/>
-        <result column="f_mainshaft_speed" property="mainshaftSpeed" jdbcType="INTEGER"/>
+        <result column="f_cut_depth" property="cutDepth" jdbcType="VARCHAR"/>
+        <result column="f_mainshaft_speed" property="mainshaftSpeed" jdbcType="VARCHAR"/>
         <result column="f_fixture" property="fixture" jdbcType="VARCHAR"/>
-        <result column="f_feeding_depth" property="feedingDepth" jdbcType="INTEGER"/>
-        <result column="f_load" property="load" jdbcType="INTEGER"/>
-        <result column="f_cut_speed" property="cutSpeed" jdbcType="INTEGER"/>
-        <result column="f_basic_time" property="basicTime" jdbcType="INTEGER"/>
-        <result column="f_assist_time" property="assistTime" jdbcType="INTEGER"/>
-        <result column="f_workspace_service_time" property="workspaceServiceTime" jdbcType="INTEGER"/>
+        <result column="f_feeding_depth" property="feedingDepth" jdbcType="VARCHAR"/>
+        <result column="f_load" property="load" jdbcType="VARCHAR"/>
+        <result column="f_cut_speed" property="cutSpeed" jdbcType="VARCHAR"/>
+        <result column="f_basic_time" property="basicTime" jdbcType="VARCHAR"/>
+        <result column="f_assist_time" property="assistTime" jdbcType="VARCHAR"/>
+        <result column="f_workspace_service_time" property="workspaceServiceTime" jdbcType="VARCHAR"/>
         <result column="f_sort" property="sort" jdbcType="INTEGER"/>
         <result column="f_is_delete" property="isDelete" jdbcType="BIT"/>
         <result column="f_creator_id" property="creatorId" jdbcType="INTEGER"/>
@@ -28,14 +28,14 @@
         <result column="f_tool" property="tool" jdbcType="INTEGER"/>
         <result column="f_cutter" property="cutter" jdbcType="VARCHAR"/>
         <result column="f_cut_depth" property="cutDepth" jdbcType="INTEGER"/>
-        <result column="f_mainshaft_speed" property="mainshaftSpeed" jdbcType="INTEGER"/>
+        <result column="f_mainshaft_speed" property="mainshaftSpeed" jdbcType="VARCHAR"/>
         <result column="f_fixture" property="fixture" jdbcType="VARCHAR"/>
-        <result column="f_feeding_depth" property="feedingDepth" jdbcType="INTEGER"/>
-        <result column="f_load" property="load" jdbcType="INTEGER"/>
-        <result column="f_cut_speed" property="cutSpeed" jdbcType="INTEGER"/>
-        <result column="f_basic_time" property="basicTime" jdbcType="INTEGER"/>
-        <result column="f_assist_time" property="assistTime" jdbcType="INTEGER"/>
-        <result column="f_workspace_service_time" property="workspaceServiceTime" jdbcType="INTEGER"/>
+        <result column="f_feeding_depth" property="feedingDepth" jdbcType="VARCHAR"/>
+        <result column="f_load" property="load" jdbcType="VARCHAR"/>
+        <result column="f_cut_speed" property="cutSpeed" jdbcType="VARCHAR"/>
+        <result column="f_basic_time" property="basicTime" jdbcType="VARCHAR"/>
+        <result column="f_assist_time" property="assistTime" jdbcType="VARCHAR"/>
+        <result column="f_workspace_service_time" property="workspaceServiceTime" jdbcType="VARCHAR"/>
         <result column="f_sort" property="sort" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">

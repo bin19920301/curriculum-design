@@ -40,13 +40,13 @@ public class WorkingStep {
      * 切削深度
      */
     @Column(name = "f_cut_depth")
-    private Integer cutDepth;
+    private String cutDepth;
 
     /**
      * 主轴转速
      */
     @Column(name = "f_mainshaft_speed")
-    private Integer mainshaftSpeed;
+    private String mainshaftSpeed;
 
     /**
      * 夹具或辅助工具
@@ -58,37 +58,37 @@ public class WorkingStep {
      * 走刀深度
      */
     @Column(name = "f_feeding_depth")
-    private Integer feedingDepth;
+    private String feedingDepth;
 
     /**
      * 进给量
      */
     @Column(name = "f_load")
-    private Integer load;
+    private String load;
 
     /**
      * 切削速度
      */
     @Column(name = "f_cut_speed")
-    private Integer cutSpeed;
+    private String cutSpeed;
 
     /**
      * 基本时间
      */
     @Column(name = "f_basic_time")
-    private Integer basicTime;
+    private String basicTime;
 
     /**
      * 辅助时间
      */
     @Column(name = "f_assist_time")
-    private Integer assistTime;
+    private String assistTime;
 
     /**
      * 工作地服务时间
      */
     @Column(name = "f_workspace_service_time")
-    private Integer workspaceServiceTime;
+    private String workspaceServiceTime;
 
     /**
      * 排序
@@ -166,19 +166,19 @@ public class WorkingStep {
         this.cutter = cutter;
     }
 
-    public Integer getCutDepth() {
+    public String getCutDepth() {
         return cutDepth;
     }
 
-    public void setCutDepth(Integer cutDepth) {
+    public void setCutDepth(String cutDepth) {
         this.cutDepth = cutDepth;
     }
 
-    public Integer getMainshaftSpeed() {
+    public String getMainshaftSpeed() {
         return mainshaftSpeed;
     }
 
-    public void setMainshaftSpeed(Integer mainshaftSpeed) {
+    public void setMainshaftSpeed(String mainshaftSpeed) {
         this.mainshaftSpeed = mainshaftSpeed;
     }
 
@@ -190,51 +190,51 @@ public class WorkingStep {
         this.fixture = fixture;
     }
 
-    public Integer getFeedingDepth() {
+    public String getFeedingDepth() {
         return feedingDepth;
     }
 
-    public void setFeedingDepth(Integer feedingDepth) {
+    public void setFeedingDepth(String feedingDepth) {
         this.feedingDepth = feedingDepth;
     }
 
-    public Integer getLoad() {
+    public String getLoad() {
         return load;
     }
 
-    public void setLoad(Integer load) {
+    public void setLoad(String load) {
         this.load = load;
     }
 
-    public Integer getCutSpeed() {
+    public String getCutSpeed() {
         return cutSpeed;
     }
 
-    public void setCutSpeed(Integer cutSpeed) {
+    public void setCutSpeed(String cutSpeed) {
         this.cutSpeed = cutSpeed;
     }
 
-    public Integer getBasicTime() {
+    public String getBasicTime() {
         return basicTime;
     }
 
-    public void setBasicTime(Integer basicTime) {
+    public void setBasicTime(String basicTime) {
         this.basicTime = basicTime;
     }
 
-    public Integer getAssistTime() {
+    public String getAssistTime() {
         return assistTime;
     }
 
-    public void setAssistTime(Integer assistTime) {
+    public void setAssistTime(String assistTime) {
         this.assistTime = assistTime;
     }
 
-    public Integer getWorkspaceServiceTime() {
+    public String getWorkspaceServiceTime() {
         return workspaceServiceTime;
     }
 
-    public void setWorkspaceServiceTime(Integer workspaceServiceTime) {
+    public void setWorkspaceServiceTime(String workspaceServiceTime) {
         this.workspaceServiceTime = workspaceServiceTime;
     }
 
@@ -250,8 +250,8 @@ public class WorkingStep {
         return isDelete;
     }
 
-    public void setIsDelete(Boolean isDelete) {
-        this.isDelete = isDelete;
+    public void setIsDelete(Boolean delete) {
+        isDelete = delete;
     }
 
     public Integer getCreatorId() {
@@ -284,5 +284,31 @@ public class WorkingStep {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkingStep{" +
+                "id=" + id +
+                ", cardId=" + cardId +
+                ", positionId=" + positionId +
+                ", tool=" + tool +
+                ", cutter='" + cutter + '\'' +
+                ", cutDepth='" + cutDepth + '\'' +
+                ", mainshaftSpeed='" + mainshaftSpeed + '\'' +
+                ", fixture='" + fixture + '\'' +
+                ", feedingDepth='" + feedingDepth + '\'' +
+                ", load='" + load + '\'' +
+                ", cutSpeed='" + cutSpeed + '\'' +
+                ", basicTime='" + basicTime + '\'' +
+                ", assistTime='" + assistTime + '\'' +
+                ", workspaceServiceTime='" + workspaceServiceTime + '\'' +
+                ", sort=" + sort +
+                ", isDelete=" + isDelete +
+                ", creatorId=" + creatorId +
+                ", createtime=" + createtime +
+                ", updaterId=" + updaterId +
+                ", updatetime=" + updatetime +
+                '}';
     }
 }

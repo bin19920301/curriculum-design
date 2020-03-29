@@ -47,7 +47,7 @@ public class Card {
      * 毛坯重量
      */
     @Column(name = "f_workblank_weight")
-    private Double workblankWeight;
+    private String workblankWeight;
 
     /**
      * 毛坯类型
@@ -133,11 +133,11 @@ public class Card {
         this.materials = materials;
     }
 
-    public Double getWorkblankWeight() {
+    public String getWorkblankWeight() {
         return workblankWeight;
     }
 
-    public void setWorkblankWeight(Double workblankWeight) {
+    public void setWorkblankWeight(String workblankWeight) {
         this.workblankWeight = workblankWeight;
     }
 
@@ -153,8 +153,8 @@ public class Card {
         return isDelete;
     }
 
-    public void setIsDelete(Boolean isDelete) {
-        this.isDelete = isDelete;
+    public void setIsDelete(Boolean delete) {
+        isDelete = delete;
     }
 
     public Integer getCreatorId() {
@@ -187,5 +187,24 @@ public class Card {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", workId=" + workId +
+                ", partNumber='" + partNumber + '\'' +
+                ", partName='" + partName + '\'' +
+                ", productType='" + productType + '\'' +
+                ", materials='" + materials + '\'' +
+                ", workblankWeight='" + workblankWeight + '\'' +
+                ", workblankKind='" + workblankKind + '\'' +
+                ", isDelete=" + isDelete +
+                ", creatorId=" + creatorId +
+                ", createtime=" + createtime +
+                ", updaterId=" + updaterId +
+                ", updatetime=" + updatetime +
+                '}';
     }
 }
