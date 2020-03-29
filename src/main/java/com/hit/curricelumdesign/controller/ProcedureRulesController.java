@@ -19,13 +19,13 @@ public class ProcedureRulesController {
     private ProcedureRulesService procedureRulesService;
 
     @RequestMapping(value = "/procedurerules/addrule/", method = RequestMethod.POST)
-    @HitApi(checkTeacherLogin = true)
+    //@HitApi(checkTeacherLogin = true)
     public Result addRule(AddProcedureRulesParam param) {
         return  procedureRulesService.addProcessRules(param);
     }
 
     @RequestMapping(value = "/procedurerules/updaterule/", method = RequestMethod.POST)
-    @HitApi(checkTeacherLogin = true)
+    //@HitApi(checkTeacherLogin = true)
     public Result updateRule(UpdateProcedureRulesParam param) {
         return procedureRulesService.updateProcessRules(param);
     }

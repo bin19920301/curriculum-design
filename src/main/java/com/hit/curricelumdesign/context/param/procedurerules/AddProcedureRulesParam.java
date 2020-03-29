@@ -45,4 +45,5 @@ public class AddProcedureRulesParam extends BaseRequestParam {
     public void setRulesDetails(String rulesDetails) {
         this.rulesDetails = rulesDetails;
     }
+
 }

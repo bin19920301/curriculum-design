@@ -36,6 +36,13 @@ public class ProcedureRulesService {
     private FinishedSurfaceMapper finishedSurfaceMapper;
 
     public Result addProcessRules(AddProcedureRulesParam param) {
+
+        //20200329 增加规则校验
+        Boolean result = this.validationRules(param.getRulesDetails(), param.getRulesType());
+        if (!result){
+            throw new BaseException(Error.VALIDATION_RULES_ERROR);
+        }
+
         List<Integer> surfaceIdList = new ArrayList<>();
         if (1 == param.getRulesType()) {
             surfaceIdList = getOrderSurfaceIdList(param.getRulesDetails());
@@ -46,11 +53,7 @@ public class ProcedureRulesService {
         verifySurface(param.getWorkProjectId(), surfaceIdList);
 
 
-        //20200329 增加规则校验
-        Boolean result = this.validationRules(param.getRulesDetails(), param.getRulesType());
-        if (!result){
-            throw new BaseException(Error.VALIDATION_RULES_ERROR);
-        }
+
         ProcedureRules procedureRules = new ProcedureRules();
         BeanUtil.copyProperties(param,procedureRules);
         //设置属性
@@ -96,6 +99,14 @@ public class ProcedureRulesService {
     }
 
     public Result updateProcessRules(UpdateProcedureRulesParam param) {
+
+
+        //20200329 增加规则校验
+        Boolean result = this.validationRules(param.getRulesDetails(), param.getRulesType());
+        if (!result){
+            throw new BaseException(Error.VALIDATION_RULES_ERROR);
+        }
+
         List<Integer> surfaceIdList = new ArrayList<>();
         if (1 == param.getRulesType()) {
             surfaceIdList = getOrderSurfaceIdList(param.getRulesDetails());
@@ -106,11 +117,6 @@ public class ProcedureRulesService {
         verifySurface(param.getWorkProjectId(), surfaceIdList);
 
 
-        //20200329 增加规则校验
-        Boolean result = this.validationRules(param.getRulesDetails(), param.getRulesType());
-        if (!result){
-            throw new BaseException(Error.VALIDATION_RULES_ERROR);
-        }
         ProcedureRules procedureRules = new ProcedureRules();
         BeanUtil.copyProperties(param,procedureRules);
         // 设置属性
@@ -148,6 +154,8 @@ public class ProcedureRulesService {
                     throw new BaseException(Error.RULE_CONTAINS_NON_EXISTENT_SURFACE_ERROR);
                 }
             }
+        }else{
+            throw new BaseException(Error.RULE_CONTAINS_NON_EXISTENT_SURFACE_ERROR);
         }
     }
 
@@ -171,14 +179,32 @@ public class ProcedureRulesService {
         //先判断是否包含除了数字和两种逗号以外的字符
         if (rulesDetails.matches(pattern)){
             String[] split = rulesDetails.split(",");
-            for (String s : split) {
+            //排除;;;;;;情况
+            if(split == null ){
+                return false;
+            }
+            //排除类似a,,,,b情况
+            //原始规则的长度
+            int len = rulesDetails.length();//获取原来的字符串长度
+            //获取去掉;的字符串长度
+            String s1 = rulesDetails.replace(",", "");
+            int len2 = s1.length();
+            //差值代表出现,的次数,分割后,数组的长度要和这个差值大1
+            int differenceValue = len - len2;
+            System.out.println("len:"+len);
+            System.out.println("len2"+len2);
+            if (differenceValue != split.length-1 && differenceValue != 0){
+                return false;
+            }
+            return true;
+           /* for (String s : split) {
                 if (!StringUtils.isBlank(s)){
                     return true;
                 }else{
                     //通过判断两个逗号之间是否非空,即判断出现1,2,,3,,,4这种形式
                     return false;
                 }
-            }
+            }*/
         }
         //包含其他字符返回false
         return false;
@@ -191,7 +217,24 @@ public class ProcedureRulesService {
         String patternFirstStep = "([0-9a-z\\-;]*)";
         //先判断是否包含除了数字和两种逗号以外的字符
         if (rulesDetails.matches(patternFirstStep)){
+
             String[] split = rulesDetails.split(";");
+            //排除;;;;;;情况
+            if(split == null ){
+                return false;
+            }
+            //排除类似1-a;;;;情况
+            //原始规则的长度
+            int len = rulesDetails.length();//获取原来的字符串长度
+            //获取去掉;的字符串长度
+            String s1 = rulesDetails.replace(";", "");
+            int len2 = s1.length();
+            //差值代表出现;的次数,分割后,数组的长度要和这个差值大1;如果1-a情况,没有;,通过差值!=0判断
+            int differenceValue = len - len2;
+            if (differenceValue != split.length-1 && differenceValue != 0){
+                return false;
+            }
+            System.out.println("获取到的长度是:"+split.length);
             for (String s : split) {
                 if (!StringUtils.isBlank(s)){
                     //这里获取到的理想格式是1-a形式
