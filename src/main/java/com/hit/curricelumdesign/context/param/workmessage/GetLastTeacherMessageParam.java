@@ -1,8 +1,10 @@
 package com.hit.curricelumdesign.context.param.workmessage;
 
+import com.hit.curricelumdesign.context.param.BaseRequestParam;
+
 import javax.validation.constraints.NotNull;
 
-public class GetLastTeacherMessageParam {
+public class GetLastTeacherMessageParam extends BaseRequestParam {
 
     @NotNull
     private Integer lastId;

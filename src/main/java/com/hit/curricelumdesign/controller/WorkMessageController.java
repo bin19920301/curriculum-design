@@ -95,7 +95,7 @@ public class WorkMessageController {
     }
 
     @RequestMapping(value = "/workmessage/teacherlistLastmessage/", method = RequestMethod.POST)
-    //@HitApi(checkTeacherLogin = true)
+    @HitApi(checkTeacherLogin = true)
     public Result teacherListLastWorkMessage(GetLastTeacherMessageParam param) {
         return workMessageService.teacherListLastMessage(param);
     }

@@ -130,7 +130,7 @@ public class TeachingMessageService {
     }
 
     /**
-     * 根据消息id查找最新的teachingMessage
+     * 学生根据消息id查找最新的teachingMessage
      * @param param
      * @return
      */
@@ -146,6 +146,28 @@ public class TeachingMessageService {
                 }
             } else if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
                 dto.setCanDelete(Constants.Common.NOT);
+            }
+        }
+        return Result.success(teachingMessageInfoDTOList);
+    }
+
+    /**
+     * 教师根据消息id查找最新的teachingMessage
+     * @param param
+     * @return
+     */
+    public Result teacherListLastTeachingMessageByTeachingId(ListLastTeacherMessageParam param) {
+        TeachingMessage teachingMessage = teachingMessageManager.getById(param.getLastId());
+        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listLastMessageByTeachingId(teachingMessage.getTeachingId(), teachingMessage.getId());
+        for (TeachingMessageInfoDTO dto : teachingMessageInfoDTOList) {
+            if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                dto.setCanDelete(Constants.Common.NOT);
+            } else if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                if (dto.getSenderId().compareTo(param.getLoginTeacherId()) == 0) {
+                    dto.setCanDelete(Constants.Common.YES);
+                } else {
+                    dto.setCanDelete(Constants.Common.NOT);
+                }
             }
         }
         return Result.success(teachingMessageInfoDTOList);

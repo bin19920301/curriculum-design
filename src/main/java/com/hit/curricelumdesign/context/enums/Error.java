@@ -164,6 +164,7 @@ public enum Error {
 
     //----------------------------------------规则
     RULE_CONTAINS_NON_EXISTENT_SURFACE_ERROR("3015001", "包含不存在的加工表面"),
+    VALIDATION_RULES_ERROR("3015002", "规则格式错误"),
     ;
 
 

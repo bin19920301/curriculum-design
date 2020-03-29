@@ -59,4 +59,10 @@ public class TeachingMessageController {
     public Result studentListLastTeachingMessageByTeachingId(ListLastTeacherMessageParam param) {
         return teachingMessageService.studentListLastTeachingMessageByTeachingId(param);
     }
+
+    @RequestMapping(value = "/teachingmessage/teacherlistlastbyteachindid/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
+    public Result teacherListLastTeachingMessageByTeachingId(ListLastTeacherMessageParam param) {
+        return teachingMessageService.teacherListLastTeachingMessageByTeachingId(param);
+    }
 }
