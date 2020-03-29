@@ -77,14 +77,27 @@ public class WorkMessageController {
 
 
     @RequestMapping(value = "/workmessage/teacherlistmessage/", method = RequestMethod.POST)
+    @HitApi(checkTeacherLogin = true)
     public Result teacherListWorkMessage(WorkMessageListParam param) {
         return workMessageService.teacherListWorkMessage(param);
     }
 
     @RequestMapping(value = "/workmessage/studentlistmessage/", method = RequestMethod.POST)
+    @HitApi(checkStudentLogin = true)
     public Result studentListWorkMessage(WorkMessageListParam param) {
         return workMessageService.studentListWorkMessage(param);
     }
 
+    @RequestMapping(value = "/workmessage/studentlistlastmessage/", method = RequestMethod.POST)
+    @HitApi(checkStudentLogin = true)
+    public Result studentListLastWorkMessage(GetLastStudentMessageParam param) {
+        return workMessageService.studentListLastMessage(param);
+    }
+
+    @RequestMapping(value = "/workmessage/teacherlistLastmessage/", method = RequestMethod.POST)
+    //@HitApi(checkTeacherLogin = true)
+    public Result teacherListLastWorkMessage(GetLastTeacherMessageParam param) {
+        return workMessageService.teacherListLastMessage(param);
+    }
 
 }

@@ -35,4 +35,6 @@ public interface WorkMessageMapper {
     List<WorkMessageInfoDTO> getWorkMessageInfoDTOByWorkId(Integer workId, Integer startId);
 
     int readMessage(@Param("userId") Integer userId, @Param("workId") Integer workId, @Param("receiverType") Integer receiverType);
+
+    List<WorkMessageInfoDTO> getStudentLastListMessage(Integer currentWorkMessageId, Integer workId);
 }

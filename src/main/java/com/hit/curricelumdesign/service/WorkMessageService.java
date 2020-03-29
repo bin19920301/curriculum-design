@@ -21,7 +21,6 @@ import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.work.WorkManager;
 import com.hit.curricelumdesign.manager.workmessage.WorkMessageManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -245,5 +244,61 @@ public class WorkMessageService {
 
         BaseListDTO<WorkMessageInfoDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
         return Result.success(baseListDTO);
+    }
+
+    /**
+     * 学生根据一条消息的id获取最新消息(其他消息id大于这个消息id)
+     * @param param
+     * @return
+     */
+    public Result studentListLastMessage(GetLastStudentMessageParam param){
+        //获取到当前得消息实体
+        WorkMessage currentWorkMessage = workMessageManager.getWorkMessageById(param.getLastId());
+        //获取到当前的作业实体
+        Work work = workManager.getWorkerById(currentWorkMessage.getWorkId());
+
+        StudentDTO student = studentManager.getStudentById(work.getStudentId());
+        Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
+        TeacherDTO teacher = teacherManager.getTeacherById(teaching.getTeacherId());
+        //获取到大于当前消息id且属于同一个作业的消息
+        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getStudentLastListMessage(param.getLastId(), work.getId());
+        for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
+            if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                message.setSenderName(student.getName());
+                message.setCanDelete(Constants.Common.YES);
+            } else if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                message.setSenderName(teacher.getName());
+                message.setCanDelete(Constants.Common.NOT);
+            }
+        }
+        return Result.success(workMessageInfoDTOList);
+    }
+
+    /**
+     * 教师根据一条消息的id获取最新消息(其他消息id大于这个消息id)
+     * @param param
+     * @return
+     */
+    public Result teacherListLastMessage(GetLastTeacherMessageParam param){
+        //获取到当前得消息实体
+        WorkMessage currentWorkMessage = workMessageManager.getWorkMessageById(param.getLastId());
+        //获取到当前的作业实体
+        Work work = workManager.getWorkerById(currentWorkMessage.getWorkId());
+
+        StudentDTO student = studentManager.getStudentById(work.getStudentId());
+        Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
+        TeacherDTO teacher = teacherManager.getTeacherById(teaching.getTeacherId());
+        //获取到大于当前消息id且属于同一个作业的消息
+        List<WorkMessageInfoDTO> workMessageInfoDTOList = workMessageMapper.getStudentLastListMessage(param.getLastId(), work.getId());
+        for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
+            if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                message.setSenderName(student.getName());
+                message.setCanDelete(Constants.Common.YES);
+            } else if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                message.setSenderName(teacher.getName());
+                message.setCanDelete(Constants.Common.NOT);
+            }
+        }
+        return Result.success(workMessageInfoDTOList);
     }
 }

@@ -23,4 +23,6 @@ public interface TeacherMessageMapper {
     int updateByPrimaryKey(TeacherMessage record);
 
     List<TeacherMessageInfoDTO> listTeacherMessageDTO(Integer startId);
+
+    List<TeacherMessageInfoDTO> listLastTeacherMessageDTO(Integer lastId);
 }

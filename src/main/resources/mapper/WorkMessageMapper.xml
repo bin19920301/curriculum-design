@@ -271,4 +271,20 @@
             and f_receiver_id = #{userId}
             and f_receiver_type = #{receiverType}
     </update>
+    <select id="getStudentLastListMessage" resultMap="WorkMessageInfoDTOMap">
+        select
+        f_id,
+        f_content,
+        f_sender_id,
+        f_sender_type,
+        DATE_FORMAT(f_createtime ,'%Y-%m-%d %H:%i:%s') as 'createtime'
+        FROM
+        t_work_message
+        WHERE
+        f_is_delete = 0
+        AND f_work_id = #{workId}
+        <if test="currentWorkMessageId != null and currentWorkMessageId != 0">
+            and f_id &gt; #{currentWorkMessageId}
+        </if>
+    </select>
 </mapper>

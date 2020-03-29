@@ -125,4 +125,18 @@
         </if>
         order by ttm.f_createtime desc
     </select>
+    <select id="listLastTeacherMessageDTO" resultMap="DTOResultMap">
+        select
+        ttm.f_id, ttm.f_content, ttm.f_creator_id,
+        ttm.f_updatetime, ttm.f_is_delete,
+        ttm.f_createtime, tt.f_name AS creatorName
+        from t_teacher_message ttm
+        left join t_teacher tt
+        on ttm.f_creator_id = tt.f_id
+        where ttm.f_is_delete = 0
+        <if test="lastId != null and lastId != 0">
+            and ttm.f_id &gt; #{lastId}
+        </if>
+        order by ttm.f_createtime asc
+    </select>
 </mapper>

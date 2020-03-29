@@ -9,6 +9,7 @@ import com.hit.curricelumdesign.context.dto.teachingmessage.TeachingMessageListD
 import com.hit.curricelumdesign.context.entity.TeachingMessage;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
+import com.hit.curricelumdesign.context.param.teachermessage.ListLastTeacherMessageParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.AddTeachingMessageParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.ListByTeachingIdParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.TeachingMessageBaseParam;
@@ -126,5 +127,27 @@ public class TeachingMessageService {
         teachingMessageListDTO.setTeachingMessageInfoDTOBaseListDTO(baseListDTO);
         teachingMessageListDTO.setStudentCount(workMapper.countStudentsByTeachingId(param.getTeachingId()));
         return Result.success(teachingMessageListDTO);
+    }
+
+    /**
+     * 根据消息id查找最新的teachingMessage
+     * @param param
+     * @return
+     */
+    public Result studentListLastTeachingMessageByTeachingId(ListLastTeacherMessageParam param) {
+        TeachingMessage teachingMessage = teachingMessageManager.getById(param.getLastId());
+        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listLastMessageByTeachingId(teachingMessage.getTeachingId(), teachingMessage.getId());
+        for (TeachingMessageInfoDTO dto : teachingMessageInfoDTOList) {
+            if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
+                if (dto.getSenderId().compareTo(param.getLoginStudentId()) == 0) {
+                    dto.setCanDelete(Constants.Common.YES);
+                } else {
+                    dto.setCanDelete(Constants.Common.NOT);
+                }
+            } else if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
+                dto.setCanDelete(Constants.Common.NOT);
+            }
+        }
+        return Result.success(teachingMessageInfoDTOList);
     }
 }

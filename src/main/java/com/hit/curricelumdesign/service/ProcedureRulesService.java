@@ -3,7 +3,6 @@ package com.hit.curricelumdesign.service;
 import com.github.pagehelper.PageHelper;
 import com.hit.curricelumdesign.context.dto.finishedsurface.FinishedSurfaceDTO;
 import com.hit.curricelumdesign.context.dto.procedurerules.ProcedureRulesDTO;
-import com.hit.curricelumdesign.context.entity.FinishedSurface;
 import com.hit.curricelumdesign.context.entity.ProcedureRules;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
@@ -14,9 +13,9 @@ import com.hit.curricelumdesign.context.param.procedurerules.UpdateProcedureRule
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.FinishedSurfaceMapper;
 import com.hit.curricelumdesign.dao.ProcedureRulesMapper;
-import com.hit.curricelumdesign.manager.finishedsurface.FinishedSurfaceManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,8 +45,14 @@ public class ProcedureRulesService {
         }
         verifySurface(param.getWorkProjectId(), surfaceIdList);
 
+
+        //20200329 增加规则校验
+        Boolean result = this.validationRules(param.getRulesDetails(), param.getRulesType());
+        if (!result){
+            throw new BaseException(Error.VALIDATION_RULES_ERROR);
+        }
         ProcedureRules procedureRules = new ProcedureRules();
-        BeanUtil.copyProperties(param, procedureRules);
+        BeanUtil.copyProperties(param,procedureRules);
         //设置属性
         procedureRules.setCreatetime(new Date());
         procedureRules.setCreatorId(param.getLoginTeacherId());
@@ -100,8 +105,14 @@ public class ProcedureRulesService {
         }
         verifySurface(param.getWorkProjectId(), surfaceIdList);
 
+
+        //20200329 增加规则校验
+        Boolean result = this.validationRules(param.getRulesDetails(), param.getRulesType());
+        if (!result){
+            throw new BaseException(Error.VALIDATION_RULES_ERROR);
+        }
         ProcedureRules procedureRules = new ProcedureRules();
-        BeanUtil.copyProperties(param, procedureRules);
+        BeanUtil.copyProperties(param,procedureRules);
         // 设置属性
         procedureRules.setUpdatetime(new Date());
         procedureRules.setUpdaterId(param.getLoginTeacherId());
@@ -110,7 +121,7 @@ public class ProcedureRulesService {
         return Result.success();
     }
 
-    public Result deleteProcessRules(DeleteProcedureRulesParam param) {
+    public Result deleteProcessRules(DeleteProcedureRulesParam param){
         ProcedureRules procedureRules = procedureRulesMapper.selectByPrimaryKey(param.getId());
         // 设置属性
         procedureRules.setIsDelete(true);
@@ -121,10 +132,10 @@ public class ProcedureRulesService {
         return Result.success();
     }
 
-    public Result listProcessResults(ListProcedureRulesByProjectIdParam param) {
+    public Result listProcessResults(ListProcedureRulesByProjectIdParam param){
         PageHelper.startPage(param.getPageNum(), param.getPageSize());
         List<ProcedureRulesDTO> procedureRules = procedureRulesMapper.findByProjectId(param.getProjectId());
-        return Result.success(procedureRules);
+        return  Result.success(procedureRules);
     }
 
     private void verifySurface(Integer workProjectId, List<Integer> surfaceIdList) {
@@ -138,5 +149,93 @@ public class ProcedureRulesService {
                 }
             }
         }
+    }
+
+    private Boolean validationRules(String rulesDetails,Integer rulesType){
+        switch (rulesType){
+            case 1:
+                return this.validationRulesTypeOne(rulesDetails);
+            case 2:
+                return this.validationRulesTypeTwo(rulesDetails);
+            default:
+                return false;
+        }
+    }
+
+    private Boolean validationRulesTypeOne(String rulesDetails){
+        //判断非空
+        if (StringUtils.isBlank(rulesDetails)){
+            return false;
+        }
+        String pattern = "([，,0-9]*)";
+        //先判断是否包含除了数字和两种逗号以外的字符
+        if (rulesDetails.matches(pattern)){
+            String[] split = rulesDetails.split(",");
+            for (String s : split) {
+                if (!StringUtils.isBlank(s)){
+                    return true;
+                }else{
+                    //通过判断两个逗号之间是否非空,即判断出现1,2,,3,,,4这种形式
+                    return false;
+                }
+            }
+        }
+        //包含其他字符返回false
+        return false;
+    }
+    private Boolean validationRulesTypeTwo(String rulesDetails){
+        //判断非空
+        if (StringUtils.isBlank(rulesDetails)){
+            return false;
+        }
+        String patternFirstStep = "([0-9a-z\\-;]*)";
+        //先判断是否包含除了数字和两种逗号以外的字符
+        if (rulesDetails.matches(patternFirstStep)){
+            String[] split = rulesDetails.split(";");
+            for (String s : split) {
+                if (!StringUtils.isBlank(s)){
+                    //这里获取到的理想格式是1-a形式
+                    String patternSecondStep = "([0-9a-z\\-]*)";
+                    if (s.matches(patternSecondStep)){
+                        //这里按照"-"分隔后,应该为2,且0的位置为数字,1的位置为小写字母
+                        String[] split1 = s.split("-");
+                        if(split1 != null && split1.length == 2){
+                            //判断第一个位置
+                            String patternThirdStep = "([0-9]*)";
+                            //第一个位置是否是纯数字或者长度大于三
+                            if (!split1[0].matches(patternThirdStep) || split1[0].length()> 3 ){
+                                return false;
+                            }
+                            //判断第二个位置,因为字母只能出现一次,所以不用判断长度,即aa和ab等情况不符合规则
+                            String patternFourthStep = "([a-z])";
+                            if (!split1[1].matches(patternFourthStep)){
+                                return false;
+                            }
+                            return true;
+                        }
+                    }
+                    return false;
+                }else{
+                    //通过判断两个分号之间是否非空,即判断出现1-a;;;2-b这种形式
+                    return false;
+                }
+            }
+        }
+        //包含其他字符返回false
+        return false;
+    }
+
+    public static void main(String[] args) {
+        //Pattern pattern = Pattern.compile("[^0-9,]+");
+      /*  String pattern = "([，,0-9]*)";
+        String aim = "1,22,,2,3,4";*/
+
+      /*  String patternOneStep = "([0-9a-z\\-]*)";
+        String aim = "111a-a1";*/
+/*        String patternOneStep ="([0-9]*)";
+        String aim = "111";*/
+        String patternOneStep ="([a-z])";
+        String aim = "abc";
+        System.out.println(aim.matches(patternOneStep));
     }
 }

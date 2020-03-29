@@ -10,6 +10,7 @@ import com.hit.curricelumdesign.context.entity.TeacherMessage;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.BaseListRequestParam;
 import com.hit.curricelumdesign.context.param.teachermessage.AddTeacherMessageParam;
+import com.hit.curricelumdesign.context.param.teachermessage.ListLastTeacherMessageParam;
 import com.hit.curricelumdesign.context.param.teachermessage.ListTeacherMessageParam;
 import com.hit.curricelumdesign.context.param.teachermessage.TeacherMessageBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
@@ -68,5 +69,19 @@ public class TeacherMessageService {
         PageInfo<TeacherMessageInfoDTO> pageInfo = new PageInfo<>(teacherMessageDTOList);
         BaseListDTO<TeacherMessageInfoDTO> baseListDTO = new BaseListDTO<>(pageInfo.getTotal(), pageInfo.getList());
         return Result.success(baseListDTO);
+    }
+
+    public Result listLastTeacherMessage(ListLastTeacherMessageParam param) {
+        //获取当前消息,顺便做下id验证
+        TeacherMessage currentMessage = teacherMessageManager.getById(param.getLastId());
+        List<TeacherMessageInfoDTO> teacherMessageDTOList = teacherMessageMapper.listLastTeacherMessageDTO(currentMessage.getId());
+        for (TeacherMessageInfoDTO dto : teacherMessageDTOList) {
+            if (dto.getCreatorId().compareTo(param.getLoginTeacherId()) == 0) {
+                dto.setCanDelete(Constants.Common.YES);
+            } else {
+                dto.setCanDelete(Constants.Common.NOT);
+            }
+        }
+        return Result.success(teacherMessageDTOList);
     }
 }
