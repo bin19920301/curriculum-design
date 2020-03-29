@@ -57,6 +57,7 @@ public class CardService {
         //2020-02-22
         //查找工艺卡片
         CardDTO cardDTO = cardMapper.findByWorkId(param.getId());
+        Set<Integer> errorRuleIdSet = new HashSet<>();
         //2020-02-27 增加非空判断
         if (null == cardDTO) {
             return null;
@@ -124,6 +125,7 @@ public class CardService {
         for (SurfaceBO surfaceBO : surfaceList) {
             Collection<String> errorMsgCollection = surfaceBO.getErrorMsg().values();
             if (CollectionUtils.isNotEmpty(errorMsgCollection)) {
+                errorRuleIdSet.addAll(surfaceBO.getErrorMsg().keySet());
                 for (ProcessDTO processDTO : processDTOList) {
                     if (surfaceBO.getProcessId().equals(processDTO.getProcessId())) {
                         List<String> errorMsgList = new ArrayList<String>();
@@ -138,6 +140,7 @@ public class CardService {
         for (FinishedMethodBO finishedMethodBO : finishedMethodBOList) {
             Collection<String> errorMsgCollection = finishedMethodBO.getErrorMsg().values();
             if (CollectionUtils.isNotEmpty(errorMsgCollection)) {
+                errorRuleIdSet.addAll(finishedMethodBO.getErrorMsg().keySet());
                 for (ProcessDTO processDTO : processDTOList) {
                     if (processDTO.getProcessId().equals(finishedMethodBO.getProcessId())) {
                         for (WorkingPositionDTO workingPositionDTO : processDTO.getWorkingPositionList()) {
@@ -157,6 +160,7 @@ public class CardService {
                 }
             }
         }
+        cardDTO.setErrorNum(errorRuleIdSet.size());
         return cardDTO;
     }
 

@@ -46,6 +46,11 @@ public class CardDTO {
      */
     private List<ProcessDTO> processList;
 
+    /**
+     * 错误数量
+     */
+    private Integer errorNum;
+
     public Integer getCardId() {
         return cardId;
     }
@@ -110,6 +115,14 @@ public class CardDTO {
         this.processList = processList;
     }
 
+    public Integer getErrorNum() {
+        return errorNum;
+    }
+
+    public void setErrorNum(Integer errorNum) {
+        this.errorNum = errorNum;
+    }
+
     @Override
     public String toString() {
         return "CardDTO{" +
@@ -121,6 +134,7 @@ public class CardDTO {
                 ", workblankWeight='" + workblankWeight + '\'' +
                 ", workblankKind='" + workblankKind + '\'' +
                 ", processList=" + processList +
+                ", errorNum=" + errorNum +
                 '}';
     }
 }
