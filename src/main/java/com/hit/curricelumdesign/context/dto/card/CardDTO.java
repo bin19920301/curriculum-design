@@ -34,7 +34,7 @@ public class CardDTO {
     /**
      * 毛坯重量
      */
-    private Double workblankWeight;
+    private String workblankWeight;
 
     /**
      * 毛坯类型
@@ -86,11 +86,11 @@ public class CardDTO {
         this.materials = materials;
     }
 
-    public Double getWorkblankWeight() {
+    public String getWorkblankWeight() {
         return workblankWeight;
     }
 
-    public void setWorkblankWeight(Double workblankWeight) {
+    public void setWorkblankWeight(String workblankWeight) {
         this.workblankWeight = workblankWeight;
     }
 
@@ -108,5 +108,19 @@ public class CardDTO {
 
     public void setProcessList(List<ProcessDTO> processList) {
         this.processList = processList;
+    }
+
+    @Override
+    public String toString() {
+        return "CardDTO{" +
+                "cardId=" + cardId +
+                ", partNumber='" + partNumber + '\'' +
+                ", partName='" + partName + '\'' +
+                ", productType='" + productType + '\'' +
+                ", materials='" + materials + '\'' +
+                ", workblankWeight='" + workblankWeight + '\'' +
+                ", workblankKind='" + workblankKind + '\'' +
+                ", processList=" + processList +
+                '}';
     }
 }

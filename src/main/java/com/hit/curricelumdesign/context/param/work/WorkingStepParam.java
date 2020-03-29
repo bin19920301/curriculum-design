@@ -28,12 +28,12 @@ public class WorkingStepParam {
     /**
      * 切削深度
      */
-    private Integer cutDepth;
+    private String cutDepth;
 
     /**
      * 主轴转速
      */
-    private Integer mainshaftSpeed;
+    private String mainshaftSpeed;
 
     /**
      * 夹具或辅助工具
@@ -43,32 +43,32 @@ public class WorkingStepParam {
     /**
      * 走刀深度
      */
-    private Integer feedingDepth;
+    private String feedingDepth;
 
     /**
      * 进给量
      */
-    private Integer load;
+    private String load;
 
     /**
      * 切削速度
      */
-    private Integer cutSpeed;
+    private String cutSpeed;
 
     /**
      * 基本时间
      */
-    private Integer basicTime;
+    private String basicTime;
 
     /**
      * 辅助时间
      */
-    private Integer assistTime;
+    private String assistTime;
 
     /**
      * 工作地服务时间
      */
-    private Integer workspaceServiceTime;
+    private String workspaceServiceTime;
 
     /**
      * 排序
@@ -99,19 +99,19 @@ public class WorkingStepParam {
         this.cutter = cutter;
     }
 
-    public Integer getCutDepth() {
+    public String getCutDepth() {
         return cutDepth;
     }
 
-    public void setCutDepth(Integer cutDepth) {
+    public void setCutDepth(String cutDepth) {
         this.cutDepth = cutDepth;
     }
 
-    public Integer getMainshaftSpeed() {
+    public String getMainshaftSpeed() {
         return mainshaftSpeed;
     }
 
-    public void setMainshaftSpeed(Integer mainshaftSpeed) {
+    public void setMainshaftSpeed(String mainshaftSpeed) {
         this.mainshaftSpeed = mainshaftSpeed;
     }
 
@@ -123,51 +123,51 @@ public class WorkingStepParam {
         this.fixture = fixture;
     }
 
-    public Integer getFeedingDepth() {
+    public String getFeedingDepth() {
         return feedingDepth;
     }
 
-    public void setFeedingDepth(Integer feedingDepth) {
+    public void setFeedingDepth(String feedingDepth) {
         this.feedingDepth = feedingDepth;
     }
 
-    public Integer getLoad() {
+    public String getLoad() {
         return load;
     }
 
-    public void setLoad(Integer load) {
+    public void setLoad(String load) {
         this.load = load;
     }
 
-    public Integer getCutSpeed() {
+    public String getCutSpeed() {
         return cutSpeed;
     }
 
-    public void setCutSpeed(Integer cutSpeed) {
+    public void setCutSpeed(String cutSpeed) {
         this.cutSpeed = cutSpeed;
     }
 
-    public Integer getBasicTime() {
+    public String getBasicTime() {
         return basicTime;
     }
 
-    public void setBasicTime(Integer basicTime) {
+    public void setBasicTime(String basicTime) {
         this.basicTime = basicTime;
     }
 
-    public Integer getAssistTime() {
+    public String getAssistTime() {
         return assistTime;
     }
 
-    public void setAssistTime(Integer assistTime) {
+    public void setAssistTime(String assistTime) {
         this.assistTime = assistTime;
     }
 
-    public Integer getWorkspaceServiceTime() {
+    public String getWorkspaceServiceTime() {
         return workspaceServiceTime;
     }
 
-    public void setWorkspaceServiceTime(Integer workspaceServiceTime) {
+    public void setWorkspaceServiceTime(String workspaceServiceTime) {
         this.workspaceServiceTime = workspaceServiceTime;
     }
 
@@ -185,15 +185,15 @@ public class WorkingStepParam {
                 "workingStepId=" + workingStepId +
                 ", tool=" + tool +
                 ", cutter='" + cutter + '\'' +
-                ", cutDepth=" + cutDepth +
-                ", mainshaftSpeed=" + mainshaftSpeed +
+                ", cutDepth='" + cutDepth + '\'' +
+                ", mainshaftSpeed='" + mainshaftSpeed + '\'' +
                 ", fixture='" + fixture + '\'' +
-                ", feedingDepth=" + feedingDepth +
-                ", load=" + load +
-                ", cutSpeed=" + cutSpeed +
-                ", basicTime=" + basicTime +
-                ", assistTime=" + assistTime +
-                ", workspaceServiceTime=" + workspaceServiceTime +
+                ", feedingDepth='" + feedingDepth + '\'' +
+                ", load='" + load + '\'' +
+                ", cutSpeed='" + cutSpeed + '\'' +
+                ", basicTime='" + basicTime + '\'' +
+                ", assistTime='" + assistTime + '\'' +
+                ", workspaceServiceTime='" + workspaceServiceTime + '\'' +
                 ", sort=" + sort +
                 '}';
     }

@@ -25,7 +25,7 @@ public class MethodRuleFactory implements RuleFactory {
             //分解出每一组<表面id,加工方法>
             String[] ruleStringArray = ruleString.split(";");
             for (String  untreatedRuleString: ruleStringArray) {
-                String[] ruleArray = untreatedRuleString.split(",");
+                String[] ruleArray = untreatedRuleString.split("-");
                 //组装成加工方法得规则
                 MethodRule methodRule = new MethodRule(Integer.valueOf(ruleArray[0]), ruleArray[1], ruleBO);
                 //组装规则list

@@ -43,7 +43,7 @@ public class AddCardParam extends BaseRequestParam {
     /**
      * 毛坯重量
      */
-    private Double workblankWeight;
+    private String workblankWeight;
 
     /**
      * 毛坯类型
@@ -95,11 +95,11 @@ public class AddCardParam extends BaseRequestParam {
         this.materials = materials;
     }
 
-    public Double getWorkblankWeight() {
+    public String getWorkblankWeight() {
         return workblankWeight;
     }
 
-    public void setWorkblankWeight(Double workblankWeight) {
+    public void setWorkblankWeight(String workblankWeight) {
         this.workblankWeight = workblankWeight;
     }
 
@@ -127,7 +127,7 @@ public class AddCardParam extends BaseRequestParam {
                 ", partName='" + partName + '\'' +
                 ", productType='" + productType + '\'' +
                 ", materials='" + materials + '\'' +
-                ", workblankWeight=" + workblankWeight +
+                ", workblankWeight='" + workblankWeight + '\'' +
                 ", workblankKind='" + workblankKind + '\'' +
                 ", processList=" + processList +
                 '}';
