@@ -2,6 +2,8 @@ package com.hit.curricelumdesign.context.param.procedurerules;
 
 import com.hit.curricelumdesign.context.param.BaseRequestParam;
 
+import javax.validation.constraints.NotEmpty;
+
 public class AddProcedureRulesParam extends BaseRequestParam {
 
     /**
@@ -17,6 +19,7 @@ public class AddProcedureRulesParam extends BaseRequestParam {
     /**
      * 规则详情
      */
+    @NotEmpty
     private String rulesDetails;
 
     public Integer getWorkProjectId() {
