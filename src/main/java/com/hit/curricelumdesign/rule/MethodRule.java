@@ -3,6 +3,7 @@ package com.hit.curricelumdesign.rule;
 import com.hit.curricelumdesign.context.bo.rule.FinishedMethodBO;
 import com.hit.curricelumdesign.context.bo.rule.RuleBO;
 import com.hit.curricelumdesign.context.bo.rule.WorkCardBO;
+import com.hit.curricelumdesign.context.dto.errormsg.ErrorMsgDTO;
 import com.hit.curricelumdesign.utils.StringUtil;
 
 import java.util.ArrayList;
@@ -49,7 +50,11 @@ public class MethodRule implements Rule {
                 //判断加工方法是否正确
                 String method = finishedMethodBO.getMethod();
                 if (StringUtil.isBlank(method) || !method.equals(methodCharacter)) {
-                    finishedMethodBO.addErrorMsg(ruleBO.getRuleId(), ruleBO.getRuleString());
+                    ErrorMsgDTO errorMsgDTO = new ErrorMsgDTO();
+                    errorMsgDTO.setSurfaceId(surfaceId);
+                    errorMsgDTO.setRulesType(ruleBO.getType());
+                    errorMsgDTO.setRuleDesc(ruleBO.getRuleString());
+                    finishedMethodBO.addErrorMsg(ruleBO.getRuleId(), errorMsgDTO);
                 }
             }
         }

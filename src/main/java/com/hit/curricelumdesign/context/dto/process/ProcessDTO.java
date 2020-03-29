@@ -1,7 +1,9 @@
 package com.hit.curricelumdesign.context.dto.process;
 
+import com.hit.curricelumdesign.context.dto.errormsg.ErrorMsgDTO;
 import com.hit.curricelumdesign.context.dto.processfile.ProcessFileDTO;
 import com.hit.curricelumdesign.context.dto.workingposition.WorkingPositionDTO;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMsg;
 
 import java.util.List;
 import java.util.Map;
@@ -54,7 +56,7 @@ public class ProcessDTO implements Comparable {
     private List<WorkingPositionDTO> workingPositionList;
 
     //<规则详情>
-    private List<String> errorMsg;
+    private List<ErrorMsgDTO> errorMsg;
 
     public Integer getProcessId() {
         return processId;
@@ -128,11 +130,11 @@ public class ProcessDTO implements Comparable {
         this.workingPositionList = workingPositionList;
     }
 
-    public List<String> getErrorMsg() {
+    public List<ErrorMsgDTO> getErrorMsg() {
         return errorMsg;
     }
 
-    public void setErrorMsg(List<String> errorMsg) {
+    public void setErrorMsg(List<ErrorMsgDTO> errorMsg) {
         this.errorMsg = errorMsg;
     }
 

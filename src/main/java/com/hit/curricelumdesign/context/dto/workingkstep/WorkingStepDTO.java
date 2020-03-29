@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.dto.workingkstep;
 
+import com.hit.curricelumdesign.context.dto.errormsg.ErrorMsgDTO;
+
 import java.util.List;
 
 public class WorkingStepDTO implements Comparable {
@@ -69,8 +71,7 @@ public class WorkingStepDTO implements Comparable {
      */
     private Integer sort;
 
-    //<规则详情>
-    private List<String> errorMsg;
+    private List<ErrorMsgDTO> errorMsg;
 
     public Integer getWorkingStepId() {
         return workingStepId;
@@ -176,11 +177,11 @@ public class WorkingStepDTO implements Comparable {
         this.sort = sort;
     }
 
-    public List<String> getErrorMsg() {
+    public List<ErrorMsgDTO> getErrorMsg() {
         return errorMsg;
     }
 
-    public void setErrorMsg(List<String> errorMsg) {
+    public void setErrorMsg(List<ErrorMsgDTO> errorMsg) {
         this.errorMsg = errorMsg;
     }
 

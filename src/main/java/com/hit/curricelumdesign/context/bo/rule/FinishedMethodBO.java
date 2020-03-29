@@ -1,5 +1,7 @@
 package com.hit.curricelumdesign.context.bo.rule;
 
+import com.hit.curricelumdesign.context.dto.errormsg.ErrorMsgDTO;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,8 +31,9 @@ public class FinishedMethodBO {
 
     //加工方法
     private String method;
+
     //<规则id,规则详情>
-    private Map<Integer, String> errorMsg;
+    private Map<Integer, ErrorMsgDTO> errorMsg;
 
     public FinishedMethodBO(Integer processId, Integer positionId, Integer stepId, Integer surfaceId, String method) {
         this.processId = processId;
@@ -81,17 +84,17 @@ public class FinishedMethodBO {
         this.method = method;
     }
 
-    public Map<Integer, String> getErrorMsg() {
+    public Map<Integer, ErrorMsgDTO> getErrorMsg() {
         return errorMsg;
     }
 
-    public void setErrorMsg(Map<Integer, String> errorMsg) {
+    public void setErrorMsg(Map<Integer, ErrorMsgDTO> errorMsg) {
         this.errorMsg = errorMsg;
     }
 
-    public void addErrorMsg(Integer ruleId, String ruleDetail) {
+    public void addErrorMsg(Integer ruleId, ErrorMsgDTO errorMsgDTO) {
         if (!errorMsg.containsKey(ruleId)) {
-            errorMsg.put(ruleId, ruleDetail);
+            errorMsg.put(ruleId, errorMsgDTO);
         }
     }
 

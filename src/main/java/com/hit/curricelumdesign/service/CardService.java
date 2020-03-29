@@ -5,6 +5,7 @@ import com.hit.curricelumdesign.context.bo.rule.RuleBO;
 import com.hit.curricelumdesign.context.bo.rule.SurfaceBO;
 import com.hit.curricelumdesign.context.bo.rule.WorkCardBO;
 import com.hit.curricelumdesign.context.dto.card.CardDTO;
+import com.hit.curricelumdesign.context.dto.errormsg.ErrorMsgDTO;
 import com.hit.curricelumdesign.context.dto.procedurerules.ProcedureRulesDTO;
 import com.hit.curricelumdesign.context.dto.process.ProcessDTO;
 import com.hit.curricelumdesign.context.dto.workingkstep.WorkingStepDTO;
@@ -123,23 +124,23 @@ public class CardService {
         RuleChain ruleChain = ruleChainFactory.createRuleChain(ruleBOList);
         ruleChain.check(workCardBO);
         for (SurfaceBO surfaceBO : surfaceList) {
-            Collection<String> errorMsgCollection = surfaceBO.getErrorMsg().values();
-            if (CollectionUtils.isNotEmpty(errorMsgCollection)) {
+            Collection<ErrorMsgDTO> errorMsgDTOS = surfaceBO.getErrorMsg().values();
+            if (CollectionUtils.isNotEmpty(errorMsgDTOS)) {
                 errorRuleIdSet.addAll(surfaceBO.getErrorMsg().keySet());
                 for (ProcessDTO processDTO : processDTOList) {
                     if (surfaceBO.getProcessId().equals(processDTO.getProcessId())) {
-                        List<String> errorMsgList = new ArrayList<String>();
-                        for (String s : errorMsgCollection) {
-                            errorMsgList.add(s);
+                        List<ErrorMsgDTO> errorMsgDTOList = new ArrayList<>();
+                        for (ErrorMsgDTO errorMsgDTO : errorMsgDTOS) {
+                            errorMsgDTOList.add(errorMsgDTO);
                         }
-                        processDTO.setErrorMsg(errorMsgList);
+                        processDTO.setErrorMsg(errorMsgDTOList);
                     }
                 }
             }
         }
         for (FinishedMethodBO finishedMethodBO : finishedMethodBOList) {
-            Collection<String> errorMsgCollection = finishedMethodBO.getErrorMsg().values();
-            if (CollectionUtils.isNotEmpty(errorMsgCollection)) {
+            Collection<ErrorMsgDTO> errorMsgDTOS = finishedMethodBO.getErrorMsg().values();
+            if (CollectionUtils.isNotEmpty(errorMsgDTOS)) {
                 errorRuleIdSet.addAll(finishedMethodBO.getErrorMsg().keySet());
                 for (ProcessDTO processDTO : processDTOList) {
                     if (processDTO.getProcessId().equals(finishedMethodBO.getProcessId())) {
@@ -147,9 +148,9 @@ public class CardService {
                             if (workingPositionDTO.getWorkingPositionId().equals(finishedMethodBO.getPositionId())) {
                                 for (WorkingStepDTO workingStepDTO : workingPositionDTO.getWorkingStepList()) {
                                     if (workingStepDTO.getWorkingStepId().equals(finishedMethodBO.getStepId())) {
-                                        List<String> errorMsgList = new ArrayList<String>();
-                                        for (String s : errorMsgCollection) {
-                                            errorMsgList.add(s);
+                                        List<ErrorMsgDTO> errorMsgList = new ArrayList<>();
+                                        for (ErrorMsgDTO errorMsgDTO : errorMsgDTOS) {
+                                            errorMsgList.add(errorMsgDTO);
                                         }
                                         workingStepDTO.setErrorMsg(errorMsgList);
                                     }

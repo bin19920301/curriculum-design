@@ -3,6 +3,7 @@ package com.hit.curricelumdesign.rule;
 import com.hit.curricelumdesign.context.bo.rule.RuleBO;
 import com.hit.curricelumdesign.context.bo.rule.SurfaceBO;
 import com.hit.curricelumdesign.context.bo.rule.WorkCardBO;
+import com.hit.curricelumdesign.context.dto.errormsg.ErrorMsgDTO;
 
 import java.util.*;
 
@@ -33,7 +34,11 @@ public class OrderRule implements Rule {
                 for (int j = i + 1; j < surfaceList.size(); j++) {
                     SurfaceBO targetBO = surfaceList.get(j);
                     if (preSurfaceIdSet.contains(targetBO.getSurfaceId())) {
-                        targetBO.addErrorMsg(ruleBO.getRuleId(), ruleBO.getRuleString());
+                        ErrorMsgDTO errorMsgDTO = new ErrorMsgDTO();
+                        errorMsgDTO.setSurfaceId(currentBO.getSurfaceId());
+                        errorMsgDTO.setRulesType(ruleBO.getType());
+                        errorMsgDTO.setRuleDesc(ruleBO.getRuleString());
+                        targetBO.addErrorMsg(ruleBO.getRuleId(), errorMsgDTO);
                     }
                 }
             }
