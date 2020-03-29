@@ -16,7 +16,7 @@ public class WorkingStepParam {
     private Integer workingStepId;
 
     /**
-     * 机床;1车床,2铣床,3刨床,4磨床
+     * 机床;1车床,2铣床,3刨床,4磨床,5钻床,6铰床
      */
     private Integer tool;
 

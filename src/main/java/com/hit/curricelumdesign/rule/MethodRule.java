@@ -21,7 +21,7 @@ public class MethodRule implements Rule {
 
     //加工方法
     //加工方法ID：车削-a；铣削-b；刨-c；磨-d；钻-e；铰-f
-    //设计出现错误 数据库设计时: 机床;1车床,2铣床,3刨床,4磨床
+    //设计出现错误 数据库设计时: 机床;1车床,2铣床,3刨床,4磨床,5钻床,6铰床
     private String methodCharacter;
 
     //RuleBO

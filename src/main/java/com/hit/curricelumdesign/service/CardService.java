@@ -110,7 +110,7 @@ public class CardService {
                                     workingPositionDTO.getWorkingPositionId(),
                                     workingStepDTO.getWorkingStepId(),
                                     processDTO.getSurfaceId(),
-                                    ToolEnums.intToChar(workingStepDTO.getTool()).toString());
+                                    ToolEnums.getTypeByCode(workingStepDTO.getTool()));
                             //填入list中
                             finishedMethodBOList.add(finishedMethodBO);
                         }
