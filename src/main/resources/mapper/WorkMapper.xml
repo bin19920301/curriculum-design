@@ -26,6 +26,7 @@
         <result column="academyName" property="academyName"/>
         <result column="className" property="className"/>
         <result column="workProjectName" property="workProjectName"/>
+        <result column="score" property="score"/>
     </resultMap>
     <sql id="Base_Column_List">
     f_id, f_teaching_id, f_work_project_id, f_student_id, f_score, f_submittime, f_returntime,
@@ -205,7 +206,8 @@
     twp.f_id as workProjectId,twp.f_name as workProjectName,
     ta.f_name as academyName,
     te.f_enrollment_year as enrollmentYear,
-    tc.f_name as className
+    tc.f_name as className,
+    tw.f_score as score
     from t_work tw
     left join t_student ts on tw.f_student_id = ts.f_id
     left join t_work_project twp on tw.f_work_project_id = twp.f_id

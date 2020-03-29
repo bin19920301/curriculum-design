@@ -62,6 +62,11 @@ public class WorkForTeacherDTO {
      */
     private String workProjectName;
 
+    /**
+     * 分数
+     */
+    private Integer score;
+
     public Integer getId() {
         return id;
     }
@@ -76,6 +81,14 @@ public class WorkForTeacherDTO {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getStatusDescribe() {
+        return statusDescribe;
+    }
+
+    public void setStatusDescribe(String statusDescribe) {
+        this.statusDescribe = statusDescribe;
     }
 
     public Integer getStudentId() {
@@ -142,12 +155,12 @@ public class WorkForTeacherDTO {
         this.workProjectName = workProjectName;
     }
 
-    public String getStatusDescribe() {
-        return statusDescribe;
+    public Integer getScore() {
+        return score;
     }
 
-    public void setStatusDescribe(String statusDescribe) {
-        this.statusDescribe = statusDescribe;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     @Override
@@ -164,6 +177,7 @@ public class WorkForTeacherDTO {
                 ", className='" + className + '\'' +
                 ", workProjectId=" + workProjectId +
                 ", workProjectName='" + workProjectName + '\'' +
+                ", score=" + score +
                 '}';
     }
 }

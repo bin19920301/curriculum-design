@@ -25,7 +25,7 @@ public class WorkingStep {
     private Integer positionId;
 
     /**
-     * 机床;1车床,2铣床,3刨床,4磨床
+     * 机床;1车床,2铣床,3刨床,4磨床,5钻床,6铰床
      */
     @Column(name = "f_tool")
     private Integer tool;
