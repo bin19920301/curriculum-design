@@ -191,8 +191,6 @@ public class ProcedureRulesService {
             int len2 = s1.length();
             //差值代表出现,的次数,分割后,数组的长度要和这个差值大1
             int differenceValue = len - len2;
-            System.out.println("len:"+len);
-            System.out.println("len2"+len2);
             if (differenceValue != split.length-1 && differenceValue != 0){
                 return false;
             }
@@ -234,7 +232,6 @@ public class ProcedureRulesService {
             if (differenceValue != split.length-1 && differenceValue != 0){
                 return false;
             }
-            System.out.println("获取到的长度是:"+split.length);
             for (String s : split) {
                 if (!StringUtils.isBlank(s)){
                     //这里获取到的理想格式是1-a形式
