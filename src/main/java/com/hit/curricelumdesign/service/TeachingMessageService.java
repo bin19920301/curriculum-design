@@ -6,17 +6,20 @@ import com.hit.curricelumdesign.context.constant.Constants;
 import com.hit.curricelumdesign.context.dto.BaseListDTO;
 import com.hit.curricelumdesign.context.dto.teachingmessage.TeachingMessageInfoDTO;
 import com.hit.curricelumdesign.context.dto.teachingmessage.TeachingMessageListDTO;
+import com.hit.curricelumdesign.context.entity.Teaching;
 import com.hit.curricelumdesign.context.entity.TeachingMessage;
 import com.hit.curricelumdesign.context.enums.Error;
 import com.hit.curricelumdesign.context.exception.BaseException;
 import com.hit.curricelumdesign.context.param.teachermessage.ListLastTeacherMessageParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.AddTeachingMessageParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.ListByTeachingIdParam;
+import com.hit.curricelumdesign.context.param.teachingmessage.ListLastTeachingMessageParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.TeachingMessageBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.dao.TeachingMapper;
 import com.hit.curricelumdesign.dao.TeachingMessageMapper;
 import com.hit.curricelumdesign.dao.WorkMapper;
+import com.hit.curricelumdesign.manager.teaching.TeachingManager;
 import com.hit.curricelumdesign.manager.teachingmessage.TeachingMessageManager;
 import com.hit.curricelumdesign.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,8 @@ public class TeachingMessageService {
     private TeachingMessageMapper teachingMessageMapper;
     @Autowired
     private WorkMapper workMapper;
+    @Autowired
+    private TeachingManager teachingManager;
 
     public Result addTeacherMessage(AddTeachingMessageParam param) {
         TeachingMessage message = new TeachingMessage();
@@ -134,9 +139,11 @@ public class TeachingMessageService {
      * @param param
      * @return
      */
-    public Result studentListLastTeachingMessageByTeachingId(ListLastTeacherMessageParam param) {
-        TeachingMessage teachingMessage = teachingMessageManager.getById(param.getLastId());
-        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listLastMessageByTeachingId(teachingMessage.getTeachingId(), teachingMessage.getId());
+    public Result studentListLastTeachingMessageByTeachingId(ListLastTeachingMessageParam param) {
+        //TeachingMessage teachingMessage = teachingMessageManager.getById(param.getLastId());
+        //20200330增加teaching校验
+        Teaching teaching = teachingManager.getTeachingById(param.getTeachingId());
+        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listLastMessageByTeachingId(param.getTeachingId(), param.getLastId());
         for (TeachingMessageInfoDTO dto : teachingMessageInfoDTOList) {
             if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
                 if (dto.getSenderId().compareTo(param.getLoginStudentId()) == 0) {
@@ -156,9 +163,11 @@ public class TeachingMessageService {
      * @param param
      * @return
      */
-    public Result teacherListLastTeachingMessageByTeachingId(ListLastTeacherMessageParam param) {
-        TeachingMessage teachingMessage = teachingMessageManager.getById(param.getLastId());
-        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listLastMessageByTeachingId(teachingMessage.getTeachingId(), teachingMessage.getId());
+    public Result teacherListLastTeachingMessageByTeachingId(ListLastTeachingMessageParam param) {
+        //TeachingMessage teachingMessage = teachingMessageManager.getById(param.getLastId());
+        //20200330增加teaching校验
+        Teaching teaching = teachingManager.getTeachingById(param.getTeachingId());
+        List<TeachingMessageInfoDTO> teachingMessageInfoDTOList = teachingMessageMapper.listLastMessageByTeachingId(param.getTeachingId(), param.getLastId());
         for (TeachingMessageInfoDTO dto : teachingMessageInfoDTOList) {
             if (dto.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
                 dto.setCanDelete(Constants.Common.NOT);

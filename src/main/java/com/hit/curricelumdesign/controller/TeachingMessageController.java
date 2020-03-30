@@ -4,6 +4,7 @@ import com.hit.curricelumdesign.context.annotation.HitApi;
 import com.hit.curricelumdesign.context.param.teachermessage.ListLastTeacherMessageParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.AddTeachingMessageParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.ListByTeachingIdParam;
+import com.hit.curricelumdesign.context.param.teachingmessage.ListLastTeachingMessageParam;
 import com.hit.curricelumdesign.context.param.teachingmessage.TeachingMessageBaseParam;
 import com.hit.curricelumdesign.context.response.Result;
 import com.hit.curricelumdesign.service.TeachingMessageService;
@@ -56,13 +57,13 @@ public class TeachingMessageController {
 
     @RequestMapping(value = "/teachingmessage/studentlistlsatbyteachindid/", method = RequestMethod.POST)
     @HitApi(checkStudentLogin = true)
-    public Result studentListLastTeachingMessageByTeachingId(ListLastTeacherMessageParam param) {
+    public Result studentListLastTeachingMessageByTeachingId(ListLastTeachingMessageParam param) {
         return teachingMessageService.studentListLastTeachingMessageByTeachingId(param);
     }
 
     @RequestMapping(value = "/teachingmessage/teacherlistlastbyteachindid/", method = RequestMethod.POST)
     @HitApi(checkTeacherLogin = true)
-    public Result teacherListLastTeachingMessageByTeachingId(ListLastTeacherMessageParam param) {
+    public Result teacherListLastTeachingMessageByTeachingId(ListLastTeachingMessageParam param) {
         return teachingMessageService.teacherListLastTeachingMessageByTeachingId(param);
     }
 }

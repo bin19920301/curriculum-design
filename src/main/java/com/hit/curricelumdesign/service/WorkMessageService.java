@@ -253,9 +253,9 @@ public class WorkMessageService {
      */
     public Result studentListLastMessage(GetLastStudentMessageParam param){
         //获取到当前得消息实体
-        WorkMessage currentWorkMessage = workMessageManager.getWorkMessageById(param.getLastId());
+        //WorkMessage currentWorkMessage = workMessageManager.getWorkMessageById(param.getLastId());
         //获取到当前的作业实体
-        Work work = workManager.getWorkerById(currentWorkMessage.getWorkId());
+        Work work = workManager.getWorkerById(param.getWorkId());
 
         StudentDTO student = studentManager.getStudentById(work.getStudentId());
         Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());
@@ -281,9 +281,9 @@ public class WorkMessageService {
      */
     public Result teacherListLastMessage(GetLastTeacherMessageParam param){
         //获取到当前得消息实体
-        WorkMessage currentWorkMessage = workMessageManager.getWorkMessageById(param.getLastId());
+        //WorkMessage currentWorkMessage = workMessageManager.getWorkMessageById(param.getLastId());
         //获取到当前的作业实体
-        Work work = workManager.getWorkerById(currentWorkMessage.getWorkId());
+        Work work = workManager.getWorkerById(param.getWorkId());
 
         StudentDTO student = studentManager.getStudentById(work.getStudentId());
         Teaching teaching = teachingManager.getTeachingById(work.getTeachingId());

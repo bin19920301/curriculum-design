@@ -73,8 +73,8 @@ public class TeacherMessageService {
 
     public Result listLastTeacherMessage(ListLastTeacherMessageParam param) {
         //获取当前消息,顺便做下id验证
-        TeacherMessage currentMessage = teacherMessageManager.getById(param.getLastId());
-        List<TeacherMessageInfoDTO> teacherMessageDTOList = teacherMessageMapper.listLastTeacherMessageDTO(currentMessage.getId());
+        //TeacherMessage currentMessage = teacherMessageManager.getById(param.getLastId());
+        List<TeacherMessageInfoDTO> teacherMessageDTOList = teacherMessageMapper.listLastTeacherMessageDTO(param.getLastId());
         for (TeacherMessageInfoDTO dto : teacherMessageDTOList) {
             if (dto.getCreatorId().compareTo(param.getLoginTeacherId()) == 0) {
                 dto.setCanDelete(Constants.Common.YES);

@@ -16,4 +16,11 @@ public class ListLastTeacherMessageParam extends BaseRequestParam {
     public void setLastId(Integer lastId) {
         this.lastId = lastId;
     }
+
+    @Override
+    public String toString() {
+        return "ListLastTeacherMessageParam{" +
+                "lastId=" + lastId +
+                '}';
+    }
 }
