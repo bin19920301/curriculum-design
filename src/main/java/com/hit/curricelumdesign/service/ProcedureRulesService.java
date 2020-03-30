@@ -175,7 +175,7 @@ public class ProcedureRulesService {
         if (StringUtils.isBlank(rulesDetails)){
             return false;
         }
-        String pattern = "([，,0-9]*)";
+        String pattern = "([,0-9]*)";
         //先判断是否包含除了数字和两种逗号以外的字符
         if (rulesDetails.matches(pattern)){
             String[] split = rulesDetails.split(",");
