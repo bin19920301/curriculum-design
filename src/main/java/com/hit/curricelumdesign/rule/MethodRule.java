@@ -12,7 +12,7 @@ import java.util.Iterator;
 /**
  * @author xbr
  * @Date 2020-03-14
- * @ClassName MethodRule
+ * @ClassName MethodRule 
  * @Description
  */
 public class MethodRule implements Rule {
