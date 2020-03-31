@@ -293,10 +293,10 @@ public class WorkMessageService {
         for (WorkMessageInfoDTO message : workMessageInfoDTOList) {
             if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_STUDENT) == 0) {
                 message.setSenderName(student.getName());
-                message.setCanDelete(Constants.Common.YES);
+                message.setCanDelete(Constants.Common.NOT);
             } else if (message.getSenderType().compareTo(Constants.WorkMessage.SENDER_TYPE_TEACHER) == 0) {
                 message.setSenderName(teacher.getName());
-                message.setCanDelete(Constants.Common.NOT);
+                message.setCanDelete(Constants.Common.YES);
             }
         }
         return Result.success(workMessageInfoDTOList);
