@@ -11,7 +11,7 @@ public class AddTeacherMessageParam extends BaseRequestParam {
      * 内容
      */
     @NotNull
-    @Size(max = 215)
+    @Size(max = 300)
     private String content;
 
 
