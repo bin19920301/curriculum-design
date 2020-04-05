@@ -58,7 +58,7 @@ public class CardService {
         //2020-02-22
         //查找工艺卡片
         CardDTO cardDTO = cardMapper.findByWorkId(param.getId());
-        Set<Integer> errorRuleIdSet = new HashSet<>();
+        List<Integer> errorRuleIdSet = new ArrayList<>();
         //2020-02-27 增加非空判断
         if (null == cardDTO) {
             return null;
