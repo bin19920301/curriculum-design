@@ -23,6 +23,8 @@ public class WorkInfoForStudentDTO {
 
     private WorkTeachingDTO teaching;
 
+    private Integer score;
+
     private WorkProjectInfoForStudentDTO workProjectInfoDTO;
 
     //private List<CraftCardInfoDTO> craftCardInfoDTOList;
@@ -66,6 +68,14 @@ public class WorkInfoForStudentDTO {
         this.teaching = teaching;
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     public WorkProjectInfoForStudentDTO getWorkProjectInfoDTO() {
         return workProjectInfoDTO;
     }
@@ -89,6 +99,7 @@ public class WorkInfoForStudentDTO {
                 ", status=" + status +
                 ", studentName='" + studentName + '\'' +
                 ", teaching=" + teaching +
+                ", score=" + score +
                 ", workProjectInfoDTO=" + workProjectInfoDTO +
                 ", workFileDTOList=" + workFileDTOList +
                 '}';

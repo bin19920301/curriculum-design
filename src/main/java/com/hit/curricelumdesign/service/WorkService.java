@@ -406,6 +406,7 @@ public class WorkService {
         Work work = workManager.getWorkerById(param.getId());
         workInfoDTO.setWorkId(work.getId());
         workInfoDTO.setStatus(work.getStatus());
+        workInfoDTO.setScore(work.getScore());
         WorkTeachingDTO workTeachingDTO = teachingMapper.getWorkTeachingDTOById(work.getTeachingId());
         if (null == workTeachingDTO) {
             throw new BaseException(Error.TEACHING_IS_NOT_EXIST);
