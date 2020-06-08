@@ -3,6 +3,8 @@ package com.hit.curricelumdesign.context.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "t_procedure_rules")
 public class ProcedureRules {
     /**
      * id主键自增非空唯一

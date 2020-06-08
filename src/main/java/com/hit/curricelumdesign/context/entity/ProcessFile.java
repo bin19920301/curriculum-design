@@ -1,11 +1,10 @@
 package com.hit.curricelumdesign.context.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "t_process_file")
 public class ProcessFile {
     /**
      * 主键id
