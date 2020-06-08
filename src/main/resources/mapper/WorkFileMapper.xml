@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hit.curricelumdesign.dao.WorkFileMapper">
+    <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.WorkFile">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_work_id" property="workId" jdbcType="INTEGER"/>
+        <result column="f_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_size" property="size" jdbcType="VARCHAR"/>
+        <result column="f_path" property="path" jdbcType="VARCHAR"/>
+        <result column="f_is_delete" property="isDelete" jdbcType="BIT"/>
+        <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="DTOResultMap" type="com.hit.curricelumdesign.context.dto.workfile.WorkFileDTO">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_size" property="size" jdbcType="VARCHAR"/>
+        <result column="f_path" property="url" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    f_id, f_work_id, f_name, f_size, f_path, f_is_delete, f_createtime, f_updatetime
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_work_file
+        where f_id = #{id,jdbcType=INTEGER}
+        and f_is_delete = 0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_work_file
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.WorkFile">
+    insert into t_work_file (f_id, f_work_id, f_name,
+      f_size, f_path, f_is_delete, f_createtime,
+      f_updatetime)
+    values (#{id,jdbcType=INTEGER}, #{workId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{size,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP},
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.WorkFile">
+        insert into t_work_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                f_id,
+            </if>
+            <if test="workId != null">
+                f_work_id,
+            </if>
+            <if test="name != null">
+                f_name,
+            </if>
+            <if test="size != null">
+                f_size,
+            </if>
+            <if test="path != null">
+                f_path,
+            </if>
+            <if test="isDelete != null">
+                f_is_delete,
+            </if>
+            <if test="createtime != null">
+                f_createtime,
+            </if>
+            <if test="updatetime != null">
+                f_updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="workId != null">
+                #{workId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null">
+                #{size,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.WorkFile">
+        update t_work_file
+        <set>
+            <if test="workId != null">
+                f_work_id = #{workId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                f_name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null">
+                f_size = #{size,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                f_path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                f_is_delete = #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="createtime != null">
+                f_createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where f_id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.WorkFile">
+    update t_work_file
+    set f_work_id = #{workId,jdbcType=INTEGER},
+      f_name = #{name,jdbcType=VARCHAR},
+      f_size = #{size,jdbcType=VARCHAR},
+      f_path = #{path,jdbcType=VARCHAR},
+      f_is_delete = #{isDelete,jdbcType=BIT},
+      f_createtime = #{createtime,jdbcType=TIMESTAMP},
+      f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="getByWorkId" resultMap="DTOResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_work_file
+        where f_work_id  = #{workId,jdbcType=INTEGER}
+        and f_is_delete = 0
+    </select>
+</mapper>

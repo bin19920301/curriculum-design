@@ -1,8 +1,5 @@
 package com.hit.curricelumdesign.context.param;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 /**
  * Description: 基础入参类
  * ClassName: BaseRequestParam
@@ -28,6 +25,21 @@ public class BaseRequestParam {
      */
     private String studentToken;
 
+    /**
+     * 教师id
+     */
+    private Integer loginTeacherId;
+
+    /**
+     * 管理员id
+     */
+    private Integer loginAdminId;
+
+    /**
+     * 学生id
+     */
+    private Integer loginStudentId;
+
     public String getTeacherToken() {
         return teacherToken;
     }
@@ -52,12 +64,39 @@ public class BaseRequestParam {
         this.studentToken = studentToken;
     }
 
+    public Integer getLoginTeacherId() {
+        return loginTeacherId;
+    }
+
+    public void setLoginTeacherId(Integer loginTeacherId) {
+        this.loginTeacherId = loginTeacherId;
+    }
+
+    public Integer getLoginAdminId() {
+        return loginAdminId;
+    }
+
+    public void setLoginAdminId(Integer loginAdminId) {
+        this.loginAdminId = loginAdminId;
+    }
+
+    public Integer getLoginStudentId() {
+        return loginStudentId;
+    }
+
+    public void setLoginStudentId(Integer loginStudentId) {
+        this.loginStudentId = loginStudentId;
+    }
+
     @Override
     public String toString() {
         return "BaseRequestParam{" +
                 "teacherToken='" + teacherToken + '\'' +
                 ", adminToken='" + adminToken + '\'' +
                 ", studentToken='" + studentToken + '\'' +
+                ", teacherId=" + loginTeacherId +
+                ", adminId=" + loginAdminId +
+                ", studentId=" + loginStudentId +
                 '}';
     }
 }

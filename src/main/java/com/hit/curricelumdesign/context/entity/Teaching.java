@@ -15,6 +15,12 @@ public class Teaching {
     private Integer id;
 
     /**
+     * 指导教师id
+     */
+    @Column(name = "f_teacher_id")
+    private Integer teacherId;
+
+    /**
      * 教学名称
      */
     @Column(name = "f_name")
@@ -23,14 +29,8 @@ public class Teaching {
     /**
      * 教师提示
      */
-    @Column(name = "f_teacher_ reminder")
+    @Column(name = "f_teacher_reminder")
     private String teacherReminder;
-
-    /**
-     * 指导教师id
-     */
-    @Column(name = "f_teacher_id")
-    private Integer teacherId;
 
     /**
      * 截止日期
@@ -82,6 +82,14 @@ public class Teaching {
         this.id = id;
     }
 
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+
     public String getName() {
         return name;
     }
@@ -96,14 +104,6 @@ public class Teaching {
 
     public void setTeacherReminder(String teacherReminder) {
         this.teacherReminder = teacherReminder;
-    }
-
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
     }
 
     public Date getDeadlineTime() {
@@ -160,5 +160,22 @@ public class Teaching {
 
     public void setUpdaterId(Integer updaterId) {
         this.updaterId = updaterId;
+    }
+
+    @Override
+    public String toString() {
+        return "Teaching{" +
+                "id=" + id +
+                ", teacherId=" + teacherId +
+                ", name='" + name + '\'' +
+                ", teacherReminder='" + teacherReminder + '\'' +
+                ", deadlineTime=" + deadlineTime +
+                ", status=" + status +
+                ", isDelete=" + isDelete +
+                ", createtime=" + createtime +
+                ", creatorId=" + creatorId +
+                ", updatetime=" + updatetime +
+                ", updaterId=" + updaterId +
+                '}';
     }
 }

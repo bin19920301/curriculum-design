@@ -2,8 +2,12 @@ package com.hit.curricelumdesign.dao;
 
 import com.hit.curricelumdesign.context.entity.Academy;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
+@Repository
 public interface AcademyMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +20,10 @@ public interface AcademyMapper {
     int updateByPrimaryKeySelective(Academy record);
 
     int updateByPrimaryKey(Academy record);
+
+    Academy getAcademyByName(String name);
+
+    Academy getAcademyById(Integer id);
+
+    List<Academy> getAcademyList();
 }

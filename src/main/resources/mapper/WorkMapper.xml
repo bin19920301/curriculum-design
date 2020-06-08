@@ -1,164 +1,223 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hit.curricelumdesign.dao.WorkMapper">
-  <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.Work">
-    <id column="f_id" jdbcType="INTEGER" property="id" />
-    <result column="f_project_id" jdbcType="INTEGER" property="projectId" />
-    <result column="f_teaching_id" jdbcType="INTEGER" property="teachingId" />
-    <result column="f_student_id" jdbcType="INTEGER" property="studentId" />
-    <result column="f_score" jdbcType="INTEGER" property="score" />
-    <result column="f_status" jdbcType="INTEGER" property="status" />
-    <result column="f_submit_time" jdbcType="TIMESTAMP" property="submitTime" />
-    <result column="f_is_delete" jdbcType="BIT" property="isDelete" />
-    <result column="f_create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="f_updater_id" jdbcType="INTEGER" property="updaterId" />
-    <result column="f_update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    f_id, f_project_id, f_teaching_id, f_student_id, f_score, f_status, f_submit_time, 
-    f_is_delete, f_create_time, f_updater_id, f_update_time
+    <resultMap id="BaseResultMap" type="com.hit.curricelumdesign.context.entity.Work">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_teaching_id" property="teachingId" jdbcType="INTEGER"/>
+        <result column="f_work_project_id" property="workProjectId" jdbcType="INTEGER"/>
+        <result column="f_student_id" property="studentId" jdbcType="INTEGER"/>
+        <result column="f_score" property="score" jdbcType="INTEGER"/>
+        <result column="f_submittime" property="submittime" jdbcType="TIMESTAMP"/>
+        <result column="f_returntime" property="returntime" jdbcType="TIMESTAMP"/>
+        <result column="f_status" property="status" jdbcType="INTEGER"/>
+        <result column="f_is_delete" property="isDelete" jdbcType="BIT"/>
+        <result column="f_createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="f_updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="WorkForTeachDTOResultMap" type="com.hit.curricelumdesign.context.dto.work.WorkForTeacherDTO">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_work_project_id" property="workProjectId" jdbcType="INTEGER"/>
+        <result column="f_student_id" property="studentId" jdbcType="INTEGER"/>
+        <result column="f_status" property="status" jdbcType="INTEGER"/>
+        <result column="studentId" property="studentId"/>
+        <result column="studentNumber" property="studentNumber"/>
+        <result column="studentName" property="studentName"/>
+        <result column="enrollmentYear" property="enrollmentYear"/>
+        <result column="academyName" property="academyName"/>
+        <result column="className" property="className"/>
+        <result column="workProjectName" property="workProjectName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    f_id, f_teaching_id, f_work_project_id, f_student_id, f_score, f_submittime, f_returntime,
+    f_status, f_is_delete, f_createtime, f_updatetime
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_work
-    where f_id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_work
+        where f_id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_work
     where f_id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.Work">
-    insert into t_work (f_id, f_project_id, f_teaching_id, 
-      f_student_id, f_score, f_status, 
-      f_submit_time, f_is_delete, f_create_time, 
-      f_updater_id, f_update_time)
-    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{teachingId,jdbcType=INTEGER}, 
-      #{studentId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{submitTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updaterId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP})
+    <insert id="insert" parameterType="com.hit.curricelumdesign.context.entity.Work">
+    insert into t_work (f_id, f_teaching_id, f_work_project_id,
+      f_student_id, f_score, f_submittime,
+      f_returntime, f_status, f_is_delete,
+      f_createtime, f_updatetime)
+    values (#{id,jdbcType=INTEGER}, #{teachingId,jdbcType=INTEGER}, #{workProjectId,jdbcType=INTEGER},
+      #{studentId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{submittime,jdbcType=TIMESTAMP},
+      #{returntime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{isDelete,jdbcType=BIT},
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.Work">
-    insert into t_work
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        f_id,
-      </if>
-      <if test="projectId != null">
-        f_project_id,
-      </if>
-      <if test="teachingId != null">
-        f_teaching_id,
-      </if>
-      <if test="studentId != null">
-        f_student_id,
-      </if>
-      <if test="score != null">
-        f_score,
-      </if>
-      <if test="status != null">
-        f_status,
-      </if>
-      <if test="submitTime != null">
-        f_submit_time,
-      </if>
-      <if test="isDelete != null">
-        f_is_delete,
-      </if>
-      <if test="createTime != null">
-        f_create_time,
-      </if>
-      <if test="updaterId != null">
-        f_updater_id,
-      </if>
-      <if test="updateTime != null">
-        f_update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="projectId != null">
-        #{projectId,jdbcType=INTEGER},
-      </if>
-      <if test="teachingId != null">
-        #{teachingId,jdbcType=INTEGER},
-      </if>
-      <if test="studentId != null">
-        #{studentId,jdbcType=INTEGER},
-      </if>
-      <if test="score != null">
-        #{score,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="submitTime != null">
-        #{submitTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null">
-        #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null">
-        #{updaterId,jdbcType=INTEGER},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.Work">
+    <insert id="insertSelective" parameterType="com.hit.curricelumdesign.context.entity.Work">
+        insert into t_work
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                f_id,
+            </if>
+            <if test="teachingId != null">
+                f_teaching_id,
+            </if>
+            <if test="workProjectId != null">
+                f_work_project_id,
+            </if>
+            <if test="studentId != null">
+                f_student_id,
+            </if>
+            <if test="score != null">
+                f_score,
+            </if>
+            <if test="submittime != null">
+                f_submittime,
+            </if>
+            <if test="returntime != null">
+                f_returntime,
+            </if>
+            <if test="status != null">
+                f_status,
+            </if>
+            <if test="isDelete != null">
+                f_is_delete,
+            </if>
+            <if test="createtime != null">
+                f_createtime,
+            </if>
+            <if test="updatetime != null">
+                f_updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="teachingId != null">
+                #{teachingId,jdbcType=INTEGER},
+            </if>
+            <if test="workProjectId != null">
+                #{workProjectId,jdbcType=INTEGER},
+            </if>
+            <if test="studentId != null">
+                #{studentId,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="submittime != null">
+                #{submittime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="returntime != null">
+                #{returntime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hit.curricelumdesign.context.entity.Work">
+        update t_work
+        <set>
+            <if test="teachingId != null">
+                f_teaching_id = #{teachingId,jdbcType=INTEGER},
+            </if>
+            <if test="workProjectId != null">
+                f_work_project_id = #{workProjectId,jdbcType=INTEGER},
+            </if>
+            <if test="studentId != null">
+                f_student_id = #{studentId,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                f_score = #{score,jdbcType=INTEGER},
+            </if>
+            <if test="submittime != null">
+                f_submittime = #{submittime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="returntime != null">
+                f_returntime = #{returntime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                f_status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                f_is_delete = #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="createtime != null">
+                f_createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                f_updatetime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where f_id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.Work">
     update t_work
-    <set>
-      <if test="projectId != null">
-        f_project_id = #{projectId,jdbcType=INTEGER},
-      </if>
-      <if test="teachingId != null">
-        f_teaching_id = #{teachingId,jdbcType=INTEGER},
-      </if>
-      <if test="studentId != null">
-        f_student_id = #{studentId,jdbcType=INTEGER},
-      </if>
-      <if test="score != null">
-        f_score = #{score,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        f_status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="submitTime != null">
-        f_submit_time = #{submitTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null">
-        f_is_delete = #{isDelete,jdbcType=BIT},
-      </if>
-      <if test="createTime != null">
-        f_create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updaterId != null">
-        f_updater_id = #{updaterId,jdbcType=INTEGER},
-      </if>
-      <if test="updateTime != null">
-        f_update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where f_id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hit.curricelumdesign.context.entity.Work">
-    update t_work
-    set f_project_id = #{projectId,jdbcType=INTEGER},
-      f_teaching_id = #{teachingId,jdbcType=INTEGER},
+    set f_teaching_id = #{teachingId,jdbcType=INTEGER},
+      f_work_project_id = #{workProjectId,jdbcType=INTEGER},
       f_student_id = #{studentId,jdbcType=INTEGER},
       f_score = #{score,jdbcType=INTEGER},
+      f_submittime = #{submittime,jdbcType=TIMESTAMP},
+      f_returntime = #{returntime,jdbcType=TIMESTAMP},
       f_status = #{status,jdbcType=INTEGER},
-      f_submit_time = #{submitTime,jdbcType=TIMESTAMP},
       f_is_delete = #{isDelete,jdbcType=BIT},
-      f_create_time = #{createTime,jdbcType=TIMESTAMP},
-      f_updater_id = #{updaterId,jdbcType=INTEGER},
-      f_update_time = #{updateTime,jdbcType=TIMESTAMP}
+      f_createtime = #{createtime,jdbcType=TIMESTAMP},
+      f_updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where f_id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectByParams" resultMap="BaseResultMap">
+        select
+        f_id, f_teaching_id, f_work_project_id, f_student_id, f_score, f_submittime, f_returntime,
+        f_status, f_is_delete, f_createtime, f_updatetime
+        from t_work
+        where f_is_delete = false
+        <if test="teachingId != null">
+            and f_teaching_id = #{teachingId,jdbcType=INTEGER}
+        </if>
+        <if test="studentId != null">
+            and f_student_id = #{studentId,jdbcType=INTEGER}
+        </if>
+        <if test="workProjectId != null">
+            and f_work_project_id = #{workProjectId,jdbcType=INTEGER}
+        </if>
+        <if test="isDone != null">
+            <if test="isDone == 0">
+                and f_status in (0,1,2)
+            </if>
+            <if test="isDone == 1">
+                and f_status = 3
+            </if>
+        </if>
+    </select>
+    <select id="selectByTeachingId" resultMap="WorkForTeachDTOResultMap">
+    select
+    tw.f_id, tw.f_teaching_id, tw.f_work_project_id, tw.f_student_id,  tw.f_status,
+    ts.f_id as studentId ,ts.f_number as studentNumber,ts.f_name as studentName,
+    twp.f_id as workProjectId,twp.f_name as workProjectName,
+    ta.f_name as academyName,
+    te.f_enrollment_year as enrollmentYear,
+    tc.f_name as className
+    from t_work tw
+    left join t_student ts on tw.f_student_id = ts.f_id
+    left join t_work_project twp on tw.f_work_project_id = twp.f_id
+    left join t_academy ta on ts.f_academy_id = ta.f_id
+    left join t_enrollment_year te on ts.f_enrollment_id = te.f_id
+    left join t_class tc on ts.f_class_id = tc.f_id
+    where tw.f_is_delete = false and tw.f_teaching_id = #{teachingId,jdbcType=INTEGER}
+</select>
+    <select id="countStudentsByTeachingId" resultType="java.lang.Long">
+    select
+        count(*)
+    from t_work
+    where f_is_delete = false and f_teaching_id = #{teachingId,jdbcType=INTEGER}
+</select>
 </mapper>

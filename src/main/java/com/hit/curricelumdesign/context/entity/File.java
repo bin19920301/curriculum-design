@@ -161,4 +161,21 @@ public class File {
     public void setUpdaterId(Integer updaterId) {
         this.updaterId = updaterId;
     }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "id=" + id +
+                ", folderId=" + folderId +
+                ", name='" + name + '\'' +
+                ", size='" + size + '\'' +
+                ", path='" + path + '\'' +
+                ", useCount=" + useCount +
+                ", isDelete=" + isDelete +
+                ", createtime=" + createtime +
+                ", creatorId=" + creatorId +
+                ", updatetime=" + updatetime +
+                ", updaterId=" + updaterId +
+                '}';
+    }
 }
